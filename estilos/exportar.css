@@ -1,0 +1,88 @@
+/* CSS Document */
+
+@charset "utf-8";
+
+.menu-inferior {
+    margin-top: 12px;
+
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid #EEEEEE;
+    background-color: white;
+
+    padding: 12px;
+    box-sizing: border-box;
+
+    width: 100%;
+    gap: 36px;
+
+    border-radius: 16px;
+
+    height: 72px;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.confirmacao {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.label-confirmacao {
+    color: #333;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-left: 8px;
+
+    height: 34px;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0F9D58;
+
+    margin: 0px 0px 0px 8px;
+
+    cursor: pointer;
+}
+
+button#exportar.ativo {
+    cursor: pointer;
+    background-color: #0F9D58;
+}
+
+button#exportar {
+    cursor: not-allowed;
+
+    height: 48px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    color: white;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 500;
+
+    align-items: center;
+
+    background-color: #AEAEAE;
+
+    border: 0px;
+    padding: 0px 16px 0px 16px;
+
+    border-radius: 24px;
+}

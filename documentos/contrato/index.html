@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contrato | SistemaBC</title>
+
+    <link rel="icon" href="../../favicon.png">
+
+    <link rel="stylesheet" href="../../estilos/sistema.css">
+    <link rel="stylesheet" href="../../estilos/exportar.css">
+    <link rel="stylesheet" href="../../estilos/documentos.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+
+    <link rel="stylesheet" href="../../estilos/icones.css">
+</head>
+
+<body id="contrato">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Contrato de Crédito</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-data">Data de Emissão</label>
+                            </div>
+                            <input class="input" id="i-data" type="date" max="2026-12-31">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-box">
+                    <h2>Dados do Cliente</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números, pois o sistema irá pontuar automaticamente.">info</span>
+                            </div>
+                            <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-razao">Razão Social</label>
+                            </div>
+                            <input class="input" id="i-razao" placeholder="Nome da Empresa">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-box">
+                    <h2>Proposta de Crédito</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-valor">Valor do Crédito</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números e vírgulas.">info</span>
+                            </div>                            
+                            <input class="input" id="i-valor" placeholder="1000,00" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-parcelas">Parcelas</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números.">info</span>
+                            </div>
+                            <input class="input" id="i-parcelas" placeholder="00x" type="number" step="12" min="0">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-carencia">Prazo de Carência</label>
+                                <span class="material-symbols-rounded" title="Quantidade em DIAS. Utilize somente números.">info</span>
+                            </div>
+                            <input class="input" id="i-carencia" placeholder="00 dias" type="number" min="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="base-box">
+                    <h2>Dados Bancários</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-banco">Instituição</label>
+                                <span class="material-symbols-rounded" title="Utilize, preferencialmente, o código numérico do banco e depois o nome, como mostrado no exemplo do campo.">info</span>
+                            </div>  
+                            <input class="input" id="i-banco" placeholder="Código - Nome do Banco" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-agencia">Agência</label>
+                            </div>
+                            <input class="input" id="i-agencia" placeholder="0000">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-conta">Conta</label>
+                            </div>
+                            <input class="input" id="i-conta" placeholder="000000-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="capa"></div>
+        <div class="pagina">
+            <div class="titulodocumento-nome">Contrato de Crédito</div>
+            <div class="pagina-conteudo">
+                <div class="pagina-textos">
+                    <p class="bold">Termos e Condições Gerais para Contratação do <span class="banco-razaosocialCAPS bold"></span> para a Prestação de Serviços de Crédito Empresarial</p>
+
+                    <p>Registrado em Cartório do Registro de Títulos e Documentos do Município de São Paulo, Estado de São Paulo.</p>
+
+                    <p><span class="banco-razaosocialCAPS"></span>, instituição financeira com sede na <span class="banco-logradouro"></span>, nº <span class="banco-numero"></span>, cidade de <span class="banco-cidade"></span>, Estado de <span class="banco-estado"></span>, CEP: <span class="banco-cep"></span>, inscrito no CNPJ sob o nº <span class="banco-cnpj"></span>.</p>
+
+                    <p class="bold">CLÁUSULA 01 - DO CLIENTE</p>
+
+                    <p>1.1. O presente instrumento visa estabelecer as condições pelas quais o <span class="banco-nomeCAPS"></span> prestará ao CLIENTE o serviço de crédito empresarial (definido no item 1.2 abaixo).</p>
+
+                    <p>1.2. O <span class="banco-nomeCAPS"></span>, mediante análise de crédito e cadastro, disponibilizará ao CLIENTE, um empréstimo para utilização na forma definida neste contrato, cujos valores, prazos, forma de pagamento, encargos financeiros, tarifas e demais condições, serão pactuados entre o <span class="banco-nomeCAPS"></span> e o CLIENTE à época da efetiva contratação da operação de crédito.</p>
+
+                    <p>1.3. O CLIENTE declara-se ciente e concorda que a contratação do empréstimo poderá ser efetuada em quaisquer canais disponibilizados pelo <span class="banco-nomeCAPS"></span> para tal fim. As condições específicas da contratação serão informadas no próprio canal utilizado e, ratificadas por meio de emissão de comprovante de contratação disponibilizado pelo canal utilizado pelo CLIENTE. Exclusivamente nas contratações efetuadas via canal de atendimento do <span class="banco-nomeCAPS"></span> (WhatsApp), o <span class="banco-nomeCAPS"></span> encaminhará ao endereço de correspondência do CLIENTE comunicado contendo as condições específicas da contratação.</p>
+
+                    <p class="bold">CLÁUSULA 02 - CONDIÇÕES ESPECÍFICAS DA CONTRATAÇÃO</p>
+
+                    <p>2.1. O empréstimo objeto deste contrato será contratado exclusivamente pelos meios eletrônicos.</p>
+
+                    <p>2.2. O valor do empréstimo contratado será creditado na conta corrente de titularidade do CLIENTE.</p>
+
+                    <p>2.3. No ato da contratação, o CLIENTE informará: o valor do empréstimo que deseja contratar; o número de parcelas mensais para o pagamento; o dia do mês para débito das parcelas. O sistema adequará a data da solicitação do empréstimo ao dia escolhido para o débito das parcelas e os encargos incidentes nesse período serão financiados e distribuídos nas parcelas.</p>
+
+                    <p>2.4. O CLIENTE declara-se ciente e concorda que o valor principal do empréstimo será pago na data de vencimento deste contrato acrescido do valor correspondente aos juros, e demais encargos incidentes na operação.</p>
+
+                    <p class="bold">CLÁUSULA 03 - DO PAGAMENTO</p>
+
+                    <p>3.1. A liquidação do valor principal, encargos financeiros e demais despesas da operação de empréstimo será efetuada mediante pagamento de boleto bancário enviado pelo <span class="banco-nomeCAPS"></span> ao e-mail do CLIENTE.</p>
+
+                    <p>3.2. O CLIENTE obriga-se a prover os respectivos pagamentos nas datas acordadas neste termo, caso contrário o <span class="banco-nomeCAPS"></span> está autorizado a enquadrar o CLIENTE nas instituições de cobrança financeira responsáveis pelo cadastro do mesmo, sujeito a negativação de Score e impedimento de contratação de crédito com outras instituições financeiras.</p>
+                </div>
+            </div>
+        </div>
+        <div class="pagina">
+            <div class="titulodocumento-nome">Contrato de Crédito</div>
+            <div class="pagina-conteudo">
+                <div class="pagina-textos">
+                    <p class="bold">CLÁUSULA 04 - ENCARGOS E DESPESAS</p>
+
+                    <p>4.1. O CLIENTE será exclusivamente responsável pelos tributos, contribuições, custos adicionais de qualquer natureza incidentes ou que venham a incidir sobre este empréstimo, e despesas relacionadas e/ou decorrentes desta empréstimo, incluindo, sem limitação, as despesas de tarifas bancárias, da cobrança e/ou segurança do presente empréstimo, obrigando-se a imediatamente recolhê-los na forma da legislação em vigor e/ou a pagá-los ou reembolsá-los ao <span class="banco-nomeCAPS"></span>, conforme o caso.</p>
+
+                    <p class="bold">CLÁUSULA 05 - TRATAMENTO E PROTEÇÃO DE DADOS PESSOAIS</p>
+
+                    <p>5.1. Nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/18), o CLIENTE reconhece que o <span class="banco-nomeCAPS"></span> poderá realizar o tratamento de Dados Pessoais com finalidades específicas e de acordo com as bases legais previstas na respectiva Lei, tais como: para o devido cumprimento das obrigações legais e regulatórias, para o exercício regular de direitos e para a proteção do crédito, bem como, sempre que necessário, para a execução dos contratos firmados com seus clientes ou para atender aos interesses legítimos do <span class="banco-nomeCAPS"></span>, de seus clientes ou de terceiros. Para qualquer outra finalidade, para a qual o consentimento do titular deve ser coletado, o tratamento estará condicionado à manifestação livre, informada e inequívoca do titular. Para fins do quanto disposto nesta cláusula, “Dados Pessoais” se refere a todas as informações relacionadas aos representantes legais do CLIENTE.</p>
+
+                    <p class="bold">CLÁUSULA 06 - CÉDULA DE CRÉDITO BANCÁRIO (CCB)</p>
+
+                    <p>6.1. O presente contrato formaliza uma Cédula de Crédito Bancário (CCB), título de crédito que representa a promessa de pagamento de obrigação em dinheiro, emitido em favor do <span class="banco-nomeCAPS"></span>, nos termos da Lei nº 10.931/2004.</p>
+
+                    <p>6.2. A CCB registra todas as condições da operação de crédito empresarial, incluindo o valor principal do empréstimo, o prazo para pagamento, a taxa de juros, o número de parcelas, encargos, tarifas e demais despesas incidentes.</p>
+
+                    <p>6.3. O CLIENTE reconhece que a CCB constitui título executivo extrajudicial, permitindo ao <span class="banco-nomeCAPS"></span> o exercício direto de cobrança judicial do débito em caso de inadimplência, sem necessidade de processo prévio de reconhecimento de dívida.</p>
+
+                    <p class="bold">CLÁUSULA 07 - CUSTO EFETIVO TOTAL (CET)</p>
+
+                    <p>7.1. O Custo Efetivo Total (CET) representa o custo total da operação de crédito contratada, incluindo, além da taxa de juros nominal, todos os encargos e despesas incidentes sobre o empréstimo, como tarifas bancárias, impostos (inclusive IOF), seguros e demais custos operacionais. Ele é calculado sobre o valor total do empréstimo e serve como indicador financeiro para permitir a comparação com outras ofertas de crédito disponíveis no mercado.</p>
+                    
+                    <p>7.2. O <span class="banco-nomeCAPS"></span> informará ao CLIENTE o CET da operação no momento da contratação, conforme exigido pela regulamentação do Banco Central do Brasil (Resolução nº 4.558/2017 e normas complementares).</p>
+
+                    <p class="bold">CLÁUSULA 08 - ASSINATURA DO TERMO DE CONDIÇÕES GERAIS</p>
+
+                    <p>8.1. Mediante a assinatura do Termo de Condições Gerais para Contratação do <span class="banco-nomeCAPS"></span> para a Prestação de Serviços de Crédito Empresarial aqui previstos as partes concordarão em cumprir todas as disposições constantes nestes instrumentos desde o momento em que o crédito for depositado na conta de titularidade do CLIENTE pelo <span class="banco-nomeCAPS"></span>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="pagina">
+            <div class="titulodocumento-nome">Contrato de Crédito</div>
+            <div class="pagina-conteudo">
+                <div class="pagina-textos">
+                    <p>8.2 Proposta de Crédito:
+                        <br>
+                        <span class="topico">11111</span>- <span class="bold">R$ </span><span class="bold" id="valor">[VALOR DO CRÉDITO]</span> em <span class="bold" id="parcelas">[PARCELAS]</span><span class="bold">x</span> de R$ <span id="proposta-parcelas">[PROPOSTA-PARCELAS]</span>
+                        <br>
+                        <span class="topico">11111</span>- Carência: <span id="prazo-carencia">[PRAZO-CARÊNCIA]</span> dias para efetuar o pagamento da primeira parcela
+                        <br>
+                        <span class="topico">11111</span>- Total de juros: <span class="bold">R$ </span><span class="bold" id="proposta-juros">[PROPOSTA-JUROS]</span>
+                        <br>
+                        <span class="topico">11111</span>- Total devido: <span class="bold">R$ </span><span class="bold" id="proposta-devido">[PROPOSTA-DEVIDO]</span>
+                        <br>
+                        <span class="topico">11111</span>- Taxa de juros: <span id="taxa-juros">[TAXA DE JUROS]</span> ao mês.
+                        <br>
+                    </p>
+                    <p>8.3 Dados para Pagamento:
+                        <br>
+                        <span class="topico">11111</span>- Instituição: <span id="banco">[BANCO]</span>
+                        <br>
+                        <span class="topico">11111</span>- Agência: <span id="agencia">[AGÊNCIA]</span>
+                        <br>
+                        <span class="topico">11111</span>- Conta: <span id="conta">[CONTA]</span><br>
+                    </p>
+                    <p><span class="bold">Data de Emissão:</span> <span id="dia">[DD]</span> de <span id="mes">[MM]</span> de <span id="ano">[AAAA]</span>.</p>
+                </div>
+
+                <div class="selos" id="selo">
+				    <img src="../../sistema/selo-contrato.png" class="selo" alt="Selo">
+			    </div>
+			
+			    <div id="assinaturas">
+				    <div class="a-modelo">
+					    <div class="a-div"></div>
+			    		<span id="razao">[RAZÃO SOCIAL]</span>
+			    		<span class="bold">CNPJ: <span id="cnpj">[CNPJ]</span></span>
+		    		</div>
+		    		<div style="margin-top: 120px; display: flex; flex-direction: row; gap: 32px;">
+		    			<div class="a-modelo">
+		    				<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+						    <div class="a-div"></div>
+						    <span class="banco-diretor"></span>
+						    <span class="bold">DIRETOR EXECUTIVO | <span class="banco-nome"></span></span>
+					    </div>
+					    <div class="a-modelo">
+					    	<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura2" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+					    	<div class="a-div"></div>
+					    	<span id="gerente">[GERENTE]</span>
+					    	<span class="bold">GERENTE DE CRÉDITO | <span class="banco-nome"></span></span>
+					    </div>
+				    </div>
+			    </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js"></script>
+    <script src="../../scripts/banco.js"></script>
+
+    <script src="../../scripts/assinatura.js"></script>
+    
+    <script src="../../scripts/cnpj.js"></script>
+    <script src="../../scripts/datas.js"></script>
+    <script src="../../scripts/proposta.js"></script>
+
+    <script src="./inputs.js"></script>
+
+    <script src="../../scripts/titulo.js"></script>
+    <script src="../../scripts/exportar.js"></script>
+    <script src="../../scripts/impressao.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Garantia | SistemaBC</title>
+
+    <link rel="icon" href="../../favicon.png">
+
+    <link rel="stylesheet" href="../../estilos/sistema.css">
+    <link rel="stylesheet" href="../../estilos/exportar.css">
+    <link rel="stylesheet" href="../../estilos/documentos.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+
+    <link rel="stylesheet" href="../../estilos/icones.css">
+</head>
+
+<body id="garantia">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Garantia de Liberação</h1>
+            <div class="formularios">
+                <div class="area-boxes" style="grid-template-columns: 100%;">
+
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cliente">Cliente</label>
+                            </div>
+                            <input class="input" id="i-cliente" placeholder="Nome do Cliente/Empresa" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="pagina">
+            <div class="titulodocumento-nome">Garantia de Liberação</div>
+            <div class="pagina-conteudo">
+                <div class="pagina-textos">
+                    <p class="bold">
+                        <span id="gerente1" class="bold">[GERENTE]</span> | Gerente de Crédito
+                        <br>
+                        <span class="banco-razaosocial bold"></span>
+                        <br>
+                        <span class="banco-logradouro bold"></span>, <span class="banco-numero bold"></span> - <span class="banco-bairro bold"></span>, <span class="banco-cidade bold"></span> - <span class="banco-uf bold"></span>, <span class="banco-cep bold"></span>
+                    </p>
+
+                    <p>Prezados,</p>
+                    
+                    <p>Eu, <span id="gerente2">[GERENTE]</span>, na qualidade de gerente bancário da instituição financeira <span class="banco-nome"></span>, situada no endereço acima mencionado, venho por meio desta carta formal confirmar a garantia de liberação de crédito conforme solicitado por <span id="cliente">[CLIENTE]</span>.</p>
+                    
+                    <p>A instituição financeira <span class="banco-nome"></span> assume total responsabilidade pela liberação do crédito conforme os termos acordados entre as partes envolvidas. Garantimos que, após a finalização dos trâmites necessários e a devida aprovação, o valor do crédito será disponibilizado na conta designada pelo cliente dentro do prazo estabelecido.</p>
+
+                    <p>Esta garantia é emitida em conformidade com as políticas e procedimentos internos da instituição, e tem como objetivo assegurar ao cliente a confiabilidade e eficiência dos serviços prestados pela instituição financeira <span class="banco-nome"></span>.</p>
+
+                    <p>Ressaltamos que estamos à disposição para quaisquer esclarecimentos adicionais que se façam necessários e reiteramos nosso compromisso em fornecer um serviço de excelência aos nossos clientes.</p>
+
+                    <p>Atenciosamente,</p>
+                </div>
+
+                <div class="selos" id="selo">
+				    <img src="../../sistema/selo-garantia.png" class="selo" alt="Selo">
+			    </div>
+			
+			    <div id="assinaturas">
+		    		<div style="margin-top: -10px; display: flex; flex-direction: row; gap: 32px;">
+					    <div class="a-modelo">
+					    	<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+					    	<div class="a-div"></div>
+					    	<span id="gerente3">[GERENTE]</span>
+					    	<span class="bold">GERENTE DE CRÉDITO | <span class="banco-nome"></span></span>
+					    </div>
+				    </div>
+			    </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js"></script>
+    <script src="../../scripts/banco.js"></script>
+
+    <script src="../../scripts/assinatura.js"></script>
+
+    <script src="./inputs.js"></script>
+
+    <script src="../../scripts/titulo.js"></script>
+    <script src="../../scripts/exportar.js"></script>
+    <script src="../../scripts/impressao.js"></script>
+</body>
+
+</html>

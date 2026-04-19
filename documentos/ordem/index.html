@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ordem | SistemaBC</title>
+
+    <link rel="icon" href="../../favicon.png">
+
+    <link rel="stylesheet" href="../../estilos/sistema.css">
+    <link rel="stylesheet" href="../../estilos/exportar.css">
+    <link rel="stylesheet" href="../../estilos/documentos.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+
+    <link rel="stylesheet" href="../../estilos/icones.css">
+</head>
+
+<body id="ordem">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Ordem de Pagamento</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+
+                <div class="base-box">
+                    <h2>Dados do Cliente</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números, pois o sistema irá pontuar automaticamente.">info</span>
+                            </div>
+                            <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-razao">Razão Social</label>
+                            </div>
+                            <input class="input" id="i-razao" placeholder="Nome da Empresa">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-nome">Nome Completo</label>
+                            </div>
+                            <input class="input" id="i-nome" placeholder="Nome do Cliente">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="base-box">
+                    <h2>Dados Bancários</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-banco">Instituição</label>
+                                <span class="material-symbols-rounded" title="Utilize, preferencialmente, o código numérico do banco e depois o nome, como mostrado no exemplo do campo.">info</span>
+                            </div>  
+                            <input class="input" id="i-banco" placeholder="Código - Nome do Banco" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-agencia">Agência</label>
+                            </div>
+                            <input class="input" id="i-agencia" placeholder="0000">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-conta">Conta</label>
+                            </div>
+                            <input class="input" id="i-conta" placeholder="000000-0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-data">Data da Operação</label>
+                            </div>
+                            <input class="input" id="i-data" type="date" max="2026-12-31">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-hora">Hora da Operação</label>
+                            </div>
+                            <input class="input" id="i-hora" type="time">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-valor">Valor do Crédito</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números e vírgulas.">info</span>
+                            </div>                            
+                            <input class="input" id="i-valor" placeholder="1000,00" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-box">
+                    <div class="h2-ativar" id="h2-conclusao">
+                        <h2>Conclusão</h2>
+                        <input type="checkbox" id="checkbox-conclusao">
+                    </div>
+                    
+                    <div class="base-boxcampos" id="box-conclusao">
+                        <div class="campo">
+                            <div class="label" style="display: none;">
+                                <label class="label-campo" for="i-conclusao">Texto da Conclusão</label>
+                                <span class="material-symbols-rounded" title="É necessário marcar a caixa acima para que a conclusão seja exibida no documento final.">info</span>
+                            </div>
+                            <input class="input" id="i-conclusao" placeholder="Digite aqui">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo">Referência</label>
+                                <span class="material-symbols-rounded" title="Clique no texto para copiar.">info</span>
+                            </div>
+                            <div class="campo-texto" id="copiar" onclick="copiar()">Esta ordem de pagamento foi emitida para conclusão às [HORÁRIO]. Caso a pendência do documento não seja solucionada até o horário informado, a ordem de pagamento será cancelada.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="ordem">
+            <div class="titulodocumento-nome">Ordem de Pagamento</div>
+            <div class="ordem-conteudo">
+                <div class="ordem-secao">
+                    <div class="ordem-titulo">Ordenante</div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Gerente</div>
+                        <div class="ordem-celula"><span id="gerente1"></span></div>
+                    </div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Razão Social</div>
+                        <div class="ordem-celula extra"><span class="banco-razaosocialCAPS"></span></div>
+                        <div class="ordem-celulatitulo">CNPJ</div>
+                        <div class="ordem-celula extra semborda"><span class="banco-cnpj"></span></div>
+                    </div>
+                    <div class="ordem-row final">
+                        <div class="ordem-celulatitulo" style="height: 40px;">Endereço</div>
+                        <div class="ordem-celula" style="height: 40px;">
+                            <p>
+                                <span class="banco-logradouro"></span>, <span class="banco-numero"></span> - <span class="banco-bairro"></span>, <span class="banco-cidade"></span> - <span class="banco-uf"></span>, <span class="banco-cep"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ordem-secao">
+                    <div class="ordem-titulo">Beneficiário</div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Nome Completo</div>
+                        <div class="ordem-celula"><span id="nome" class="nowrap"></span></div>
+                    </div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Razão Social</div>
+                        <div class="ordem-celula"><span id="razao" class="nowrap"></span></div>
+                    </div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">CNPJ</div>
+                        <div class="ordem-celula extra"><span id="cnpj"></span></div>
+                        <div class="ordem-celulatitulo">Instituição</div>
+                        <div class="ordem-celula extra semborda"><span id="banco" class="nowrap"></span></div>
+                    </div>
+                    <div class="ordem-row final">
+                        <div class="ordem-celulatitulo">Agência</div>
+                        <div class="ordem-celula extra"><span id="agencia"></span></div>
+                        <div class="ordem-celulatitulo">Conta</div>
+                        <div class="ordem-celula extra semborda"><span id="conta"></span></div>
+                    </div>
+                </div>
+                <div class="ordem-secao">
+                    <div class="ordem-titulo">Dados da Operação</div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Moeda</div>
+                        <div class="ordem-celula extra">Real Brasileiro</div>
+                        <div class="ordem-celulatitulo">Valor</div>
+                        <div class="ordem-celula extra semborda"><span id="valor"></span></div>
+                    </div>
+                    <div class="ordem-row">
+                        <div class="ordem-celulatitulo">Data</div>
+                        <div class="ordem-celula extra"><span id="data"></span></div>
+                        <div class="ordem-celulatitulo">Hora</div>
+                        <div class="ordem-celula extra semborda"><span id="hora"></span></div>
+                    </div>
+                    <div class="ordem-row final">
+                        <div class="ordem-celulatitulo">Registro</div>
+                        <div class="ordem-celula extra"><span id="registro"></span></div>
+                        <div class="ordem-celulatitulo">Emissão</div>
+                        <div class="ordem-celula extra semborda"><span id="emissao"></span></div>
+                    </div>
+                </div>
+                <div class="ordem-secao">
+                    <div class="ordem-titulo">Observações</div>
+                    <div class="ordem-row final">
+                        <div class="ordem-celula full">
+                            <p>
+                                O valor só será liberado se as informações do beneficiário estiverem de acordo com os dados registrados no cadastro acima e o Cadastro Nacional de Pessoa Jurídica (CNPJ) estiver em situação regular.
+                                <br>
+                                A instituição financeira efetuará esta operação, aplicando as condições e tarifas de acordo com os termos e condições do banco. É possível uma eventual alteração no valor da ordem, devido às despesas causadas por terceiros bancos envolvidos nesta transação ou pendências documentais.
+                                <br>
+                                O cliente também se declara ciente e de acordo com as leis e normas que regulam os procedimentos de ordens de pagamento, especialmente no que diz respeito ao prazo de transferência e despesas bancárias. A instituição financeira, se necessário, reserva-se ao direito de efetuar qualquer alteração na ordem de pagamento.
+                                <br>
+                                <span id="conclusao"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="assinaturas">
+		    		<div style="margin-top: 55px; display: flex; flex-direction: row; gap: 32px;">
+					    <div class="a-modelo">
+					    	<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+					    	<div class="a-div"></div>
+					    	<span id="gerente2">[GERENTE]</span>
+					    	<span class="bold">GERENTE DE CRÉDITO | <span class="banco-nome"></span></span>
+					    </div>
+				    </div>
+			    </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js"></script>
+    <script src="../../scripts/banco.js"></script>
+
+    <script src="../../scripts/cnpj.js"></script>
+    <script src="../../scripts/assinatura.js"></script>
+    
+    <script src="conclusao.js"></script>
+    <script src="copiar.js"></script>
+    <script src="data-e-hora.js"></script>
+    <script src="emissao.js"></script>
+    <script src="inputs.js"></script>
+    <script src="registro.js"></script>
+    <script src="valor.js"></script>
+
+    <script src="../../scripts/titulo.js"></script>
+    <script src="../../scripts/exportar.js"></script>
+    <script src="../../scripts/impressao.js"></script>
+</body>
+
+</html>

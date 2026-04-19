@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comprovante | SistemaBC</title>
+
+    <link rel="icon" href="../../favicon.png">
+
+    <link rel="stylesheet" href="../../estilos/sistema.css">
+    <link rel="stylesheet" href="../../estilos/exportar.css">
+    <link rel="stylesheet" href="../../estilos/documentos.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+
+    <link rel="stylesheet" href="../../estilos/icones.css">
+</head>
+
+<body id="comprovante">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Comprovante</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="box-duplo">
+                <div class="base-box">
+                    <h2>Dados do Cliente</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cpfcnpj">CPF / CNPJ</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números, pois o sistema irá pontuar automaticamente.">info</span>
+                            </div>
+                            <input class="input" id="i-cpfcnpj" placeholder="000.000.000-00">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-nome">Nome / Razão Social</label>
+                            </div>
+                            <input class="input" id="i-nome" placeholder="Nome ou Razão Social">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <h2>Dados Bancários</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-banco">Instituição</label>
+                                <span class="material-symbols-rounded" title="Utilize, preferencialmente, o código numérico do banco e depois o nome, como mostrado no exemplo do campo.">info</span>
+                            </div>  
+                            <input class="input" id="i-banco" placeholder="Código - Nome do Banco" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-agencia">Agência</label>
+                            </div>
+                            <input class="input" id="i-agencia" placeholder="0000">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-conta">Conta</label>
+                            </div>
+                            <input class="input" id="i-conta" placeholder="000000-0">
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                    <div class="box-duplo">
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-data">Data</label>
+                            </div>
+                            <input class="input" id="i-data" type="date" max="2026-12-31">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-hora">Hora</label>
+                            </div>
+                            <input class="input" id="i-hora" type="time">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-valor">Valor do Crédito</label>
+                                <span class="material-symbols-rounded" title="Utilize a pontuação correta para evitar erros.">info</span>
+                            </div>                            
+                            <input class="input" id="i-valor" placeholder="1000,00" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="select-status">Status da Transferência</label>
+                            </div>                            
+                            <select id="select-status">
+				                <option value="[STATUS]">Selecione uma opção</option>
+				                <option value="Efetuada">Efetuada</option>
+				                <option value="Concluída">Concluída</option>
+				                <option value="Não concluída">Não concluída</option>
+				                <option value="Erro na operação">Erro na operação</option>
+				                <option value="Outro">Outro (editável)</option>
+			                </select>
+                            <input class="input" id="i-status" placeholder="Status da Transferência">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <div class="h2-ativar" id="h2-chavepix">
+                        <h2>Chave PIX</h2>
+                        <input type="checkbox" id="checkbox-chavepix">
+                    </div>
+                    <div class="base-boxcampos" id="chavepix">
+                        <div class="campo">
+                            <div class="label" style="display: none;">
+                                <label class="label-campo" for="i-banco">PIX</label>
+                            </div>
+                            <input class="input" id="i-pix" placeholder="Digite aqui" type="text">
+                        </div>
+                    </div>
+                </div>
+                    </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="comprovante">
+            <div class="titulodocumento-nome">Comprovante</div>
+            <div class="comprovante-conteudo">
+                <div class="comprovante-secao">
+                    <div class="comprovante-titulo">Dados da Transferência</div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Data</div>
+                        <div class="comprovante-celula"><span id="data"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Hora</div>
+                        <div class="comprovante-celula"><span id="hora"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Valor</div>
+                        <div class="comprovante-celula"><span id="valor"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Autenticação</div>
+                        <div class="comprovante-celula"><span id="autenticacao"></span></div>
+                    </div>
+                    <div class="comprovante-row final">
+                        <div class="comprovante-celulatitulo">Status</div>
+                        <div class="comprovante-celula"><span id="status"></span></div>
+                    </div>
+                </div>
+                <div class="comprovante-secao">
+                    <div class="comprovante-titulo">Dados do Pagador</div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Nome</div>
+                        <div class="comprovante-celula"><span class="banco-razaosocialCAPS"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">CNPJ</div>
+                        <div class="comprovante-celula"><span class="banco-cnpj"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Instituição</div>
+                        <div class="comprovante-celula"><span class="banco-comprovante"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Agência</div>
+                        <div class="comprovante-celula"><span class="banco-agencia"></span></div>
+                    </div>
+                    <div class="comprovante-row final">
+                        <div class="comprovante-celulatitulo">Conta</div>
+                        <div class="comprovante-celula"><span class="banco-conta"></span></div>
+                    </div>
+                </div>
+                <div class="comprovante-secao">
+                    <div class="comprovante-titulo">Dados do Recebedor</div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Nome</div>
+                        <div class="comprovante-celula"><span id="nome" class="nowrap"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">CPF/CNPJ</div>
+                        <div class="comprovante-celula"><span id="cpfcnpj"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Instituição</div>
+                        <div class="comprovante-celula"><span id="banco" class="nowrap"></span></div>
+                    </div>
+                    <div class="comprovante-row">
+                        <div class="comprovante-celulatitulo">Agência</div>
+                        <div class="comprovante-celula"><span id="agencia"></span></div>
+                    </div>
+                    <div class="comprovante-row" id="comprovante-conta">
+                        <div class="comprovante-celulatitulo">Conta</div>
+                        <div class="comprovante-celula"><span id="conta"></span></div>
+                    </div>
+                    <div class="comprovante-row" id="comprovante-pix">
+                        <div class="comprovante-celulatitulo">Chave PIX</div>
+                        <div class="comprovante-celula"><span id="pix"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js"></script>
+    <script src="../../scripts/banco.js"></script>
+
+    <script src="./status.js"></script>
+    <script src="./pix.js"></script>
+    <script src="./autenticacao.js"></script>
+    <script src="./cpf-e-cnpj.js"></script>
+    <script src="./data-e-hora.js"></script>
+    <script src="./inputs.js"></script>
+    <script src="./valor.js"></script>
+
+    <script src="../../scripts/titulo.js"></script>
+    <script src="../../scripts/exportar.js"></script>
+    <script src="../../scripts/impressao.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,490 @@
+/* CSS Document */
+
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+#documento {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.capa {
+    width: 792px;
+    height: 1121px;
+
+    background-image: url(../sistema/capa.svg);
+	background-size: cover;
+}
+
+.titulodocumento-nome {
+    position: absolute;
+    justify-self: center;
+
+    font-family: 'Inter';
+    color: var(--cor-destaque);
+    font-size: 28px;
+    font-weight: 600;
+
+    margin-top: 96px;
+}
+
+.pagina {
+    width: 792px;
+    height: 1120px;
+
+    background-image: url(../sistema/mda.svg);
+	background-size: cover;
+}
+
+.pagina-conteudo {
+    padding: 168px 80px 0px 80px;
+}
+
+.pagina-textos {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.pagina-textos span {
+    color: black;
+
+    text-align: justify;
+
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 300;
+}
+
+span.bold {
+    font-weight: 500;
+}
+
+.pagina-textos p {
+    margin: 0px;
+
+    color: black;
+
+    text-align: justify;
+
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 300;
+}
+
+p.bold {
+    font-weight: 500;
+}
+
+.pagina-textos span.topico {
+    color: white;
+}
+
+/* SELOS */
+
+.selos {
+    margin-top: 20px;
+	margin-left: 332px;
+	z-index: 1;
+}
+
+.selo {
+	width: 240px;
+}
+
+/* ASSINATURAS */
+
+#assinaturas {
+    margin-top: 0px;
+    
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
+    color: black;
+}
+
+.a-modelo {
+	display: flex;
+	flex-direction: column;
+
+    position: relative;
+
+    gap: 4px;
+}
+
+.a-div {
+	width: 300px;
+	height: 1px;
+	
+	background-color: black;
+	
+	margin-bottom: 5px;
+}
+
+.svg-diretor {
+	position: absolute;
+	left: 24px;
+	top: -62px;
+}
+
+.svg-gerente {
+	position: absolute;
+	left: 64px;
+	top: -45px;
+}
+
+.a-digital {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 6px;
+	
+	position: absolute;
+	left: 0px;
+	top: -46px;
+}
+
+.digital-texto {
+	font-family: 'Inter';
+	color: black;
+	font-size: 12px;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+
+.aprovacao {
+    width: 792px;
+    height: 1120px;
+
+    background-image: url(../sistema/mda.svg);
+	background-size: cover;
+}
+
+.aprovacao-conteudo {
+    padding: 168px 80px 0px 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+.aprovacao-secao {
+    display: flex;
+    flex-direction: column;
+}
+
+.aprovacao-row {
+    display: flex;
+    flex-direction: row;
+    
+    border-left: 1px solid var(--cor-destaque);
+    border-right: 1px solid var(--cor-destaque);
+    border-bottom: 1px solid var(--cor-destaque);
+}
+
+.aprovacao-row.final {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.aprovacao-titulo {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 36px;
+    padding: 12px;
+
+    color: white;
+    font-family: 'Inter';
+	font-size: 15px;
+	font-weight: 500;
+
+    text-transform: uppercase;
+
+    background-color: var(--cor-destaque);
+
+    box-sizing: border-box;
+
+    z-index: 1;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.aprovacao-celulatitulo {
+    display: flex;
+    align-items: center;
+
+    width: 30%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 500;
+
+    text-transform: uppercase;
+
+    border-right: 1px solid var(--cor-destaque);
+    
+    box-sizing: border-box;
+}
+
+.aprovacao-celula {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    width: 70%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 500;
+    
+    box-sizing: border-box;
+}
+
+#resultado {
+    color: #0F9D58;
+
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+#processamento {
+    color: #F4B400;
+
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.comprovante {
+    width: 792px;
+    height: 1120px;
+
+    background-image: url(../sistema/mda.svg);
+	background-size: cover;
+}
+
+.comprovante-conteudo {
+    padding: 168px 80px 0px 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+.comprovante-secao {
+    display: flex;
+    flex-direction: column;
+}
+
+.comprovante-row {
+    display: flex;
+    flex-direction: row;
+    
+    border-left: 1px solid var(--cor-destaque);
+    border-right: 1px solid var(--cor-destaque);
+    border-bottom: 1px solid var(--cor-destaque);
+}
+
+.comprovante-row.final {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.comprovante-titulo {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 36px;
+    padding: 12px;
+
+    color: white;
+    font-family: 'Inter';
+	font-size: 15px;
+	font-weight: 500;
+
+    text-transform: uppercase;
+
+    background-color: var(--cor-destaque);
+
+    box-sizing: border-box;
+
+    z-index: 1;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.comprovante-celulatitulo {
+    display: flex;
+    align-items: center;
+
+    width: 30%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 500;
+
+    text-transform: uppercase;
+
+    border-right: 1px solid var(--cor-destaque);
+    
+    box-sizing: border-box;
+}
+
+.comprovante-celula {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    width: 70%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 500;
+    
+    box-sizing: border-box;
+}
+
+.ordem {
+    width: 792px;
+    height: 1120px;
+
+    background-image: url(../sistema/mda.svg);
+	background-size: cover;
+}
+
+.ordem-conteudo {
+    padding: 168px 80px 0px 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.ordem-secao {
+    display: flex;
+    flex-direction: column;
+}
+
+.ordem-row {
+    display: flex;
+    flex-direction: row;
+    
+    border-left: 1px solid var(--cor-destaque);
+    border-right: 1px solid var(--cor-destaque);
+    border-bottom: 1px solid var(--cor-destaque);
+}
+
+.ordem-row.final {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ordem-titulo {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 36px;
+    padding: 12px;
+
+    color: white;
+    font-family: 'Inter';
+	font-size: 15px;
+	font-weight: 500;
+
+    text-transform: uppercase;
+
+    background-color: var(--cor-destaque);
+
+    box-sizing: border-box;
+
+    z-index: 1;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ordem-celulatitulo {
+    display: flex;
+    align-items: center;
+
+    width: 25%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 600;
+
+    text-transform: uppercase;
+
+    border-right: 1px solid var(--cor-destaque);
+    
+    box-sizing: border-box;
+}
+
+.ordem-celula {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    width: 75%;
+    height: 30px;
+    padding: 12px;
+
+    color: black;
+    font-family: 'Inter';
+	font-size: 12px;
+	font-weight: 500;
+    
+    box-sizing: border-box;
+}
+
+.ordem-celula.extra {
+    width: 25%;
+    border-right: 1px solid var(--cor-destaque);
+}
+
+.ordem-celula.semborda {
+    border-right: 0px;
+}
+
+.ordem-celula.full {
+    width: 100%;
+    height: min-content;
+}
+
+.ordem-celula.full p {
+    text-align: justify;
+    margin: 0px;
+}
+
+span.nowrap {
+    overflow: hidden; /* esconde qualquer conteúdo que ultrapasse a largura */
+    white-space: nowrap; /* faz com que o texto não quebre para a próxima linha */
+    text-overflow: ellipsis; /* adiciona "..." para indicar que o texto foi truncado */
+}
