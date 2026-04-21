@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const garantia = document.getElementById('garantia');
     const termo = document.getElementById('termo');
     const ordem = document.getElementById('ordem');
+    const aprovacao = document.getElementById('aprovacao');
     const telaAprovacao = document.getElementById('tela-aprovacao')
     const telaComprovante = document.getElementById('tela-comprovante')
 

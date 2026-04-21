@@ -53,17 +53,27 @@ const navdrawerHTML = `
 </header>
 `;
 
+/**
+ * Caminho base do app (sempre com barra final).
+ * Detecta automaticamente raiz do Live Server, subpasta de deploy (ex.: /autodocs/) e file://.
+ */
 function getBasePath() {
-  if (location.protocol === 'file:') {
-    const match = location.pathname.match(/(.*SistemaAgi\/)/i);
-    if (match && match[1]) {
-      return match[1];
-    } else {
-      return '/SistemaAgi/';
-    }
-  } else {
-    return '/SistemaAgi/';
+  let p = location.pathname.replace(/\\/g, '/');
+  p = p.replace(/\/?index\.html?$/i, '');
+  if (!p.endsWith('/')) {
+    p += '/';
   }
+
+  const lower = p.toLowerCase();
+  const markers = ['/documentos/', '/consulta/', '/ajuda/', '/configuracoes/'];
+  for (let i = 0; i < markers.length; i++) {
+    const idx = lower.indexOf(markers[i]);
+    if (idx !== -1) {
+      return p.slice(0, idx + 1);
+    }
+  }
+
+  return p;
 }
 
 function inserirNavdrawer() {
