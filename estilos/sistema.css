@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-    --cor-destaque: #0068FF;
+    --cor-destaque: #eef1ee;
     --cinza-titulos: #333;
 }
 
@@ -19,6 +19,28 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: 301px auto;
+    align-items: stretch;
+}
+
+/* Menu | formulário | preview ao vivo (somente páginas que possuem #documento) */
+body:has(#documento) {
+    grid-template-columns: 301px minmax(0, 1fr) minmax(0, 1fr);
+}
+
+body:has(#documento) > #conteudo {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+body:has(#documento) > #documento {
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+    background-color: #ececec;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
 }
 
 header#navdrawer {
@@ -49,7 +71,7 @@ header#navdrawer {
 .logo-div{
     height: 100%;
     width: 1px;
-    background-color: white;
+    background-color: #006157;
 }
 
 .sistema-navdrawer {
@@ -118,7 +140,7 @@ header#navdrawer {
 }
 
 .navdrawer-option.ativo {
-    color: white;
+    color: #006157;
     background-color: var(--cor-destaque);
 
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -151,7 +173,7 @@ header#pagina {
 
     gap: 10px;
 
-    color: white;
+    color: #006157;
     font-family: 'Inter';
     font-size: 11px;
     font-weight: 400;
@@ -176,7 +198,7 @@ header#pagina {
 }
 
 h1 {
-    color: var(--cor-destaque);
+    color: #006157;
     font-family: 'Inter';
     font-size: 24px;
     font-weight: 600;
@@ -385,5 +407,36 @@ input::placeholder {
 @media (max-width: 840px) {
     .area-boxes {
         grid-template-columns: 100%;
+    }
+}
+
+@media print {
+    html,
+    body {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    body {
+        display: block !important;
+    }
+
+    #navdrawer,
+    #conteudo {
+        display: none !important;
+    }
+
+    #documento {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: white !important;
+        overflow: visible !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
     }
 }

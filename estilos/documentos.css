@@ -23,7 +23,7 @@
     justify-self: center;
 
     font-family: 'Inter';
-    color: var(--cor-destaque);
+    color: #006157;
     font-size: 28px;
     font-weight: 600;
 
@@ -199,7 +199,7 @@ p.bold {
     height: 36px;
     padding: 12px;
 
-    color: white;
+    color: #006157;
     font-family: 'Inter';
 	font-size: 15px;
 	font-weight: 500;

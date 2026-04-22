@@ -2,16 +2,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const elementosTexto = [
         { class: 'banco-cnpj', texto: '10.664.513/0001-50' },
 
-        { class: 'banco-nome', texto: 'Banco Agibank' },
-        { class: 'banco-nome-ALT', texto: 'Banco Agibank' },
+        { class: 'banco-nome', texto: 'Banco Sofisa S.A.' },
+        { class: 'banco-nome-ALT', texto: 'Banco Sofisa S.A.' },
 
-        { class: 'banco-nomeCAPS', texto: 'BANCO AGIBANK' },
-        { class: 'banco-nomeCAPS-ALT', texto: 'BANCO AGIBANK' },
+        { class: 'banco-nomeCAPS', texto: 'BANCO SOFISA S.A.' },
+        { class: 'banco-nomeCAPS-ALT', texto: 'BANCO SOFISA S.A.' },
 
-        { class: 'banco-razaosocial', texto: 'Banco Agibank S/A' },
-        { class: 'banco-razaosocialCAPS', texto: 'BANCO AGIBANK S/A' },
+        { class: 'banco-razaosocial', texto: 'Banco Sofisa S.A.' },
+        { class: 'banco-razaosocialCAPS', texto: 'BANCO SOFISA S.A.' },
         
-        { class: 'banco-comprovante', texto: 'BANCO AGIBANK SA' },
+        { class: 'banco-comprovante', texto: 'BANCO SOFISA S.A.' },
         { class: 'banco-agencia', texto: '0001' },
         { class: 'banco-conta', texto: '95477282-2' },
 
