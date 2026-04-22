@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const elementosTexto = [
-        { class: 'banco-cnpj', texto: '10.664.513/0001-50' },
+        { class: 'banco-cnpj', texto: '60.889.128/0001-80' },
 
         { class: 'banco-nome', texto: 'Banco Sofisa S.A.' },
         { class: 'banco-nome-ALT', texto: 'Banco Sofisa S.A.' },
@@ -15,15 +15,15 @@ document.addEventListener('DOMContentLoaded', function () {
         { class: 'banco-agencia', texto: '0001' },
         { class: 'banco-conta', texto: '95477282-2' },
 
-        { class: 'banco-logradouro', texto: 'Rua Sergio Fernandes Borges Soares' },
-        { class: 'banco-numero', texto: '1000' },
-        { class: 'banco-bairro', texto: 'Distrito Industrial' },
-        { class: 'banco-cidade', texto: 'Campinas' },
+        { class: 'banco-logradouro', texto: 'Alameda Santos' },
+        { class: 'banco-numero', texto: '1496' },
+        { class: 'banco-bairro', texto: 'Cerqueira Cesar' },
+        { class: 'banco-cidade', texto: 'São Paulo' },
         { class: 'banco-estado', texto: 'São Paulo' },
         { class: 'banco-uf', texto: 'SP' },
-        { class: 'banco-cep', texto: '13054-709' },
+        { class: 'banco-cep', texto: '01418-100' },
 
-        { class: 'banco-diretor', texto: 'Daniel Monteiro de Farias' },
+        { class: 'banco-diretor', texto: 'Alexandre Burmaian' },
     ];
 
     elementosTexto.forEach(item => {
