@@ -4,8 +4,12 @@ const navdrawerHTML = `
 <header id="navdrawer">
   <div class="sistema-logo">
     <div class="logo"><img src="" id="logo" alt="Logo"></div>
+    <button id="navdrawer-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span class="material-symbols-rounded">menu</span>
+    </button>
     <div class="logo-div"></div>
   </div>
+  <button id="navdrawer-backdrop" type="button" aria-label="Fechar menu"></button>
   <div class="sistema-navdrawer">
     <div class="up-side">
       <a class="navdrawer-option" id="menu-home" data-path="" href="#">
@@ -140,10 +144,38 @@ function ativarMenu() {
   }
 }
 
+function configurarMenuMovel() {
+  const toggle = document.getElementById('navdrawer-toggle');
+  const backdrop = document.getElementById('navdrawer-backdrop');
+  const navLinks = document.querySelectorAll('.sistema-navdrawer a[data-path]');
+  if (!toggle || !backdrop) return;
+
+  function closeMenu() {
+    document.body.classList.remove('navdrawer-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    const opened = document.body.classList.toggle('navdrawer-open');
+    toggle.setAttribute('aria-expanded', opened ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', toggleMenu);
+  backdrop.addEventListener('click', closeMenu);
+  navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) {
+      closeMenu();
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   inserirNavdrawer();
   const basePath = getBasePath();
   ajustarLinks(basePath);
   ajustarLogo(basePath);
   ativarMenu();
+  configurarMenuMovel();
 });
