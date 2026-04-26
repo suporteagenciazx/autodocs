@@ -32,13 +32,13 @@
                 <div class="base-box">
                     <h2>Documento</h2>
                     <div class="base-boxcampos">
-                        <div class="campo">
+                        <div class="campo selo-opcao">
                             <div class="label">
                                 <label class="label-campo" for="i-gerente">Gerente</label>
                             </div>
                             <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
                         </div>
-                        <div class="campo">
+                        <div class="campo selo-opcao">
                             <div class="label">
                                 <label class="label-campo" for="i-data">Data de Emissão</label>
                             </div>
@@ -84,6 +84,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="base-box">
+                    <h2>Selos e Carimbos</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                            <input id="i-selo-qr" type="checkbox" checked>
+                        </div>
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                            <input id="i-selo-png" type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="menu-inferior">
                 <div class="confirmacao">
@@ -110,10 +123,6 @@
                     <p><span class="bold">Data de Emissão:</span> <span id="dia">[DD]</span> de <span id="mes">[MM]</span> de <span id="ano">[AAAA]</span>.</p>
                 </div>
 
-                <div class="selos" id="selo">
-				    <img src="../../sistema/selo-declaracao.svg" class="selo" alt="Selo">
-			    </div>
-			
 			    <div id="assinaturas">
 		    		<div style="margin-top: 120px; display: flex; flex-direction: row; gap: 32px;">
 		    			<div class="a-modelo">
@@ -136,6 +145,7 @@
 					    </div>
 				    </div>
 			    </div>
+                <div class="selos" id="selo" data-auth-src="../../sistema/selo-declaracao.png"></div>
 
             </div>
         </div>
@@ -151,6 +161,7 @@
     <script src="./inputs.js"></script>
 
     <script src="../../scripts/titulo.js"></script>
+    <script src="../../scripts/selo-digital.js"></script>
     <script src="../../scripts/exportar.js"></script>
     <script src="../../scripts/impressao.js"></script>
 </body>

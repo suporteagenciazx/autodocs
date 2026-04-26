@@ -326,6 +326,13 @@ h2 {
     gap: 8px;
 }
 
+.campo.selo-opcao {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .label {
     display: flex;
     flex-direction: row;
