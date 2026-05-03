@@ -6,6 +6,7 @@
 
 :root {
     --cor-destaque: #eef1ee;
+    --cor-accent: #006157;
     --cinza-titulos: #333;
 }
 
@@ -88,7 +89,7 @@ header#navdrawer {
     border: 0;
     border-radius: 10px;
     background: transparent;
-    color: #006157;
+    color: var(--cor-accent);
     cursor: pointer;
     align-items: center;
     justify-content: center;
@@ -105,7 +106,7 @@ header#navdrawer {
 .logo-div{
     height: 100%;
     width: 1px;
-    background-color: #006157;
+    background-color: var(--cor-accent);
 }
 
 .sistema-navdrawer {
@@ -174,7 +175,7 @@ header#navdrawer {
 }
 
 .navdrawer-option.ativo {
-    color: #006157;
+    color: var(--cor-accent);
     background-color: var(--cor-destaque);
 
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -189,6 +190,7 @@ header#navdrawer {
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-width: 0;
     height: 100%;
 
     background-color: #F9F9F9;
@@ -207,7 +209,7 @@ header#pagina {
 
     gap: 10px;
 
-    color: #006157;
+    color: var(--cor-accent);
     font-family: 'Inter';
     font-size: 11px;
     font-weight: 400;
@@ -220,10 +222,11 @@ header#pagina {
 .sistema-pagina {
     display: flex;
     width: 100%;
+    min-width: 0;
 
     padding: 36px 0px 0px 0px;
 
-    align-items: center;
+    align-items: stretch;
     flex-direction: column;
     
     /* Para rolagem */
@@ -232,24 +235,24 @@ header#pagina {
 }
 
 h1 {
-    color: #006157;
+    color: var(--cor-accent);
     font-family: 'Inter';
     font-size: 24px;
     font-weight: 600;
 
-    text-align: center;
+    text-align: left;
 
     line-height: 17px;
 
-    margin: 0px 0px 24px 0px;
+    margin: 0px 16px 24px 16px;
 }
 
 .formularios {
     display: flex;
     flex-direction: column;
 
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-left: 16px;
+    margin-right: 16px;
 
     padding-bottom: 24px;
 }
@@ -259,7 +262,7 @@ h1 {
     display: grid;
     grid-template-columns: 340px 340px;
     gap: 12px;
-    justify-content: center;
+    justify-content: start;
 }
 
 .base-box {
@@ -573,7 +576,7 @@ input::placeholder {
         height: 64px;
         padding: 0;
         background: transparent;
-        color: #006157;
+        color: var(--cor-accent);
         align-items: center;
         justify-content: center;
         text-align: center;

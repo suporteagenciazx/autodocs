@@ -1,5 +1,17 @@
 // navdrawer.js
 
+const AUTODOCS_THEME_KEYS = {
+  logo: 'autodocs.logo',
+  favicon: 'autodocs.favicon',
+  corDestaque: 'autodocs.corDestaque',
+  corAccent: 'autodocs.corAccent',
+};
+
+const AUTODOCS_DEFAULTS = {
+  logo: 'sistema/logo.svg',
+  favicon: 'sistema/logo.svg',
+};
+
 const navdrawerHTML = `
 <header id="navdrawer">
   <div class="sistema-logo">
@@ -15,37 +27,24 @@ const navdrawerHTML = `
       <a class="navdrawer-option" id="menu-home" data-path="" href="#">
         <span class="material-symbols-rounded">home</span>Painel Inicial
       </a>
-      <a class="navdrawer-option" id="menu-consulta" data-path="consulta/" href="#">
-        <span class="material-symbols-rounded">search</span>Consulta
+      <a class="navdrawer-option" id="menu-documentacoes" data-path="documentacoes/" href="#">
+        <span class="material-symbols-rounded">folder_open</span>Documentações
       </a>
-      <div class="navdrawer-div"></div>
-      <a class="navdrawer-option" id="menu-aprovacao" data-path="documentos/aprovacao/" href="#">
-        <span class="material-symbols-rounded">priority</span>Aprovação
+      <a class="navdrawer-option" id="menu-tags" data-path="tags/" href="#">
+        <span class="material-symbols-rounded">label</span>Tags
       </a>
-      <a class="navdrawer-option" id="menu-contrato" data-path="documentos/contrato/" href="#">
-        <span class="material-symbols-rounded">docs</span>Contrato de Crédito
+      <a class="navdrawer-option" id="menu-usuarios" data-path="usuarios/" href="#">
+        <span class="material-symbols-rounded">group</span>Usuários
       </a>
-      <a class="navdrawer-option" id="menu-comprovante" data-path="documentos/comprovante/" href="#">
-        <span class="material-symbols-rounded">receipt_long</span>Comprovante
+      <a class="navdrawer-option" id="menu-designer" data-path="designer/" href="#">
+        <span class="material-symbols-rounded">design_services</span>Designer
       </a>
-      <a class="navdrawer-option" id="menu-termo" data-path="documentos/termo/" href="#">
-        <span class="material-symbols-rounded">two_pager</span>Termo de Responsabilidade
-      </a>
-      <a class="navdrawer-option" id="menu-declaracao" data-path="documentos/declaracao/" href="#">
-        <span class="material-symbols-rounded">article</span>Declaração de Quitação
-      </a>
-      <a class="navdrawer-option" id="menu-ordem" data-path="documentos/ordem/" href="#">
-        <span class="material-symbols-rounded">table</span>Ordem de Pagamento
-      </a>
-      <a class="navdrawer-option" id="menu-garantia" data-path="documentos/garantia/" href="#">
-        <span class="material-symbols-rounded">inventory</span>Garantia de Liberação
+      <a class="navdrawer-option" id="menu-suporte" data-path="suporte/" href="#">
+        <span class="material-symbols-rounded">support_agent</span>Suporte
       </a>
     </div>
     <div class="down-side">
       <div class="navdrawer-div"></div>
-      <a class="navdrawer-option" id="menu-ajuda" data-path="ajuda/" href="#">
-        <span class="material-symbols-rounded">help</span>Ajuda
-      </a>
       <a class="navdrawer-option" id="menu-configuracoes" data-path="configuracoes/" href="#">
         <span class="material-symbols-rounded">settings</span>Configurações
       </a>
@@ -56,6 +55,18 @@ const navdrawerHTML = `
   </div>
 </header>
 `;
+
+function normalizeThemePath(s) {
+  if (!s || typeof s !== 'string') return '';
+  let t = s.trim().replace(/\\/g, '/');
+  if (t.startsWith('./')) t = t.slice(2);
+  if (t.includes('..')) return '';
+  return t;
+}
+
+function isValidHexColor(v) {
+  return typeof v === 'string' && /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/.test(v.trim());
+}
 
 /**
  * Caminho base do app (sempre com barra final).
@@ -69,7 +80,17 @@ function getBasePath() {
   }
 
   const lower = p.toLowerCase();
-  const markers = ['/documentos/', '/consulta/', '/ajuda/', '/configuracoes/'];
+  const markers = [
+    '/documentos/',
+    '/consulta/',
+    '/documentacoes/',
+    '/tags/',
+    '/usuarios/',
+    '/designer/',
+    '/suporte/',
+    '/ajuda/',
+    '/configuracoes/',
+  ];
   for (let i = 0; i < markers.length; i++) {
     const idx = lower.indexOf(markers[i]);
     if (idx !== -1) {
@@ -78,6 +99,48 @@ function getBasePath() {
   }
 
   return p;
+}
+
+function aplicarTemaAutoDocs(basePath) {
+  const root = document.documentElement;
+
+  let logoRel = normalizeThemePath(localStorage.getItem(AUTODOCS_THEME_KEYS.logo) || '');
+  let favRel = normalizeThemePath(localStorage.getItem(AUTODOCS_THEME_KEYS.favicon) || '');
+  const corDestaque = localStorage.getItem(AUTODOCS_THEME_KEYS.corDestaque);
+  const corAccent = localStorage.getItem(AUTODOCS_THEME_KEYS.corAccent);
+
+  if (!logoRel) logoRel = AUTODOCS_DEFAULTS.logo;
+  if (!favRel) favRel = AUTODOCS_DEFAULTS.favicon;
+
+  const logoEl = document.getElementById('logo');
+  if (logoEl) {
+    logoEl.src = basePath + logoRel;
+  }
+
+  let linkIcon = document.querySelector('link[rel~="icon"]');
+  if (!linkIcon) {
+    linkIcon = document.createElement('link');
+    linkIcon.rel = 'icon';
+    document.head.appendChild(linkIcon);
+  }
+  linkIcon.href = basePath + favRel;
+
+  if (corDestaque && isValidHexColor(corDestaque)) {
+    root.style.setProperty('--cor-destaque', corDestaque.trim());
+  } else {
+    root.style.removeProperty('--cor-destaque');
+  }
+
+  if (corAccent && isValidHexColor(corAccent)) {
+    root.style.setProperty('--cor-accent', corAccent.trim());
+  } else {
+    root.style.removeProperty('--cor-accent');
+  }
+}
+
+/** Reaplica tema (ex.: após salvar em Configurações). */
+function applyAutoDocsTheme() {
+  aplicarTemaAutoDocs(getBasePath());
 }
 
 function inserirNavdrawer() {
@@ -94,13 +157,6 @@ function ajustarLinks(basePath) {
   });
 }
 
-function ajustarLogo(basePath) {
-  const logo = document.getElementById('logo');
-  if (logo) {
-    logo.src = basePath + 'sistema/logo.svg';
-  }
-}
-
 function ativarMenu() {
   const navLinks = document.querySelectorAll('.sistema-navdrawer a[data-path]');
   const currentPath = location.pathname.toLowerCase();
@@ -109,37 +165,28 @@ function ativarMenu() {
     link.classList.remove('ativo');
   });
 
-  // Função auxiliar para ativar menu pelo id, com verificação
   function ativarPorId(id) {
     const el = document.getElementById(id);
     if (el) el.classList.add('ativo');
   }
 
-  // Verifica com includes e removendo "index.html" para ajudar
-  const pathSemIndex = currentPath.replace(/index\.html$/, '');
+  const pathSemIndex = currentPath.replace(/index\.html$/i, '');
 
-  if (pathSemIndex.includes('/documentos/aprovacao/')) {
-    ativarPorId('menu-aprovacao');
-  } else if (pathSemIndex.includes('/documentos/contrato/')) {
-    ativarPorId('menu-contrato');
-  } else if (pathSemIndex.includes('/documentos/comprovante/')) {
-    ativarPorId('menu-comprovante');
-  } else if (pathSemIndex.includes('/documentos/termo/')) {
-    ativarPorId('menu-termo');
-  } else if (pathSemIndex.includes('/documentos/declaracao/')) {
-    ativarPorId('menu-declaracao');
-  } else if (pathSemIndex.includes('/documentos/ordem/')) {
-    ativarPorId('menu-ordem');
-  } else if (pathSemIndex.includes('/documentos/garantia/')) {
-    ativarPorId('menu-garantia');
-  } else if (pathSemIndex.includes('/consulta/')) {
-    ativarPorId('menu-consulta');
-  } else if (pathSemIndex.includes('/ajuda/')) {
-    ativarPorId('menu-ajuda');
-  } else if (pathSemIndex.includes('/configuracoes/')) {
+  if (pathSemIndex.includes('/configuracoes/')) {
     ativarPorId('menu-configuracoes');
+  } else if (pathSemIndex.includes('/usuarios/')) {
+    ativarPorId('menu-usuarios');
+  } else if (pathSemIndex.includes('/designer/')) {
+    ativarPorId('menu-designer');
+  } else if (pathSemIndex.includes('/suporte/')) {
+    ativarPorId('menu-suporte');
+  } else if (pathSemIndex.includes('/tags/')) {
+    ativarPorId('menu-tags');
+  } else if (pathSemIndex.includes('/documentacoes/')) {
+    ativarPorId('menu-documentacoes');
+  } else if (pathSemIndex.includes('/documentos/') || pathSemIndex.includes('/consulta/') || pathSemIndex.includes('/ajuda/')) {
+    ativarPorId('menu-documentacoes');
   } else {
-    // padrão home
     ativarPorId('menu-home');
   }
 }
@@ -175,7 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
   inserirNavdrawer();
   const basePath = getBasePath();
   ajustarLinks(basePath);
-  ajustarLogo(basePath);
+  aplicarTemaAutoDocs(basePath);
   ativarMenu();
   configurarMenuMovel();
 });
+
+window.applyAutoDocsTheme = applyAutoDocsTheme;
+window.getAutoDocsBasePath = getBasePath;

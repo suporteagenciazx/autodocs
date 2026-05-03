@@ -1,0 +1,324 @@
+/* Hub de documentações e página de tags */
+
+/* Área útil em largura total; margens laterais iguais (dir. não colada na borda). */
+.doc-hub-layout {
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.doc-hub-layout h1 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.doc-hub-layout .sistema-conteudo {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0;
+}
+
+.doc-hub-toolbar {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 14px 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.doc-hub-search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+    padding: 7px 11px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.doc-hub-search-wrap .material-symbols-rounded {
+    color: #999;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.doc-hub-search-wrap input[type="search"] {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    background: transparent;
+}
+
+.doc-hub-search-wrap input[type="search"]::placeholder {
+    color: #bdbdbd;
+}
+
+.doc-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0 0 24px 0;
+    box-sizing: border-box;
+}
+
+.doc-hub-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.doc-hub-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.doc-hub-card-preview {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.doc-hub-card-preview--icon {
+    background: var(--cor-destaque);
+}
+
+.doc-hub-card-doc-icon {
+    font-size: 72px;
+    color: var(--cor-accent);
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+    opacity: 0.92;
+}
+
+.doc-hub-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px 12px;
+    align-items: flex-start;
+}
+
+.doc-hub-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cinza-titulos);
+    line-height: 1.3;
+}
+
+.doc-hub-card-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 30%, transparent);
+    background-color: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 12%, white);
+    color: var(--tag-accent, var(--cor-accent));
+}
+
+.doc-hub-empty {
+    text-align: left;
+    padding: 24px 0;
+    color: #999;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    max-width: none;
+    margin: 0;
+}
+
+/* Página Tags */
+
+.tags-page-section {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 28px 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tags-page-section h2 {
+    margin-bottom: 12px;
+}
+
+.tags-form-inline {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tags-form-inline .input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.tags-form-inline .tags-cor-hex {
+    flex: 0 0 100px;
+    min-width: 88px;
+    max-width: 120px;
+}
+
+.tags-btn-primary {
+    height: 36px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--cor-accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tags-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tags-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+.tags-row-color {
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tags-row-name {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cinza-titulos);
+}
+
+.tags-row-meta {
+    font-size: 12px;
+    color: #999;
+}
+
+.tags-btn-remove {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #666;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.tags-btn-remove:hover {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.tags-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.tags-doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+}
+
+.tags-doc-table th,
+.tags-doc-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tags-doc-table th {
+    font-weight: 600;
+    color: var(--cor-accent);
+    background: var(--cor-destaque);
+}
+
+.tags-doc-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.tags-doc-select {
+    width: 100%;
+    max-width: 220px;
+    height: 36px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .doc-hub-layout {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .doc-hub-search-wrap {
+        max-width: none;
+    }
+
+    .tags-doc-select {
+        max-width: none;
+    }
+}

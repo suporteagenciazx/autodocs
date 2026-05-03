@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Configurações | Sistema BC</title>
+    <title>Configurações | AutoDocs</title>
 
     <link rel="icon" href="../sistema/logo.svg" type="image/svg+xml">
 
@@ -15,6 +15,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
 
     <link rel="stylesheet" href="../estilos/icones.css">
+    <style>
+        #form-autodocs-tema button[type="submit"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 22px;
+            border-radius: 22px;
+            border: 0;
+            cursor: pointer;
+            background-color: var(--cor-accent);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,18 +41,50 @@
         <div class="sistema-pagina">
             <h1>Configurações</h1>
             <div class="formularios">
-                <div class="area-boxes" style="grid-template-columns: 492px;">
-                <div class="base-box" style="display:flex; justify-content: center; flex-direction: column; gap: 12px; align-items: center;">
-                    <span class="material-symbols-rounded">construction</span>
-                    <h2 style="margin: 0px;">Sistema em desenvolvimento</h2>
+                <div class="area-boxes" style="grid-template-columns: minmax(280px, 520px); justify-content: center;">
+                    <div class="base-box">
+                        <div class="box-header">
+                            <span class="material-symbols-rounded">palette</span>
+                            <h2>Identidade visual AutoDocs</h2>
+                        </div>
+                        <p class="campo-texto" style="margin-bottom: 16px;">
+                            Informe caminhos relativos à raiz do site (ex.: <code>sistema/logo.svg</code> ou arquivos na pasta <code>autodocs/</code>). Coloque os arquivos na pasta do projeto antes de referenciá-los.
+                        </p>
+                        <form id="form-autodocs-tema" class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="autodocs-logo">Caminho do logo (barra lateral)</label>
+                                <input class="input" type="text" id="autodocs-logo" name="logo" placeholder="sistema/logo.svg" autocomplete="off">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="autodocs-favicon">Caminho do favicon (aba do navegador)</label>
+                                <input class="input" type="text" id="autodocs-favicon" name="favicon" placeholder="sistema/logo.svg" autocomplete="off">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="autodocs-cor-destaque-text">Cor de destaque (fundo da barra superior do menu)</label>
+                                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                                    <input type="color" id="autodocs-cor-destaque" aria-label="Seletor cor de destaque" style="width:48px;height:36px;padding:2px;border:0;background:transparent;cursor:pointer;">
+                                    <input class="input" type="text" id="autodocs-cor-destaque-text" placeholder="#eef1ee" autocomplete="off" style="flex:1;min-width:140px;">
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="autodocs-cor-accent-text">Cor de ênfase (links ativos, títulos, detalhes)</label>
+                                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                                    <input type="color" id="autodocs-cor-accent" aria-label="Seletor cor de ênfase" style="width:48px;height:36px;padding:2px;border:0;background:transparent;cursor:pointer;">
+                                    <input class="input" type="text" id="autodocs-cor-accent-text" placeholder="#006157" autocomplete="off" style="flex:1;min-width:140px;">
+                                </div>
+                            </div>
+                            <div class="campo" style="margin-top: 8px;">
+                                <button type="submit">Salvar e aplicar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-
             </div>
         </div>
     </div>
     <script src="../scripts/banco.js"></script>
     <script src="../scripts/navdrawer.js"></script>
+    <script src="../scripts/configuracoes-autodocs.js"></script>
 </body>
 
 </html>

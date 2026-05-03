@@ -33,4 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
             el.textContent = item.texto;
         });
     });
+
+    const headerBanco = document.getElementById('sistema-banco');
+    const headerCnpj = document.getElementById('sistema-cnpj');
+    if (headerBanco) headerBanco.textContent = 'AutoDocs';
+    if (headerCnpj) {
+        headerCnpj.textContent = 'Sistema de emissão de documentações automáticas';
+    }
 });

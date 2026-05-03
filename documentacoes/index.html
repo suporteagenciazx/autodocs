@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentações | AutoDocs</title>
+
+    <link rel="icon" href="../sistema/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../estilos/sistema.css">
+    <link rel="stylesheet" href="../estilos/exportar.css">
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+
+    <link rel="stylesheet" href="../estilos/icones.css">
+</head>
+
+<body>
+    <div class="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <div class="doc-hub-layout">
+            <h1>Documentações</h1>
+            <div class="sistema-conteudo">
+                <div class="doc-hub-toolbar">
+                    <label class="doc-hub-search-wrap">
+                        <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                        <input type="search" id="documentacoes-search" placeholder="Pesquisar por nome, instituição ou descrição…" autocomplete="off" enterkeyhint="search">
+                    </label>
+                </div>
+                <p id="documentacoes-empty" class="doc-hub-empty" hidden>Nenhuma documentação encontrada.</p>
+                <div id="documentacoes-grid" class="doc-hub-grid"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/banco.js"></script>
+    <script src="../scripts/navdrawer.js"></script>
+    <script src="../scripts/autodocs-tags-storage.js"></script>
+    <script src="../scripts/autodocs-docs-catalog.js"></script>
+    <script src="../scripts/documentacoes-page.js"></script>
+</body>
+
+</html>
