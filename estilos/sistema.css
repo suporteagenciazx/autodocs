@@ -612,6 +612,96 @@ input::placeholder {
     }
 }
 
+/* Páginas shell (sem #documento): mesma usabilidade mobile — barra superior só logo + menu; drawer deslizante */
+@media (max-width: 900px) {
+    body:not(:has(#documento)) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 64px minmax(0, 1fr);
+        height: 100dvh;
+    }
+
+    body:not(:has(#documento)) > #navdrawer {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: 64px;
+        position: relative;
+        z-index: 20;
+    }
+
+    body:not(:has(#documento)) .sistema-logo {
+        height: 64px;
+        padding: 12px;
+    }
+
+    body:not(:has(#documento)) .logo-div {
+        display: none;
+    }
+
+    body:not(:has(#documento)) #navdrawer-toggle {
+        display: inline-flex;
+    }
+
+    body:not(:has(#documento)) .sistema-navdrawer {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        bottom: 0;
+        width: min(320px, 86vw);
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+        max-height: none;
+        border-right: 1px solid #EEEEEE;
+        border-bottom: 0;
+        padding: 16px 12px 12px 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        z-index: 30;
+    }
+
+    body:not(:has(#documento)) #navdrawer-backdrop {
+        display: block;
+        position: fixed;
+        inset: 64px 0 0 0;
+        background: rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        border: 0;
+        padding: 0;
+        z-index: 25;
+    }
+
+    body:not(:has(#documento)).navdrawer-open .sistema-navdrawer {
+        transform: translateX(0);
+    }
+
+    body:not(:has(#documento)).navdrawer-open #navdrawer-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body:not(:has(#documento)) .navdrawer-option {
+        height: 42px;
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    body:not(:has(#documento)) > .conteudo {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 0;
+        overflow: auto;
+        max-height: calc(100dvh - 64px);
+    }
+}
+
+/* Largura estreita: oculta linha secundária do header (subtítulo / CNPJ) */
+@media (max-width: 600px) {
+    header#pagina #sistema-cnpj {
+        display: none;
+    }
+}
+
 @media print {
     html,
     body {
