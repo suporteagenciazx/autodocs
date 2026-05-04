@@ -8,7 +8,7 @@
   }
 
   function normalizePickerHex(hex) {
-    if (!hex || typeof hex !== 'string') return '#006157';
+    if (!hex || typeof hex !== 'string') return '#025aa4';
     const t = hex.trim();
     if (/^#[0-9A-Fa-f]{3}$/.test(t)) {
       const r = t[1];
@@ -17,13 +17,13 @@
       return '#' + r + r + g + g + b + b;
     }
     if (/^#[0-9A-Fa-f]{6}$/.test(t)) return t;
-    return '#006157';
+    return '#025aa4';
   }
 
   function defaultAccentForForm() {
     const v = getComputedStyle(document.documentElement).getPropertyValue('--cor-accent').trim();
     if (/^#[0-9A-Fa-f]{3,6}$/i.test(v)) return normalizePickerHex(v);
-    return '#006157';
+    return '#025aa4';
   }
 
   function renderTagsList() {
@@ -35,7 +35,7 @@
     ul.innerHTML = '';
     tags.forEach(tag => {
       const n = window.AutoDocsTags.countDocsForTag(tag.id, ids);
-      const accent = tag.accentColor || '#006157';
+      const accent = tag.accentColor || '#025aa4';
       const li = document.createElement('li');
       li.className = 'tags-row';
       li.innerHTML =
@@ -156,7 +156,7 @@
     if (form && input) {
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const cor = textCor ? textCor.value.trim() : picker ? picker.value : '#006157';
+        const cor = textCor ? textCor.value.trim() : picker ? picker.value : '#025aa4';
         const id = window.AutoDocsTags.createTag(input.value, cor);
         if (!id) {
           alert('Nome inválido ou tag já existente.');

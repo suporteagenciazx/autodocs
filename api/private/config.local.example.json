@@ -1,0 +1,11 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "name": "autodocs",
+    "user": "autodocs_app",
+    "password": "OZUJxEWYenbkzJeS"
+  },
+  "session_cookie_secure": false,
+  "registration_open": false
+}

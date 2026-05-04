@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta | AutoDocs</title>
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../estilos/sistema.css">
+    <link rel="stylesheet" href="../estilos/exportar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+    <link rel="stylesheet" href="../estilos/icones.css">
+    <style>
+        .autodocs-auth-card { max-width: 420px; margin: 0 auto; }
+        .autodocs-auth-msg { color: #b00020; font-size: 13px; margin: 0 0 12px; min-height: 1.2em; }
+        .autodocs-auth-note { font-size: 12px; color: #555; margin-top: 12px; }
+    </style>
+</head>
+
+<body>
+    <div class="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Criar conta</h1>
+            <div class="formularios">
+                <div class="area-boxes" style="grid-template-columns: 1fr;">
+                    <div class="base-box autodocs-auth-card">
+                        <div class="box-header">
+                            <span class="material-symbols-rounded">person_add</span>
+                            <h2>Registo</h2>
+                        </div>
+                        <p id="cadastro-msg" class="autodocs-auth-msg" role="alert"></p>
+                        <p id="cadastro-bloqueado" class="campo-texto" hidden>
+                            O registo público está desativado. Peça a um administrador para criar a sua conta, ou ative <code>registration_open</code> em <code>api/private/config.local.json</code>.
+                        </p>
+                        <form id="form-cadastro" class="base-boxcampos" hidden>
+                            <div class="campo">
+                                <label class="label-campo" for="cadastro-email">Email</label>
+                                <input class="input" type="email" id="cadastro-email" name="email" required autocomplete="username" maxlength="255">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="cadastro-password">Palavra-passe (mín. 8 caracteres)</label>
+                                <input class="input" type="password" id="cadastro-password" name="password" required autocomplete="new-password" minlength="8">
+                            </div>
+                            <div class="campo" style="margin-top: 8px;">
+                                <button type="submit" class="input" style="cursor:pointer; background: var(--cor-accent, #025aa4); color: #fff; border: 0; padding: 14px 22px; border-radius: 22px; font-weight: 600;">Registar</button>
+                            </div>
+                        </form>
+                        <p class="autodocs-auth-note"><a href="../login/">Voltar ao login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/banco.js"></script>
+    <script src="../scripts/cadastro-page.js"></script>
+    <script src="../scripts/navdrawer.js"></script>
+</body>
+
+</html>

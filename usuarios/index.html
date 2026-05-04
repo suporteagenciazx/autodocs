@@ -4,17 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Usuários | AutoDocs</title>
-
-    <link rel="icon" href="../sistema/logo.svg" type="image/svg+xml">
-
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../estilos/sistema.css">
     <link rel="stylesheet" href="../estilos/exportar.css">
-
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-
     <link rel="stylesheet" href="../estilos/icones.css">
+    <style>
+        .usuarios-doc-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            margin: 0 0 14px 0;
+        }
+
+        .usuarios-doc-toolbar .doc-hub-search-wrap {
+            flex: 1;
+            min-width: 200px;
+            max-width: 360px;
+        }
+
+        .usuarios-msg {
+            color: #b00020;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin: 0 0 12px;
+            min-height: 1.2em;
+        }
+
+        .usuarios-email-cell {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+        }
+
+        .usuarios-email-cell .material-symbols-rounded {
+            font-size: 20px;
+            color: var(--cor-accent);
+            flex-shrink: 0;
+        }
+
+        .usuarios-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .usuarios-batch-grid {
+            display: grid;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .usuarios-batch-grid label {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .usuarios-modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+
+        .usuarios-modal-bg.is-open {
+            display: flex;
+        }
+
+        .usuarios-modal {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: auto;
+            padding: 22px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            box-sizing: border-box;
+        }
+
+        .usuarios-modal h3 {
+            margin: 0 0 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cinza-titulos);
+        }
+
+        .usuarios-modal-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,19 +124,70 @@
             <span id="sistema-cnpj" class="banco-cnpj"></span>
         </header>
         <div class="sistema-pagina">
-            <h1>Usuários</h1>
-            <div class="formularios">
-                <div class="area-boxes" style="grid-template-columns: minmax(280px, 492px);">
-                    <div class="base-box" style="display:flex; justify-content: center; flex-direction: column; gap: 12px; align-items: center;">
-                        <span class="material-symbols-rounded">construction</span>
-                        <h2 style="margin: 0px;">Em breve</h2>
-                        <p class="campo-texto" style="text-align: center; margin: 0;">Gestão de usuários e níveis de acesso será adicionada em uma versão futura.</p>
+            <div class="doc-hub-layout">
+                <h1>Usuários</h1>
+                <div class="sistema-conteudo">
+                    <p id="usuarios-msg" class="usuarios-msg" role="alert"></p>
+                    <div class="doc-hub-toolbar usuarios-doc-toolbar">
+                        <label class="doc-hub-search-wrap">
+                            <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                            <input type="search" id="usuarios-search" placeholder="Pesquisar por email, função ou lotes…" autocomplete="off" enterkeyhint="search">
+                        </label>
+                        <button type="button" id="usuarios-btn-novo" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:0;cursor:pointer;background-color:var(--cor-accent);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;">Novo utilizador</button>
+                    </div>
+                    <div class="tags-table-wrap">
+                        <table class="tags-doc-table" id="usuarios-table">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Função</th>
+                                    <th>Ativo</th>
+                                    <th>Lotes</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuarios-tbody"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="usuarios-modal-bg" id="usuarios-modal-bg" aria-hidden="true">
+        <div class="usuarios-modal" role="dialog" aria-labelledby="usuarios-modal-title">
+            <h3 id="usuarios-modal-title">Utilizador</h3>
+            <form id="usuarios-form" class="base-boxcampos">
+                <input type="hidden" id="usuarios-edit-id" value="">
+                <div class="campo">
+                    <label class="label-campo" for="usuarios-f-email">Email</label>
+                    <input class="input" type="email" id="usuarios-f-email" required maxlength="255" autocomplete="off">
+                </div>
+                <div class="campo">
+                    <label class="label-campo" for="usuarios-f-password">Palavra-passe</label>
+                    <input class="input" type="password" id="usuarios-f-password" autocomplete="new-password" placeholder="Deixe vazio para não alterar">
+                </div>
+                <div class="campo">
+                    <label class="label-campo" for="usuarios-f-role">Função</label>
+                    <select class="input" id="usuarios-f-role">
+                        <option value="user">Utilizador</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <span class="label-campo">Lotes de documentação</span>
+                    <div class="usuarios-batch-grid" id="usuarios-f-batches"></div>
+                </div>
+                <div class="usuarios-modal-actions">
+                    <button type="submit" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:0;cursor:pointer;background-color:var(--cor-accent);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:140px;">Guardar</button>
+                    <button type="button" id="usuarios-modal-cancel" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:1px solid #e8e8e8;cursor:pointer;background:#fff;color:var(--cor-accent);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:140px;">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="../scripts/banco.js"></script>
+    <script src="../scripts/usuarios-page.js"></script>
     <script src="../scripts/navdrawer.js"></script>
 </body>
 

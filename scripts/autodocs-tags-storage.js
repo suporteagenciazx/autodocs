@@ -36,9 +36,9 @@
   }
 
   function fallbackAccentFromTheme() {
-    if (typeof document === 'undefined') return '#006157';
+    if (typeof document === 'undefined') return '#025aa4';
     const v = getComputedStyle(document.documentElement).getPropertyValue('--cor-accent').trim();
-    return isValidHex(v) ? normalizeHex(v) : '#006157';
+    return isValidHex(v) ? normalizeHex(v) : '#025aa4';
   }
 
   function migrateTagColors(tags) {
@@ -47,7 +47,7 @@
     const next = tags.map(t => {
       if (t.accentColor && isValidHex(t.accentColor)) return t;
       changed = true;
-      const defaultSofisa = '#006157';
+      const defaultSofisa = '#025aa4';
       const col =
         t.id === 'tag-sofisa' ? defaultSofisa : fb;
       return { ...t, accentColor: normalizeHex(col) || col };
@@ -80,7 +80,7 @@
     ensureDefaults(catalogDocIds) {
       let tags = this.getTags();
       if (!tags.length) {
-        tags = [{ id: 'tag-sofisa', name: 'Sofisa', accentColor: '#006157' }];
+        tags = [{ id: 'tag-sofisa', name: 'Sofisa', accentColor: '#025aa4' }];
         this.setTags(tags);
       } else {
         const mig = migrateTagColors(tags);
@@ -107,7 +107,7 @@
       if (tags.some(t => t.name.toLowerCase() === n.toLowerCase())) return null;
       let hex = normalizeHex(accentColor || '');
       if (!hex) hex = fallbackAccentFromTheme();
-      if (!isValidHex(hex)) hex = '#006157';
+      if (!isValidHex(hex)) hex = '#025aa4';
       const tag = {
         id: newId('tag-'),
         name: n,

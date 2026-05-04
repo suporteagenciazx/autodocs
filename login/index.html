@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | AutoDocs</title>
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../estilos/sistema.css">
+    <link rel="stylesheet" href="../estilos/exportar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
+    <link rel="stylesheet" href="../estilos/icones.css">
+    <style>
+        body.login-standalone {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 24px 16px;
+            background: #f0f2f0;
+        }
+
+        .login-standalone-main {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .login-standalone-card {
+            width: 100%;
+            padding: 32px 28px;
+            box-sizing: border-box;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .login-standalone-card.base-boxcampos {
+            gap: 14px;
+        }
+
+        .login-standalone-logo {
+            display: block;
+            margin: 0 auto;
+            max-height: 44px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .autodocs-auth-msg {
+            color: #b00020;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            margin: 0;
+            min-height: 1.2em;
+        }
+
+        .login-standalone-submit {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 4px;
+            padding: 14px 22px;
+            border-radius: 22px;
+            border: 0;
+            cursor: pointer;
+            background-color: var(--cor-accent, #025aa4);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .login-standalone-links {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            text-align: center;
+            color: #666;
+        }
+
+        .login-standalone-links a {
+            color: var(--cor-accent, #025aa4);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-standalone-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="login-standalone">
+    <main class="login-standalone-main">
+        <form id="form-login" class="login-standalone-card base-boxcampos" novalidate>
+            <img id="login-logo" class="login-standalone-logo" src="../sistema/logo-horizontal.svg" alt="AutoDocs" width="160" height="44">
+            <p id="login-msg" class="autodocs-auth-msg" role="alert"></p>
+            <div class="campo">
+                <label class="label-campo" for="login-email">Email</label>
+                <input class="input" type="email" id="login-email" name="email" required autocomplete="username" maxlength="255">
+            </div>
+            <div class="campo">
+                <label class="label-campo" for="login-password">Palavra-passe</label>
+                <input class="input" type="password" id="login-password" name="password" required autocomplete="current-password" minlength="1">
+            </div>
+            <button type="submit" class="login-standalone-submit">Entrar</button>
+        </form>
+    </main>
+    <script src="../scripts/login-page.js"></script>
+</body>
+
+</html>

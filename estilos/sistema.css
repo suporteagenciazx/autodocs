@@ -6,8 +6,88 @@
 
 :root {
     --cor-destaque: #eef1ee;
-    --cor-accent: #006157;
+    --cor-accent: #025aa4;
     --cinza-titulos: #333;
+}
+
+/*
+ * Botões pill (Usuários, modais, toolbar). Centralizado aqui para garantir carga e remover o aspeto nativo do SO.
+ */
+.autodocs-btn-pill-primary {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    padding: 14px 22px;
+    border-radius: 22px;
+    border: 0;
+    cursor: pointer;
+    background-color: var(--cor-accent, #025aa4);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.autodocs-btn-pill-primary:hover {
+    filter: brightness(0.95);
+}
+
+.autodocs-btn-pill-secondary {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    padding: 14px 22px;
+    border-radius: 22px;
+    border: 1px solid #e8e8e8;
+    cursor: pointer;
+    background: #fff;
+    color: var(--cor-accent, #025aa4);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.autodocs-btn-pill-secondary:hover {
+    background: var(--cor-destaque, #eef1ee);
+    border-color: #ddd;
+}
+
+.autodocs-btn-pill-danger {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    padding: 14px 22px;
+    border-radius: 22px;
+    border: 1px solid #ffcdd2;
+    cursor: pointer;
+    background: #fff;
+    color: #c62828;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.autodocs-btn-pill-danger:hover {
+    background: #ffebee;
+    border-color: #ef9a9a;
 }
 
 html {
@@ -184,6 +264,11 @@ header#navdrawer {
 .navdrawer-option:hover:not(.ativo) {
     color: #666;
     background-color: #F5F5F5;
+}
+
+/* Garante que itens com [hidden] não fiquem visíveis: o estilo acima força display:flex. */
+.navdrawer-option[hidden] {
+    display: none !important;
 }
 
 .conteudo {

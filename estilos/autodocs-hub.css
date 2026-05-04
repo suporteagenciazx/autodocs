@@ -203,6 +203,39 @@
     cursor: pointer;
 }
 
+/* Ações em tabelas (ex.: Editar / Eliminar em Usuários) */
+.tags-btn-outline {
+    height: 36px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--cor-accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tags-btn-outline:hover {
+    background: var(--cor-destaque);
+    border-color: #ddd;
+}
+
+.tags-btn-outline--danger {
+    border-color: #ffcdd2;
+    color: #c62828;
+    background: #fff;
+}
+
+.tags-btn-outline--danger:hover {
+    background: #ffebee;
+    border-color: #ef9a9a;
+}
+
+/* Botões pill: ver estilos/sistema.css (.autodocs-btn-pill-*) */
+
 .tags-list {
     list-style: none;
     margin: 0;

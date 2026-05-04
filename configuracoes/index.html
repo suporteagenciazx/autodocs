@@ -7,7 +7,7 @@
 
     <title>Configurações | AutoDocs</title>
 
-    <link rel="icon" href="../sistema/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../estilos/sistema.css">
     <link rel="stylesheet" href="../estilos/exportar.css">
@@ -16,6 +16,19 @@
 
     <link rel="stylesheet" href="../estilos/icones.css">
     <style>
+        .config-autodocs-narrow {
+            width: 40%;
+            max-width: 100%;
+            min-width: min(280px, 100%);
+            justify-self: start;
+        }
+
+        @media (max-width: 900px) {
+            .config-autodocs-narrow {
+                width: 100%;
+            }
+        }
+
         #form-autodocs-tema button[type="submit"] {
             width: 100%;
             box-sizing: border-box;
@@ -41,23 +54,24 @@
         <div class="sistema-pagina">
             <h1>Configurações</h1>
             <div class="formularios">
-                <div class="area-boxes" style="grid-template-columns: minmax(280px, 520px); justify-content: center;">
+                <div class="area-boxes" style="grid-template-columns: 1fr;">
+                    <div class="config-autodocs-narrow">
                     <div class="base-box">
                         <div class="box-header">
                             <span class="material-symbols-rounded">palette</span>
                             <h2>Identidade visual AutoDocs</h2>
                         </div>
                         <p class="campo-texto" style="margin-bottom: 16px;">
-                            Informe caminhos relativos à raiz do site (ex.: <code>sistema/logo.svg</code> ou arquivos na pasta <code>autodocs/</code>). Coloque os arquivos na pasta do projeto antes de referenciá-los.
+                            Os valores são gravados em <code>api/private/theme.json</code> no servidor (não em cookies nem <code>localStorage</code>). Use caminhos relativos à raiz do site (ex.: <code>sistema/logo-horizontal.svg</code>). Coloque os ficheiros no projeto antes de referenciá-los.
                         </p>
                         <form id="form-autodocs-tema" class="base-boxcampos">
                             <div class="campo">
                                 <label class="label-campo" for="autodocs-logo">Caminho do logo (barra lateral)</label>
-                                <input class="input" type="text" id="autodocs-logo" name="logo" placeholder="sistema/logo.svg" autocomplete="off">
+                                <input class="input" type="text" id="autodocs-logo" name="logo" placeholder="sistema/logo-horizontal.svg" autocomplete="off">
                             </div>
                             <div class="campo">
                                 <label class="label-campo" for="autodocs-favicon">Caminho do favicon (aba do navegador)</label>
-                                <input class="input" type="text" id="autodocs-favicon" name="favicon" placeholder="sistema/logo.svg" autocomplete="off">
+                                <input class="input" type="text" id="autodocs-favicon" name="favicon" placeholder="sistema/favicon.svg" autocomplete="off">
                             </div>
                             <div class="campo">
                                 <label class="label-campo" for="autodocs-cor-destaque-text">Cor de destaque (fundo da barra superior do menu)</label>
@@ -70,13 +84,14 @@
                                 <label class="label-campo" for="autodocs-cor-accent-text">Cor de ênfase (links ativos, títulos, detalhes)</label>
                                 <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                                     <input type="color" id="autodocs-cor-accent" aria-label="Seletor cor de ênfase" style="width:48px;height:36px;padding:2px;border:0;background:transparent;cursor:pointer;">
-                                    <input class="input" type="text" id="autodocs-cor-accent-text" placeholder="#006157" autocomplete="off" style="flex:1;min-width:140px;">
+                                    <input class="input" type="text" id="autodocs-cor-accent-text" placeholder="#025aa4" autocomplete="off" style="flex:1;min-width:140px;">
                                 </div>
                             </div>
                             <div class="campo" style="margin-top: 8px;">
                                 <button type="submit">Salvar e aplicar</button>
                             </div>
                         </form>
+                    </div>
                     </div>
                 </div>
             </div>

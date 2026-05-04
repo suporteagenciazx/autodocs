@@ -1,29 +1,14 @@
 (function () {
-  const KEYS = {
-    logo: 'autodocs.logo',
-    favicon: 'autodocs.favicon',
-    corDestaque: 'autodocs.corDestaque',
-    corAccent: 'autodocs.corAccent',
-  };
+  const LS_LEGACY_KEYS = ['autodocs.logo', 'autodocs.favicon', 'autodocs.corDestaque', 'autodocs.corAccent'];
 
-  function loadForm() {
-    const logoEl = document.getElementById('autodocs-logo');
-    const favEl = document.getElementById('autodocs-favicon');
-    const pickerD = document.getElementById('autodocs-cor-destaque');
-    const textD = document.getElementById('autodocs-cor-destaque-text');
-    const pickerA = document.getElementById('autodocs-cor-accent');
-    const textA = document.getElementById('autodocs-cor-accent-text');
-    if (!logoEl || !favEl) return;
-
-    logoEl.value = localStorage.getItem(KEYS.logo) || '';
-    favEl.value = localStorage.getItem(KEYS.favicon) || '';
-
-    const storedD = localStorage.getItem(KEYS.corDestaque) || '#eef1ee';
-    const storedA = localStorage.getItem(KEYS.corAccent) || '#006157';
-    if (pickerD) pickerD.value = normalizeHexForPicker(storedD);
-    if (textD) textD.value = storedD;
-    if (pickerA) pickerA.value = normalizeHexForPicker(storedA);
-    if (textA) textA.value = storedA;
+  function clearLegacyThemeStorage() {
+    LS_LEGACY_KEYS.forEach(k => {
+      try {
+        localStorage.removeItem(k);
+      } catch (_) {
+        /* ignore */
+      }
+    });
   }
 
   function normalizeHexForPicker(hex) {
@@ -39,24 +24,73 @@
     return '#eef1ee';
   }
 
-  function save(e) {
+  function getBasePath() {
+    return typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
+  }
+
+  async function loadForm() {
+    const logoEl = document.getElementById('autodocs-logo');
+    const favEl = document.getElementById('autodocs-favicon');
+    const pickerD = document.getElementById('autodocs-cor-destaque');
+    const textD = document.getElementById('autodocs-cor-destaque-text');
+    const pickerA = document.getElementById('autodocs-cor-accent');
+    const textA = document.getElementById('autodocs-cor-accent-text');
+    if (!logoEl || !favEl) return;
+
+    const basePath = getBasePath();
+    let data = null;
+    try {
+      const res = await fetch(basePath + 'api/autodocs-theme.php', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) data = await res.json();
+    } catch (_) {
+      /* mantém campos vazios */
+    }
+
+    if (data && typeof data === 'object') {
+      logoEl.value = typeof data.logo === 'string' ? data.logo : '';
+      favEl.value = typeof data.favicon === 'string' ? data.favicon : '';
+      const storedD = typeof data.corDestaque === 'string' ? data.corDestaque : '#eef1ee';
+      const storedA = typeof data.corAccent === 'string' ? data.corAccent : '#025aa4';
+      if (pickerD) pickerD.value = normalizeHexForPicker(storedD);
+      if (textD) textD.value = storedD;
+      if (pickerA) pickerA.value = normalizeHexForPicker(storedA);
+      if (textA) textA.value = storedA;
+    }
+  }
+
+  async function save(e) {
     e.preventDefault();
+    const basePath = getBasePath();
     const logo = document.getElementById('autodocs-logo').value.trim();
     const fav = document.getElementById('autodocs-favicon').value.trim();
     const cd = document.getElementById('autodocs-cor-destaque-text').value.trim();
     const ca = document.getElementById('autodocs-cor-accent-text').value.trim();
 
-    if (logo) localStorage.setItem(KEYS.logo, logo);
-    else localStorage.removeItem(KEYS.logo);
-    if (fav) localStorage.setItem(KEYS.favicon, fav);
-    else localStorage.removeItem(KEYS.favicon);
-    if (cd) localStorage.setItem(KEYS.corDestaque, cd);
-    else localStorage.removeItem(KEYS.corDestaque);
-    if (ca) localStorage.setItem(KEYS.corAccent, ca);
-    else localStorage.removeItem(KEYS.corAccent);
+    let res;
+    try {
+      res = await fetch(basePath + 'api/autodocs-theme.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ logo, favicon: fav, corDestaque: cd, corAccent: ca }),
+      });
+    } catch (_) {
+      alert('Não foi possível contactar o servidor.');
+      return;
+    }
 
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      alert(body.error || 'Erro ao guardar.');
+      return;
+    }
+
+    clearLegacyThemeStorage();
     if (typeof window.applyAutoDocsTheme === 'function') {
-      window.applyAutoDocsTheme();
+      await window.applyAutoDocsTheme();
     }
     location.reload();
   }

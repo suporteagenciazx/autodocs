@@ -23,6 +23,14 @@
     );
   }
 
+  /** null = mostrar todas (admin ou pré-auth / file) */
+  function allowedDocIdSet() {
+    const a = window.__autodocsAuth;
+    if (!a || !a.user) return null;
+    if (a.user.role === 'admin' || a.allowedDocIds == null) return null;
+    return new Set(a.allowedDocIds);
+  }
+
   function render() {
     const grid = document.getElementById('documentacoes-grid');
     const empty = document.getElementById('documentacoes-empty');
@@ -33,11 +41,14 @@
     const catalog = window.AUTODOCS_DOCS_CATALOG;
     window.AutoDocsTags.ensureDefaults(catalog.map(d => d.id));
 
+    const allowed = allowedDocIdSet();
+
     function paint() {
       const q = search ? search.value : '';
       grid.innerHTML = '';
       let count = 0;
       catalog.forEach(doc => {
+        if (allowed && !allowed.has(doc.id)) return;
         const tagName = window.AutoDocsTags.tagNameForDoc(doc.id);
         if (!matchesSearch(doc, tagName, q)) return;
         count++;
@@ -74,5 +85,13 @@
     if (search) search.addEventListener('input', paint);
   }
 
-  document.addEventListener('DOMContentLoaded', render);
+  function start() {
+    render();
+  }
+
+  if (window.__autodocsAuth !== undefined) {
+    start();
+  } else {
+    document.addEventListener('autodocs-auth-ready', start, { once: true });
+  }
 })();
