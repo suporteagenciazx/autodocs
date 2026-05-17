@@ -12,7 +12,6 @@ const AUTODOCS_ROOT = __DIR__ . '/..';
 function autodocs_catalog_doc_ids(): array
 {
     return [
-        'consulta',
         'aprovacao',
         'contrato',
         'comprovante',
@@ -167,18 +166,36 @@ function autodocs_allowed_doc_ids(PDO $pdo, array $user): array
     if (empty($user['active'])) {
         return [];
     }
-    $st = $pdo->prepare(
-        'SELECT DISTINCT i.catalog_doc_id
-         FROM user_doc_access u
-         INNER JOIN doc_batch_items i ON i.batch_id = u.batch_id
-         WHERE u.user_id = ?'
-    );
-    $st->execute([(int) $user['id']]);
-    $ids = [];
-    foreach ($st->fetchAll() as $row) {
-        $ids[] = (string) $row['catalog_doc_id'];
+    $lib = __DIR__ . '/user-tag-links-lib.php';
+    if (!is_readable($lib)) {
+        return [];
     }
-    return array_values(array_intersect(autodocs_catalog_doc_ids(), $ids));
+    require_once $lib;
+    require_once __DIR__ . '/autodocs-tags-lib.php';
+    $userTagIds = autodocs_user_tag_ids_for((int) $user['id']);
+    if ($userTagIds === []) {
+        return [];
+    }
+    $tagsPayload = autodocs_tags_load_merged();
+    return autodocs_allowed_docs_from_user_tags($userTagIds, $tagsPayload['docLinks']);
+}
+
+/**
+ * Tags atribuídas ao utilizador (grupos de documentação).
+ *
+ * @return list<string>
+ */
+function autodocs_user_assigned_tag_ids(array $user): array
+{
+    if (($user['role'] ?? '') === 'admin') {
+        return [];
+    }
+    $lib = __DIR__ . '/user-tag-links-lib.php';
+    if (!is_readable($lib)) {
+        return [];
+    }
+    require_once $lib;
+    return autodocs_user_tag_ids_for((int) $user['id']);
 }
 
 function autodocs_require_login(PDO $pdo): array

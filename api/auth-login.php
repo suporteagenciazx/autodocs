@@ -49,6 +49,7 @@ try {
     autodocs_json_response(200, [
         'user' => $user,
         'allowedDocIds' => $allowed,
+        'userTagIds' => autodocs_user_assigned_tag_ids($user + ['active' => 1]),
     ]);
 } catch (Throwable $e) {
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);

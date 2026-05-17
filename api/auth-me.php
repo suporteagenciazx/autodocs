@@ -23,6 +23,7 @@ try {
             'role' => (string) $user['role'],
         ],
         'allowedDocIds' => $allowed,
+        'userTagIds' => autodocs_user_assigned_tag_ids($user),
     ]);
 } catch (Throwable $e) {
     $msg = $e->getMessage();

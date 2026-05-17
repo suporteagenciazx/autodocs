@@ -56,21 +56,6 @@
             justify-content: flex-end;
         }
 
-        .usuarios-batch-grid {
-            display: grid;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .usuarios-batch-grid label {
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-            font-size: 12px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-
         .usuarios-modal-bg {
             position: fixed;
             inset: 0;
@@ -131,9 +116,9 @@
                     <div class="doc-hub-toolbar usuarios-doc-toolbar">
                         <label class="doc-hub-search-wrap">
                             <span class="material-symbols-rounded" aria-hidden="true">search</span>
-                            <input type="search" id="usuarios-search" placeholder="Pesquisar por email, função ou lotes…" autocomplete="off" enterkeyhint="search">
+                            <input type="search" id="usuarios-search" placeholder="Pesquisar por email ou função…" autocomplete="off" enterkeyhint="search">
                         </label>
-                        <button type="button" id="usuarios-btn-novo" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:0;cursor:pointer;background-color:var(--cor-accent);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;">Novo utilizador</button>
+                        <button type="button" id="usuarios-btn-novo" class="autodocs-btn-pill-primary">Novo utilizador</button>
                     </div>
                     <div class="tags-table-wrap">
                         <table class="tags-doc-table" id="usuarios-table">
@@ -142,7 +127,7 @@
                                     <th>Email</th>
                                     <th>Função</th>
                                     <th>Ativo</th>
-                                    <th>Lotes</th>
+                                    <th>Tags</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -165,7 +150,12 @@
                 </div>
                 <div class="campo">
                     <label class="label-campo" for="usuarios-f-password">Palavra-passe</label>
-                    <input class="input" type="password" id="usuarios-f-password" autocomplete="new-password" placeholder="Deixe vazio para não alterar">
+                    <div class="password-field-wrap">
+                        <input class="input" type="password" id="usuarios-f-password" autocomplete="new-password" placeholder="Deixe vazio para não alterar">
+                        <button type="button" class="password-toggle-btn" aria-label="Mostrar palavra-passe" aria-pressed="false">
+                            <span class="material-symbols-rounded" aria-hidden="true">visibility</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="campo">
                     <label class="label-campo" for="usuarios-f-role">Função</label>
@@ -174,21 +164,53 @@
                         <option value="admin">Administrador</option>
                     </select>
                 </div>
-                <div class="campo">
-                    <span class="label-campo">Lotes de documentação</span>
-                    <div class="usuarios-batch-grid" id="usuarios-f-batches"></div>
-                </div>
                 <div class="usuarios-modal-actions">
-                    <button type="submit" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:0;cursor:pointer;background-color:var(--cor-accent);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:140px;">Guardar</button>
-                    <button type="button" id="usuarios-modal-cancel" style="box-sizing:border-box;padding:14px 22px;border-radius:22px;border:1px solid #e8e8e8;cursor:pointer;background:#fff;color:var(--cor-accent);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:140px;">Cancelar</button>
+                    <button type="submit" class="autodocs-btn-pill-primary" style="flex:1;min-width:140px;">Guardar</button>
+                    <button type="button" id="usuarios-modal-cancel" class="autodocs-btn-pill-secondary" style="flex:1;min-width:140px;">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <div class="usuarios-docs-modal-bg" id="usuarios-docs-modal-bg" aria-hidden="true">
+        <div class="usuarios-docs-modal" role="dialog" aria-labelledby="usuarios-docs-modal-title">
+            <div class="usuarios-docs-modal-header">
+                <div>
+                    <h3 id="usuarios-docs-modal-title">Vincular tags</h3>
+                    <p class="usuarios-docs-modal-sub" id="usuarios-docs-modal-sub"></p>
+                </div>
+                <button type="button" id="usuarios-docs-close-top" class="tags-btn-outline" aria-label="Fechar">Fechar</button>
+            </div>
+            <div class="usuarios-docs-toolbar">
+                <label class="doc-hub-search-wrap">
+                    <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                    <input type="search" id="usuarios-docs-search" placeholder="Pesquisar tag…" autocomplete="off">
+                </label>
+                <div class="usuarios-docs-view-toggle" role="group" aria-label="Modo de visualização">
+                    <button type="button" class="usuarios-docs-view-btn is-active" data-view="cards" aria-pressed="true" title="Cartões">
+                        <span class="material-symbols-rounded" aria-hidden="true">grid_view</span>
+                    </button>
+                    <button type="button" class="usuarios-docs-view-btn" data-view="list" aria-pressed="false" title="Lista">
+                        <span class="material-symbols-rounded" aria-hidden="true">view_list</span>
+                    </button>
+                </div>
+            </div>
+            <p id="usuarios-docs-modal-msg" class="usuarios-docs-modal-msg" role="alert" hidden></p>
+            <div class="usuarios-docs-body">
+                <div id="usuarios-docs-container" class="usuarios-docs-grid"></div>
+            </div>
+            <div class="usuarios-docs-modal-footer">
+                <button type="button" id="usuarios-docs-close" class="tags-btn-primary">Concluído</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../scripts/banco.js"></script>
-    <script src="../scripts/usuarios-page.js"></script>
+    <script src="../scripts/autodocs-tags-storage.js?v=5"></script>
+    <script src="../scripts/autodocs-docs-catalog.js"></script>
+    <script src="../scripts/password-toggle.js"></script>
     <script src="../scripts/navdrawer.js"></script>
+    <script src="../scripts/usuarios-page.js?v=5"></script>
 </body>
 
 </html>

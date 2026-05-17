@@ -4,10 +4,14 @@
       "id": "tag-sofisa",
       "name": "Sofisa",
       "accentColor": "#006157"
+    },
+    {
+      "id": "tag-uso-geral",
+      "name": "Uso Geral",
+      "accentColor": "#5c6b73"
     }
   ],
   "docLinks": {
-    "consulta": "tag-sofisa",
     "aprovacao": "tag-sofisa",
     "contrato": "tag-sofisa",
     "comprovante": "tag-sofisa",

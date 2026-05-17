@@ -130,7 +130,7 @@ body#garantia #assinaturas {
 }
 
 body#garantia #assinaturas > div {
-    margin-top: 120px !important;
+    margin-top: 0px !important;
 }
 
 body#garantia .a-modelo {

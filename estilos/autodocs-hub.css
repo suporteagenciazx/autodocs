@@ -194,7 +194,7 @@
     height: 36px;
     padding: 0 18px;
     border: 0;
-    border-radius: 10px;
+    border-radius: var(--btn-radius, 10px);
     background-color: var(--cor-accent);
     color: #fff;
     font-family: 'Inter', sans-serif;
@@ -209,7 +209,7 @@
     padding: 0 16px;
     box-sizing: border-box;
     border: 1px solid #e8e8e8;
-    border-radius: 10px;
+    border-radius: var(--btn-radius, 10px);
     background: #fff;
     color: var(--cor-accent);
     font-family: 'Inter', sans-serif;
@@ -327,9 +327,45 @@
     border-bottom: 0;
 }
 
+.tags-doc-link-cell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.tags-btn-save-link,
+.tags-btn-save-accent {
+    padding: 8px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tags-row-status {
+    font-size: 11px;
+    font-weight: 500;
+    color: #666;
+    min-width: 4rem;
+}
+
+.tags-row-status--ok {
+    color: #137333;
+}
+
+.tags-row-status--error {
+    color: #b3261e;
+}
+
+.tags-row-status--pending {
+    color: #666;
+}
+
 .tags-doc-select {
     width: 100%;
     max-width: 220px;
+    min-width: 140px;
+    flex: 1 1 140px;
     height: 36px;
     padding: 0 8px;
     border: 0;
@@ -339,6 +375,459 @@
     font-size: 12px;
     font-weight: 600;
     color: #666;
+}
+
+/* Tags — gestão admin */
+
+.tags-admin-layout .tags-page-intro {
+    margin: 0 0 16px;
+    max-width: 640px;
+}
+
+.tags-flash {
+    margin: 0 0 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+}
+
+.tags-flash--ok {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+.tags-flash--error {
+    background: #fdecea;
+    color: #b3261e;
+}
+
+.tags-admin-toolbar {
+    margin-bottom: 18px;
+}
+
+.tags-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+.tags-admin-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.tags-admin-card-swatch {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+}
+
+.tags-admin-card-title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.tags-admin-card-id,
+.tags-admin-card-meta {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: #999;
+    font-family: 'Inter', sans-serif;
+    word-break: break-all;
+}
+
+.usuarios-tag-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--cor-destaque);
+    color: #666;
+    vertical-align: middle;
+}
+
+.usuarios-tags-cell {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    max-width: 220px;
+}
+
+.usuarios-tags-labels {
+    display: inline-block;
+    color: var(--cinza-titulos);
+    font-weight: 500;
+}
+
+.usuarios-legacy-badge {
+    display: block;
+    margin-top: 6px;
+    padding: 4px 8px;
+    border-radius: var(--btn-radius, 10px);
+    font-size: 11px;
+    font-weight: 600;
+    background: #fff8e1;
+    color: #8a6d00;
+    border: 1px solid #ffe082;
+    line-height: 1.3;
+}
+
+.tags-admin-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.tags-admin-card-actions .tags-btn-outline {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.tags-empty {
+    margin-top: 8px;
+}
+
+.tags-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 16px;
+}
+
+.tags-modal-bg.is-open {
+    display: flex;
+}
+
+.tags-modal {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    max-width: 420px;
+    width: 100%;
+    padding: 22px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+}
+
+.tags-modal h3 {
+    margin: 0 0 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cinza-titulos);
+}
+
+.tags-modal-cor-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.tags-modal-cor-inputs input[type="color"] {
+    width: 44px;
+    height: 36px;
+    padding: 2px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tags-modal-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--cor-destaque);
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.tags-preview-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.tags-preview-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tags-modal-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Usuários — vincular documentações */
+
+.usuarios-docs-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+    padding: 16px;
+}
+
+.usuarios-docs-modal-bg.is-open {
+    display: flex;
+}
+
+.usuarios-docs-modal {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    width: min(920px, 100%);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.usuarios-docs-modal-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.usuarios-docs-modal-header h3 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cinza-titulos);
+}
+
+.usuarios-docs-modal-sub {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+}
+
+.usuarios-docs-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 14px;
+}
+
+.usuarios-docs-toolbar .doc-hub-search-wrap {
+    flex: 1;
+    min-width: 180px;
+    max-width: 320px;
+}
+
+.usuarios-docs-view-toggle {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.usuarios-docs-view-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e8e8e8;
+    border-radius: var(--btn-radius, 10px);
+    background: #fff;
+    color: var(--cor-accent);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.usuarios-docs-view-btn.is-active {
+    background: var(--cor-destaque);
+    border-color: #ddd;
+}
+
+.usuarios-docs-view-btn .material-symbols-rounded {
+    font-size: 22px;
+}
+
+.usuarios-docs-modal-msg {
+    margin: 0 20px 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    background: #fdecea;
+    color: #b3261e;
+}
+
+.usuarios-docs-modal-msg--info {
+    background: #e8f0fe;
+    color: #1a56db;
+}
+
+.usuarios-docs-empty {
+    margin: 0;
+    padding: 24px 12px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #888;
+}
+
+.usuarios-docs-body {
+    flex: 1;
+    overflow: auto;
+    padding: 0 20px 20px;
+}
+
+.usuarios-docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.usuarios-docs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.usuarios-doc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.usuarios-docs-grid .usuarios-doc-item {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 140px;
+}
+
+.usuarios-doc-item-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.usuarios-doc-item-title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cinza-titulos);
+}
+
+.usuarios-doc-item-blurb {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+}
+
+.usuarios-doc-item-tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background: var(--cor-destaque);
+}
+
+.usuarios-doc-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.usuarios-docs-grid .usuarios-doc-item-controls {
+    margin-top: auto;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.usuarios-doc-tag-select {
+    flex: 1;
+    min-width: 0;
+    max-width: 160px;
+    height: 36px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 8px;
+    background: #f5f5f5;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}
+
+.usuarios-doc-link-btn {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: var(--btn-radius, 10px);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.usuarios-doc-link-btn .material-symbols-rounded {
+    font-size: 22px;
+}
+
+.usuarios-doc-link-btn--linked {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+.usuarios-doc-link-btn--unlinked {
+    background: #f5f5f5;
+    color: #888;
+}
+
+.usuarios-doc-item.is-linked {
+    border-color: color-mix(in srgb, var(--cor-accent) 35%, #eee);
+}
+
+.usuarios-docs-modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
 }
 
 @media (max-width: 600px) {
@@ -352,6 +841,10 @@
     }
 
     .tags-doc-select {
+        max-width: none;
+    }
+
+    .usuarios-docs-toolbar .doc-hub-search-wrap {
         max-width: none;
     }
 }

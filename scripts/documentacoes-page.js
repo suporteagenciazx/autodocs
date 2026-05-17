@@ -152,5 +152,29 @@
       render();
     }
   });
+
+  async function refreshTagsFromServer() {
+    if (!window.AutoDocsTags || typeof window.AutoDocsTags.syncFromServer !== 'function') return;
+    const bp = typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
+    try {
+      await window.AutoDocsTags.syncFromServer(bp);
+    } catch (_) {
+      /* ignore */
+    }
+    if (document.getElementById('documentacoes-grid')) {
+      render();
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && document.getElementById('documentacoes-grid')) {
+      refreshTagsFromServer();
+    }
+  });
+
+  setInterval(() => {
+    if (document.visibilityState !== 'visible' || !document.getElementById('documentacoes-grid')) return;
+    refreshTagsFromServer();
+  }, 30000);
 })();
 

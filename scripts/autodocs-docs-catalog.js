@@ -3,12 +3,6 @@
  */
 window.AUTODOCS_DOCS_CATALOG = [
   {
-    id: 'consulta',
-    title: 'Consulta',
-    href: 'consulta/',
-    blurb: 'Consulta e pesquisa no sistema.',
-  },
-  {
     id: 'aprovacao',
     title: 'Aprovação',
     href: 'documentos/aprovacao/',

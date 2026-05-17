@@ -8,6 +8,15 @@
     --cor-destaque: #eef1ee;
     --cor-accent: #025aa4;
     --cinza-titulos: #333;
+    --btn-radius: 10px;
+}
+
+/* Raio padrão de todos os botões (sobrepõe estilos inline antigos) */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    border-radius: var(--btn-radius) !important;
 }
 
 /*
@@ -18,7 +27,7 @@
     appearance: none;
     box-sizing: border-box;
     padding: 14px 22px;
-    border-radius: 22px;
+    border-radius: var(--btn-radius);
     border: 0;
     cursor: pointer;
     background-color: var(--cor-accent, #025aa4);
@@ -43,7 +52,7 @@
     appearance: none;
     box-sizing: border-box;
     padding: 14px 22px;
-    border-radius: 22px;
+    border-radius: var(--btn-radius);
     border: 1px solid #e8e8e8;
     cursor: pointer;
     background: #fff;
@@ -69,7 +78,7 @@
     appearance: none;
     box-sizing: border-box;
     padding: 14px 22px;
-    border-radius: 22px;
+    border-radius: var(--btn-radius);
     border: 1px solid #ffcdd2;
     cursor: pointer;
     background: #fff;
@@ -816,4 +825,42 @@ input::placeholder {
         align-items: stretch !important;
         justify-content: flex-start !important;
     }
+}
+
+/* Campo de palavra-passe com botão mostrar/ocultar */
+.password-field-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.password-field-wrap .input {
+    width: 100%;
+    padding-right: 44px;
+    box-sizing: border-box;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--btn-radius);
+    background: transparent;
+    color: var(--cor-accent, #025aa4);
+    cursor: pointer;
+}
+
+.password-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.password-toggle-btn .material-symbols-rounded {
+    font-size: 22px;
 }

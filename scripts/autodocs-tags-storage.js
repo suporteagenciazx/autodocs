@@ -2,8 +2,9 @@
   const LS_TAGS = 'autodocs.tags.list';
   const LS_LINKS = 'autodocs.tags.docLinks';
   const SOFISA_ACCENT = '#006157';
+  const USO_GERAL_ACCENT = '#5c6b73';
+  const USO_GERAL_TAG_ID = 'tag-uso-geral';
   const LEGACY_SOFISA_BLUE = '#025aa4';
-  let pushTimer = null;
   let syncPromise = null;
   let lastPushError = null;
 
@@ -111,6 +112,7 @@
     try {
       const res = await fetch(bp + 'api/autodocs-tags.php', {
         credentials: 'same-origin',
+        cache: 'no-store',
         headers: { Accept: 'application/json' },
       });
       if (!res.ok) return null;
@@ -125,23 +127,28 @@
     lastPushError = null;
     if (location.protocol === 'file:') {
       lastPushError = 'Gravação no servidor indisponível em file://.';
-      return false;
+      return { ok: false, error: lastPushError };
     }
     if (!isAdminUser()) {
-      return false;
+      lastPushError = 'Apenas administradores podem gravar tags no servidor.';
+      return { ok: false, error: lastPushError };
     }
     const bp = basePath || (typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/');
     try {
       const res = await fetch(bp + 'api/autodocs-tags.php', {
         method: 'POST',
         credentials: 'same-origin',
+        cache: 'no-store',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
           tags: window.AutoDocsTags.getTags(),
           docLinks: window.AutoDocsTags.getLinks(),
         }),
       });
-      if (res.ok) return true;
+      if (res.ok) {
+        dispatchTagsSynced(true);
+        return { ok: true, error: null };
+      }
       let msg = 'Não foi possível gravar as tags no servidor (HTTP ' + res.status + ').';
       try {
         const err = await res.json();
@@ -151,22 +158,12 @@
       }
       lastPushError = msg;
       dispatchPushError(msg);
-      return false;
+      return { ok: false, error: msg };
     } catch (_) {
       lastPushError = 'Falha de rede ao gravar tags no servidor.';
       dispatchPushError(lastPushError);
-      return false;
+      return { ok: false, error: lastPushError };
     }
-  }
-
-  function schedulePushToServer() {
-    if (!isAdminUser() || location.protocol === 'file:') return;
-    if (pushTimer) clearTimeout(pushTimer);
-    pushTimer = setTimeout(async () => {
-      pushTimer = null;
-      const bp = typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
-      await pushTagsToServer(bp);
-    }, 400);
   }
 
   window.AutoDocsTags = {
@@ -178,7 +175,10 @@
 
     setTags(tags) {
       localStorage.setItem(LS_TAGS, JSON.stringify(tags));
-      schedulePushToServer();
+    },
+
+    setTagsLocal(tags) {
+      this.setTags(tags);
     },
 
     getLinks() {
@@ -189,7 +189,10 @@
 
     setLinks(links) {
       localStorage.setItem(LS_LINKS, JSON.stringify(links));
-      schedulePushToServer();
+    },
+
+    setLinksLocal(links) {
+      this.setLinks(links);
     },
 
     getLastPushError() {
@@ -204,8 +207,8 @@
         if (!data) return false;
         const persisted = !!data.persisted;
         if (!persisted && isAdminUser() && hasLocalTagsState()) {
-          const pushed = await pushTagsToServer(basePath);
-          return pushed;
+          const result = await pushTagsToServer(basePath);
+          return result.ok;
         }
         if (applyServerPayload(data)) return true;
         return false;
@@ -219,16 +222,36 @@
       }
     },
 
-    /** Admin: envia estado atual ao servidor. */
+    /** Admin: envia estado atual ao servidor (único ponto de POST). */
     async saveToServer(basePath) {
       return pushTagsToServer(basePath);
     },
 
-    /** Garante tag padrão Sofisa, cores nas tags e vínculos para cada id do catálogo. */
+    clearLastPushError() {
+      lastPushError = null;
+    },
+
+    usoGeralTagId() {
+      return USO_GERAL_TAG_ID;
+    },
+
+    ensureUsoGeralTag(tags) {
+      if (tags.some(t => t.id === USO_GERAL_TAG_ID)) {
+        return tags;
+      }
+      return tags.concat([
+        { id: USO_GERAL_TAG_ID, name: 'Uso Geral', accentColor: USO_GERAL_ACCENT },
+      ]);
+    },
+
+    /** Garante tags padrão, Uso Geral e vínculos para cada id do catálogo. */
     ensureDefaults(catalogDocIds) {
       let tags = this.getTags();
       if (!tags.length) {
-        tags = [{ id: 'tag-sofisa', name: 'Sofisa', accentColor: SOFISA_ACCENT }];
+        tags = [
+          { id: 'tag-sofisa', name: 'Sofisa', accentColor: SOFISA_ACCENT },
+          { id: USO_GERAL_TAG_ID, name: 'Uso Geral', accentColor: USO_GERAL_ACCENT },
+        ];
         localStorage.setItem(LS_TAGS, JSON.stringify(tags));
       } else {
         const mig = migrateTagColors(tags);
@@ -245,7 +268,13 @@
           localStorage.setItem(LS_TAGS, JSON.stringify(tags));
         }
       }
-      const defaultTagId = tags[0].id;
+      const beforeLen = tags.length;
+      tags = this.ensureUsoGeralTag(tags);
+      if (tags.length !== beforeLen) {
+        localStorage.setItem(LS_TAGS, JSON.stringify(tags));
+      }
+      const defaultTagId =
+        tags.find(t => t.id === USO_GERAL_TAG_ID)?.id || tags[0].id;
       const links = this.getLinks();
       let changed = false;
       catalogDocIds.forEach(id => {
@@ -256,7 +285,6 @@
       });
       if (changed) {
         localStorage.setItem(LS_LINKS, JSON.stringify(links));
-        schedulePushToServer();
       }
       return tags;
     },
@@ -308,7 +336,11 @@
       if (tags.length <= 1) return false;
       const ix = tags.findIndex(t => t.id === tagId);
       if (ix === -1) return false;
-      const fallback = tags.filter(t => t.id !== tagId)[0].id;
+      if (tagId === USO_GERAL_TAG_ID) return false;
+      const fallback =
+        tags.find(t => t.id === USO_GERAL_TAG_ID)?.id ||
+        tags.filter(t => t.id !== tagId)[0]?.id;
+      if (!fallback) return false;
       tags = tags.filter(t => t.id !== tagId);
       this.setTags(tags);
       const links = this.getLinks();
@@ -333,16 +365,20 @@
     },
 
     tagNameForDoc(docId) {
-      const links = this.getLinks();
-      const tagId = links[docId];
+      const tagId = this.getLinks()[docId];
       const t = this.tagById(tagId);
       return t ? t.name : '';
     },
 
+    docsForTag(tagId, catalogIds) {
+      const links = this.getLinks();
+      return (catalogIds || []).filter(id => links[id] === tagId);
+    },
+
     /** Cor de ênfase da marca para a documentação (hex). */
     accentForDoc(docId) {
-      const links = this.getLinks();
-      const t = this.tagById(links[docId]);
+      const tagId = this.getLinks()[docId];
+      const t = this.tagById(tagId);
       if (!t) return SOFISA_ACCENT;
       if (t.accentColor && isValidHex(t.accentColor)) {
         const hex = normalizeHex(t.accentColor);

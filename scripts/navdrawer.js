@@ -362,6 +362,7 @@ async function autodocsResolveAuth(basePath) {
     window.__autodocsAuth = {
       user: data.user,
       allowedDocIds: Array.isArray(data.allowedDocIds) ? data.allowedDocIds : [],
+      userTagIds: Array.isArray(data.userTagIds) ? data.userTagIds : [],
     };
   } catch (_) {
     window.__autodocsAuth = null;

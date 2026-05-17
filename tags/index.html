@@ -4,17 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Tags | AutoDocs</title>
-
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
-
     <link rel="stylesheet" href="../estilos/sistema.css">
     <link rel="stylesheet" href="../estilos/exportar.css">
     <link rel="stylesheet" href="../estilos/autodocs-hub.css">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-
     <link rel="stylesheet" href="../estilos/icones.css">
 </head>
 
@@ -25,54 +20,92 @@
             <span id="sistema-cnpj" class="banco-cnpj"></span>
         </header>
         <div class="sistema-pagina">
-            <h1>Tags</h1>
-            <div class="formularios">
-                <section class="tags-page-section">
-                    <h2>Nova tag</h2>
-                    <p class="campo-texto" style="margin-bottom: 12px;">
-                        Instituição, empresa ou marca associada às documentações (ex.: Sofisa, parceiro X).
-                    </p>
-                    <form id="form-nova-tag" class="tags-form-inline">
-                        <input class="input" type="text" id="nova-tag-nome" placeholder="Nome da tag" maxlength="80" autocomplete="off" required>
-                        <input type="color" id="nova-tag-cor" aria-label="Cor da marca" title="Cor da marca" style="width:44px;height:36px;padding:2px;border:0;background:transparent;cursor:pointer;">
-                        <input class="input tags-cor-hex" type="text" id="nova-tag-cor-text" placeholder="#006157" maxlength="7" autocomplete="off" aria-label="Cor em hexadecimal">
-                        <button type="submit" class="tags-btn-primary">Criar tag</button>
-                    </form>
-                    <p class="campo-texto" style="margin-top: 8px; font-size: 11px;">
-                        A cor define a identidade visual da tag nos cards de documentações (texto e realce).
-                    </p>
-                </section>
-
-                <section class="tags-page-section">
-                    <h2>Tags cadastradas</h2>
-                    <ul id="tags-list" class="tags-list"></ul>
-                </section>
-
-                <section class="tags-page-section">
-                    <h2>Vincular documentações</h2>
-                    <p class="campo-texto" style="margin-bottom: 12px;">
-                        Escolha a tag de cada documentação. Alterações são salvas automaticamente.
-                    </p>
-                    <div class="tags-table-wrap">
-                        <table class="tags-doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Documentação</th>
-                                    <th>Tag</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tags-doc-table"></tbody>
-                        </table>
-                    </div>
-                </section>
+            <div class="doc-hub-layout tags-admin-layout">
+                <h1>Tags</h1>
+                <p class="tags-page-intro campo-texto">
+                    Cada tag agrupa documentações por instituição ou marca. Vincule as documentações à tag aqui;
+                    na página <strong>Usuários</strong>, atribua tags (grupos) a cada utilizador.
+                </p>
+                <p id="tags-flash" class="tags-flash" role="status" hidden></p>
+                <div class="doc-hub-toolbar tags-admin-toolbar">
+                    <label class="doc-hub-search-wrap">
+                        <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                        <input type="search" id="tags-search" placeholder="Pesquisar tag…" autocomplete="off">
+                    </label>
+                    <br>
+                    <button type="button" id="tags-btn-nova" class="tags-btn-primary">Nova tag</button>
+                </div>
+                <div id="tags-grid" class="tags-admin-grid" role="list"></div>
+                <p id="tags-empty" class="tags-empty campo-texto" hidden>Nenhuma tag encontrada.</p>
             </div>
         </div>
     </div>
+
+    <div class="tags-modal-bg" id="tags-modal-bg" aria-hidden="true">
+        <div class="tags-modal" role="dialog" aria-labelledby="tags-modal-title">
+            <h3 id="tags-modal-title">Tag</h3>
+            <form id="tags-modal-form" class="base-boxcampos">
+                <input type="hidden" id="tags-edit-id" value="">
+                <div class="campo">
+                    <label class="label-campo" for="tags-modal-nome">Nome</label>
+                    <input class="input" type="text" id="tags-modal-nome" maxlength="80" required autocomplete="off" placeholder="Ex.: Sofisa, Parceiro X">
+                </div>
+                <div class="campo tags-modal-cor-row">
+                    <label class="label-campo" for="tags-modal-cor-text">Cor da marca</label>
+                    <div class="tags-modal-cor-inputs">
+                        <input type="color" id="tags-modal-cor" aria-label="Seletor de cor" title="Cor da marca">
+                        <input class="input tags-cor-hex" type="text" id="tags-modal-cor-text" maxlength="7" placeholder="#006157" aria-label="Cor em hexadecimal">
+                    </div>
+                </div>
+                <div class="tags-modal-preview">
+                    <span class="tags-preview-swatch" id="tags-preview-swatch" aria-hidden="true"></span>
+                    <span class="tags-preview-label" id="tags-preview-label">Pré-visualização</span>
+                </div>
+                <div class="tags-modal-actions">
+                    <button type="submit" class="tags-btn-primary">Guardar</button>
+                    <button type="button" id="tags-modal-cancel" class="tags-btn-outline">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="usuarios-docs-modal-bg" id="tags-vincular-modal-bg" aria-hidden="true">
+        <div class="usuarios-docs-modal" role="dialog" aria-labelledby="tags-vincular-modal-title">
+            <div class="usuarios-docs-modal-header">
+                <div>
+                    <h3 id="tags-vincular-modal-title">Vincular documentações</h3>
+                    <p class="usuarios-docs-modal-sub" id="tags-vincular-modal-sub"></p>
+                </div>
+                <button type="button" id="tags-vincular-close-top" class="tags-btn-outline">Fechar</button>
+            </div>
+            <div class="usuarios-docs-toolbar">
+                <label class="doc-hub-search-wrap">
+                    <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                    <input type="search" id="tags-vincular-search" placeholder="Pesquisar documentação…" autocomplete="off">
+                </label>
+                <div class="usuarios-docs-view-toggle" role="group" aria-label="Modo de visualização">
+                    <button type="button" class="usuarios-docs-view-btn is-active" data-tags-view="cards" aria-pressed="true" title="Cartões">
+                        <span class="material-symbols-rounded" aria-hidden="true">grid_view</span>
+                    </button>
+                    <button type="button" class="usuarios-docs-view-btn" data-tags-view="list" aria-pressed="false" title="Lista">
+                        <span class="material-symbols-rounded" aria-hidden="true">view_list</span>
+                    </button>
+                </div>
+            </div>
+            <div class="usuarios-docs-body">
+                <div id="tags-vincular-container" class="usuarios-docs-grid"></div>
+            </div>
+            <div class="usuarios-docs-modal-footer">
+                <button type="button" id="tags-vincular-close" class="tags-btn-primary">Concluído</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../scripts/banco.js"></script>
-    <script src="../scripts/navdrawer.js"></script>
-    <script src="../scripts/autodocs-tags-storage.js"></script>
+    <script src="../scripts/autodocs-tags-storage.js?v=6"></script>
     <script src="../scripts/autodocs-docs-catalog.js"></script>
-    <script src="../scripts/tags-page.js"></script>
+    <script src="../scripts/navdrawer.js"></script>
+    <script src="../scripts/tags-page.js?v=6"></script>
 </body>
 
 </html>

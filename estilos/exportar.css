@@ -84,5 +84,5 @@ button#exportar {
     border: 0px;
     padding: 0px 16px 0px 16px;
 
-    border-radius: 24px;
+    border-radius: var(--btn-radius, 10px);
 }

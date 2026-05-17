@@ -43,10 +43,15 @@
                             </div>
                             <div class="campo">
                                 <label class="label-campo" for="cadastro-password">Palavra-passe (mín. 8 caracteres)</label>
-                                <input class="input" type="password" id="cadastro-password" name="password" required autocomplete="new-password" minlength="8">
+                                <div class="password-field-wrap">
+                                    <input class="input" type="password" id="cadastro-password" name="password" required autocomplete="new-password" minlength="8">
+                                    <button type="button" class="password-toggle-btn" aria-label="Mostrar palavra-passe" aria-pressed="false">
+                                        <span class="material-symbols-rounded" aria-hidden="true">visibility</span>
+                                    </button>
+                                </div>
                             </div>
                             <div class="campo" style="margin-top: 8px;">
-                                <button type="submit" class="input" style="cursor:pointer; background: var(--cor-accent, #025aa4); color: #fff; border: 0; padding: 14px 22px; border-radius: 22px; font-weight: 600;">Registar</button>
+                                <button type="submit" class="autodocs-btn-pill-primary" style="width:100%;">Registar</button>
                             </div>
                         </form>
                         <p class="autodocs-auth-note"><a href="../login/">Voltar ao login</a></p>
@@ -56,6 +61,7 @@
         </div>
     </div>
     <script src="../scripts/banco.js"></script>
+    <script src="../scripts/password-toggle.js"></script>
     <script src="../scripts/cadastro-page.js"></script>
     <script src="../scripts/navdrawer.js"></script>
 </body>

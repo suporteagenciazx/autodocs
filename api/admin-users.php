@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/user-tag-links-lib.php';
 
 header('X-Content-Type-Options: nosniff');
 
@@ -47,6 +48,8 @@ try {
                  GROUP BY u.id, u.email, u.role, u.active
                  ORDER BY u.id'
             )->fetchAll();
+            require_once __DIR__ . '/autodocs-tags-lib.php';
+            $tagsCatalog = autodocs_tags_load_merged()['tags'];
             $out = [];
             foreach ($rows as $r) {
                 $batches = [];
@@ -57,12 +60,19 @@ try {
                         }
                     }
                 }
+                $userId = (int) $r['id'];
+                $tagIds = autodocs_user_tag_ids_for($userId);
+                $tagLabels = autodocs_tag_labels_for_ids($tagIds, $tagsCatalog);
                 $out[] = [
-                    'id' => (int) $r['id'],
+                    'id' => $userId,
                     'email' => (string) $r['email'],
                     'role' => (string) $r['role'],
                     'active' => (int) $r['active'],
                     'batchIds' => $batches,
+                    'tagIds' => $tagIds,
+                    'tagLinkCount' => count($tagIds),
+                    'tagLabels' => $tagLabels,
+                    'hasLegacyBatches' => $batches !== [],
                 ];
             }
             $batches = $pdo->query(
@@ -166,6 +176,7 @@ try {
                 exit;
             }
             $pdo->prepare('DELETE FROM users WHERE id = ?')->execute([$id]);
+            autodocs_user_tag_links_remove_user($id);
             autodocs_json_response(200, ['ok' => true]);
             break;
 
