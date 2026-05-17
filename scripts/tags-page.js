@@ -7,8 +7,10 @@
       .replace(/"/g, '&quot;');
   }
 
+  const SOFISA_ACCENT = '#006157';
+
   function normalizePickerHex(hex) {
-    if (!hex || typeof hex !== 'string') return '#025aa4';
+    if (!hex || typeof hex !== 'string') return SOFISA_ACCENT;
     const t = hex.trim();
     if (/^#[0-9A-Fa-f]{3}$/.test(t)) {
       const r = t[1];
@@ -17,13 +19,28 @@
       return '#' + r + r + g + g + b + b;
     }
     if (/^#[0-9A-Fa-f]{6}$/.test(t)) return t;
-    return '#025aa4';
+    return SOFISA_ACCENT;
   }
 
   function defaultAccentForForm() {
-    const v = getComputedStyle(document.documentElement).getPropertyValue('--cor-accent').trim();
-    if (/^#[0-9A-Fa-f]{3,6}$/i.test(v)) return normalizePickerHex(v);
-    return '#025aa4';
+    return SOFISA_ACCENT;
+  }
+
+  function showTagsSaveError(message) {
+    let el = document.getElementById('tags-save-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.id = 'tags-save-error';
+      el.className = 'campo-texto';
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'margin: 0 0 16px; padding: 12px 16px; border-radius: 12px; background: #fdecea; color: #b3261e; font-size: 13px;';
+      const page = document.querySelector('.sistema-pagina h1');
+      if (page && page.parentNode) {
+        page.parentNode.insertBefore(el, page.nextSibling);
+      }
+    }
+    el.textContent = message;
+    el.hidden = !message;
   }
 
   function renderTagsList() {
@@ -35,7 +52,7 @@
     ul.innerHTML = '';
     tags.forEach(tag => {
       const n = window.AutoDocsTags.countDocsForTag(tag.id, ids);
-      const accent = tag.accentColor || '#025aa4';
+      const accent = tag.accentColor || SOFISA_ACCENT;
       const li = document.createElement('li');
       li.className = 'tags-row';
       li.innerHTML =
@@ -131,7 +148,7 @@
     renderDocLinks();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function startTagsPage() {
     if (!window.AutoDocsTags || !window.AUTODOCS_DOCS_CATALOG) return;
     window.AutoDocsTags.ensureDefaults(window.AUTODOCS_DOCS_CATALOG.map(d => d.id));
 
@@ -156,7 +173,7 @@
     if (form && input) {
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const cor = textCor ? textCor.value.trim() : picker ? picker.value : '#025aa4';
+        const cor = textCor ? textCor.value.trim() : picker ? picker.value : SOFISA_ACCENT;
         const id = window.AutoDocsTags.createTag(input.value, cor);
         if (!id) {
           alert('Nome inválido ou tag já existente.');
@@ -171,5 +188,19 @@
     }
 
     renderAll();
-  });
+
+    document.addEventListener('autodocs-tags-push-error', e => {
+      const msg = e && e.detail && e.detail.message;
+      if (msg) showTagsSaveError(msg);
+    });
+
+    const pending = window.AutoDocsTags.getLastPushError && window.AutoDocsTags.getLastPushError();
+    if (pending) showTagsSaveError(pending);
+  }
+
+  if (window.__autodocsAuth !== undefined) {
+    startTagsPage();
+  } else {
+    document.addEventListener('autodocs-auth-ready', startTagsPage, { once: true });
+  }
 })();

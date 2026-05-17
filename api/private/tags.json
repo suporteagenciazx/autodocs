@@ -1,0 +1,19 @@
+{
+    "tags": [
+        {
+            "id": "tag-sofisa",
+            "name": "Sofisa",
+            "accentColor": "#006157"
+        }
+    ],
+    "docLinks": {
+        "consulta": "tag-sofisa",
+        "aprovacao": "tag-sofisa",
+        "contrato": "tag-sofisa",
+        "comprovante": "tag-sofisa",
+        "termo": "tag-sofisa",
+        "declaracao": "tag-sofisa",
+        "ordem": "tag-sofisa",
+        "garantia": "tag-sofisa"
+    }
+}

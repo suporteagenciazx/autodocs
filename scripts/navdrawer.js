@@ -393,6 +393,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   ajustarLinks(basePath);
   const themeData = await fetchAutodocsThemeJson(basePath);
   aplicarTemaAutoDocs(basePath, themeData);
+  if (window.AutoDocsTags && typeof window.AutoDocsTags.syncFromServer === 'function') {
+    try {
+      await window.AutoDocsTags.syncFromServer(basePath);
+    } catch (_) {
+      /* mantém localStorage */
+    }
+  }
   aplicarVisibilidadeMenuAuth(basePath);
   configurarBotaoSair(basePath);
   ativarMenu();

@@ -82,7 +82,10 @@
     }
 
     paint();
-    if (search) search.addEventListener('input', paint);
+    if (search && !search.dataset.docHubBound) {
+      search.dataset.docHubBound = '1';
+      search.addEventListener('input', paint);
+    }
   }
 
   function start() {
@@ -94,4 +97,12 @@
   } else {
     document.addEventListener('autodocs-auth-ready', start, { once: true });
   }
+
+  document.addEventListener('autodocs-tags-synced', () => {
+    const grid = document.getElementById('documentacoes-grid');
+    if (grid && window.AUTODOCS_DOCS_CATALOG && window.AutoDocsTags) {
+      render();
+    }
+  });
 })();
+

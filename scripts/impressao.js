@@ -1,41 +1,70 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const exportar = document.getElementById('exportar');
-    const navdrawer = document.getElementById('navdrawer');
-    const sistema = document.getElementById('conteudo');
     const documento = document.getElementById('documento');
-
     if (!documento) {
         return;
     }
 
-    function base() {
-        navdrawer.style.display = 'flex';
-        sistema.style.display = 'flex';
+    let exportBound = false;
+
+    function initExportPrint() {
+        if (exportBound) return;
+
+        const exportar = document.getElementById('exportar');
+        if (!exportar) return;
+
+        const navdrawer = document.getElementById('navdrawer');
+        const sistema = document.getElementById('conteudo');
+
+        function base() {
+            if (navdrawer) navdrawer.style.display = 'flex';
+            if (sistema) sistema.style.display = 'flex';
+        }
+
+        function docPrint() {
+            documento.style.display = 'flex';
+        }
+
+        base();
+
+        exportar.addEventListener(
+            'click',
+            () => {
+                if (exportar.classList.contains('ativo')) {
+                    if (navdrawer) navdrawer.style.display = 'none';
+                    if (sistema) sistema.style.display = 'none';
+                    docPrint();
+
+                    window.print();
+
+                    setTimeout(() => {
+                        base();
+                        documento.style.removeProperty('display');
+                    }, 200);
+                } else {
+                    alert(
+                        'Verifique se todos os campos foram preenchidos e marque a caixinha para liberar a exportação.'
+                    );
+                }
+            },
+            { once: false }
+        );
+
+        exportBound = true;
     }
 
-    function docPrint() {
-        documento.style.display = 'flex';
+    function tryInit() {
+        if (exportBound) return true;
+        if (!document.getElementById('exportar')) return false;
+        initExportPrint();
+        return exportBound;
     }
 
-    base();
+    document.addEventListener('autodocs-auth-ready', () => tryInit(), { once: true });
 
-    if (exportar) {
-        exportar.addEventListener('click', () => {
-            if (exportar.classList.contains('ativo')) {
-                navdrawer.style.display = 'none';
-                sistema.style.display = 'none';
-                docPrint();
+    if (tryInit()) return;
 
-                window.print();
-
-                setTimeout(() => {
-                    base();
-                    documento.style.removeProperty('display');
-                }, 200);
-            } else {
-                alert('Verifique se todos os campos foram preenchidos e marque a caixinha para liberar a exportação.');
-                return;
-            }
-        });
-    }
+    const observer = new MutationObserver(() => {
+        if (tryInit()) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 });
