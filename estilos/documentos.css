@@ -125,13 +125,22 @@ p.bold {
     color: black;
 }
 
+body#garantia #assinaturas {
+    margin-top: 24px;
+}
+
 body#garantia #assinaturas > div {
     margin-top: 120px !important;
 }
 
+body#garantia .a-modelo {
+    margin-top: 8px;
+}
+
 body#garantia .a-digital {
-    position: static;
-    top: auto;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
 }
 
 .a-modelo {

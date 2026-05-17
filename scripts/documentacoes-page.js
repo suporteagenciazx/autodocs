@@ -1,4 +1,6 @@
 (function () {
+  const SOFISA_ACCENT = '#006157';
+
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, '&amp;')
@@ -11,6 +13,47 @@
     let full = basePath + hrefFromRoot;
     if (!full.endsWith('/')) full += '/';
     return full;
+  }
+
+  function tagBadgeInlineStyle(hex) {
+    if (!hex || typeof hex !== 'string') return '';
+    const h = hex.trim();
+    if (!/^#[0-9A-Fa-f]{6}$/.test(h) && !/^#[0-9A-Fa-f]{3}$/.test(h)) return '';
+    let r;
+    let g;
+    let b;
+    if (h.length === 4) {
+      r = parseInt(h[1] + h[1], 16);
+      g = parseInt(h[2] + h[2], 16);
+      b = parseInt(h[3] + h[3], 16);
+    } else {
+      r = parseInt(h.slice(1, 3), 16);
+      g = parseInt(h.slice(3, 5), 16);
+      b = parseInt(h.slice(5, 7), 16);
+    }
+    const full =
+      h.length === 4
+        ? '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3]
+        : h;
+    return (
+      '--tag-accent:' +
+      full +
+      ';color:' +
+      full +
+      ';border-color:rgba(' +
+      r +
+      ',' +
+      g +
+      ',' +
+      b +
+      ',0.35);background-color:rgba(' +
+      r +
+      ',' +
+      g +
+      ',' +
+      b +
+      ',0.12);'
+    );
   }
 
   function matchesSearch(doc, tagName, q) {
@@ -57,10 +100,7 @@
         const card = document.createElement('a');
         card.className = 'doc-hub-card';
         card.href = href;
-        const tagStyle =
-          /^#[0-9A-Fa-f]{6}$/.test(tagAccent) || /^#[0-9A-Fa-f]{3}$/.test(tagAccent)
-            ? '--tag-accent:' + tagAccent + ';'
-            : '';
+        const tagStyle = tagBadgeInlineStyle(tagAccent) || tagBadgeInlineStyle(SOFISA_ACCENT);
         card.innerHTML =
           '<div class="doc-hub-card-preview doc-hub-card-preview--icon">' +
           '<span class="material-symbols-rounded doc-hub-card-doc-icon" aria-hidden="true">description</span>' +
@@ -88,14 +128,22 @@
     }
   }
 
-  function start() {
+  async function start() {
+    if (window.AutoDocsTags && typeof window.AutoDocsTags.syncFromServer === 'function') {
+      const bp = typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
+      try {
+        await window.AutoDocsTags.syncFromServer(bp);
+      } catch (_) {
+        /* usa localStorage */
+      }
+    }
     render();
   }
 
   if (window.__autodocsAuth !== undefined) {
     start();
   } else {
-    document.addEventListener('autodocs-auth-ready', start, { once: true });
+    document.addEventListener('autodocs-auth-ready', () => start(), { once: true });
   }
 
   document.addEventListener('autodocs-tags-synced', () => {

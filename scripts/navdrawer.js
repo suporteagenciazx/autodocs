@@ -386,25 +386,31 @@ function autodocsDispatchAuthReady() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const basePath = getBasePath();
-  const abort = await autodocsResolveAuth(basePath);
-  if (abort) return;
-  autodocsGuardAdminRoute(basePath);
-  inserirNavdrawer();
-  ajustarLinks(basePath);
-  const themeData = await fetchAutodocsThemeJson(basePath);
-  aplicarTemaAutoDocs(basePath, themeData);
-  if (window.AutoDocsTags && typeof window.AutoDocsTags.syncFromServer === 'function') {
-    try {
-      await window.AutoDocsTags.syncFromServer(basePath);
-    } catch (_) {
-      /* mantém localStorage */
+  let abort = false;
+  try {
+    abort = await autodocsResolveAuth(basePath);
+    if (abort) return;
+    autodocsGuardAdminRoute(basePath);
+    inserirNavdrawer();
+    ajustarLinks(basePath);
+    const themeData = await fetchAutodocsThemeJson(basePath);
+    aplicarTemaAutoDocs(basePath, themeData);
+    if (window.AutoDocsTags && typeof window.AutoDocsTags.syncFromServer === 'function') {
+      try {
+        await window.AutoDocsTags.syncFromServer(basePath);
+      } catch (_) {
+        /* mantém localStorage */
+      }
+    }
+    aplicarVisibilidadeMenuAuth(basePath);
+    configurarBotaoSair(basePath);
+    ativarMenu();
+    configurarMenuMovel();
+  } finally {
+    if (!abort) {
+      autodocsDispatchAuthReady();
     }
   }
-  aplicarVisibilidadeMenuAuth(basePath);
-  configurarBotaoSair(basePath);
-  ativarMenu();
-  configurarMenuMovel();
-  autodocsDispatchAuthReady();
 });
 
 window.applyAutoDocsTheme = applyAutoDocsTheme;

@@ -232,9 +232,17 @@
         localStorage.setItem(LS_TAGS, JSON.stringify(tags));
       } else {
         const mig = migrateTagColors(tags);
-        if (mig.changed) {
-          localStorage.setItem(LS_TAGS, JSON.stringify(mig.tags));
-          tags = mig.tags;
+        tags = mig.tags;
+        let needsWrite = mig.changed;
+        tags = tags.map(t => {
+          if (t.id === 'tag-sofisa' && normalizeHex(t.accentColor || '') === LEGACY_SOFISA_BLUE) {
+            needsWrite = true;
+            return { ...t, accentColor: SOFISA_ACCENT };
+          }
+          return t;
+        });
+        if (needsWrite) {
+          localStorage.setItem(LS_TAGS, JSON.stringify(tags));
         }
       }
       const defaultTagId = tags[0].id;
@@ -335,9 +343,15 @@
     accentForDoc(docId) {
       const links = this.getLinks();
       const t = this.tagById(links[docId]);
-      if (!t) return fallbackAccentFromTheme();
-      if (t.accentColor && isValidHex(t.accentColor)) return normalizeHex(t.accentColor);
-      return fallbackAccentFromTheme();
+      if (!t) return SOFISA_ACCENT;
+      if (t.accentColor && isValidHex(t.accentColor)) {
+        const hex = normalizeHex(t.accentColor);
+        if (t.id === 'tag-sofisa' && hex === LEGACY_SOFISA_BLUE) {
+          return SOFISA_ACCENT;
+        }
+        return hex;
+      }
+      return t.id === 'tag-sofisa' ? SOFISA_ACCENT : fallbackAccentFromTheme();
     },
 
     countDocsForTag(tagId, catalogIds) {
