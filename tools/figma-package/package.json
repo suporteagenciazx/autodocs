@@ -1,0 +1,9 @@
+{
+  "name": "autodocs-figma-package",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "fig-to-json": "^1.0.4",
+    "uzip": "^0.20201231.0"
+  }
+}

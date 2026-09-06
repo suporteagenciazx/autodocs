@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 const AUTODOCS_TAGS_FILE = __DIR__ . '/private/tags.json';
 
+function autodocs_tags_substr(string $s, int $start, int $length): string
+{
+    if (function_exists('mb_substr')) {
+        return mb_substr($s, $start, $length);
+    }
+    return substr($s, $start, $length);
+}
+
 /**
  * @return list<string>
  */
@@ -17,6 +25,22 @@ function autodocs_tags_catalog_doc_ids(): array
         'declaracao',
         'ordem',
         'garantia',
+        'magnus-laudo',
+        'valuation-aguia',
+        'orcamento-aguia',
+        'orcamento-magnus',
+        'lae-dvego',
+        'lae-dvego-magnus',
+        'nfe-magnus',
+        'nfe-aguia',
+        'recibo-magnus',
+        'recibo-aguia',
+        'tela-aprovacao',
+        'tela-auditoria-fiscal',
+        'varredura-expansao',
+        'cce-bacen',
+        'eve-aguia',
+        'eve-magnus',
     ];
 }
 
@@ -110,7 +134,7 @@ function autodocs_tags_sanitize_payload($raw): array
             }
             $row = [
                 'id' => $id,
-                'name' => mb_substr($name, 0, 80),
+                'name' => autodocs_tags_substr($name, 0, 80),
                 'accentColor' => $accent,
             ];
             if (isset($t['createdAt']) && is_numeric($t['createdAt'])) {
@@ -152,6 +176,17 @@ function autodocs_tags_sanitize_payload($raw): array
  */
 function autodocs_tags_load_merged(): array
 {
+    $cacheKey = 'cache:tags';
+    if (function_exists('autodocs_cache_get')) {
+        $cached = autodocs_cache_get($cacheKey);
+        if (is_string($cached) && $cached !== '') {
+            $j = json_decode($cached, true);
+            if (is_array($j)) {
+                return autodocs_tags_sanitize_payload($j);
+            }
+        }
+    }
+
     if (!is_readable(AUTODOCS_TAGS_FILE)) {
         return autodocs_tags_defaults();
     }
@@ -160,7 +195,18 @@ function autodocs_tags_load_merged(): array
         return autodocs_tags_defaults();
     }
     $j = json_decode($raw, true);
-    return autodocs_tags_sanitize_payload($j);
+    $payload = autodocs_tags_sanitize_payload($j);
+    if (function_exists('autodocs_cache_set')) {
+        autodocs_cache_set($cacheKey, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 300);
+    }
+    return $payload;
+}
+
+function autodocs_tags_cache_invalidate(): void
+{
+    if (function_exists('autodocs_cache_delete')) {
+        autodocs_cache_delete('cache:tags');
+    }
 }
 
 /**

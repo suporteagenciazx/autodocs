@@ -2,7 +2,7 @@
 
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Inter: carregar via <link> no HTML (não @import — evita FOUC/cascade block). */
 
 :root {
     --cor-destaque: #eef1ee;
@@ -110,11 +110,22 @@ body {
     display: grid;
     grid-template-columns: 301px auto;
     align-items: stretch;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    transition: grid-template-columns 0.22s ease;
+}
+
+html.navdrawer-collapsed body {
+    grid-template-columns: 76px auto;
 }
 
 /* Menu | formulário | preview ao vivo (somente páginas que possuem #documento) */
 body:has(#documento) {
     grid-template-columns: 301px minmax(360px, 420px) minmax(0, 1fr);
+    transition: grid-template-columns 0.22s ease;
+}
+
+html.navdrawer-collapsed body:has(#documento) {
+    grid-template-columns: 76px minmax(360px, 420px) minmax(0, 1fr);
 }
 
 body:has(#documento) > #conteudo {
@@ -151,6 +162,11 @@ header#navdrawer {
     width: 301px;
     display: flex;
     flex-direction: column;
+    transition: width 0.22s ease;
+}
+
+html.navdrawer-collapsed header#navdrawer {
+    width: 76px;
 }
 
 .sistema-logo {
@@ -161,6 +177,85 @@ header#navdrawer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.sistema-logo-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.logo--compact {
+    display: none;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+html.navdrawer-collapsed .logo--full {
+    display: none;
+}
+
+html.navdrawer-collapsed .logo--compact {
+    display: block;
+}
+
+html.navdrawer-collapsed .sistema-logo {
+    padding: 10px 6px 8px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    height: auto;
+    min-height: 64px;
+    gap: 4px;
+}
+
+html.navdrawer-collapsed .logo-div {
+    display: none;
+}
+
+html.navdrawer-collapsed .sistema-logo-actions {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+html.navdrawer-collapsed #navdrawer-collapse {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid color-mix(in srgb, var(--cor-accent) 18%, transparent);
+}
+
+html.navdrawer-collapsed #navdrawer-collapse:hover {
+    background: #fff;
+}
+
+#navdrawer-collapse {
+    display: inline-flex;
+    height: 36px;
+    width: 36px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--cor-accent);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#navdrawer-collapse .material-symbols-rounded {
+    font-size: 22px;
+}
+
+#navdrawer-collapse:hover {
+    background: rgba(255, 255, 255, 0.45);
 }
 
 .logo {
@@ -223,9 +318,9 @@ header#navdrawer {
 .down-side {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-
-    margin-top: 12px;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 4px;
 }
 
 .navdrawer-div {
@@ -261,6 +356,37 @@ header#navdrawer {
     text-decoration: none;
 
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    transition: padding 0.22s ease, justify-content 0.22s ease;
+}
+
+.navdrawer-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.18s ease, max-width 0.22s ease;
+    max-width: 220px;
+}
+
+html.navdrawer-collapsed .navdrawer-label {
+    opacity: 0;
+    max-width: 0;
+    pointer-events: none;
+}
+
+html.navdrawer-collapsed .navdrawer-option {
+    justify-content: center;
+    padding: 12px 8px;
+    gap: 0;
+}
+
+html.navdrawer-collapsed .sistema-navdrawer {
+    padding-left: 8px;
+    padding-right: 8px;
+    max-height: none;
+}
+
+html.navdrawer-collapsed .navdrawer-option .material-symbols-rounded {
+    margin: 0;
 }
 
 .navdrawer-option.ativo {
@@ -280,6 +406,370 @@ header#navdrawer {
     display: none !important;
 }
 
+.navdrawer-footer-card {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    background: #fff;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.navdrawer-theme-switch {
+    min-height: 64px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navdrawer-theme-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8a8f98;
+    line-height: 1;
+}
+
+.navdrawer-switch {
+    position: relative;
+    display: inline-flex;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.navdrawer-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.navdrawer-switch-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: #d5d8de;
+    transition: background 0.2s ease;
+}
+
+.navdrawer-switch-track::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.navdrawer-switch input:checked + .navdrawer-switch-track {
+    background: color-mix(in srgb, var(--cor-accent, #2563eb) 28%, #1a2332);
+}
+
+.navdrawer-switch input:checked + .navdrawer-switch-track::after {
+    transform: translateX(20px);
+    background: var(--cor-accent, #2563eb);
+}
+
+.navdrawer-profile-card {
+    min-height: 58px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.navdrawer-profile-card:hover,
+.navdrawer-profile-card.is-active {
+    border-color: color-mix(in srgb, var(--cor-accent, #2563eb) 35%, #e6e6e6);
+    background: var(--cor-destaque, #f4f7fb);
+}
+
+.navdrawer-profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--cor-accent, #2563eb) 22%, #1e293b);
+    color: color-mix(in srgb, var(--cor-accent, #60a5fa) 70%, #fff);
+}
+
+.navdrawer-profile-initial {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.navdrawer-profile-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.navdrawer-profile-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.navdrawer-profile-role {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9aa3ad;
+}
+
+.navdrawer-logout {
+    min-height: 44px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.navdrawer-logout:hover {
+    background: #f5f5f5;
+}
+
+.navdrawer-logout .material-symbols-rounded {
+    font-size: 20px;
+}
+
+html.navdrawer-collapsed .navdrawer-theme-switch {
+    min-height: 44px;
+    padding: 10px 8px;
+}
+
+html.navdrawer-collapsed .navdrawer-theme-label {
+    display: none;
+}
+
+html.navdrawer-collapsed .navdrawer-profile-card {
+    justify-content: center;
+    padding: 10px 8px;
+}
+
+html.navdrawer-collapsed .navdrawer-profile-meta {
+    display: none;
+}
+
+html.navdrawer-collapsed .navdrawer-logout .navdrawer-label {
+    display: none;
+}
+
+html.navdrawer-collapsed .navdrawer-logout {
+    gap: 0;
+}
+
+.autodocs-support-fab {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2147482000;
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: var(--cor-accent, #025aa4);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.autodocs-support-fab:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.autodocs-support-fab .material-symbols-rounded {
+    font-size: 24px;
+}
+
+.autodocs-support-fab[hidden] {
+    display: none !important;
+}
+
+html.theme-dark {
+    color-scheme: dark;
+}
+
+html.theme-dark body {
+    background: #121416;
+}
+
+html.theme-dark .conteudo {
+    background-color: #171a1d;
+}
+
+html.theme-dark #navdrawer,
+html.theme-dark .sistema-navdrawer {
+    background: #1c2024;
+}
+
+html.theme-dark .navdrawer-option {
+    background: transparent;
+    color: #b8c0c8;
+}
+
+html.theme-dark .navdrawer-option:hover:not(.ativo) {
+    background: #262b31;
+    color: #d5dbe1;
+}
+
+html.theme-dark .navdrawer-option.ativo {
+    color: var(--cor-accent);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+html.theme-dark .navdrawer-div {
+    background-color: #2a3036;
+}
+
+html.theme-dark .navdrawer-footer-card {
+    background: #1a222d;
+    border-color: #2a3442;
+    color: #e8edf2;
+}
+
+html.theme-dark .navdrawer-theme-label {
+    color: #9aa3ad;
+}
+
+html.theme-dark .navdrawer-profile-card:hover,
+html.theme-dark .navdrawer-profile-card.is-active {
+    background: #222b38;
+    border-color: #334155;
+}
+
+html.theme-dark .navdrawer-profile-name {
+    color: #f3f6f9;
+}
+
+html.theme-dark .navdrawer-profile-role {
+    color: #8b949e;
+}
+
+html.theme-dark .navdrawer-logout {
+    color: #e8edf2;
+}
+
+html.theme-dark .navdrawer-logout:hover {
+    background: #222b38;
+}
+
+html.theme-dark .navdrawer-switch-track {
+    background: #2a3442;
+}
+
+html.theme-dark .navdrawer-switch input:checked + .navdrawer-switch-track {
+    background: color-mix(in srgb, var(--cor-accent, #2563eb) 35%, #152033);
+}
+
+html.theme-dark .navdrawer-switch input:checked + .navdrawer-switch-track::after {
+    background: var(--cor-accent, #2563eb);
+}
+
+html.theme-dark .sistema-pagina,
+html.theme-dark .base-box,
+html.theme-dark .formularios {
+    color: #d5dbe1;
+}
+
+html.theme-dark .sistema-pagina h1,
+html.theme-dark .base-box h2 {
+    color: #f0f3f6;
+}
+
+html.theme-dark .campo-texto,
+html.theme-dark .label-campo {
+    color: #9aa3ad;
+}
+
+html.theme-dark .input,
+html.theme-dark select,
+html.theme-dark textarea,
+html.theme-dark .designer-tag-select,
+html.theme-dark .doc-hub-tag-multi-btn {
+    background: #23282e;
+    color: #e8edf2;
+    border-color: #343b43;
+}
+
+html.theme-dark .doc-hub-tag-multi-panel {
+    background: #23282e;
+    border-color: #343b43;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+html.theme-dark .doc-hub-tag-multi-option {
+    color: #d5dbe1;
+}
+
+html.theme-dark .doc-hub-tag-multi-option:hover {
+    background: #2c3239;
+}
+
+html.theme-dark .doc-hub-card,
+html.theme-dark .base-box {
+    background: #1c2024;
+    border-color: #2a3036;
+}
+
+html.theme-dark .doc-hub-card-title {
+    color: #e8edf2;
+}
+
+html.theme-dark .doc-hub-card-blurb,
+html.theme-dark .doc-hub-empty,
+html.theme-dark .doc-hub-group-count {
+    color: #8a949e;
+}
+
+html.theme-dark .doc-hub-group-title {
+    color: #d5dbe1;
+}
+
+html.theme-dark .doc-hub-group-collapse {
+    color: #8a949e;
+}
+
+html.theme-dark .doc-hub-group-collapse:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e8edf2;
+}
+
 .conteudo {
     display: flex;
     flex-direction: column;
@@ -288,6 +778,79 @@ header#navdrawer {
     height: 100%;
 
     background-color: #F9F9F9;
+    transition: opacity 0.12s ease;
+}
+
+body.autodocs-soft-nav .conteudo {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+/* Transição ao abrir documentação (overlay + spinner) */
+html.autodocs-page-transition-pending body {
+    overflow: hidden;
+}
+
+.autodocs-page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 249, 249, 0.82);
+    backdrop-filter: blur(3px);
+    opacity: 1;
+    transition: opacity 0.28s ease;
+    pointer-events: all;
+}
+
+.autodocs-page-transition[hidden] {
+    display: none !important;
+}
+
+.autodocs-page-transition.is-hiding {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.autodocs-page-transition-spinner {
+    width: 34px;
+    height: 34px;
+    border: 3px solid #e0e0e0;
+    border-top-color: var(--cor-accent, #025aa4);
+    border-radius: 50%;
+    animation: autodocs-page-transition-spin 0.7s linear infinite;
+}
+
+@keyframes autodocs-page-transition-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+html.autodocs-page-transition-pending::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2147482999;
+    background: rgba(249, 249, 249, 0.92);
+    pointer-events: all;
+}
+
+html.autodocs-page-transition-pending::after {
+    content: '';
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 2147483000;
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 3px solid #e0e0e0;
+    border-top-color: var(--cor-accent, #025aa4);
+    border-radius: 50%;
+    animation: autodocs-page-transition-spin 0.7s linear infinite;
+    pointer-events: none;
 }
 
 header#pagina {
@@ -465,6 +1028,44 @@ label.label-campo {
     align-items: center;
 }
 
+/* Botão de sorteio de valor (scripts/autodocs-aleatorio.js). A margem
+   automática consome o espaço livre do .label para que o botão fique colado ao
+   rótulo e o ícone de ajuda continue encostado à direita. */
+.campo-aleatorio {
+    margin: 0 auto 0 6px;
+    padding: 0;
+
+    width: 18px;
+    height: 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    color: #bdbdbd;
+    cursor: pointer;
+
+    transition: color .15s ease, background-color .15s ease;
+}
+
+.campo-aleatorio span {
+    color: inherit;
+    font-size: 15px;
+}
+
+.campo-aleatorio:hover {
+    color: var(--cor-accent);
+    background: rgba(2, 90, 164, .08);
+}
+
+.campo-aleatorio:focus-visible {
+    outline: 2px solid var(--cor-accent);
+    outline-offset: 1px;
+}
+
 input.input {
     color: #666;
     font-family: 'Inter';
@@ -552,6 +1153,10 @@ input::placeholder {
     body:has(#documento) {
         grid-template-columns: 280px minmax(320px, 380px) minmax(0, 1fr);
     }
+
+    html.navdrawer-collapsed body:has(#documento) {
+        grid-template-columns: 76px minmax(320px, 380px) minmax(0, 1fr);
+    }
 }
 
 @media (max-width: 1200px) {
@@ -560,10 +1165,18 @@ input::placeholder {
         grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
     }
 
+    html.navdrawer-collapsed body:has(#documento) {
+        grid-template-columns: 76px minmax(0, 1fr);
+    }
+
     body:has(#documento) > #navdrawer {
         grid-column: 1;
         grid-row: 1 / 3;
         width: 260px;
+    }
+
+    html.navdrawer-collapsed body:has(#documento) > #navdrawer {
+        width: 76px;
     }
 
     body:has(#documento) > #conteudo {
@@ -609,6 +1222,10 @@ input::placeholder {
 
     body:has(#documento) #navdrawer-toggle {
         display: inline-flex;
+    }
+
+    body:has(#documento) #navdrawer-collapse {
+        display: none;
     }
 
     body:has(#documento) .sistema-navdrawer {
@@ -736,6 +1353,10 @@ input::placeholder {
         display: inline-flex;
     }
 
+    body:not(:has(#documento)) #navdrawer-collapse {
+        display: none;
+    }
+
     body:not(:has(#documento)) .sistema-navdrawer {
         position: fixed;
         top: 64px;
@@ -808,7 +1429,9 @@ input::placeholder {
     }
 
     #navdrawer,
-    #conteudo {
+    #conteudo,
+    #autodocs-support-fab,
+    .autodocs-support-fab {
         display: none !important;
     }
 
@@ -863,4 +1486,97 @@ input::placeholder {
 
 .password-toggle-btn .material-symbols-rounded {
     font-size: 22px;
+}
+
+/* —— Toasts (canto superior direito) —— */
+.autodocs-toast-stack {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 12000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: min(380px, calc(100vw - 32px));
+    pointer-events: none;
+}
+
+.autodocs-toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #333;
+    opacity: 0;
+    transform: translateY(-8px) translateX(12px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    pointer-events: auto;
+}
+
+.autodocs-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+.autodocs-toast.is-leaving {
+    opacity: 0;
+    transform: translateY(-6px) translateX(8px);
+}
+
+.autodocs-toast-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.autodocs-toast--ok .autodocs-toast-icon { color: #1b7f4a; }
+.autodocs-toast--error .autodocs-toast-icon { color: #b3261e; }
+.autodocs-toast--info .autodocs-toast-icon { color: var(--cor-accent, #025aa4); }
+
+.autodocs-toast-text {
+    flex: 1;
+    min-width: 0;
+    white-space: pre-wrap;
+}
+
+/* —— OpenCNPJ loading no input CNPJ —— */
+.autodocs-cnpj-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.autodocs-cnpj-wrap .input {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 38px;
+}
+
+.autodocs-cnpj-spinner {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    margin-top: -9px;
+    border: 2px solid #e0e0e0;
+    border-top-color: var(--cor-accent, #025aa4);
+    border-radius: 50%;
+    animation: autodocs-cnpj-spin 0.75s linear infinite;
+    pointer-events: none;
+}
+
+.autodocs-cnpj-spinner[hidden] {
+    display: none !important;
+}
+
+@keyframes autodocs-cnpj-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

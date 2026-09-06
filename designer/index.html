@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -9,12 +9,14 @@
 
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="../estilos/sistema.css">
-    <link rel="stylesheet" href="../estilos/exportar.css">
+    <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css?v=20260905">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-
-    <link rel="stylesheet" href="../estilos/icones.css">
+    <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
+    <script src="../scripts/navdrawer-collapsed-init.js?v=20260905"></script>
+    <script src="../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
 </head>
 
 <body>
@@ -24,20 +26,360 @@
             <span id="sistema-cnpj" class="banco-cnpj"></span>
         </header>
         <div class="sistema-pagina">
-            <h1>Designer</h1>
-            <div class="formularios">
-                <div class="area-boxes" style="grid-template-columns: minmax(280px, 492px);">
-                    <div class="base-box" style="display:flex; justify-content: center; flex-direction: column; gap: 12px; align-items: center;">
-                        <span class="material-symbols-rounded">construction</span>
-                        <h2 style="margin: 0px;">Em breve</h2>
-                        <p class="campo-texto" style="text-align: center; margin: 0;">Ferramentas de design de documentos serão disponibilizadas aqui.</p>
+            <div class="doc-hub-layout designer-layout">
+                <h1>Designer</h1>
+                <div class="sistema-conteudo">
+                    <div class="designer-toolbar">
+                        <label class="doc-hub-search-wrap">
+                            <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                            <input type="search" id="designer-search" placeholder="Pesquisar por nome ou descrição…" autocomplete="off" enterkeyhint="search">
+                        </label>
+                        <div class="designer-tag-filter">
+                            <span class="designer-tag-filter-label" id="designer-tag-filter-label">Etiqueta</span>
+                            <div id="designer-tag-filter" class="doc-hub-tag-multiselect" role="group" aria-labelledby="designer-tag-filter-label"></div>
+                        </div>
+                        <div class="designer-toolbar-actions">
+                            <button type="button" id="designer-group-toggle" class="tags-btn-outline doc-hub-group-toggle" aria-pressed="false" title="Agrupar por etiqueta">
+                                <span class="material-symbols-rounded" aria-hidden="true">view_agenda</span>
+                                Agrupar por etiqueta
+                            </button>
+                            <button type="button" id="designer-btn-arquivo" class="tags-btn-outline designer-btn-arquivo" aria-pressed="false">
+                                <span class="material-symbols-rounded" aria-hidden="true">inventory_2</span>
+                                Arquivo
+                                <span id="designer-arquivo-count" class="designer-arquivo-count" hidden>0</span>
+                            </button>
+                            <button type="button" id="designer-btn-nova" class="autodocs-btn-pill-primary">
+                                <span class="material-symbols-rounded" aria-hidden="true">add</span>
+                                Nova documentação
+                            </button>
+                        </div>
+                    </div>
+                    <div id="designer-view-active">
+                        <p id="designer-empty" class="doc-hub-empty" hidden>Nenhuma documentação encontrada.</p>
+                        <div id="designer-list" class="doc-hub-list">
+                            <div id="designer-grid" class="doc-hub-grid designer-grid"></div>
+                        </div>
+                    </div>
+
+                    <div id="designer-view-arquivo" class="designer-arquivo-view" hidden>
+                        <div class="designer-arquivo-header">
+                            <div class="designer-arquivo-title-row">
+                                <button type="button" id="designer-btn-arquivo-voltar" class="tags-btn-outline designer-arquivo-back" aria-label="Voltar à lista de documentações">
+                                    <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                                    Voltar
+                                </button>
+                                <h2>Arquivo</h2>
+                            </div>
+                            <p class="campo-texto">Documentações arquivadas. Pode restaurar ou eliminar definitivamente.</p>
+                        </div>
+                        <p id="designer-arquivo-empty" class="doc-hub-empty" hidden>O arquivo está vazio.</p>
+                        <div id="designer-arquivo-list" class="doc-hub-list">
+                            <div id="designer-arquivo-grid" class="doc-hub-grid designer-grid"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../scripts/banco.js"></script>
-    <script src="../scripts/navdrawer.js"></script>
+
+    <div class="tags-modal-bg" id="designer-modal-bg" aria-hidden="true">
+        <div class="tags-modal designer-modal designer-modal--wide" role="dialog" aria-labelledby="designer-modal-title">
+            <div class="designer-modal-viewport">
+                <div class="designer-modal-track" id="designer-modal-track" data-step="choose">
+                    <section class="designer-modal-panel" data-panel="choose">
+                        <h3 id="designer-modal-title">Nova documentação</h3>
+                        <p class="designer-modal-intro campo-texto">Escolha como deseja criar o modelo de documentação.</p>
+                        <div class="designer-modal-options">
+                            <button type="button" class="designer-modal-option" data-goto="pdf">
+                                <span class="designer-source-badge designer-source-badge--pdf designer-source-badge--lg" aria-hidden="true">
+                                    <img src="../sistema/icon-pdf.svg" alt="" width="22" height="22">
+                                </span>
+                                <span class="designer-modal-option-text">
+                                    <strong>Importar PDF (nativo)</strong>
+                                    <span>Converte PDF com placeholders [CAMPO] num modelo HTML AutoDocs.</span>
+                                </span>
+                                <span class="material-symbols-rounded designer-modal-option-arrow" aria-hidden="true">chevron_right</span>
+                            </button>
+                            <button type="button" class="designer-modal-option" data-goto="docx">
+                                <span class="designer-source-badge designer-source-badge--docx designer-source-badge--lg" aria-hidden="true">
+                                    <img src="../sistema/icon-docx.svg" alt="" width="22" height="22">
+                                </span>
+                                <span class="designer-modal-option-text">
+                                    <strong>Importar DOCX</strong>
+                                    <span>Lê um ficheiro Word e converte o conteúdo num modelo AutoDocs.</span>
+                                </span>
+                                <span class="material-symbols-rounded designer-modal-option-arrow" aria-hidden="true">chevron_right</span>
+                            </button>
+                            <button type="button" class="designer-modal-option" data-goto="html">
+                                <span class="designer-source-badge designer-source-badge--html designer-source-badge--lg" aria-hidden="true">
+                                    <span class="material-symbols-rounded">html</span>
+                                </span>
+                                <span class="designer-modal-option-text">
+                                    <strong>Importar HTML/CSS</strong>
+                                    <span>Aproveita uma página já feita em HTML e CSS como base do modelo.</span>
+                                </span>
+                                <span class="material-symbols-rounded designer-modal-option-arrow" aria-hidden="true">chevron_right</span>
+                            </button>
+                            <button type="button" class="designer-modal-option" data-goto="figma">
+                                <span class="designer-source-badge designer-source-badge--figma designer-source-badge--lg" aria-hidden="true">
+                                    <img src="../sistema/icon-figma.svg" alt="" width="22" height="22">
+                                </span>
+                                <span class="designer-modal-option-text">
+                                    <strong>Importar do Figma</strong>
+                                    <span>Pacote ZIP com .fig + PNGs exportados — sem API nem token.</span>
+                                </span>
+                                <span class="material-symbols-rounded designer-modal-option-arrow" aria-hidden="true">chevron_right</span>
+                            </button>
+                            <button type="button" class="designer-modal-option" data-goto="native">
+                                <span class="designer-source-badge designer-source-badge--native designer-source-badge--lg" aria-hidden="true">
+                                    <img src="../sistema/favicon.svg" alt="" width="22" height="22">
+                                </span>
+                                <span class="designer-modal-option-text">
+                                    <strong>Criar no AutoDocs</strong>
+                                    <span>Monte o modelo diretamente no editor nativo do sistema.</span>
+                                </span>
+                                <span class="material-symbols-rounded designer-modal-option-arrow" aria-hidden="true">chevron_right</span>
+                            </button>
+                        </div>
+                        <div class="tags-modal-actions">
+                            <button type="button" class="tags-btn-outline designer-modal-close">Cancelar</button>
+                        </div>
+                    </section>
+
+                    <section class="designer-modal-panel" data-panel="pdf">
+                        <button type="button" class="designer-modal-back" data-goto="choose">
+                            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                            Voltar
+                        </button>
+                        <h3>Importar PDF (nativo)</h3>
+                        <p class="designer-modal-intro campo-texto">
+                            Envie um PDF com texto e placeholders no formato <code>[CAMPO]</code>.
+                            O sistema gera um modelo HTML AutoDocs (como Garantia/Contrato).
+                        </p>
+                        <form id="designer-pdf-form" class="base-boxcampos" enctype="multipart/form-data">
+                            <div class="campo">
+                                <label class="label-campo" for="designer-pdf-title">Nome da documentação</label>
+                                <input class="input" type="text" id="designer-pdf-title" required maxlength="120" placeholder="Ex.: Carta de garantia" autocomplete="off">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-pdf-tag-mode">Etiqueta</label>
+                                <select id="designer-pdf-tag-mode" class="designer-tag-select">
+                                    <option value="existing">Usar etiqueta existente</option>
+                                    <option value="new">Criar nova etiqueta</option>
+                                </select>
+                            </div>
+                            <div class="campo" id="designer-pdf-tag-existing-wrap">
+                                <label class="label-campo" for="designer-pdf-tag">Etiqueta existente</label>
+                                <select id="designer-pdf-tag" class="designer-tag-select" aria-label="Etiqueta da documentação">
+                                    <option value="">— Selecione —</option>
+                                </select>
+                            </div>
+                            <div id="designer-pdf-tag-new-wrap" class="designer-tag-new-wrap" hidden>
+                                <div class="campo">
+                                    <label class="label-campo" for="designer-pdf-tag-new-name">Nome da nova etiqueta</label>
+                                    <input class="input" type="text" id="designer-pdf-tag-new-name" maxlength="60" placeholder="Ex.: Magnus" autocomplete="off">
+                                </div>
+                                <div class="campo designer-tag-color-field">
+                                    <label class="label-campo" for="designer-pdf-tag-new-color">Cor</label>
+                                    <input type="color" id="designer-pdf-tag-new-color" value="#5c6b73" aria-label="Cor da etiqueta">
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-pdf-file">PDF do documento</label>
+                                <input class="input designer-file-input" type="file" id="designer-pdf-file" accept=".pdf,application/pdf" required>
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-pdf-capa">Capa (opcional)</label>
+                                <input class="input designer-file-input" type="file" id="designer-pdf-capa" accept=".png,.jpg,.jpeg,.webp,.svg,image/*">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-pdf-mda">Fundo MDA (páginas)</label>
+                                <input class="input designer-file-input" type="file" id="designer-pdf-mda" accept=".png,.jpg,.jpeg,.webp,.svg,image/*">
+                                <p class="designer-figma-hint campo-texto">Se vazio, usa o MDA padrão do sistema.</p>
+                            </div>
+                            <div class="campo designer-tag-color-field">
+                                <label class="label-campo" for="designer-pdf-last-color">Cor da última página</label>
+                                <input type="color" id="designer-pdf-last-color" value="#ffffff" aria-label="Cor da última página">
+                                <p class="designer-figma-hint campo-texto">A última folha não usa MDA — só esta cor sólida.</p>
+                            </div>
+                            <p id="designer-pdf-error" class="designer-form-error" role="alert" hidden></p>
+                            <div class="tags-modal-actions">
+                                <button type="submit" class="tags-btn-primary" id="designer-pdf-submit">Importar e montar</button>
+                                <button type="button" class="tags-btn-outline designer-modal-close">Cancelar</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Placeholders: as opções já aparecem na escolha, os formulários vêm depois. -->
+                    <section class="designer-modal-panel" data-panel="docx">
+                        <button type="button" class="designer-modal-back" data-goto="choose">
+                            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                            Voltar
+                        </button>
+                        <h3>Importar DOCX</h3>
+                        <p class="designer-modal-intro campo-texto">
+                            Vai aceitar um ficheiro <code>.docx</code> com placeholders no formato <code>[CAMPO]</code>
+                            e montar o modelo HTML AutoDocs, tal como a importação de PDF.
+                        </p>
+                        <p class="designer-modal-soon campo-texto">
+                            <span class="material-symbols-rounded" aria-hidden="true">schedule</span>
+                            Formulário ainda por montar.
+                        </p>
+                        <div class="tags-modal-actions">
+                            <button type="button" class="tags-btn-outline designer-modal-close">Fechar</button>
+                        </div>
+                    </section>
+
+                    <section class="designer-modal-panel" data-panel="html">
+                        <button type="button" class="designer-modal-back" data-goto="choose">
+                            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                            Voltar
+                        </button>
+                        <h3>Importar HTML/CSS</h3>
+                        <p class="designer-modal-intro campo-texto">
+                            Vai aceitar uma página em <code>.html</code> com o respetivo <code>.css</code>
+                            (ou um ZIP com ambos e as imagens) e usá-la como base do modelo.
+                        </p>
+                        <p class="designer-modal-soon campo-texto">
+                            <span class="material-symbols-rounded" aria-hidden="true">schedule</span>
+                            Formulário ainda por montar.
+                        </p>
+                        <div class="tags-modal-actions">
+                            <button type="button" class="tags-btn-outline designer-modal-close">Fechar</button>
+                        </div>
+                    </section>
+
+                    <section class="designer-modal-panel" data-panel="figma">
+                        <button type="button" class="designer-modal-back" data-goto="choose">
+                            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                            Voltar
+                        </button>
+                        <h3>Importar do Figma</h3>
+                        <p class="designer-modal-intro campo-texto">
+                            No Figma: <strong>File → Save local copy</strong> (.fig) e exporte os frames em <strong>PNG</strong>.
+                            Coloque tudo num <strong>ZIP</strong> e envie abaixo.
+                        </p>
+                        <form id="designer-figma-form" class="base-boxcampos" enctype="multipart/form-data">
+                            <div class="campo">
+                                <label class="label-campo" for="designer-figma-title">Nome da documentação</label>
+                                <input class="input" type="text" id="designer-figma-title" required maxlength="120" placeholder="Ex.: Laudo Magnus" autocomplete="off">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-figma-tag-mode">Etiqueta</label>
+                                <select id="designer-figma-tag-mode" class="designer-tag-select">
+                                    <option value="existing">Usar etiqueta existente</option>
+                                    <option value="new">Criar nova etiqueta</option>
+                                </select>
+                            </div>
+                            <div class="campo" id="designer-figma-tag-existing-wrap">
+                                <label class="label-campo" for="designer-figma-tag">Etiqueta existente</label>
+                                <select id="designer-figma-tag" class="designer-tag-select" aria-label="Etiqueta da documentação">
+                                    <option value="">— Selecione —</option>
+                                </select>
+                            </div>
+                            <div id="designer-figma-tag-new-wrap" class="designer-tag-new-wrap" hidden>
+                                <div class="campo">
+                                    <label class="label-campo" for="designer-figma-tag-new-name">Nome da nova etiqueta</label>
+                                    <input class="input" type="text" id="designer-figma-tag-new-name" maxlength="60" placeholder="Ex.: Magnus" autocomplete="off">
+                                </div>
+                                <div class="campo designer-tag-color-field">
+                                    <label class="label-campo" for="designer-figma-tag-new-color">Cor</label>
+                                    <input type="color" id="designer-figma-tag-new-color" value="#5c6b73" aria-label="Cor da etiqueta">
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="designer-figma-zip">Pacote ZIP</label>
+                                <input class="input designer-file-input" type="file" id="designer-figma-zip" name="package" accept=".zip,application/zip" required>
+                                <p class="designer-figma-hint campo-texto">
+                                    O ZIP deve incluir o ficheiro <code>.fig</code> e os <code>.png</code> das páginas (nomes iguais aos frames ajudam).
+                                    PDF opcional.
+                                </p>
+                            </div>
+                            <p id="designer-figma-error" class="designer-form-error" role="alert" hidden></p>
+                            <div class="tags-modal-actions">
+                                <button type="submit" class="tags-btn-primary" id="designer-figma-submit">Importar e montar</button>
+                                <button type="button" class="tags-btn-outline designer-modal-close">Cancelar</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="designer-modal-panel" data-panel="native">
+                        <button type="button" class="designer-modal-back" data-goto="choose">
+                            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+                            Voltar
+                        </button>
+                        <h3>Criar no AutoDocs</h3>
+                        <p class="designer-modal-intro campo-texto">Defina um nome para o novo modelo nativo.</p>
+                        <form id="designer-native-form" class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="designer-native-title">Nome do modelo</label>
+                                <input class="input" type="text" id="designer-native-title" required maxlength="120" placeholder="Ex.: Carta de cobrança" autocomplete="off">
+                            </div>
+                            <div class="tags-modal-actions">
+                                <button type="submit" class="tags-btn-primary">Criar modelo</button>
+                                <button type="button" class="tags-btn-outline designer-modal-close">Cancelar</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="designer-modal-panel designer-modal-panel--loading" data-panel="loading">
+                        <div class="designer-loading-state">
+                            <span class="material-symbols-rounded designer-loading-icon" aria-hidden="true">sync</span>
+                            <p id="designer-loading-text">A processar Figma…</p>
+                            <p id="designer-loading-hint" class="designer-loading-hint campo-texto">A extrair o ZIP, ler o .fig e montar o documento.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tags-modal-bg" id="designer-confirm-bg" aria-hidden="true">
+        <div class="tags-modal designer-confirm-modal" role="dialog" aria-labelledby="designer-confirm-title">
+            <h3 id="designer-confirm-title">Confirmar</h3>
+            <p id="designer-confirm-text" class="campo-texto"></p>
+            <div class="tags-modal-actions">
+                <button type="button" id="designer-confirm-ok" class="tags-btn-outline tags-btn-outline--danger">Eliminar definitivamente</button>
+                <button type="button" id="designer-confirm-cancel" class="tags-btn-outline">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tags-modal-bg" id="designer-edit-bg" aria-hidden="true">
+        <div class="tags-modal designer-edit-modal" role="dialog" aria-labelledby="designer-edit-title">
+            <h3 id="designer-edit-title">Editar documentação</h3>
+            <form id="designer-edit-form" class="base-boxcampos">
+                <input type="hidden" id="designer-edit-id" value="">
+                <div class="campo">
+                    <label class="label-campo" for="designer-edit-name">Nome</label>
+                    <input class="input" type="text" id="designer-edit-name" required maxlength="120" autocomplete="off">
+                </div>
+                <div class="campo">
+                    <label class="label-campo" for="designer-edit-blurb">Descrição</label>
+                    <textarea class="input designer-edit-textarea" id="designer-edit-blurb" rows="3" maxlength="280" placeholder="Breve descrição que aparece no card"></textarea>
+                </div>
+                <div class="campo">
+                    <label class="label-campo" for="designer-edit-tag">Etiqueta</label>
+                    <select id="designer-edit-tag" class="designer-tag-select" aria-label="Etiqueta da documentação">
+                        <option value="">— Selecione —</option>
+                    </select>
+                </div>
+                <p id="designer-edit-error" class="designer-form-error" role="alert" hidden></p>
+                <div class="tags-modal-actions">
+                    <button type="submit" class="tags-btn-primary" id="designer-edit-submit">Guardar</button>
+                    <button type="button" class="tags-btn-outline" id="designer-edit-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../scripts/banco.js?v=20260905"></script>
+    <script src="../scripts/autodocs-tags-storage.js?v=20260905"></script>
+    <script src="../scripts/autodocs-docs-catalog.js?v=20260905"></script>
+    <script src="../scripts/designer-models-storage.js?v=20260905"></script>
+    <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/designer-page.js?v=20260905"></script>
 </body>
 
 </html>

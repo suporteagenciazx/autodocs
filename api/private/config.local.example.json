@@ -1,11 +1,19 @@
 {
   "db": {
-    "host": "127.0.0.1",
+    "host": "db",
     "port": 3306,
     "name": "autodocs",
     "user": "autodocs_app",
-    "password": "OZUJxEWYenbkzJeS"
+    "password": "CHANGE_ME"
+  },
+  "redis": {
+    "host": "redis",
+    "port": 6379,
+    "prefix": "autodocs:"
   },
   "session_cookie_secure": false,
-  "registration_open": false
+  "registration_open": false,
+  "figma": {
+    "access_token": ""
+  }
 }

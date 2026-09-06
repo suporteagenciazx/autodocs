@@ -1,0 +1,58 @@
+# AutoDocs v7 — segurança + cache/compressão (Apache)
+# Docker (AllowOverride All) e compatível com VPS Apache se necessário.
+
+AddDefaultCharset UTF-8
+
+# --- Bloquear artefactos sensíveis ---
+<FilesMatch "(?i)\.(log|sql|bak|env)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "(?i)^(debug-|.*\.)?log$">
+  Require all denied
+</FilesMatch>
+<Files "logins.txt">
+  Require all denied
+</Files>
+
+# --- Headers de segurança (HTML e estáticos) ---
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+
+# --- Compressão ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Cache longo apenas para binários (nome muda quando o conteúdo muda) ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+  ExpiresByType font/woff "access plus 30 days"
+  ExpiresByType application/font-woff2 "access plus 30 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(woff2?|png|jpe?g|webp|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # CSS/JS/HTML/SVG revalidam sempre (ETag devolve 304 quando nada mudou).
+  # Sem isto, edições em estilos/*.css e scripts/*.js só aparecem depois de
+  # limpar a cache do navegador — o browser embutido do Cursor ignora cache
+  # e mascara o problema.
+  <FilesMatch "\.(css|js|mjs|html?|svg|json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header unset Expires
+    Header unset Pragma
+  </FilesMatch>
+</IfModule>

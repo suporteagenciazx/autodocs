@@ -1,0 +1,381 @@
+{
+  "figImages": [
+    {
+      "source": "images/9e58af47b1e2321a31682726e58e4fb2944e4728",
+      "file": "9e58af47b1e2321a31682726e58e4fb2944e4728.png",
+      "bytes": 11748256,
+      "ext": "png",
+      "width": 4096,
+      "height": 3755
+    },
+    {
+      "source": "images/4d68d8823894922f57ec2f5bd58b3821051e86c4",
+      "file": "4d68d8823894922f57ec2f5bd58b3821051e86c4.png",
+      "bytes": 542334,
+      "ext": "png",
+      "width": 4096,
+      "height": 1614
+    },
+    {
+      "source": "images/c5b1cba4537c0d90889195aed0d37c94c33949ff",
+      "file": "c5b1cba4537c0d90889195aed0d37c94c33949ff.png",
+      "bytes": 461788,
+      "ext": "png",
+      "width": 596,
+      "height": 842
+    },
+    {
+      "source": "images/23ac4cabb6faaa3fd4940775c45af8aa7a9fdd09",
+      "file": "23ac4cabb6faaa3fd4940775c45af8aa7a9fdd09.png",
+      "bytes": 408549,
+      "ext": "png",
+      "width": 512,
+      "height": 470
+    },
+    {
+      "source": "images/52ee69477bd38d3a750e5332161ec2f3c9f9cda5",
+      "file": "52ee69477bd38d3a750e5332161ec2f3c9f9cda5.png",
+      "bytes": 405159,
+      "ext": "png",
+      "width": 1904,
+      "height": 545
+    },
+    {
+      "source": "images/ddcc7d4e68c804f304eaf04e9e512e649adaf39b",
+      "file": "ddcc7d4e68c804f304eaf04e9e512e649adaf39b.png",
+      "bytes": 189798,
+      "ext": "png",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "source": "images/4b147d998f491e7e44801150b3272902a041c258",
+      "file": "4b147d998f491e7e44801150b3272902a041c258.png",
+      "bytes": 114165,
+      "ext": "png",
+      "width": 298,
+      "height": 421
+    },
+    {
+      "source": "images/79cb7302061d2bee539e332d94d4e84d8fa74c83",
+      "file": "79cb7302061d2bee539e332d94d4e84d8fa74c83.png",
+      "bytes": 90946,
+      "ext": "png",
+      "width": 1023,
+      "height": 647
+    },
+    {
+      "source": "images/319deddc21147784158352931840ceecb54dc688",
+      "file": "319deddc21147784158352931840ceecb54dc688.png",
+      "bytes": 71677,
+      "ext": "png",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "source": "images/9e37f3a14cefbc631b9d3233b16b26c47056ed21",
+      "file": "9e37f3a14cefbc631b9d3233b16b26c47056ed21.png",
+      "bytes": 69760,
+      "ext": "png",
+      "width": 505,
+      "height": 494
+    },
+    {
+      "source": "images/cf40c34242c60b7fe90988329c2b3851ff436430",
+      "file": "cf40c34242c60b7fe90988329c2b3851ff436430.png",
+      "bytes": 59958,
+      "ext": "png",
+      "width": 2266,
+      "height": 2266
+    },
+    {
+      "source": "images/7d0949fa0278243368789dba3cfa07f6ab642eb5",
+      "file": "7d0949fa0278243368789dba3cfa07f6ab642eb5.png",
+      "bytes": 58378,
+      "ext": "png",
+      "width": 512,
+      "height": 324
+    },
+    {
+      "source": "images/cb32ad32b2e3d42127d8582f829748221a73d549",
+      "file": "cb32ad32b2e3d42127d8582f829748221a73d549.png",
+      "bytes": 57271,
+      "ext": "png",
+      "width": 476,
+      "height": 137
+    },
+    {
+      "source": "images/d00b61ab3705d1694831342c322535a1b2fa9a5f",
+      "file": "d00b61ab3705d1694831342c322535a1b2fa9a5f.png",
+      "bytes": 56929,
+      "ext": "png",
+      "width": 464,
+      "height": 178
+    },
+    {
+      "source": "images/20a523e7342cb45f28481981e1835e66f94c8510",
+      "file": "20a523e7342cb45f28481981e1835e66f94c8510.png",
+      "bytes": 30072,
+      "ext": "png",
+      "width": 504,
+      "height": 504
+    },
+    {
+      "source": "images/6fedc384ddfb40ab6ac36ac0b12c5b14765ba827",
+      "file": "6fedc384ddfb40ab6ac36ac0b12c5b14765ba827.png",
+      "bytes": 29530,
+      "ext": "png",
+      "width": 512,
+      "height": 202
+    },
+    {
+      "source": "images/4453ac8a233d1f1cf525b1c28574ce5c9ac950bb",
+      "file": "4453ac8a233d1f1cf525b1c28574ce5c9ac950bb.png",
+      "bytes": 26497,
+      "ext": "png",
+      "width": 504,
+      "height": 504
+    },
+    {
+      "source": "images/914b47418c753b75ae3d148a3cb8fb2ea6b040a2",
+      "file": "914b47418c753b75ae3d148a3cb8fb2ea6b040a2.png",
+      "bytes": 18819,
+      "ext": "png",
+      "width": 1007,
+      "height": 1007
+    },
+    {
+      "source": "images/7a92ecd47e8301d98a2f69ba57ccda734bdbc7e4",
+      "file": "7a92ecd47e8301d98a2f69ba57ccda734bdbc7e4.png",
+      "bytes": 18238,
+      "ext": "png",
+      "width": 640,
+      "height": 564
+    },
+    {
+      "source": "images/09d6492ac3fbedbe70188131454ea666a9a3ed3e",
+      "file": "09d6492ac3fbedbe70188131454ea666a9a3ed3e.png",
+      "bytes": 16158,
+      "ext": "png",
+      "width": 596,
+      "height": 842
+    },
+    {
+      "source": "images/21ad3805c5b01b47193018c74bbfbd39c52eb12c",
+      "file": "21ad3805c5b01b47193018c74bbfbd39c52eb12c.png",
+      "bytes": 15945,
+      "ext": "png",
+      "width": 895,
+      "height": 260
+    },
+    {
+      "source": "images/fea093756f119ece2b4992c667c71982bb02c4a0",
+      "file": "fea093756f119ece2b4992c667c71982bb02c4a0.png",
+      "bytes": 15165,
+      "ext": "png",
+      "width": 320,
+      "height": 282
+    },
+    {
+      "source": "images/190d2f64fe06072c13d9034a7d3519d28fe1eff0",
+      "file": "190d2f64fe06072c13d9034a7d3519d28fe1eff0.png",
+      "bytes": 14294,
+      "ext": "png",
+      "width": 284,
+      "height": 284
+    },
+    {
+      "source": "images/b8e1692e2a4cd145e164f657c4e5151998c2cb83",
+      "file": "b8e1692e2a4cd145e164f657c4e5151998c2cb83.png",
+      "bytes": 13522,
+      "ext": "png",
+      "width": 448,
+      "height": 130
+    },
+    {
+      "source": "images/6946a78a3e65f659e5858eaf9e10c6634a3f633b",
+      "file": "6946a78a3e65f659e5858eaf9e10c6634a3f633b.png",
+      "bytes": 12341,
+      "ext": "png",
+      "width": 298,
+      "height": 421
+    },
+    {
+      "source": "images/c5638d5551c4daff77648e0eb529d614603e466b",
+      "file": "c5638d5551c4daff77648e0eb529d614603e466b.png",
+      "bytes": 10481,
+      "ext": "png",
+      "width": 456,
+      "height": 351
+    },
+    {
+      "source": "images/8cb2b37bbf9d97aca2180cea32342b8f1b2ed750",
+      "file": "8cb2b37bbf9d97aca2180cea32342b8f1b2ed750.png",
+      "bytes": 9519,
+      "ext": "png",
+      "width": 912,
+      "height": 702
+    },
+    {
+      "source": "images/686b83d94af8b90acc28274244abfd6c539751ed",
+      "file": "686b83d94af8b90acc28274244abfd6c539751ed.png",
+      "bytes": 8806,
+      "ext": "png",
+      "width": 624,
+      "height": 549
+    },
+    {
+      "source": "images/63b23aaecc8a2955af7119946058a5cee0b00239",
+      "file": "63b23aaecc8a2955af7119946058a5cee0b00239.png",
+      "bytes": 7346,
+      "ext": "png",
+      "width": 312,
+      "height": 275
+    },
+    {
+      "source": "images/85b2d5e53d9562fdc99825ab3af86e8d88314f3a",
+      "file": "85b2d5e53d9562fdc99825ab3af86e8d88314f3a.png",
+      "bytes": 6901,
+      "ext": "png",
+      "width": 1007,
+      "height": 1007
+    }
+  ],
+  "pdfImages": [
+    {
+      "name": "pdf-img-01.jpg",
+      "type": "jpg",
+      "bytes": 48646,
+      "offset": 4825986
+    }
+  ],
+  "meta": {
+    "client_meta": {
+      "background_color": {
+        "r": 0.11764705926179886,
+        "g": 0.11764705926179886,
+        "b": 0.11764705926179886,
+        "a": 1
+      },
+      "thumbnail_size": {
+        "width": 400,
+        "height": 137
+      },
+      "render_coordinates": {
+        "x": 0,
+        "y": 0,
+        "width": 2459,
+        "height": 842
+      }
+    },
+    "file_name": "Laudo de avaliação econômica MAGNUS",
+    "developer_related_links": [],
+    "exported_at": "2026-09-05T04:51:25.058Z"
+  },
+  "largestFig": [
+    {
+      "source": "images/9e58af47b1e2321a31682726e58e4fb2944e4728",
+      "file": "9e58af47b1e2321a31682726e58e4fb2944e4728.png",
+      "bytes": 11748256,
+      "ext": "png",
+      "width": 4096,
+      "height": 3755
+    },
+    {
+      "source": "images/4d68d8823894922f57ec2f5bd58b3821051e86c4",
+      "file": "4d68d8823894922f57ec2f5bd58b3821051e86c4.png",
+      "bytes": 542334,
+      "ext": "png",
+      "width": 4096,
+      "height": 1614
+    },
+    {
+      "source": "images/c5b1cba4537c0d90889195aed0d37c94c33949ff",
+      "file": "c5b1cba4537c0d90889195aed0d37c94c33949ff.png",
+      "bytes": 461788,
+      "ext": "png",
+      "width": 596,
+      "height": 842
+    },
+    {
+      "source": "images/23ac4cabb6faaa3fd4940775c45af8aa7a9fdd09",
+      "file": "23ac4cabb6faaa3fd4940775c45af8aa7a9fdd09.png",
+      "bytes": 408549,
+      "ext": "png",
+      "width": 512,
+      "height": 470
+    },
+    {
+      "source": "images/52ee69477bd38d3a750e5332161ec2f3c9f9cda5",
+      "file": "52ee69477bd38d3a750e5332161ec2f3c9f9cda5.png",
+      "bytes": 405159,
+      "ext": "png",
+      "width": 1904,
+      "height": 545
+    },
+    {
+      "source": "images/ddcc7d4e68c804f304eaf04e9e512e649adaf39b",
+      "file": "ddcc7d4e68c804f304eaf04e9e512e649adaf39b.png",
+      "bytes": 189798,
+      "ext": "png",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "source": "images/4b147d998f491e7e44801150b3272902a041c258",
+      "file": "4b147d998f491e7e44801150b3272902a041c258.png",
+      "bytes": 114165,
+      "ext": "png",
+      "width": 298,
+      "height": 421
+    },
+    {
+      "source": "images/79cb7302061d2bee539e332d94d4e84d8fa74c83",
+      "file": "79cb7302061d2bee539e332d94d4e84d8fa74c83.png",
+      "bytes": 90946,
+      "ext": "png",
+      "width": 1023,
+      "height": 647
+    },
+    {
+      "source": "images/319deddc21147784158352931840ceecb54dc688",
+      "file": "319deddc21147784158352931840ceecb54dc688.png",
+      "bytes": 71677,
+      "ext": "png",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "source": "images/9e37f3a14cefbc631b9d3233b16b26c47056ed21",
+      "file": "9e37f3a14cefbc631b9d3233b16b26c47056ed21.png",
+      "bytes": 69760,
+      "ext": "png",
+      "width": 505,
+      "height": 494
+    },
+    {
+      "source": "images/cf40c34242c60b7fe90988329c2b3851ff436430",
+      "file": "cf40c34242c60b7fe90988329c2b3851ff436430.png",
+      "bytes": 59958,
+      "ext": "png",
+      "width": 2266,
+      "height": 2266
+    },
+    {
+      "source": "images/7d0949fa0278243368789dba3cfa07f6ab642eb5",
+      "file": "7d0949fa0278243368789dba3cfa07f6ab642eb5.png",
+      "bytes": 58378,
+      "ext": "png",
+      "width": 512,
+      "height": 324
+    }
+  ],
+  "largestPdf": [
+    {
+      "name": "pdf-img-01.jpg",
+      "type": "jpg",
+      "bytes": 48646,
+      "offset": 4825986
+    }
+  ]
+}

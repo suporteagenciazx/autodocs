@@ -2,6 +2,7 @@
   font-family: 'Material Symbols Rounded';
   font-style: normal;
   font-weight: 100 700;
+  /* ~5MB full variable font — subset recommended for produção (só glifos usados). */
   src: url('fontes/MaterialSymbolsRounded.woff2') format('woff2');
   font-display: swap;
 }

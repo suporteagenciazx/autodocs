@@ -1,3 +1,12 @@
 api/private/config.local.json
+api/private/install.lock
+api/private/login-throttle.json
+api/private/cache/
+tools/figma-package/node_modules/
+tools/pdf-native/node_modules/
 /logins.txt
-/docs
+*.log
+debug-*.log
+.cursor/debug-*.log
+.env
+.env.local

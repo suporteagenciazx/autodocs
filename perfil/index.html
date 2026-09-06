@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil | AutoDocs</title>
+
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
+</head>
+
+<body>
+    <div class="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Perfil</h1>
+            <div class="formularios">
+                <div class="area-boxes" style="grid-template-columns: minmax(280px, 492px);">
+                    <div class="base-box">
+                        <div class="box-header">
+                            <span class="material-symbols-rounded">account_circle</span>
+                            <h2>Informações do perfil</h2>
+                        </div>
+                        <p class="campo-texto" style="margin-bottom: 16px;">
+                            Atualize o nome exibido no sistema. Alterações de e-mail e senha serão disponibilizadas em breve.
+                        </p>
+                        <form id="form-perfil" class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="perfil-nome">Nome de utilizador</label>
+                                <input class="input" type="text" id="perfil-nome" name="displayName" maxlength="80" autocomplete="nickname" placeholder="O seu nome">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="perfil-email">E-mail</label>
+                                <input class="input" type="email" id="perfil-email" readonly disabled>
+                            </div>
+                            <div class="campo" style="margin-top: 8px;">
+                                <button type="submit" class="autodocs-btn-pill-primary" style="width:100%;padding:14px 22px;border:0;border-radius:10px;cursor:pointer;background:var(--cor-accent);color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:600;">
+                                    Guardar perfil
+                                </button>
+                            </div>
+                            <p id="perfil-feedback" class="campo-texto" hidden style="margin-top:12px;"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/banco.js?v=20260905"></script>
+    <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/perfil-page.js?v=20260905"></script>
+</body>
+
+</html>

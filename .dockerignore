@@ -1,0 +1,24 @@
+# Git / IDE
+.git
+.gitattributes
+.gitignore
+.cursor
+docs
+
+# Secrets e estado local (montados em volume)
+.env
+api/private/config.local.json
+api/private/install.lock
+api/private/login-throttle.json
+
+# Artefactos
+*.log
+debug-*.log
+logins.txt
+
+# Docker (evitar recursão / lixo)
+Dockerfile
+docker-compose.yml
+docker-compose*.yml
+README-DOCKER.md
+.dockerignore

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 const AUTODOCS_THEME_FILE = __DIR__ . '/private/theme.json';
 
+// Bootstrap: cache Redis + auth no POST (GET público; cache ignora se Redis/config falhar)
+if (is_readable(__DIR__ . '/bootstrap.php')) {
+    require_once __DIR__ . '/bootstrap.php';
+}
+
 /**
  * @return array{logo: string, favicon: string, corDestaque: string, corAccent: string}
  */
@@ -50,6 +55,32 @@ function autodocs_theme_valid_hex(?string $v): bool
 function autodocs_theme_load_merged(): array
 {
     $defaults = autodocs_theme_defaults();
+    $cacheKey = 'cache:theme';
+
+    if (function_exists('autodocs_cache_get')) {
+        $cached = autodocs_cache_get($cacheKey);
+        if (is_string($cached) && $cached !== '') {
+            $j = json_decode($cached, true);
+            if (is_array($j)) {
+                $out = $defaults;
+                foreach (['logo', 'favicon', 'corDestaque', 'corAccent'] as $k) {
+                    if (!isset($j[$k]) || !is_string($j[$k])) {
+                        continue;
+                    }
+                    if ($k === 'logo' || $k === 'favicon') {
+                        $p = autodocs_theme_normalize_path($j[$k]);
+                        if ($p !== '') {
+                            $out[$k] = $p;
+                        }
+                    } elseif (autodocs_theme_valid_hex($j[$k])) {
+                        $out[$k] = trim($j[$k]);
+                    }
+                }
+                return $out;
+            }
+        }
+    }
+
     if (!is_readable(AUTODOCS_THEME_FILE)) {
         return $defaults;
     }
@@ -75,7 +106,17 @@ function autodocs_theme_load_merged(): array
             $out[$k] = trim($j[$k]);
         }
     }
+    if (function_exists('autodocs_cache_set')) {
+        autodocs_cache_set($cacheKey, json_encode($out, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 300);
+    }
     return $out;
+}
+
+function autodocs_theme_cache_invalidate(): void
+{
+    if (function_exists('autodocs_cache_delete')) {
+        autodocs_cache_delete('cache:theme');
+    }
 }
 
 header('X-Content-Type-Options: nosniff');
@@ -95,7 +136,7 @@ if ($method !== 'POST') {
     exit;
 }
 
-require __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/bootstrap.php';
 
 try {
     $pdo = autodocs_pdo();
@@ -170,6 +211,10 @@ if (@file_put_contents(AUTODOCS_THEME_FILE, $json, LOCK_EX) === false) {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(['error' => 'Não foi possível gravar api/private/theme.json (permissões?).'], JSON_UNESCAPED_UNICODE);
     exit;
+}
+
+if (function_exists('autodocs_theme_cache_invalidate')) {
+    autodocs_theme_cache_invalidate();
 }
 
 header('Content-Type: application/json; charset=utf-8');

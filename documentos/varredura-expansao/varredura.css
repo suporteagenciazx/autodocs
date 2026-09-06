@@ -1,0 +1,440 @@
+/* Varredura de Expansão — BACEN / gov.br (horizontal PNG) */
+
+:root {
+  --vx-blue: #004b8d;
+  --vx-blue-dark: #003566;
+  --vx-blue-soft: #d9e7f4;
+  --vx-link: #004b8d;
+  --vx-text: #1b1b1b;
+  --vx-muted: #555;
+  --vx-line: #dfe3e8;
+  --vx-bg: #f0f2f5;
+  --vx-ok: #168821;
+  --vx-warn: #c44d00;
+}
+
+#varredura-expansao #documento {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  background: #e9ecef;
+}
+
+#varredura-expansao .tela-varredura {
+  width: 1280px;
+  height: 720px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--vx-text);
+  position: relative;
+}
+
+#varredura-expansao .vx-govbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 40px;
+  padding: 0 28px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+#varredura-expansao .vx-gov-logo-img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+#varredura-expansao .vx-gov-links {
+  margin-left: auto;
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--vx-muted);
+}
+
+#varredura-expansao .vx-gov-tools {
+  display: flex;
+  gap: 8px;
+  color: var(--vx-blue);
+}
+
+#varredura-expansao .vx-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 28px;
+  background: #f4f6f8;
+  color: var(--vx-blue-dark);
+  border-bottom: 1px solid var(--vx-line);
+  flex-shrink: 0;
+}
+
+#varredura-expansao .vx-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--vx-blue-dark);
+}
+
+#varredura-expansao .vx-nav-logo {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+#varredura-expansao .vx-nav-menu {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#varredura-expansao .vx-nav-item {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a5560;
+}
+
+#varredura-expansao .vx-nav-item.is-active {
+  background: var(--vx-blue-soft);
+  color: var(--vx-blue-dark);
+  font-weight: 700;
+}
+
+#varredura-expansao .vx-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 0;
+  background: var(--vx-bg);
+}
+
+#varredura-expansao .vx-side {
+  background: #fff;
+  border-right: 1px solid var(--vx-line);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#varredura-expansao .vx-side-title {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vx-muted);
+}
+
+#varredura-expansao .vx-side-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #333;
+}
+
+#varredura-expansao .vx-side-item.is-active {
+  background: var(--vx-blue-soft);
+  color: var(--vx-blue-dark);
+  font-weight: 700;
+}
+
+#varredura-expansao .vx-side-item .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--vx-blue);
+}
+
+#varredura-expansao .vx-main {
+  padding: 22px 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#varredura-expansao .vx-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#varredura-expansao .vx-hero h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--vx-blue-dark);
+  line-height: 1.15;
+}
+
+#varredura-expansao .vx-hero p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--vx-muted);
+}
+
+#varredura-expansao .vx-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #e6f6ea;
+  color: var(--vx-ok);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#varredura-expansao .vx-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+}
+
+#varredura-expansao .vx-card {
+  background: #fff;
+  border: 1px solid var(--vx-line);
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-sizing: border-box;
+}
+
+#varredura-expansao .vx-card h2 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vx-blue-dark);
+}
+
+#varredura-expansao .vx-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+#varredura-expansao .vx-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#varredura-expansao .vx-field.full {
+  grid-column: 1 / -1;
+}
+
+#varredura-expansao .vx-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vx-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#varredura-expansao .vx-field span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  min-height: 20px;
+}
+
+#varredura-expansao .vx-capacity {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #eef4ff, #f7faff);
+  border: 1px solid #c9daf8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#varredura-expansao .vx-capacity strong {
+  font-size: 20px;
+  color: var(--vx-blue-dark);
+}
+
+#varredura-expansao .vx-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#varredura-expansao .vx-scale-bar {
+  height: 14px;
+  border-radius: 999px;
+  background: #e8edf5;
+  overflow: hidden;
+}
+
+#varredura-expansao .vx-scale-fill {
+  height: 100%;
+  width: 72%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--vx-blue), #2f77b8);
+}
+
+#varredura-expansao .vx-scale-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--vx-muted);
+}
+
+#varredura-expansao .vx-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+#varredura-expansao .vx-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--vx-blue-dark);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#varredura-expansao .vx-eligibility {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--vx-line);
+  font-size: 13px;
+  color: #333;
+  line-height: 1.45;
+}
+
+#varredura-expansao .vx-footer {
+  height: 36px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--vx-line);
+  background: #fff;
+  font-size: 11px;
+  color: var(--vx-muted);
+  flex-shrink: 0;
+}
+
+/* Form — slider da escala */
+#varredura-expansao .campo-escala-full {
+  grid-column: 1 / -1;
+}
+
+#varredura-expansao .campo-escala-full .label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+#varredura-expansao .vx-form-escala-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cor-accent, #004b8d);
+  min-width: 3.2em;
+  text-align: right;
+}
+
+#varredura-expansao .vx-form-escala {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#varredura-expansao .vx-form-escala-edge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  flex-shrink: 0;
+}
+
+#varredura-expansao .vx-form-escala-range {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+}
+
+#varredura-expansao .vx-form-escala-range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e8edf5;
+}
+
+#varredura-expansao .vx-form-escala-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--cor-accent, #004b8d);
+  box-shadow: 0 1px 4px rgba(0, 75, 141, 0.35);
+  cursor: grab;
+}
+
+#varredura-expansao .vx-form-escala-range:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+#varredura-expansao .vx-form-escala-range::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e8edf5;
+  border: 0;
+}
+
+#varredura-expansao .vx-form-escala-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--cor-accent, #004b8d);
+  box-shadow: 0 1px 4px rgba(0, 75, 141, 0.35);
+  cursor: grab;
+}
+
+#varredura-expansao .vx-form-escala-track-preview {
+  margin-top: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e8edf5;
+  overflow: hidden;
+}
+
+#varredura-expansao .vx-form-escala-track-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--vx-blue), #2f77b8);
+  transition: width 0.08s linear;
+}

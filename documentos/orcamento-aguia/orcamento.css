@@ -1,0 +1,333 @@
+/* Orçamento — Águia Consultoria (A4 792x1120) */
+
+#orcamento-aguia {
+  --orc-ink: #1a1a1a;
+  --orc-chumbo: #2e2e2e;
+  --orc-cinza: #5a5a5a;
+  --orc-medio: #8a8a8a;
+  --orc-prata: #b0b0b0;
+  --orc-borda: #d6d6d6;
+  --orc-fundo: #f3f3f3;
+  --orc-texto: #1f1f1f;
+  --orc-suave: #6e6e6e;
+  --orc-radius: 0;
+  --orc-pix: #32bcad;
+}
+
+#orcamento-aguia #documento .capa.orc-capa,
+#orcamento-aguia #documento .pagina.orc-pagina {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+#orcamento-aguia .orc-page {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 56px 64px 48px;
+  font-family: 'Inter', sans-serif;
+  color: var(--orc-texto);
+  display: flex;
+  flex-direction: column;
+}
+
+#orcamento-aguia .orc-validade-top {
+  margin: 0 0 28px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--orc-suave);
+}
+
+#orcamento-aguia #documento .capa.orc-capa {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Capa ---------- */
+
+#orcamento-aguia .orc-capa-faixa {
+  flex-shrink: 0;
+  width: 100%;
+  height: 148px;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 56px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#orcamento-aguia .orc-capa-faixa::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 48%, #2a2a2a 49%, #2a2a2a 100%);
+}
+
+#orcamento-aguia .orc-capa-faixa-logo {
+  height: 72px;
+  width: auto;
+  max-width: 420px;
+  object-fit: contain;
+  object-position: left center;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+#orcamento-aguia .orc-capa-corpo {
+  flex: 1;
+  min-height: 0;
+}
+
+#orcamento-aguia .orc-capa-centro {
+  flex: 1;
+  min-height: 0;
+}
+
+#orcamento-aguia .orc-capa-titulo-bloco {
+  margin-bottom: 120px;
+}
+
+#orcamento-aguia .orc-capa-titulo {
+  margin: 0 0 10px;
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  line-height: 1.1;
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-capa-doc {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--orc-ink);
+  line-height: 1.2;
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-rodape-empresa {
+  margin: auto 0 0;
+  padding-top: 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------- Página valores ---------- */
+
+#orcamento-aguia .orc-barra {
+  width: 100%;
+  height: 10px;
+  background: var(--orc-chumbo);
+  border-radius: var(--orc-radius);
+  margin: 0 0 22px;
+}
+
+#orcamento-aguia .orc-servico {
+  margin: 0 0 28px;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-campos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+#orcamento-aguia .orc-campos p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-campos strong {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+#orcamento-aguia .orc-valores {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+#orcamento-aguia .orc-valor-linha {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#orcamento-aguia .orc-valor-rotulo {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-valor-cifra {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--orc-ink);
+  line-height: 1.15;
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-valor-cifra--total {
+  font-size: 44px;
+  font-weight: 800;
+}
+
+#orcamento-aguia .orc-sep {
+  height: 1px;
+  background: var(--orc-chumbo);
+  margin: 8px 0 24px;
+}
+
+#orcamento-aguia .orc-pag-titulo {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-pix {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  margin-bottom: 18px;
+  background: rgba(50, 188, 173, 0.12);
+  border: 1px solid rgba(50, 188, 173, 0.35);
+  border-radius: var(--orc-radius);
+  color: var(--orc-pix);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-pix-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--orc-pix);
+}
+
+#orcamento-aguia .orc-economista {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-economista strong {
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+#orcamento-aguia .orc-cofecon {
+  margin-left: 8px;
+  font-weight: 700;
+  color: var(--orc-cinza);
+}
+
+#orcamento-aguia .orc-aviso {
+  margin: 0 0 24px;
+  max-width: 560px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------- LGPD ---------- */
+
+#orcamento-aguia .orc-lgpd-titulo {
+  margin: 8px 0 8px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-lgpd-sub {
+  margin: 0 0 28px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-lgpd-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+#orcamento-aguia .orc-lgpd-corpo p {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: justify;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}
+
+#orcamento-aguia .orc-lgpd-fecho {
+  margin-bottom: 48px;
+}
+
+#orcamento-aguia .orc-lgpd-fecho p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orc-ink);
+  font-family: 'Inter', sans-serif;
+}

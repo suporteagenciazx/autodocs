@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários | AutoDocs</title>
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../estilos/sistema.css">
-    <link rel="stylesheet" href="../estilos/exportar.css">
-    <link rel="stylesheet" href="../estilos/autodocs-hub.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-    <link rel="stylesheet" href="../estilos/icones.css">
+    
+    <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css?v=20260905">
+    
+    <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
     <style>
         .usuarios-doc-toolbar {
             display: flex;
@@ -127,7 +129,7 @@
                                     <th>Email</th>
                                     <th>Função</th>
                                     <th>Ativo</th>
-                                    <th>Tags</th>
+                                    <th>Etiqueta</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -176,7 +178,7 @@
         <div class="usuarios-docs-modal" role="dialog" aria-labelledby="usuarios-docs-modal-title">
             <div class="usuarios-docs-modal-header">
                 <div>
-                    <h3 id="usuarios-docs-modal-title">Vincular tags</h3>
+                    <h3 id="usuarios-docs-modal-title">Vincular etiquetas</h3>
                     <p class="usuarios-docs-modal-sub" id="usuarios-docs-modal-sub"></p>
                 </div>
                 <button type="button" id="usuarios-docs-close-top" class="tags-btn-outline" aria-label="Fechar">Fechar</button>
@@ -184,7 +186,7 @@
             <div class="usuarios-docs-toolbar">
                 <label class="doc-hub-search-wrap">
                     <span class="material-symbols-rounded" aria-hidden="true">search</span>
-                    <input type="search" id="usuarios-docs-search" placeholder="Pesquisar tag…" autocomplete="off">
+                    <input type="search" id="usuarios-docs-search" placeholder="Pesquisar etiqueta…" autocomplete="off">
                 </label>
                 <div class="usuarios-docs-view-toggle" role="group" aria-label="Modo de visualização">
                     <button type="button" class="usuarios-docs-view-btn is-active" data-view="cards" aria-pressed="true" title="Cartões">
@@ -205,12 +207,12 @@
         </div>
     </div>
 
-    <script src="../scripts/banco.js"></script>
-    <script src="../scripts/autodocs-tags-storage.js?v=5"></script>
-    <script src="../scripts/autodocs-docs-catalog.js"></script>
-    <script src="../scripts/password-toggle.js"></script>
-    <script src="../scripts/navdrawer.js"></script>
-    <script src="../scripts/usuarios-page.js?v=5"></script>
+    <script src="../scripts/banco.js?v=20260905"></script>
+    <script src="../scripts/autodocs-tags-storage.js?v=20260905"></script>
+    <script src="../scripts/autodocs-docs-catalog.js?v=20260905"></script>
+    <script src="../scripts/password-toggle.js?v=20260905"></script>
+    <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/usuarios-page.js?v=20260905"></script>
 </body>
 
 </html>

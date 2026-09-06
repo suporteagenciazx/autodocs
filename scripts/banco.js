@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function aplicarTextosBanco() {
     const elementosTexto = [
         { class: 'banco-cnpj', texto: '60.889.128/0001-80' },
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         { class: 'banco-razaosocial', texto: 'Banco Sofisa S.A.' },
         { class: 'banco-razaosocialCAPS', texto: 'BANCO SOFISA S.A.' },
-        
+
         { class: 'banco-comprovante', texto: 'BANCO SOFISA S.A.' },
         { class: 'banco-agencia', texto: '0001' },
         { class: 'banco-conta', texto: '95477282-2' },
@@ -40,4 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (headerCnpj) {
         headerCnpj.textContent = 'Sistema de emissão de documentações automáticas';
     }
-});
+}
+
+document.addEventListener('DOMContentLoaded', aplicarTextosBanco);
+document.addEventListener('autodocs-page-ready', aplicarTextosBanco);
+window.aplicarTextosBanco = aplicarTextosBanco;

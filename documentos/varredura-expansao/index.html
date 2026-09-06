@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varredura de Expansão | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <link rel="stylesheet" href="./varredura.css">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="varredura-expansao" data-export="png">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Varredura de Expansão</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Titular</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-titular">Nome do titular</label></div>
+                                <input class="input" id="i-titular" type="text" placeholder="[TITULAR]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-cpf">CPF</label></div>
+                                <input class="input" id="i-cpf" type="text" placeholder="[CPF]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche razão quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" type="text" placeholder="[CNPJ]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-razao">Razão social (opcional)</label></div>
+                                <input class="input" id="i-razao" type="text" placeholder="[RAZAO-SOCIAL]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Conta e instituição</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-banco-recebimento">Instituição bancária</label></div>
+                                <input class="input" id="i-banco-recebimento" type="text" placeholder="[BANCO-RECEBIMENTO]" value="Banco Sofisa S.A.">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-agencia">Agência</label></div>
+                                <input class="input" id="i-agencia" type="text" placeholder="[AGENCIA]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-conta">Conta</label></div>
+                                <input class="input" id="i-conta" type="text" placeholder="[CONTA]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-modalidades">Modalidades de recebimento</label></div>
+                                <input class="input" id="i-modalidades" type="text" value="PIX, TED E DOC">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Resultado da varredura</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-status">Status da varredura</label></div>
+                                <select id="i-status" class="input">
+                                    <option selected>Concluída</option>
+                                    <option>Em análise</option>
+                                    <option>Pendente</option>
+                                    <option>Indeferida</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-capacidade">Capacidade permitida em conta</label></div>
+                                <input class="input" id="i-capacidade" type="text" placeholder="[CAPACIDADE]" value="250.000,00">
+                            </div>
+                            <div class="campo campo-escala-full">
+                                <div class="label">
+                                    <label class="label-campo" for="i-escala">Escala de expansão</label>
+                                    <span class="vx-form-escala-value" id="i-escala-value">72%</span>
+                                </div>
+                                <div class="vx-form-escala">
+                                    <span class="vx-form-escala-edge">0%</span>
+                                    <input
+                                        class="vx-form-escala-range"
+                                        id="i-escala"
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        step="1"
+                                        value="72"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        aria-valuenow="72"
+                                        aria-label="Escala de expansão em percentagem"
+                                    >
+                                    <span class="vx-form-escala-edge">100%</span>
+                                </div>
+                                <div class="vx-form-escala-track-preview" aria-hidden="true">
+                                    <div class="vx-form-escala-track-fill" id="i-escala-preview-fill" style="width:72%"></div>
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-elegibilidade">Análise de elegibilidade</label></div>
+                                <textarea class="input" id="i-elegibilidade" rows="3">Titular elegível para expansão de limite operacional conforme política monetária e estabilidade financeira.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="tela-varredura" id="tela-varredura">
+            <div class="vx-govbar">
+                <img src="./assets/govbr-logo.png" alt="gov.br" class="vx-gov-logo-img">
+                <div class="vx-gov-links">
+                    <span>Acesso à Informação</span>
+                    <span>Participe</span>
+                    <span>Legislação</span>
+                    <span>Órgãos do Governo</span>
+                </div>
+                <div class="vx-gov-tools">
+                    <span class="material-symbols-rounded">contrast</span>
+                    <span class="material-symbols-rounded">accessibility_new</span>
+                </div>
+            </div>
+
+            <div class="vx-nav">
+                <div class="vx-nav-brand">
+                    <img class="vx-nav-logo" src="./assets/bacen-logo.png" width="24" height="24" alt="" decoding="async">
+                    Banco Central do Brasil
+                </div>
+                <div class="vx-nav-menu">
+                    <span class="vx-nav-item">Cédulas e moedas</span>
+                    <span class="vx-nav-item">Política monetária</span>
+                    <span class="vx-nav-item">Estabilidade financeira</span>
+                    <span class="vx-nav-item">Serviços</span>
+                    <span class="vx-nav-item is-active">Varredura de expansão</span>
+                    <span class="vx-nav-item">Publicações</span>
+                    <span class="vx-nav-item">Estatísticas</span>
+                </div>
+            </div>
+
+            <div class="vx-body">
+                <aside class="vx-side">
+                    <p class="vx-side-title">Serviços</p>
+                    <div class="vx-side-item"><span class="material-symbols-rounded">info</span> Acesso à informação</div>
+                    <div class="vx-side-item"><span class="material-symbols-rounded">payments</span> Política monetária</div>
+                    <div class="vx-side-item"><span class="material-symbols-rounded">monitoring</span> Estabilidade financeira</div>
+                    <div class="vx-side-item is-active"><span class="material-symbols-rounded">travel_explore</span> Varredura de expansão</div>
+                    <div class="vx-side-item"><span class="material-symbols-rounded">handshake</span> Cidadão</div>
+                </aside>
+
+                <main class="vx-main">
+                    <div class="vx-hero">
+                        <div>
+                            <h1>Varredura de expansão</h1>
+                            <p>Consulta de elegibilidade e capacidade operacional em conta</p>
+                        </div>
+                        <div class="vx-status-pill">
+                            <span class="material-symbols-rounded" style="font-size:18px">check_circle</span>
+                            Status: <span id="status">Concluída</span>
+                        </div>
+                    </div>
+
+                    <div class="vx-grid">
+                        <section class="vx-card">
+                            <h2>Dados do titular</h2>
+                            <div class="vx-fields">
+                                <div class="vx-field full">
+                                    <label>Nome do titular</label>
+                                    <span id="titular">[TITULAR]</span>
+                                </div>
+                                <div class="vx-field">
+                                    <label>CPF</label>
+                                    <span id="cpf">[CPF]</span>
+                                </div>
+                                <div class="vx-field">
+                                    <label>CNPJ</label>
+                                    <span id="cnpj">[CNPJ]</span>
+                                </div>
+                                <div class="vx-field full">
+                                    <label>Instituição bancária</label>
+                                    <span id="banco-recebimento">[BANCO-RECEBIMENTO]</span>
+                                </div>
+                                <div class="vx-field">
+                                    <label>Agência</label>
+                                    <span id="agencia">[AGENCIA]</span>
+                                </div>
+                                <div class="vx-field">
+                                    <label>Conta</label>
+                                    <span id="conta">[CONTA]</span>
+                                </div>
+                            </div>
+                            <div class="vx-capacity">
+                                <div>
+                                    <div style="font-size:11px;font-weight:700;color:#555;text-transform:uppercase;">Capacidade permitida em conta</div>
+                                    <div style="font-size:12px;color:#777;margin-top:2px;">Modalidades: <span id="modalidades">PIX, TED E DOC</span></div>
+                                </div>
+                                <strong>R$ <span id="capacidade">[CAPACIDADE]</span></strong>
+                            </div>
+                        </section>
+
+                        <section class="vx-card">
+                            <h2>Escala de expansão</h2>
+                            <div class="vx-scale">
+                                <div class="vx-scale-bar"><div class="vx-scale-fill" id="escala-fill" style="width:72%"></div></div>
+                                <div class="vx-scale-meta">
+                                    <span>Baixa</span>
+                                    <span><strong id="escala">72</strong>% de expansão</span>
+                                    <span>Alta</span>
+                                </div>
+                            </div>
+                            <div class="vx-tags">
+                                <span class="vx-tag">Política monetária</span>
+                                <span class="vx-tag">Estabilidade financeira</span>
+                                <span class="vx-tag">Serviços BACEN</span>
+                            </div>
+                            <div class="vx-eligibility">
+                                <strong>Análise de elegibilidade</strong><br>
+                                <span id="elegibilidade">[ELEGIBILIDADE]</span>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+            </div>
+
+            <div class="vx-footer">
+                <span>ACESSIBILIDADE · ALTO CONTRASTE · ENGLISH</span>
+                <span>Banco Central do Brasil · Varredura de expansão</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/vendor/html2canvas.min.js"></script>
+    <script src="../../scripts/exportar-png.js?v=20260905"></script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+{
+  "ok": true,
+  "method": "pdf-render-ocr+vision; fig is image-board",
+  "generatedAt": "2026-09-05T05:32:00.000Z",
+  "source": {
+    "fig": "c:\\Users\\EMPRESARIAL\\Desktop\\MAGNUS VALUATION\\Laudo de avaliação econômica MAGNUS.fig",
+    "pdf": "c:\\Users\\EMPRESARIAL\\Desktop\\MAGNUS VALUATION\\Laudo de avaliação econômica MAGNUS.pdf",
+    "pdfCopy": "tools/pdf-native/magnus-assets/origem.pdf",
+    "title": "Laudo de avaliação econômica MAGNUS",
+    "brand": "MAGNUS Relações Empresariais",
+    "figMeta": {
+      "file_name": "Laudo de avaliação econômica MAGNUS",
+      "exported_at": "2026-09-05T04:51:25.058Z",
+      "render_coordinates": { "x": 0, "y": 0, "width": 2459, "height": 842 },
+      "embeddedImages": 30
+    }
+  },
+  "summary": {
+    "pageCount": 4,
+    "page1IsCover": true,
+    "page4IsClosing": true,
+    "pdfHasExtractableText": false,
+    "figHasEditablePlaceholderLayers": false,
+    "explicitPlaceholderCount": 10,
+    "suggestedExtraFieldCount": 11
+  },
+  "placeholders": {
+    "explicit": [
+      "{RAZAO-SOCIAL}",
+      "{CNPJ}",
+      "{EMAIL-CNPJ}",
+      "{TELEFONE}",
+      "{ENDERECO-CNPJ}",
+      "{CNAE}",
+      "{FUNCIONARIOS}",
+      "{CAPITAL-SOCIAL}",
+      "{DATA-ABERTURA}",
+      "{PORTE}"
+    ],
+    "suggestedFromSampleValues": [
+      "{TAXA-DESCONTO}",
+      "{CRESCIMENTO-PERPETUIDADE}",
+      "{IPCA-PROJETADO}",
+      "{VALOR-5-ANOS}",
+      "{VALOR-TOTAL-EMPRESA}",
+      "{VALOR-PERPETUIDADE}",
+      "{FATURAMENTO-LABEL-1}",
+      "{FATURAMENTO-LABEL-2}",
+      "{FATURAMENTO-LABEL-3}",
+      "{FATURAMENTO-MES-1}",
+      "{FATURAMENTO-MES-2}",
+      "{FATURAMENTO-MES-3}",
+      "{ECONOMISTA-NOME}",
+      "{ECONOMISTA-COFECON}",
+      "{MAGNUS-CNPJ}"
+    ],
+    "formFieldGroups": {
+      "empresa_avaliada": [
+        "{RAZAO-SOCIAL}",
+        "{CNPJ}",
+        "{CNAE}",
+        "{FUNCIONARIOS}",
+        "{CAPITAL-SOCIAL}",
+        "{DATA-ABERTURA}",
+        "{PORTE}"
+      ],
+      "contatos_endereco": [
+        "{EMAIL-CNPJ}",
+        "{TELEFONE}",
+        "{ENDERECO-CNPJ}"
+      ],
+      "faturamento": [
+        "{FATURAMENTO-LABEL-1}",
+        "{FATURAMENTO-LABEL-2}",
+        "{FATURAMENTO-LABEL-3}",
+        "{FATURAMENTO-MES-1}",
+        "{FATURAMENTO-MES-2}",
+        "{FATURAMENTO-MES-3}"
+      ],
+      "premissas_valuation": [
+        "{TAXA-DESCONTO}",
+        "{CRESCIMENTO-PERPETUIDADE}",
+        "{IPCA-PROJETADO}"
+      ],
+      "valores_resultado": [
+        "{VALOR-5-ANOS}",
+        "{VALOR-PERPETUIDADE}",
+        "{VALOR-TOTAL-EMPRESA}"
+      ],
+      "responsavel_tecnico": [
+        "{ECONOMISTA-NOME}",
+        "{ECONOMISTA-COFECON}"
+      ],
+      "emissor": [
+        "{MAGNUS-CNPJ}"
+      ]
+    }
+  },
+  "pages": [
+    {
+      "index": 1,
+      "name": "Capa",
+      "isCapa": true,
+      "role": "cover",
+      "placeholders": [],
+      "text": "MAGNUS\nRelações Empresariais\n\nVALUATION EMPRESARIAL",
+      "ocrText": "Mua Empresariais\nVALUATION EMPRESARIAL",
+      "image": "tools/pdf-native/magnus-assets/ocr/page-01.png"
+    },
+    {
+      "index": 2,
+      "name": "Resumo da empresa",
+      "isCapa": false,
+      "role": "company_summary",
+      "background": "MDA",
+      "placeholders": [
+        "{RAZAO-SOCIAL}",
+        "{CNPJ}",
+        "{EMAIL-CNPJ}",
+        "{TELEFONE}",
+        "{ENDERECO-CNPJ}",
+        "{CNAE}",
+        "{FUNCIONARIOS}",
+        "{CAPITAL-SOCIAL}",
+        "{DATA-ABERTURA}",
+        "{PORTE}"
+      ],
+      "text": "RESUMO DA EMPRESA\n\n{RAZAO-SOCIAL}\n{CNPJ} |\n\nCONTATOS\nE-MAIL: {EMAIL-CNPJ}\nTELEFONE(S): {TELEFONE}\n\nATIVIDADES - CNAES\n{CNAE}\n\nENDEREÇO / LOCAL\n{ENDERECO-CNPJ}\n\nFUNCIONÁRIOS\n{FUNCIONARIOS}\n\nCAPITAL SOCIAL\n{CAPITAL-SOCIAL}\n\nDATA DE ABERTURA\n{DATA-ABERTURA}\n\nPORTE\n{PORTE}\n\nFATURAMENTO DOS ÚLTIMOS 3 (TRÊS) MESES\nMaio / Junho / Julho\n(valores de exemplo no gráfico ≈ 119.972,91 → 198.691,04 → 245.147,43)\n\nVALUATION EMPRESARIAL",
+      "ocrText": "RESUMO DA EMPRESA\n{RAZAO-SOCIAL}\n{CNP} |\nJ\nCONTATOS © ENDEREÇO / LOCAL\nE-MAIL: {EMAIL-CNPJ} {ENDERECO-CNPJ}\nTELEFONE(S): {TELEFONE}\nATIVIDADES - CNAES\n{CNAE}\n“1 FUNCIONÁRIOS [© CAPITAL SOCIAL\n{FUNCIONARIOS} {CAPITAL-SOCIAL}\nA DATA DE ABERTURA E) PORTE\n{DATA-ABERTURA} {PORTE}\n©) FATURAMENTO DOS ÚLTIMOS 3 (TRÊS) MESES\n245,147,43\n225,147,43\n198,691,04 ps\n119,972,91\nMaio Junho Julho\nVALUATION EMPRESARIAL",
+      "image": "tools/pdf-native/magnus-assets/ocr/page-02.png",
+      "sampleChart": {
+        "labels": ["Maio", "Junho", "Julho"],
+        "valuesApprox": [119972.91, 198691.04, 245147.43],
+        "yAxisLabelsSeen": ["119,972,91", "198,691,04", "225,147,43", "245,147,43"]
+      }
+    },
+    {
+      "index": 3,
+      "name": "Cálculo de fluxo de caixa descontado",
+      "isCapa": false,
+      "role": "dcf_result",
+      "background": "MDA",
+      "placeholders": [],
+      "suggestedPlaceholders": [
+        "{TAXA-DESCONTO}",
+        "{CRESCIMENTO-PERPETUIDADE}",
+        "{IPCA-PROJETADO}",
+        "{VALOR-5-ANOS}",
+        "{VALOR-TOTAL-EMPRESA}",
+        "{VALOR-PERPETUIDADE}",
+        "{ECONOMISTA-NOME}",
+        "{ECONOMISTA-COFECON}",
+        "{MAGNUS-CNPJ}"
+      ],
+      "text": "CÁLCULO BASEADO EM FLUXO DE CAIXA\n\nCÁLCULO DE FLUXO DE CAIXA DESCONTADO\n\nTAXA DE DESCONTO: 20,00%\nCRESCIMENTO DA PERPETUIDADE: 3,00%\nIPCA PROJETADO: 5,00%\n\nVALOR DOS 5 ANOS\nR$ 1.851.777,17\n\nVALOR TOTAL DA EMPRESA\nR$ 1.970.134,12\n\nVALOR DE PERPETUIDADE\nR$ 2.183.456,78\n\nMAGNUS RELAÇÕES EMPRESARIAIS\n14.668.756/0001-53\nEconomista Afonso Reis Duarte\nCOFECON 15813\n\nNA GRUPO MAGNUS RELAÇÕES EMPRESARIAIS LTDA, PREZAMOS PELA TRANSPARÊNCIA E AGILIDADE EM NOSSOS SERVIÇOS. É IMPORTANTE SALIENTAR QUE, NO PROCESSO DE AVALIAÇÃO DA SUA EMPRESA, A RESPONSABILIDADE PELA VERACIDADE DAS INFORMAÇÕES FORNECIDAS É DE CARÁTER ANALÍTICO DO CLIENTE, SUA COMPREENSÃO E COLABORAÇÃO PARA GARANTIR A EFICIÊNCIA E PRECISÃO EM NOSSO TRABALHO.\n\nVALUATION EMPRESARIAL",
+      "sampleValues": {
+        "taxaDesconto": "20,00%",
+        "crescimentoPerpetuidade": "3,00%",
+        "ipcaProjetado": "5,00%",
+        "valor5Anos": "R$ 1.851.777,17",
+        "valorTotalEmpresa": "R$ 1.970.134,12",
+        "valorPerpetuidade": "R$ 2.183.456,78",
+        "economista": "Afonso Reis Duarte",
+        "cofecon": "15813",
+        "magnusCnpj": "14.668.756/0001-53"
+      },
+      "image": "tools/pdf-native/magnus-assets/ocr/page-03.png"
+    },
+    {
+      "index": 4,
+      "name": "Encerramento",
+      "isCapa": false,
+      "role": "closing",
+      "placeholders": [],
+      "text": "MAGNUS\nRelações Empresariais\n\nAGRADECEMOS A SUA PREFERÊNCIA.",
+      "ocrText": "Relações Empresariais\nAGRADECEMOS A SUA PREFERÊNCIA.",
+      "image": "tools/pdf-native/magnus-assets/ocr/page-04.png"
+    }
+  ],
+  "ocrRaw": {
+    "tool": "tesseract.js por+eng",
+    "file": "tools/pdf-native/magnus-assets/ocr/pdf-ocr.json"
+  }
+}

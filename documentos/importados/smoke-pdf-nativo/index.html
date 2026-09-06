@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoke PDF Nativo | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="smoke-pdf-nativo">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Smoke PDF Nativo</h1>
+            <div class="formularios">
+                <div class="area-boxes" style="grid-template-columns: 100%;">
+                <div class="base-box">
+                    <h2>Campos do documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="[GERENTE]" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cliente">Cliente</label>
+                            </div>
+                            <input class="input" id="i-cliente" placeholder="[CLIENTE]" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cnpj">Cnpj</label>
+                            </div>
+                            <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <h2>Selos e Carimbos</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                            <input id="i-selo-qr" type="checkbox">
+                        </div>
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                            <input id="i-selo-png" type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                <button type="button" id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="pagina" style="background-image:url(assets/mda.svg);background-size:cover;">
+            <div class="pagina-conteudo"><div class="pagina-textos">
+                    <p>Garantia de Liberação</p>
+                    <p>Prezados, eu <span id="gerente">[GERENTE]</span> confirmo liberação para <span id="cliente">[CLIENTE]</span> CNPJ <span id="cnpj">[CNPJ]</span>.</p>
+            </div></div>
+        </div>
+        <div class="pagina" style="background-image:none;background-color:#ffffff;">
+            <div class="pagina-conteudo"><div class="pagina-textos">
+                    <p>Página final. Assinatura: <span id="gerente">[GERENTE]</span></p>
+            </div></div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/assinatura.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/selo-digital.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./orcamento.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="orcamento-aguia">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Orçamento</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Orçamento</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-documentacao">Documentação / serviço</label>
+                                </div>
+                                <input class="input" id="i-documentacao" placeholder="[DOCUMENTACAO]" type="text" value="Valuation Empresarial">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-finalidade">Finalidade</label>
+                                </div>
+                                <input class="input" id="i-finalidade" placeholder="[FINALIDADE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-validade">Validade</label>
+                                </div>
+                                <input class="input" id="i-validade" placeholder="[VALIDADE]" type="date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Cliente</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="Utilize somente números; a integração OpenCNPJ preenche automaticamente quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-telefone">Telefone (WhatsApp)</label>
+                                </div>
+                                <input class="input" id="i-telefone" placeholder="[TELEFONE]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Valores</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-tributos">Tributos de operação</label>
+                                </div>
+                                <input class="input" id="i-tributos" placeholder="R$ 0,00" type="text" value="R$ 1.100,00"
+                                    data-aleatorio data-aleatorio-variacao="0.2" data-aleatorio-min="100">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-custos">Custos de operação</label>
+                                </div>
+                                <input class="input" id="i-custos" placeholder="R$ 0,00" type="text" value="R$ 350,00"
+                                    data-aleatorio data-aleatorio-variacao="0.2" data-aleatorio-min="500">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-total">Valor total</label>
+                                </div>
+                                <input class="input" id="i-total" placeholder="R$ 0,00" type="text" value="R$ 1.450,00" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Responsável técnico</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista">Economista responsável</label>
+                                </div>
+                                <input class="input" id="i-economista" placeholder="[ECONOMISTA]" type="text" value="André Luiz Koerich">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cofecon">COFECON</label>
+                                </div>
+                                <input class="input" id="i-cofecon" placeholder="[COFECON]" type="text" value="091">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <!-- Capa -->
+        <div class="capa orc-capa">
+            <div class="orc-capa-faixa">
+                <img class="orc-capa-faixa-logo" src="./assets/logo-horizontal-capa.png" alt="Águia Consultoria">
+            </div>
+            <div class="orc-page orc-capa-corpo">
+                <p class="orc-validade-top">Orçamento válido até <span id="validade">[VALIDADE]</span></p>
+
+                <div class="orc-capa-centro" aria-hidden="true"></div>
+
+                <div class="orc-capa-titulo-bloco">
+                    <h1 class="orc-capa-titulo">ORÇAMENTO</h1>
+                    <p class="orc-capa-doc" id="documentacao">[DOCUMENTACAO]</p>
+                </div>
+
+                <p class="orc-rodape-empresa">AGUIA CONSULTORIA EMPRESARIAL LTDA</p>
+            </div>
+        </div>
+
+        <!-- Valores -->
+        <div class="pagina orc-pagina">
+            <div class="orc-page">
+                <p class="orc-validade-top">Orçamento válido até <span id="validade">[VALIDADE]</span></p>
+                <div class="orc-barra" aria-hidden="true"></div>
+                <h2 class="orc-servico" id="documentacao">[DOCUMENTACAO]</h2>
+
+                <div class="orc-campos">
+                    <p><strong>FINALIDADE:</strong> <span id="finalidade">[FINALIDADE]</span></p>
+                    <p><strong>CNPJ:</strong> <span id="cnpj">[CNPJ]</span></p>
+                    <p><strong>Razão Social:</strong> <span id="razao-social">[RAZAO-SOCIAL]</span></p>
+                    <p><strong>Telefone (WhatsApp):</strong> <span id="telefone">[TELEFONE]</span></p>
+                    <p><strong>Validade:</strong> <span id="validade">[VALIDADE]</span></p>
+                </div>
+
+                <div class="orc-valores">
+                    <div class="orc-valor-linha">
+                        <span class="orc-valor-rotulo">+ TRIBUTOS DE OPERAÇÃO</span>
+                        <span class="orc-valor-cifra" id="tributos">R$ [TRIBUTOS]</span>
+                    </div>
+                    <div class="orc-valor-linha">
+                        <span class="orc-valor-rotulo">+ CUSTOS DE OPERAÇÃO</span>
+                        <span class="orc-valor-cifra" id="custos">R$ [CUSTOS]</span>
+                    </div>
+                    <div class="orc-valor-linha orc-valor-linha--total">
+                        <span class="orc-valor-rotulo">= VALOR TOTAL</span>
+                        <span class="orc-valor-cifra orc-valor-cifra--total" id="total">R$ [TOTAL]</span>
+                    </div>
+                </div>
+
+                <div class="orc-sep" aria-hidden="true"></div>
+
+                <div class="orc-pagamento">
+                    <p class="orc-pag-titulo">FORMAS DE PAGAMENTO</p>
+                    <div class="orc-pix">
+                        <svg class="orc-pix-icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="currentColor" d="M5.283 18.36a3.505 3.505 0 0 0 2.493-1.032l3.6-3.6a.684.684 0 0 1 .946 0l3.613 3.613a3.504 3.504 0 0 0 2.493 1.032h.71l-4.56 4.56a3.647 3.647 0 0 1-5.156 0L4.85 18.36ZM18.428 5.627a3.505 3.505 0 0 0-2.493 1.032l-3.613 3.614a.67.67 0 0 1-.946 0l-3.6-3.6A3.505 3.505 0 0 0 5.283 5.64h-.434l4.573-4.572a3.646 3.646 0 0 1 5.156 0l4.559 4.559ZM1.068 9.422 3.79 6.699h1.492a2.483 2.483 0 0 1 1.744.722l3.6 3.6a1.73 1.73 0 0 0 2.443 0l3.614-3.613a2.482 2.482 0 0 1 1.744-.723h1.767l2.737 2.737a3.646 3.646 0 0 1 0 5.156l-2.736 2.736h-1.768a2.482 2.482 0 0 1-1.744-.722l-3.613-3.613a1.77 1.77 0 0 0-2.444 0l-3.6 3.6a2.483 2.483 0 0 1-1.744.722H3.791l-2.723-2.723a3.646 3.646 0 0 1 0-5.156"/>
+                        </svg>
+                        <span>PIX</span>
+                    </div>
+                    <p class="orc-economista">
+                        <strong>Economista Responsável:</strong>
+                        <span id="economista">[ECONOMISTA]</span>
+                        <span class="orc-cofecon" id="cofecon">[COFECON]</span>
+                    </p>
+                    <p class="orc-aviso">
+                        APÓS A DETECÇÃO DO VALOR NA CONTA DA ÁGUIA, AGUARDE O PRAZO DE DUAS
+                        HORAS PARA A ENTREGA DO SERVIÇO SOLICITADO.
+                    </p>
+                </div>
+
+                <p class="orc-rodape-empresa">AGUIA CONSULTORIA EMPRESARIAL LTDA</p>
+            </div>
+        </div>
+
+        <!-- LGPD -->
+        <div class="pagina orc-pagina">
+            <div class="orc-page">
+                <p class="orc-validade-top">Orçamento válido até <span id="validade">[VALIDADE]</span></p>
+                <h2 class="orc-lgpd-titulo">TRATAMENTO DE DADOS</h2>
+                <p class="orc-lgpd-sub">UTILIZAÇÃO: ÁGUIA ASSESSORIA</p>
+
+                <div class="orc-lgpd-corpo">
+                    <p>
+                        A LGPD ESTABELECE QUE OS TITULARES POSSUEM DIREITOS SOBRE OS DADOS
+                        PESSOAIS TRATADOS. A ÁGUIA CONSULTORIA EMPRESARIAL POSSUI MEIOS DE
+                        COMUNICAÇÃO COM O TITULAR PARA QUE ESSAS SOLICITAÇÕES SEJAM RECEBIDAS,
+                        ANALISADAS E ATENDIDAS, SENDO O RESULTADO POSITIVO OU NEGATIVO.
+                    </p>
+                    <p>
+                        PELA NATUREZA DE NOSSO NEGÓCIO É POSSÍVEL QUE EXISTA O COMPARTILHAMENTO
+                        DE DADOS PESSOAIS COM A NOSSA EMPRESA DURANTE O ESTABELECIMENTO DE
+                        CONTRATOS DE PRESTAÇÃO DE SERVIÇO COM OS CLIENTES.
+                    </p>
+                    <p>
+                        COM ISSO, A ÁGUIA CONSULTORIA EMPRESARIAL SEGUE O PAPEL DE OPERADOR DOS
+                        DADOS DE ACORDO COM O QUE FOR DETERMINADO PELO CLIENTE QUE ASSUME O
+                        PAPEL DE CONTROLADOR DOS DADOS PESSOAIS.
+                    </p>
+                    <p>
+                        QUANDO HOUVER O COMPARTILHAMENTO PELA ÁGUIA CONSULTORIA EMPRESARIAL
+                        COM TERCEIROS, ESTE SERÁ REALIZADO SE FOR ABSOLUTAMENTE NECESSÁRIO PARA
+                        O ALCANCE DOS RESULTADOS PARA OS QUAIS ELES SÃO MANTIDOS E QUANDO
+                        EXISTIREM ARRANJOS CONTRATUAIS E MECANISMOS DE SEGURANÇA APROPRIADOS.
+                    </p>
+                </div>
+
+                <div class="orc-lgpd-fecho">
+                    <p>ATENCIOSAMENTE,</p>
+                    <p>EQUIPE DE ADMINISTRAÇÃO ÁGUIA CONSULTORIA EMPRESARIAL.</p>
+                </div>
+
+                <p class="orc-rodape-empresa">AGUIA CONSULTORIA EMPRESARIAL LTDA</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

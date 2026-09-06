@@ -8,13 +8,37 @@
         {
             "id": "tag-uso-geral",
             "name": "Uso Geral",
-            "accentColor": "#5c6b73"
+            "accentColor": "#050505"
         },
         {
             "id": "tag-26f6fe77",
             "name": "Trust",
             "accentColor": "#7e2631",
             "createdAt": 1779051080339
+        },
+        {
+            "id": "tag-2158ca88",
+            "name": "Magnus",
+            "accentColor": "#00851b",
+            "createdAt": 1788390759846
+        },
+        {
+            "id": "tag-ac7d7f38",
+            "name": "Águia",
+            "accentColor": "#696969",
+            "createdAt": 1788635980236
+        },
+        {
+            "id": "tag-c934bcf2",
+            "name": "Cortez",
+            "accentColor": "#006eff",
+            "createdAt": 1788635997883
+        },
+        {
+            "id": "tag-117693a3",
+            "name": "Bacen",
+            "accentColor": "#005c7a",
+            "createdAt": 1788660685316
         }
     ],
     "docLinks": {
@@ -24,6 +48,22 @@
         "termo": "tag-sofisa",
         "declaracao": "tag-sofisa",
         "ordem": "tag-sofisa",
-        "garantia": "tag-sofisa"
+        "garantia": "tag-sofisa",
+        "magnus-laudo": "tag-2158ca88",
+        "valuation-aguia": "tag-ac7d7f38",
+        "orcamento-aguia": "tag-ac7d7f38",
+        "orcamento-magnus": "tag-2158ca88",
+        "lae-dvego": "tag-ac7d7f38",
+        "lae-dvego-magnus": "tag-2158ca88",
+        "nfe-magnus": "tag-2158ca88",
+        "nfe-aguia": "tag-ac7d7f38",
+        "recibo-magnus": "tag-2158ca88",
+        "recibo-aguia": "tag-ac7d7f38",
+        "tela-aprovacao": "tag-sofisa",
+        "tela-auditoria-fiscal": "tag-uso-geral",
+        "varredura-expansao": "tag-117693a3",
+        "cce-bacen": "tag-117693a3",
+        "eve-aguia": "tag-ac7d7f38",
+        "eve-magnus": "tag-2158ca88"
     }
 }

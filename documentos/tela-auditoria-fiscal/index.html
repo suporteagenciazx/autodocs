@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoria Fiscal | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <link rel="stylesheet" href="./auditoria.css">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="tela-auditoria-fiscal" data-export="png">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Auditoria Fiscal</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Empresa / banco (canto superior)</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-banco">Nome da empresa / banco</label>
+                                </div>
+                                <input class="input" id="i-banco" type="text" value="Águia Consultoria">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Empresa auditada</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche razão social e porte quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-porte">Porte</label>
+                                </div>
+                                <input class="input" id="i-porte" placeholder="[PORTE]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Cards de documentação</h2>
+                        <p style="margin:0 0 10px;font-size:13px;color:#5c6b73;">Até 4 cards, sempre centralizados no documento.</p>
+                        <div id="af-cards-lista"></div>
+                        <button type="button" id="af-add-card">
+                            <span class="material-symbols-rounded" aria-hidden="true">add</span>
+                            Adicionar card (0/4)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="tela-auditoria" id="tela-auditoria">
+            <div class="af-govbar">
+                <div class="af-gov-logo" aria-hidden="true">
+                    <img src="./assets/govbr-logo.png" alt="gov.br" class="af-gov-logo-img">
+                </div>
+                <div class="af-gov-links">
+                    <span>Órgãos do Governo</span>
+                    <span>Acesso à Informação</span>
+                    <span>Legislação</span>
+                    <span>Acessibilidade</span>
+                </div>
+                <div class="af-gov-tools">
+                    <span class="material-symbols-rounded">contrast</span>
+                    <span class="material-symbols-rounded">accessibility_new</span>
+                </div>
+                <div class="af-user">
+                    <span class="material-symbols-rounded af-user-icon" aria-hidden="true">apartment</span>
+                    <span class="af-user-name" id="banco-nome">Águia Consultoria</span>
+                    <span class="material-symbols-rounded">expand_more</span>
+                </div>
+            </div>
+
+            <div class="af-nav">
+                <div class="af-nav-left">
+                    <span class="material-symbols-rounded">menu</span>
+                    <span class="af-nav-title">Receita Federal</span>
+                </div>
+                <div class="af-search">
+                    <span>O que você procura?</span>
+                    <span class="material-symbols-rounded">search</span>
+                </div>
+            </div>
+
+            <div class="af-breadcrumb">
+                <span class="material-symbols-rounded">home</span>
+                <span class="sep">›</span>
+                <span>Serviços</span>
+                <span class="sep">›</span>
+                <span class="current">Auditoria Fiscal</span>
+            </div>
+
+            <div class="af-empresa">
+                <div class="af-shop" aria-hidden="true">
+                    <span class="material-symbols-rounded">storefront</span>
+                </div>
+                <h1 class="af-razao" id="razao-social">[RAZAO-SOCIAL]</h1>
+                <p class="af-meta">
+                    <span id="porte">[PORTE]</span>
+                    <span class="sep">›</span>
+                    <span id="cnpj">[CNPJ]</span>
+                </p>
+            </div>
+
+            <div class="af-cards-wrap">
+                <div class="af-cards" id="af-cards-doc"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

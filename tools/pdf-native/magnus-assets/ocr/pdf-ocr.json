@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "pageCount": 4,
+  "pages": [
+    {
+      "index": 1,
+      "image": "page-01.png",
+      "text": "Mua Empresariais\nVALUATION EMPRESARIAL",
+      "confidence": 78
+    },
+    {
+      "index": 2,
+      "image": "page-02.png",
+      "text": "RESUMO DA EMPRESA\n{RAZAO-SOCIAL}\n{CNP} |\nJ\nCONTATOS © ENDEREÇO / LOCAL\nE-MAIL: {EMAIL-CNPJ} {ENDERECO-CNPJ}\nTELEFONE(S): {TELEFONE}\nATIVIDADES - CNAES\n{CNAE}\n“1 FUNCIONÁRIOS [© CAPITAL SOCIAL\n{FUNCIONARIOS} {CAPITAL-SOCIAL}\nA DATA DE ABERTURA E) PORTE\n{DATA-ABERTURA} {PORTE}\n©) FATURAMENTO DOS ÚLTIMOS 3 (TRÊS) MESES\n245,147,43\n225,147,43\n198,691,04 ps\n119,972,91\nMaio Junho Julho\nVALUATION EMPRESARIAL\nNy Y",
+      "confidence": 81
+    },
+    {
+      "index": 3,
+      "image": "page-03.png",
+      "text": "CÁLCULO BASEADO EM FLUXO DE CAIXA\nCALCULO DE FLUXO DE\nCAIXA DESCONTADO\nSsssmsCss..s.s——————————-—-—-—-—a.———-—-——-—.J.\".\"..\"—\nTAXA DE DESCONTO: 20,00%\nCRESCIMENTO DA PERPETUIDADE: 3,00%\nIPCA PROJETADO: 5,00%\nVALOR DOS 5 ANOS\nR$ 1.851.777,17\nVALOR TOTAL DA EMPRESA\nSs\nRS 1.970.134,12 roc ves\n. = , o 01-53\nEconom. nso Reis Duarte\nCOFECON “e 5\n( CORECON=\nVALOR DE PERPETUIDADE SE\nRS 2.183.456,78\nNA GRUPO MAGNUS RELAÇÕES EMPRESARIAIS LTDA, PREZAMOS PELA TRANSPARENCIA E\nAGILIDADE EM NOSSOS SERVICOS. E IMPORTANTE SALIENTAR QUE, NO PROCESSO DE\nAVALIAÇÃO DA SUA EMPRESA, A RESPONSABILIDADE PELA VERACIDADE DAS\nINFORMAÇÕES FORNECIDAS É DE CARÁTER ANALÍTICO DO CLIENTE, SUA COMPREENSÃO E\nCOLABORAÇÃO PARA GARANTIR A EFICIÊNCIA E PRECISÃO EM NOSSO TRABALHO.\nVALUATION EMPRESARIAL\nNy Y JD",
+      "confidence": 86
+    },
+    {
+      "index": 4,
+      "image": "page-04.png",
+      "text": "Relações Empresariais\nAGRADECEMOS A SUA PREFERÊNCIA.",
+      "confidence": 95
+    }
+  ]
+}

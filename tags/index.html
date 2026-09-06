@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags | AutoDocs</title>
+    <title>Etiqueta | AutoDocs</title>
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../estilos/sistema.css">
-    <link rel="stylesheet" href="../estilos/exportar.css">
-    <link rel="stylesheet" href="../estilos/autodocs-hub.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"/>
-    <link rel="stylesheet" href="../estilos/icones.css">
+    
+    <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css?v=20260905">
+    
+    <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
 </head>
 
 <body>
@@ -21,29 +23,28 @@
         </header>
         <div class="sistema-pagina">
             <div class="doc-hub-layout tags-admin-layout">
-                <h1>Tags</h1>
+                <h1>Etiqueta</h1>
                 <p class="tags-page-intro campo-texto">
-                    Cada tag agrupa documentações por instituição ou marca. Vincule as documentações à tag aqui;
-                    na página <strong>Usuários</strong>, atribua tags (grupos) a cada utilizador.
+                    Cada etiqueta agrupa documentações por instituição ou marca. Vincule as documentações à etiqueta aqui;
+                    na página <strong>Usuários</strong>, atribua etiquetas (grupos) a cada utilizador.
                 </p>
-                <p id="tags-flash" class="tags-flash" role="status" hidden></p>
                 <div class="doc-hub-toolbar tags-admin-toolbar">
                     <label class="doc-hub-search-wrap">
                         <span class="material-symbols-rounded" aria-hidden="true">search</span>
-                        <input type="search" id="tags-search" placeholder="Pesquisar tag…" autocomplete="off">
+                        <input type="search" id="tags-search" placeholder="Pesquisar etiqueta…" autocomplete="off">
                     </label>
                     <br>
-                    <button type="button" id="tags-btn-nova" class="tags-btn-primary">Nova tag</button>
+                    <button type="button" id="tags-btn-nova" class="tags-btn-primary">Nova etiqueta</button>
                 </div>
                 <div id="tags-grid" class="tags-admin-grid" role="list"></div>
-                <p id="tags-empty" class="tags-empty campo-texto" hidden>Nenhuma tag encontrada.</p>
+                <p id="tags-empty" class="tags-empty campo-texto" hidden>Nenhuma etiqueta encontrada.</p>
             </div>
         </div>
     </div>
 
     <div class="tags-modal-bg" id="tags-modal-bg" aria-hidden="true">
         <div class="tags-modal" role="dialog" aria-labelledby="tags-modal-title">
-            <h3 id="tags-modal-title">Tag</h3>
+            <h3 id="tags-modal-title">Etiqueta</h3>
             <form id="tags-modal-form" class="base-boxcampos">
                 <input type="hidden" id="tags-edit-id" value="">
                 <div class="campo">
@@ -101,11 +102,12 @@
         </div>
     </div>
 
-    <script src="../scripts/banco.js"></script>
-    <script src="../scripts/autodocs-tags-storage.js?v=6"></script>
-    <script src="../scripts/autodocs-docs-catalog.js"></script>
-    <script src="../scripts/navdrawer.js"></script>
-    <script src="../scripts/tags-page.js?v=6"></script>
+    <script src="../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../scripts/banco.js?v=20260905"></script>
+    <script src="../scripts/autodocs-tags-storage.js?v=20260905"></script>
+    <script src="../scripts/autodocs-docs-catalog.js?v=20260905"></script>
+    <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/tags-page.js?v=20260905"></script>
 </body>
 
 </html>

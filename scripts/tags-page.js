@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const SOFISA_ACCENT = '#006157';
   const USO_GERAL_TAG_ID = 'tag-uso-geral';
 
@@ -30,16 +30,17 @@
   }
 
   function setFlash(message, type) {
-    const el = document.getElementById('tags-flash');
-    if (!el) return;
-    el.textContent = message || '';
-    el.hidden = !message;
-    el.className = 'tags-flash' + (type === 'error' ? ' tags-flash--error' : type === 'ok' ? ' tags-flash--ok' : '');
+    if (!message) return;
+    if (window.AutoDocsToast) {
+      if (type === 'error') window.AutoDocsToast.error(message);
+      else if (type === 'ok') window.AutoDocsToast.ok(message);
+      else window.AutoDocsToast.info(message);
+    }
   }
 
   async function persistToServer(successMessage) {
     if (!window.AutoDocsTags || typeof window.AutoDocsTags.saveToServer !== 'function') {
-      setFlash('Serviço de tags indisponível.', 'error');
+      setFlash('Serviço de etiquetas indisponível.', 'error');
       return false;
     }
     window.AutoDocsTags.clearLastPushError && window.AutoDocsTags.clearLastPushError();
@@ -76,7 +77,7 @@
     const picker = document.getElementById('tags-modal-cor');
     const textCor = document.getElementById('tags-modal-cor-text');
     const isEdit = mode === 'edit' && tag;
-    if (title) title.textContent = isEdit ? 'Editar tag' : 'Nova tag';
+    if (title) title.textContent = isEdit ? 'Editar etiqueta' : 'Nova etiqueta';
     if (idEl) idEl.value = isEdit ? tag.id : '';
     if (nome) nome.value = isEdit ? tag.name : '';
     const accent = normalizePickerHex(isEdit ? tag.accentColor : SOFISA_ACCENT);
@@ -117,10 +118,10 @@
     };
     const sub = document.getElementById('tags-vincular-modal-sub');
     const title = document.getElementById('tags-vincular-modal-title');
-    if (title) title.textContent = 'Documentações da tag';
+    if (title) title.textContent = 'Documentações da etiqueta';
     if (sub) {
       sub.textContent =
-        tag.name + ' — vincule cada documentação a esta tag (desvincular envia para Uso Geral).';
+        tag.name + ' — vincule cada documentação a esta etiqueta (desvincular envia para Uso Geral).';
     }
     const searchEl = document.getElementById('tags-vincular-search');
     if (searchEl) searchEl.value = '';
@@ -169,7 +170,7 @@
         '" data-doc-id="' +
         escapeHtml(doc.id) +
         '" aria-label="' +
-        (linked ? 'Desvincular desta tag' : 'Vincular a esta tag') +
+        (linked ? 'Desvincular desta etiqueta' : 'Vincular a esta etiqueta') +
         '" title="' +
         (linked ? 'Desvincular' : 'Vincular') +
         '">' +
@@ -266,7 +267,7 @@
         '<button type="button" class="tags-btn-outline tags-btn-outline--danger" data-act="del" data-id="' +
         escapeHtml(tag.id) +
         '"' +
-        (tag.id === USO_GERAL_TAG_ID ? ' disabled title="Tag do sistema"' : '') +
+        (tag.id === USO_GERAL_TAG_ID ? ' disabled title="Etiqueta do sistema"' : '') +
         '>Excluir</button>' +
         '</div>';
       grid.appendChild(card);
@@ -292,12 +293,12 @@
         if (id === USO_GERAL_TAG_ID) return;
         const tags = window.AutoDocsTags.getTags();
         if (tags.length <= 1) {
-          alert('É necessário manter pelo menos uma tag.');
+          alert('É necessário manter pelo menos uma etiqueta.');
           return;
         }
-        if (!confirm('Excluir esta tag? As documentações passarão para Uso Geral.')) return;
+        if (!confirm('Excluir esta etiqueta? As documentações passarão para Uso Geral.')) return;
         if (!window.AutoDocsTags.deleteTag(id)) return;
-        const ok = await persistToServer('Tag excluída.');
+        const ok = await persistToServer('Etiqueta excluída.');
         if (ok) renderGrid();
       });
     });
@@ -357,11 +358,11 @@
       } else {
         const id = window.AutoDocsTags.createTag(name, cor);
         if (!id) {
-          setFlash('Nome inválido ou tag já existente.', 'error');
+          setFlash('Nome inválido ou etiqueta já existente.', 'error');
           return;
         }
       }
-      const ok = await persistToServer(editId ? 'Tag atualizada.' : 'Tag criada.');
+      const ok = await persistToServer(editId ? 'Etiqueta atualizada.' : 'Etiqueta criada.');
       if (!ok) return;
       closeEditModal();
       renderGrid();
@@ -369,7 +370,14 @@
   }
 
   function startTagsPage() {
-    if (!window.AutoDocsTags) return;
+    const grid = document.getElementById('tags-grid');
+    if (!grid || !window.AutoDocsTags) return;
+    if (grid.dataset.pageInited === '1') {
+      renderGrid();
+      return;
+    }
+    grid.dataset.pageInited = '1';
+
     if (window.AUTODOCS_DOCS_CATALOG) {
       window.AutoDocsTags.ensureDefaults(window.AUTODOCS_DOCS_CATALOG.map(d => d.id));
     }
@@ -377,17 +385,24 @@
     renderGrid();
     document.getElementById('tags-search')?.addEventListener('input', renderGrid);
     document.getElementById('tags-btn-nova')?.addEventListener('click', () => openEditModal('new', null));
-    document.addEventListener('autodocs-tags-push-error', e => {
-      const msg = e && e.detail && e.detail.message;
-      if (msg) setFlash(msg, 'error');
-    });
+    if (!window.__autodocsTagsPushErrorBound) {
+      window.__autodocsTagsPushErrorBound = true;
+      document.addEventListener('autodocs-tags-push-error', e => {
+        const msg = e && e.detail && e.detail.message;
+        if (msg) setFlash(msg, 'error');
+      });
+    }
     const pending = window.AutoDocsTags.getLastPushError && window.AutoDocsTags.getLastPushError();
     if (pending) setFlash(pending, 'error');
   }
 
-  if (window.__autodocsAuth !== undefined) {
-    startTagsPage();
-  } else {
-    document.addEventListener('autodocs-auth-ready', startTagsPage, { once: true });
+  function tryStartTagsPage() {
+    if (document.getElementById('tags-grid')) startTagsPage();
   }
+
+  if (window.__autodocsAuth !== undefined) {
+    tryStartTagsPage();
+  }
+  document.addEventListener('autodocs-auth-ready', tryStartTagsPage);
+  document.addEventListener('autodocs-page-ready', tryStartTagsPage);
 })();

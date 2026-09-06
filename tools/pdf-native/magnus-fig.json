@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "method": "image-board-fig + pdf-ocr",
+  "title": "Laudo de avaliação econômica MAGNUS",
+  "pageCount": 4,
+  "page1IsCover": true,
+  "pages": [
+    { "index": 1, "name": "Capa", "isCapa": true },
+    { "index": 2, "name": "Resumo da empresa", "isCapa": false },
+    { "index": 3, "name": "Cálculo de fluxo de caixa descontado", "isCapa": false },
+    { "index": 4, "name": "Encerramento", "isCapa": false }
+  ],
+  "explicitPlaceholders": [
+    "{RAZAO-SOCIAL}",
+    "{CNPJ}",
+    "{EMAIL-CNPJ}",
+    "{TELEFONE}",
+    "{ENDERECO-CNPJ}",
+    "{CNAE}",
+    "{FUNCIONARIOS}",
+    "{CAPITAL-SOCIAL}",
+    "{DATA-ABERTURA}",
+    "{PORTE}"
+  ],
+  "notes": [
+    "fig-to-json OOM on this file; parse-fig.mjs now loads ESM bundler correctly",
+    "Placeholders live in raster page art (PDF/Figma images), not kiwi text layers"
+  ]
+}

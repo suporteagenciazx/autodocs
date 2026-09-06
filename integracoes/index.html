@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrações | AutoDocs</title>
+    <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/autodocs-hub.css?v=20260905">
+    <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
+    <script src="../scripts/navdrawer-collapsed-init.js?v=20260905"></script>
+</head>
+
+<body>
+    <div class="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <div class="doc-hub-layout integracoes-layout">
+                <div class="integracoes-page-header">
+                    <h1>Integrações</h1>
+                    <button type="button" id="integracoes-btn-nova" class="autodocs-btn-pill-primary">
+                        <span class="material-symbols-rounded" aria-hidden="true">add</span>
+                        Nova integração
+                    </button>
+                </div>
+                <div id="integracoes-grid" class="integracoes-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tags-modal-bg" id="integracao-modal-bg" aria-hidden="true">
+        <div class="tags-modal integracao-modal" role="dialog" aria-labelledby="integracao-modal-title" aria-modal="true">
+            <h3 id="integracao-modal-title">Integração</h3>
+            <div id="integracao-modal-body" class="integracao-modal-body"></div>
+            <div class="tags-modal-actions">
+                <button type="button" id="integracao-modal-close" class="tags-btn-outline">Fechar</button>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../scripts/banco.js?v=20260905"></script>
+    <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/integracoes-page.js?v=20260905"></script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Inter: via <link> no HTML — não @import aqui. */
 
 #documento {
     display: flex;
@@ -524,4 +524,102 @@ span.nowrap {
     overflow: hidden; /* esconde qualquer conteúdo que ultrapasse a largura */
     white-space: nowrap; /* faz com que o texto não quebre para a próxima linha */
     text-overflow: ellipsis; /* adiciona "..." para indicar que o texto foi truncado */
+}
+
+/* Páginas híbridas importadas do Figma (fundo PNG + overlays de campo) */
+
+.pagina.pagina--figma-hybrid,
+.capa.capa--figma-hybrid {
+    position: relative;
+    background-image: none;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.figma-page-bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+}
+
+.figma-page-overlays {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.figma-field-overlay {
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 3px;
+    border: 1px dashed rgba(2, 90, 164, 0.35);
+    pointer-events: none;
+}
+
+@media print {
+    .figma-field-overlay {
+        background: transparent;
+        border: 0;
+    }
+}
+
+/* Cabeçalho do editor de documento: voltar + título */
+.doc-pagina-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 16px 24px 16px;
+}
+
+.doc-pagina-titulo h1 {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-pagina-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid #e8e8e8;
+    border-radius: var(--btn-radius, 10px);
+    background: #fff;
+    color: var(--cor-accent);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.doc-pagina-voltar:hover {
+    background: var(--cor-destaque);
+    border-color: #ddd;
+}
+
+.doc-pagina-voltar .material-symbols-rounded {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.doc-pagina-voltar:focus-visible {
+    outline: 2px solid var(--cor-accent);
+    outline-offset: 2px;
 }

@@ -1,0 +1,8 @@
+{
+  "remote.portsAttributes": {
+    "8088": {
+      "label": "AutoDocs",
+      "onAutoForward": "notify"
+    }
+  }
+}

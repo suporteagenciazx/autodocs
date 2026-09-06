@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCE BACEN | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./cce.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="cce-bacen">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>CCE BACEN</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Cliente favorecido</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche a razão social quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="Razão social do cliente" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Crédito</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-credito">Valor</label>
+                                </div>
+                                <input class="input" id="i-credito" type="text" value="R$ 1.250.000,00"
+                                    data-aleatorio data-aleatorio-variacao="0.35" data-aleatorio-min="50000">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-credito-extenso">Valor por extenso</label>
+                                    <span class="material-symbols-rounded" title="Preenchido automaticamente a partir do valor; pode editar.">info</span>
+                                </div>
+                                <input class="input" id="i-credito-extenso" type="text" placeholder="um milhão...">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-banco">Concedente</label>
+                                </div>
+                                <input class="input" id="i-banco" type="text" value="Banco Sofisa S.A.">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa">Empresa facilitadora</label>
+                                </div>
+                                <input class="input" id="i-empresa" type="text" value="Águia Consultoria Empresarial Ltda">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa-cnpj">CNPJ da facilitadora</label>
+                                </div>
+                                <input class="input" id="i-empresa-cnpj" type="text" value="04.848.916/0001-57">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Assinaturas</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-autarquia">Nome (BACEN)</label>
+                                </div>
+                                <input class="input" id="i-autarquia" type="text" value="Gabriel Galípolo">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-autarquia-cargo">Cargo (BACEN)</label>
+                                </div>
+                                <input class="input" id="i-autarquia-cargo" type="text" value="Presidente">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista">Economista</label>
+                                </div>
+                                <input class="input" id="i-economista" type="text" value="André Luiz Koerich">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-corecon">COFECON</label>
+                                </div>
+                                <input class="input" id="i-corecon" type="text" value="COFECON 091">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Selos e Carimbos</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-corecon">Selo CORECON-SP</label>
+                                <input id="i-selo-corecon" type="checkbox">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                                <input id="i-selo-qr" type="checkbox">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                                <input id="i-selo-png" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="pagina cce-pagina">
+            <div class="cce-brand">
+                <img class="cce-brand-logo" src="./assets/bacen-logo.png" width="56" height="56" alt="Banco Central do Brasil" decoding="async">
+                <p class="cce-brand-name">Banco Central do Brasil</p>
+            </div>
+
+            <h1 class="cce-titulo">Certificado de Conformidade Econômica</h1>
+
+            <p class="cce-texto">
+                O Presidente <strong id="autarquia">[AUTARQUIA]</strong> fala por meio deste Certificado de
+                Conformidade Econômica, junto ao Banco Central do Brasil, instituição financeira de direito privado,
+                com sede na Loc Edificio Sede Qd 3 Bl B 19 Andar, cidade de Brasília, Estado do Distrito Federal,
+                CEP: 70074-900, inscrito no CNPJ/MF sob o nº 00.038.166/0001-05.
+            </p>
+
+            <p class="cce-texto">
+                A instituição financeira Banco Central do Brasil, por meio de certificado digital emitido pela
+                <strong id="empresa">[EMPRESA]</strong> atribuído no processo de liberação de crédito frente ao
+                <strong id="banco">[BANCO]</strong>, assegura que o cliente <strong id="razao-social">[RAZAO-SOCIAL]</strong>,
+                cuja empresa é inscrita no CNPJ sob o nº <strong id="cnpj">[CNPJ]</strong>, está em conformidade com os
+                padrões econômicos e financeiros exigidos para recebimento de crédito empresarial para capital,
+                aguardando apenas anexo de Certificação Transacional de Recebimento Fiduciário como protocolo final
+                para recebimento, em destaque ordem de pagamento pré autorizada.
+            </p>
+
+            <p class="cce-secao-titulo">
+                Informações detalhadas sobre o valor a ser liberado na conta de titularidade do cliente favorecido:
+            </p>
+
+            <div class="cce-resumo">
+                <div class="cce-linha">
+                    <span class="cce-rotulo">Valor</span>
+                    <span class="cce-valor cce-valor--destaque">
+                        <span id="credito">[CREDITO]</span>
+                        (<span>(<span id="credito-extenso">[CREDITO-POR-EXTENSO]</span>)</span>
+                    </span>
+                </div>
+                <div class="cce-linha">
+                    <span class="cce-rotulo">Concedente</span>
+                    <span class="cce-valor" id="banco">[BANCO]</span>
+                </div>
+                <div class="cce-linha">
+                    <span class="cce-rotulo">Beneficiário</span>
+                    <span class="cce-valor" id="razao-social">[RAZAO-SOCIAL]</span>
+                </div>
+                <div class="cce-linha">
+                    <span class="cce-rotulo">Empresa Facilitadora</span>
+                    <span class="cce-valor" id="empresa">[EMPRESA]</span>
+                </div>
+            </div>
+
+            <div class="cce-assinaturas">
+                <div class="cce-assinatura">
+                    <p class="cce-assinatura-org">Banco Central do Brasil</p>
+                    <img class="cce-sign-img cce-sign-img--bacen" src="./assets/assinatura-bacen.png" alt="Assinatura BACEN">
+                    <div class="cce-assinatura-linha" aria-hidden="true"></div>
+                    <p class="cce-assinatura-nome" id="autarquia">[AUTARQUIA]</p>
+                    <p class="cce-assinatura-meta" id="autarquia-cargo">[CARGO-BACEN]</p>
+                    <p class="cce-assinatura-meta">CNPJ 00.038.166/0001-05</p>
+                </div>
+                <div class="cce-assinatura">
+                    <p class="cce-assinatura-org cce-assinatura-org--muted" id="empresa">[EMPRESA]</p>
+                    <img class="cce-sign-img" src="./assets/assinatura.png" alt="Assinatura economista">
+                    <div class="cce-assinatura-linha" aria-hidden="true"></div>
+                    <p class="cce-assinatura-nome">Economista <span id="economista">[ECONOMISTA]</span></p>
+                    <p class="cce-assinatura-meta" id="corecon">[CORECON]</p>
+                    <p class="cce-assinatura-meta">CNPJ <span id="empresa-cnpj">[CNPJ-EMPRESA]</span></p>
+                </div>
+            </div>
+
+            <div class="cce-selos-area">
+                <div class="selos cce-selos-padrao" id="selo" data-auth-src="../../sistema/selo-contrato.png"></div>
+                <div class="cce-selo-corecon" id="selo-corecon">
+                    <img src="./assets/corecon-sp.png" alt="CORECON-SP">
+                </div>
+            </div>
+
+            <p class="cce-rodape">Certificado de Conformidade Econômica · Banco Central do Brasil</p>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/selo-digital.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

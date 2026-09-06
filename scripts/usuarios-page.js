@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const USO_GERAL_TAG_ID = 'tag-uso-geral';
 
   function getBasePath() {
@@ -164,18 +164,18 @@
 
     if (!allTags.length) {
       setModalMsg(
-        'Nenhuma tag cadastrada. Crie tags na página Tags antes de vincular utilizadores.',
+        'Nenhuma etiqueta cadastrada. Crie etiquetas na página Etiqueta antes de vincular utilizadores.',
         'info'
       );
       container.innerHTML =
-        '<p class="usuarios-docs-empty">Sem tags disponíveis.</p>';
+        '<p class="usuarios-docs-empty">Sem etiquetas disponíveis.</p>';
       return;
     }
     setModalMsg('');
 
     if (!tags.length) {
       container.innerHTML =
-        '<p class="usuarios-docs-empty">Nenhuma tag corresponde à pesquisa.</p>';
+        '<p class="usuarios-docs-empty">Nenhuma etiqueta corresponde à pesquisa.</p>';
       return;
     }
 
@@ -213,9 +213,9 @@
         '" data-tag-id="' +
         escapeHtml(tag.id) +
         '" aria-label="' +
-        (linked ? 'Remover acesso à tag' : 'Dar acesso à tag') +
+        (linked ? 'Remover acesso à etiqueta' : 'Dar acesso à etiqueta') +
         '" title="' +
-        (linked ? 'Desvincular tag' : 'Vincular tag') +
+        (linked ? 'Desvincular etiqueta' : 'Vincular etiqueta') +
         '">' +
         '<span class="material-symbols-rounded" aria-hidden="true">' +
         (linked ? 'link_off' : 'link') +
@@ -258,7 +258,7 @@
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      const err = data.error || 'Erro ao carregar tags.';
+      const err = data.error || 'Erro ao carregar etiquetas.';
       setMsg(err);
       setModalMsg(err);
       const bg = document.getElementById('usuarios-docs-modal-bg');
@@ -269,7 +269,7 @@
       const container = document.getElementById('usuarios-docs-container');
       if (container) {
         container.innerHTML =
-          '<p class="usuarios-docs-empty">Não foi possível carregar as tags.</p>';
+          '<p class="usuarios-docs-empty">Não foi possível carregar as etiquetas.</p>';
       }
       return;
     }
@@ -291,16 +291,16 @@
     };
     const sub = document.getElementById('usuarios-docs-modal-sub');
     const title = document.getElementById('usuarios-docs-modal-title');
-    if (title) title.textContent = 'Vincular tags ao utilizador';
+    if (title) title.textContent = 'Vincular etiquetas ao utilizador';
     if (sub) {
       sub.textContent =
         tagsModal.email +
-        ' — cada tag dá acesso a todas as documentações desse grupo (ex.: Uso Geral).';
+        ' — cada etiqueta dá acesso a todas as documentações desse grupo (ex.: Uso Geral).';
     }
     const searchEl = document.getElementById('usuarios-docs-search');
     if (searchEl) {
       searchEl.value = '';
-      searchEl.placeholder = 'Pesquisar tag…';
+      searchEl.placeholder = 'Pesquisar etiqueta…';
     }
     const bg = document.getElementById('usuarios-docs-modal-bg');
     if (bg) {
@@ -343,7 +343,7 @@
         : Array.isArray(u.tagIds)
           ? u.tagIds.length
           : 0;
-    return count > 0 ? String(count) + ' tag(s)' : '';
+    return count > 0 ? String(count) + ' etiqueta(s)' : '';
   }
 
   function renderTagsCell(u) {
@@ -356,7 +356,7 @@
           : 0;
     const legacy =
       u.hasLegacyBatches && count === 0
-        ? '<span class="usuarios-legacy-badge" title="Acesso antigo por lotes — já não vale no login. Reatribua tags.">Acesso legado — reatribuir tags</span>'
+        ? '<span class="usuarios-legacy-badge" title="Acesso antigo por lotes — já não vale no login. Reatribua etiquetas.">Acesso legado — reatribuir etiquetas</span>'
         : '';
     if (!labels && !legacy) {
       return '—';
@@ -459,6 +459,14 @@
       return;
     }
 
+    const marker = document.getElementById('usuarios-search') || document.getElementById('usuarios-form');
+    if (!marker) return;
+    if (marker.dataset.pageInited === '1') {
+      loadList();
+      return;
+    }
+    marker.dataset.pageInited = '1';
+
     if (window.AutoDocsTags) {
       window.AutoDocsTags.syncFromServer(getBasePath());
     }
@@ -521,6 +529,10 @@
       closeModal();
       loadList();
     });
+
+    if (typeof window.initPasswordToggles === 'function') {
+      window.initPasswordToggles();
+    }
   }
 
   function boot() {
@@ -533,7 +545,7 @@
     String(window.__autodocsAuth.user.role || '').toLowerCase() === 'admin'
   ) {
     boot();
-  } else {
-    document.addEventListener('autodocs-auth-ready', boot, { once: true });
   }
+  document.addEventListener('autodocs-auth-ready', boot);
+  document.addEventListener('autodocs-page-ready', boot);
 })();

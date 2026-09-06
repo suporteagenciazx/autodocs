@@ -40,6 +40,7 @@
   } else {
     initAll();
   }
+  document.addEventListener('autodocs-page-ready', () => initAll());
 
   window.initPasswordToggles = initAll;
   window.resetPasswordToggle = resetPasswordWrap;

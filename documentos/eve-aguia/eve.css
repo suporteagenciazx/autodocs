@@ -1,0 +1,322 @@
+/* EVE Águia — Estudo de Viabilidade Econômica e Financeira */
+
+#eve-aguia {
+  --eve-accent: #3a3a3a;
+  --eve-soft: #696969;
+  --eve-border: #e6e6e6;
+  --eve-text: #1a1a1a;
+  --eve-ok: #1b7a3d;
+  --eve-warn: #b36b00;
+  --eve-bad: #b42318;
+}
+
+#eve-aguia #documento .capa.eve-capa,
+#eve-aguia #documento .pagina.eve-mda {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#eve-aguia .eve-capa-conteudo,
+#eve-aguia .eve-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 72px 64px 56px;
+  font-family: 'Inter', sans-serif;
+  color: var(--eve-text);
+  display: flex;
+  flex-direction: column;
+}
+
+#eve-aguia .eve-capa-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#eve-aguia .eve-logo {
+  height: 42px;
+  width: auto;
+}
+
+#eve-aguia .eve-capa-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+#eve-aguia .eve-kicker {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--eve-soft);
+  line-height: 1.35;
+}
+
+#eve-aguia .eve-capa-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+#eve-aguia .eve-capa-sub {
+  margin: 0;
+  font-size: 15px;
+  color: #444;
+  max-width: 460px;
+  line-height: 1.45;
+}
+
+#eve-aguia .eve-capa-empresa {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--eve-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#eve-aguia .eve-capa-empresa strong {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+#eve-aguia .eve-capa-rodape {
+  font-size: 12px;
+  color: var(--eve-soft);
+}
+
+#eve-aguia .eve-page-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+#eve-aguia .eve-divider {
+  width: 48px;
+  height: 4px;
+  margin: 14px 0 20px;
+  border-radius: 4px;
+  background: var(--eve-accent);
+}
+
+#eve-aguia .eve-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#eve-aguia .eve-bloco {
+  padding: 12px 14px;
+  border: 1px solid var(--eve-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#eve-aguia .eve-bloco p {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#eve-aguia .eve-bloco p:last-child {
+  margin-bottom: 0;
+}
+
+#eve-aguia .eve-sec {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--eve-soft);
+}
+
+#eve-aguia .eve-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+#eve-aguia .eve-table th,
+#eve-aguia .eve-table td {
+  border-bottom: 1px solid var(--eve-border);
+  padding: 8px 6px;
+  text-align: right;
+}
+
+#eve-aguia .eve-table th:first-child,
+#eve-aguia .eve-table td:first-child {
+  text-align: left;
+}
+
+#eve-aguia .eve-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--eve-soft);
+}
+
+#eve-aguia .eve-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+
+#eve-aguia .eve-kpi {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--eve-border);
+  background: #fff;
+}
+
+#eve-aguia .eve-kpi span {
+  display: block;
+}
+
+#eve-aguia .eve-kpi-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--eve-soft);
+  margin-bottom: 4px;
+}
+
+#eve-aguia .eve-kpi-val {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#eve-aguia .eve-kpi.is-ok .eve-kpi-val {
+  color: var(--eve-ok);
+}
+
+#eve-aguia .eve-kpi.is-bad .eve-kpi-val {
+  color: var(--eve-bad);
+}
+
+#eve-aguia .eve-chart {
+  margin-top: 10px;
+  padding: 10px 12px 6px;
+  border: 1px solid var(--eve-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+#eve-aguia .eve-chart-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#eve-aguia .eve-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#eve-aguia .eve-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#eve-aguia .eve-scenario {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--eve-border);
+  background: #fff;
+}
+
+#eve-aguia .eve-scenario h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+#eve-aguia .eve-scenario p {
+  margin: 0 0 4px;
+  font-size: 12px;
+}
+
+#eve-aguia .eve-conclusao {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--eve-border);
+  background: rgba(255, 255, 255, 0.94);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #222;
+}
+
+#eve-aguia .eve-conclusao strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--eve-soft);
+}
+
+#eve-aguia .eve-conclusao #conclusao {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#eve-aguia .eve-assinatura {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+#eve-aguia .eve-assinatura img {
+  max-width: 180px;
+  max-height: 56px;
+  object-fit: contain;
+}
+
+#eve-aguia .eve-assinatura .eve-nome {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#eve-aguia .eve-assinatura .eve-reg {
+  font-size: 11px;
+  color: var(--eve-soft);
+}
+
+#eve-aguia .eve-gen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--cor-accent, #3a3a3a);
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}

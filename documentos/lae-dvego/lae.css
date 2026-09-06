@@ -1,0 +1,830 @@
+/* LAE/DVEGO — Águia Consultoria (A4 792x1120) */
+
+#lae-dvego {
+  --aguia-ink: #1a1a1a;
+  --aguia-chumbo: #2e2e2e;
+  --aguia-cinza: #5a5a5a;
+  --aguia-medio: #8a8a8a;
+  --aguia-prata: #b0b0b0;
+  --aguia-borda: #d6d6d6;
+  --aguia-fundo: #f3f3f3;
+  --aguia-texto: #1f1f1f;
+  --aguia-suave: #6e6e6e;
+  --aguia-radius: 0;
+}
+
+/* ---------- Capa (ID Águia) ---------- */
+
+#lae-dvego #documento .capa.aguia-capa {
+  width: 792px;
+  height: 1121px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#lae-dvego .aguia-capa-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--aguia-texto);
+}
+
+#lae-dvego .aguia-capa-faixa {
+  flex-shrink: 0;
+  height: 148px;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+#lae-dvego .aguia-capa-faixa::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 48%, #2a2a2a 49%, #2a2a2a 100%);
+}
+
+#lae-dvego .aguia-capa-faixa-logo {
+  height: 64px;
+  width: auto;
+  max-width: 360px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+#lae-dvego .aguia-capa-faixa-ref {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a8a8a8;
+}
+
+#lae-dvego .aguia-capa-corpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 56px 64px 48px;
+  min-height: 0;
+}
+
+#lae-dvego .aguia-capa-marca {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+#lae-dvego .aguia-capa-icone {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #0a0a0a;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#lae-dvego .aguia-capa-marca-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#lae-dvego .aguia-capa-selo {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#lae-dvego .aguia-capa-marca-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--aguia-suave);
+  letter-spacing: 0.04em;
+}
+
+#lae-dvego .aguia-capa-centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  min-height: 0;
+}
+
+#lae-dvego .aguia-capa-regua {
+  width: 56px;
+  height: 4px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-cinza);
+  margin-bottom: 22px;
+}
+
+#lae-dvego .aguia-capa-titulo {
+  margin: 0 0 28px;
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--aguia-ink);
+  text-transform: uppercase;
+}
+
+#lae-dvego .aguia-capa-empresa {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 24px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  border-left: 5px solid var(--aguia-chumbo);
+  background: rgba(255, 255, 255, 0.92);
+  max-width: 520px;
+}
+
+#lae-dvego .aguia-capa-rotulo {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego .aguia-capa-nome {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+}
+
+#lae-dvego .aguia-capa-cnpj {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-capa-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 12px;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-capa-rodape strong {
+  color: var(--aguia-texto);
+  font-weight: 700;
+}
+
+/* ---------- Páginas MDA ---------- */
+
+#lae-dvego #documento .pagina.aguia-mda {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#lae-dvego .aguia-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 72px 64px 64px;
+  font-family: 'Inter', sans-serif;
+  color: var(--aguia-texto);
+}
+
+#lae-dvego .aguia-kicker {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-empresa-nome,
+#lae-dvego .aguia-page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #111;
+}
+
+#lae-dvego .aguia-empresa-cnpj {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego .aguia-divider {
+  width: 48px;
+  height: 4px;
+  margin: 18px 0 28px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+}
+
+#lae-dvego .aguia-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+#lae-dvego .aguia-bloco {
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--aguia-borda);
+  border-radius: var(--aguia-radius);
+}
+
+#lae-dvego .aguia-bloco p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #222;
+}
+
+#lae-dvego .aguia-bloco p:last-child {
+  margin-bottom: 0;
+}
+
+#lae-dvego .aguia-sec-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo) !important;
+}
+
+#lae-dvego .aguia-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-prata);
+  flex-shrink: 0;
+}
+
+#lae-dvego .aguia-dot.is-dark {
+  background: var(--aguia-chumbo);
+}
+
+#lae-dvego .aguia-label {
+  font-weight: 600;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-bloco-cnae {
+  margin-bottom: 18px;
+}
+
+#lae-dvego .aguia-metricas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego .aguia-metrica-card {
+  padding: 14px 16px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#lae-dvego .aguia-metrica-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--aguia-borda);
+}
+
+#lae-dvego .aguia-metrica-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+#lae-dvego .aguia-metrica-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego .aguia-metrica-valor {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  text-align: right;
+}
+
+#lae-dvego .aguia-chart {
+  margin-top: 8px;
+  padding: 16px 18px 10px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+#lae-dvego .aguia-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego .aguia-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#lae-dvego .aguia-premissas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego .aguia-premissa {
+  padding: 14px 16px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego .aguia-premissa span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#lae-dvego .aguia-premissa strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+}
+
+#lae-dvego .aguia-valor-destaque {
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego .aguia-valor-destaque .lbl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #cfcfcf;
+}
+
+#lae-dvego .aguia-valor-destaque .val {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+#lae-dvego .aguia-valores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+#lae-dvego .aguia-valor-card {
+  padding: 16px 18px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego .aguia-valor-card .lbl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego .aguia-valor-card .val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+}
+
+#lae-dvego .aguia-rodape {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+#lae-dvego .aguia-assinatura {
+  flex: 1;
+  min-width: 0;
+}
+
+#lae-dvego .aguia-assinatura .sign-img {
+  display: block;
+  height: 72px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: grayscale(1) contrast(1.05);
+}
+
+#lae-dvego .aguia-assinatura .org {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego .aguia-assinatura .meta {
+  margin: 0 0 2px;
+  font-size: 11px;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-selos-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+#lae-dvego .aguia-selos-area .selos.aguia-selos-padrao {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+#lae-dvego .aguia-selos-area .selo {
+  width: auto;
+  max-width: 280px;
+  margin: 0;
+  align-self: flex-end;
+  border-radius: var(--aguia-radius) !important;
+}
+
+#lae-dvego .aguia-selos-area .selo:not(.selo-autenticidade) {
+  width: 280px;
+  margin-top: 0;
+}
+
+#lae-dvego .aguia-selos-area .selo-autenticidade {
+  width: 150px;
+  margin-top: 0;
+}
+
+#lae-dvego .aguia-selo-corecon img {
+  display: block;
+  height: 46px;
+  width: auto;
+  mix-blend-mode: multiply;
+  filter: grayscale(0.35);
+}
+
+#lae-dvego .aguia-selo-corecon[hidden] {
+  display: none;
+}
+
+#lae-dvego .aguia-disclaimer {
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 9.5px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-align: justify;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+}
+
+/* ---------- Página final (layout distinto) ---------- */
+
+#lae-dvego #documento .pagina.aguia-final {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+#lae-dvego .aguia-final-wrap {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+#lae-dvego .aguia-final-side {
+  background: #111;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 48px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+#lae-dvego .aguia-final-side::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: linear-gradient(135deg, transparent 42%, #2e2e2e 43%, #2e2e2e 100%);
+}
+
+#lae-dvego .aguia-final-icone {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+#lae-dvego .aguia-final-side-label {
+  position: relative;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  text-align: center;
+}
+
+#lae-dvego .aguia-final-main {
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 56px;
+  box-sizing: border-box;
+}
+
+#lae-dvego .aguia-final-regua {
+  width: 48px;
+  height: 4px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  margin-bottom: 22px;
+}
+
+#lae-dvego .aguia-final-msg {
+  margin: 0 0 16px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--aguia-ink);
+}
+
+#lae-dvego .aguia-final-texto {
+  margin: 0 0 36px;
+  max-width: 360px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego .aguia-final-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 20px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#lae-dvego .aguia-final-contato .brand {
+  color: var(--aguia-ink);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* ---------- LAE/DVEGO extras ---------- */
+
+#lae-dvego .lae-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego .lae-kpi {
+  padding: 14px 16px;
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255,255,255,0.92);
+}
+
+#lae-dvego .lae-kpi-lbl {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+  margin-bottom: 6px;
+}
+
+#lae-dvego .lae-kpi-val {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--aguia-ink);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+#lae-dvego .lae-table-wrap {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--aguia-borda);
+  margin: 0 0 22px;
+  background: rgba(255,255,255,0.95);
+}
+
+#lae-dvego .lae-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: Inter, sans-serif;
+}
+
+#lae-dvego .lae-table th,
+#lae-dvego .lae-table td {
+  border-bottom: 1px solid var(--aguia-borda);
+  border-right: 1px solid var(--aguia-borda);
+  padding: 8px 7px;
+  font-size: 10.5px;
+  line-height: 1.3;
+  vertical-align: middle;
+}
+
+#lae-dvego .lae-table th:last-child,
+#lae-dvego .lae-table td:last-child {
+  border-right: none;
+}
+
+#lae-dvego .lae-table thead th {
+  background: #2e2e2e;
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#lae-dvego .lae-table thead th:first-child {
+  text-align: left;
+  width: 28%;
+}
+
+#lae-dvego .lae-table tbody td:first-child {
+  font-weight: 600;
+  color: #222;
+  background: #f7f7f7;
+}
+
+#lae-dvego .lae-table tbody td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+#lae-dvego .lae-table tbody tr.is-total td {
+  background: #ececec;
+  font-weight: 800;
+  border-bottom: none;
+}
+
+#lae-dvego .lae-charts-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+#lae-dvego .lae-chart-box {
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255,255,255,0.92);
+  padding: 12px 12px 8px;
+}
+
+#lae-dvego .lae-chart-box h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego .lae-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#lae-dvego .lae-hint {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: #5c6b73;
+  line-height: 1.4;
+}
+
+#lae-dvego .form-hint-var {
+  font-size: 11px;
+  color: #6e6e6e;
+  margin: -4px 0 8px;
+}

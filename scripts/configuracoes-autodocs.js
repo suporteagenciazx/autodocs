@@ -95,10 +95,17 @@
     location.reload();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadForm();
+  function bindConfigPage() {
     const form = document.getElementById('form-autodocs-tema');
-    if (form) form.addEventListener('submit', save);
+    if (!form) return;
+    if (form.dataset.pageInited === '1') {
+      loadForm();
+      return;
+    }
+    form.dataset.pageInited = '1';
+
+    loadForm();
+    form.addEventListener('submit', save);
 
     const pickerD = document.getElementById('autodocs-cor-destaque');
     const textD = document.getElementById('autodocs-cor-destaque-text');
@@ -123,5 +130,12 @@
         if (/^#[0-9A-Fa-f]{6}$/i.test(v)) pickerA.value = v;
       });
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindConfigPage);
+  } else {
+    bindConfigPage();
+  }
+  document.addEventListener('autodocs-page-ready', bindConfigPage);
 })();

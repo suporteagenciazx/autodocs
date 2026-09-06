@@ -72,7 +72,23 @@ INSERT INTO doc_batch_items (batch_id, catalog_doc_id) VALUES
   (1, 'termo'),
   (1, 'declaracao'),
   (1, 'ordem'),
-  (1, 'garantia');
+  (1, 'garantia'),
+  (1, 'magnus-laudo'),
+  (1, 'valuation-aguia'),
+  (1, 'orcamento-aguia'),
+  (1, 'orcamento-magnus'),
+  (1, 'lae-dvego'),
+  (1, 'lae-dvego-magnus'),
+  (1, 'nfe-magnus'),
+  (1, 'nfe-aguia'),
+  (1, 'recibo-magnus'),
+  (1, 'recibo-aguia'),
+  (1, 'tela-aprovacao'),
+  (1, 'tela-auditoria-fiscal'),
+  (1, 'varredura-expansao'),
+  (1, 'cce-bacen'),
+  (1, 'eve-aguia'),
+  (1, 'eve-magnus');
 
 -- Lote 2: exemplo “Sofisa” (subconjunto; ajuste os IDs conforme o teu catálogo)
 INSERT INTO doc_batches (id, slug, name) VALUES
@@ -81,5 +97,6 @@ INSERT INTO doc_batches (id, slug, name) VALUES
 INSERT INTO doc_batch_items (batch_id, catalog_doc_id) VALUES
   (2, 'consulta'),
   (2, 'aprovacao'),
+  (2, 'tela-aprovacao'),
   (2, 'contrato'),
   (2, 'comprovante');

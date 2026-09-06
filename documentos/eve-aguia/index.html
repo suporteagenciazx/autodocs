@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVE | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./eve.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="eve-aguia">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>EVE</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Empresa</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-cnpj">CNPJ</label></div>
+                                <input class="input" id="i-cnpj" type="text" placeholder="[CNPJ]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-razao">Razão social</label></div>
+                                <input class="input" id="i-razao" type="text" placeholder="[RAZAO-SOCIAL]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-cnae">CNAE</label></div>
+                                <input class="input" id="i-cnae" type="text" placeholder="[CNAE]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-porte">Porte</label></div>
+                                <input class="input" id="i-porte" type="text" placeholder="[PORTE]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-endereco-cnpj">Endereço</label></div>
+                                <input class="input" id="i-endereco-cnpj" type="text" placeholder="[ENDERECO]">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-data-emissao">Data de emissão</label></div>
+                                <input class="input" id="i-data-emissao" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-referencia">Referência</label></div>
+                                <input class="input" id="i-referencia" type="text" value="EVE-AGUIA-001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Financeiro 1 — Receitas e custos (5 anos)</h2>
+                        <p class="campo-texto" style="margin:0 0 10px;">Informe projeções anuais ou use geração automática.</p>
+                        <div class="base-boxcampos" id="eve-fin1-fields">
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-rec-1">Receita ano 1</label></div><input class="input" id="i-rec-1" type="text" value="480.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-cus-1">Custos ano 1</label></div><input class="input" id="i-cus-1" type="text" value="310.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-rec-2">Receita ano 2</label></div><input class="input" id="i-rec-2" type="text" value="552.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-cus-2">Custos ano 2</label></div><input class="input" id="i-cus-2" type="text" value="340.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-rec-3">Receita ano 3</label></div><input class="input" id="i-rec-3" type="text" value="635.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-cus-3">Custos ano 3</label></div><input class="input" id="i-cus-3" type="text" value="372.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-rec-4">Receita ano 4</label></div><input class="input" id="i-rec-4" type="text" value="730.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-cus-4">Custos ano 4</label></div><input class="input" id="i-cus-4" type="text" value="405.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-rec-5">Receita ano 5</label></div><input class="input" id="i-rec-5" type="text" value="840.000,00"></div>
+                            <div class="campo"><div class="label"><label class="label-campo" for="i-cus-5">Custos ano 5</label></div><input class="input" id="i-cus-5" type="text" value="442.000,00"></div>
+                        </div>
+                        <button type="button" class="eve-gen-btn" id="eve-gen-fin1">
+                            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                            Geração automática — receitas e custos
+                        </button>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Financeiro 2 — Investimento e indicadores</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-investimento">Investimento inicial (R$)</label></div>
+                                <input class="input" id="i-investimento" type="text" value="350.000,00">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-taxa">Taxa de desconto / WACC (% a.a.)</label></div>
+                                <input class="input" id="i-taxa" type="text" value="12,00">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-crescimento">Crescimento residual (% a.a.)</label></div>
+                                <input class="input" id="i-crescimento" type="text" value="3,00">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-cenario-pes">Choque cenário pessimista (%)</label></div>
+                                <input class="input" id="i-cenario-pes" type="text" value="-15">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-cenario-otm">Choque cenário otimista (%)</label></div>
+                                <input class="input" id="i-cenario-otm" type="text" value="15">
+                            </div>
+                        </div>
+                        <button type="button" class="eve-gen-btn" id="eve-gen-fin2">
+                            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                            Geração automática — investimento e cenários
+                        </button>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Conclusão sobre viabilidade</h2>
+                        <p class="campo-texto" style="margin:0 0 10px;">Texto exibido no documento. Limite de 380 caracteres para caber na página.</p>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                                    <label class="label-campo" for="i-conclusao">Conclusão</label>
+                                    <span class="campo-texto" id="i-conclusao-count" style="margin:0;font-size:12px;">0/380</span>
+                                </div>
+                                <textarea class="input" id="i-conclusao" rows="5" maxlength="380" placeholder="Escreva a conclusão do estudo…"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="eve-gen-btn" id="eve-gen-conclusao">
+                            <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                            Sugerir conclusão automática
+                        </button>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Responsável técnico</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-economista-nome">Economista</label></div>
+                                <input class="input" id="i-economista-nome" type="text" value="André Luiz Koerich">
+                            </div>
+                            <div class="campo">
+                                <div class="label"><label class="label-campo" for="i-economista-cofecon">COFECON</label></div>
+                                <input class="input" id="i-economista-cofecon" type="text" value="091">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="capa eve-capa">
+            <div class="eve-capa-conteudo">
+                <div class="eve-capa-topo">
+                    <img class="eve-logo" src="./assets/logo-horizontal-preta.png" alt="Águia Consultoria">
+                    <img src="./assets/icone.png" alt="" width="36" height="36">
+                </div>
+                <div class="eve-capa-body">
+                    <p class="eve-kicker">Águia Consultoria</p>
+                    <h1 class="eve-capa-title">Estudo de Viabilidade Econômica e Financeira</h1>
+                    <p class="eve-capa-sub">Projeções de receita e custos, fluxo de caixa, VPL, TIR, payback e análise de cenários.</p>
+                    <div class="eve-capa-empresa">
+                        <strong id="razao-social">[RAZAO-SOCIAL]</strong>
+                        <span>CNPJ <span id="cnpj">[CNPJ]</span> · Ref. <span id="referencia">[REFERENCIA]</span></span>
+                    </div>
+                </div>
+                <div class="eve-capa-rodape">
+                    Emissão <span id="data-emissao">[DATA-EMISSAO]</span> · Documento técnico confidencial
+                </div>
+            </div>
+        </div>
+
+        <div class="pagina eve-mda">
+            <div class="eve-conteudo">
+                <p class="eve-kicker">Empresa e projeções</p>
+                <h2 class="eve-page-title">Receitas, custos e perfil</h2>
+                <div class="eve-divider"></div>
+                <div class="eve-grid-2">
+                    <div class="eve-bloco">
+                        <p class="eve-sec">Identificação</p>
+                        <p><strong id="razao-social">[RAZAO-SOCIAL]</strong></p>
+                        <p>CNPJ: <span id="cnpj">[CNPJ]</span></p>
+                        <p>CNAE: <span id="cnae">[CNAE]</span></p>
+                        <p>Porte: <span id="porte">[PORTE]</span></p>
+                        <p>Endereço: <span id="endereco-cnpj">[ENDERECO]</span></p>
+                    </div>
+                    <div class="eve-bloco">
+                        <p class="eve-sec">Premissas</p>
+                        <p>Investimento inicial: R$ <span id="investimento">[INVESTIMENTO]</span></p>
+                        <p>Taxa de desconto: <span id="taxa">[TAXA]</span>% a.a.</p>
+                        <p>Crescimento residual: <span id="crescimento">[CRESCIMENTO]</span>% a.a.</p>
+                    </div>
+                </div>
+
+                <table class="eve-table" style="margin-top:14px">
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Receita</th>
+                            <th>Custos</th>
+                            <th>Resultado operacional</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eve-proj-body"></tbody>
+                </table>
+
+                <div class="eve-chart">
+                    <p class="eve-chart-title">Projeção de receita × custos</p>
+                    <svg class="eve-chart-svg" id="chart-proj" viewBox="0 0 640 240" role="img" aria-label="Receita e custos"></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagina eve-mda">
+            <div class="eve-conteudo">
+                <p class="eve-kicker">Fluxo de caixa</p>
+                <h2 class="eve-page-title">Caixa livre do projeto</h2>
+                <div class="eve-divider"></div>
+                <table class="eve-table">
+                    <thead>
+                        <tr>
+                            <th>Período</th>
+                            <th>Fluxo de caixa</th>
+                            <th>Fluxo acumulado</th>
+                            <th>Valor presente</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eve-fc-body"></tbody>
+                </table>
+                <div class="eve-chart" style="margin-top:16px">
+                    <p class="eve-chart-title">Evolução do fluxo de caixa acumulado</p>
+                    <svg class="eve-chart-svg" id="chart-fc" viewBox="0 0 640 240" role="img" aria-label="Fluxo de caixa"></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagina eve-mda">
+            <div class="eve-conteudo">
+                <p class="eve-kicker">Indicadores e cenários</p>
+                <h2 class="eve-page-title">VPL, TIR, payback e sensibilidade</h2>
+                <div class="eve-divider"></div>
+
+                <div class="eve-kpi-row">
+                    <div class="eve-kpi" id="kpi-vpl">
+                        <span class="eve-kpi-lbl">VPL</span>
+                        <span class="eve-kpi-val" id="vpl">[VPL]</span>
+                    </div>
+                    <div class="eve-kpi" id="kpi-tir">
+                        <span class="eve-kpi-lbl">TIR</span>
+                        <span class="eve-kpi-val" id="tir">[TIR]</span>
+                    </div>
+                    <div class="eve-kpi" id="kpi-payback">
+                        <span class="eve-kpi-lbl">Payback</span>
+                        <span class="eve-kpi-val" id="payback">[PAYBACK]</span>
+                    </div>
+                    <div class="eve-kpi" id="kpi-viavel">
+                        <span class="eve-kpi-lbl">Viabilidade</span>
+                        <span class="eve-kpi-val" id="viavel">[VIAVEL]</span>
+                    </div>
+                </div>
+
+                <div class="eve-scenarios">
+                    <div class="eve-scenario">
+                        <h3>Pessimista</h3>
+                        <p>Choque: <span id="cenario-pes">[PES]</span>%</p>
+                        <p>VPL: <span id="vpl-pes">[VPL-PES]</span></p>
+                        <p>TIR: <span id="tir-pes">[TIR-PES]</span></p>
+                    </div>
+                    <div class="eve-scenario">
+                        <h3>Base</h3>
+                        <p>Choque: 0%</p>
+                        <p>VPL: <span id="vpl">[VPL]</span></p>
+                        <p>TIR: <span id="tir">[TIR]</span></p>
+                    </div>
+                    <div class="eve-scenario">
+                        <h3>Otimista</h3>
+                        <p>Choque: <span id="cenario-otm">[OTM]</span>%</p>
+                        <p>VPL: <span id="vpl-otm">[VPL-OTM]</span></p>
+                        <p>TIR: <span id="tir-otm">[TIR-OTM]</span></p>
+                    </div>
+                </div>
+
+                <div class="eve-conclusao">
+                    <strong>Conclusão sobre viabilidade</strong><br>
+                    <span id="conclusao">[CONCLUSAO]</span>
+                </div>
+
+                <div class="eve-assinatura">
+                    <div>
+                        <img src="./assets/assinatura.png" alt="Assinatura">
+                        <div class="eve-nome" id="economista-nome">[ECONOMISTA-NOME]</div>
+                        <div class="eve-reg">COFECON <span id="economista-cofecon">[ECONOMISTA-COFECON]</span></div>
+                    </div>
+                    <img src="./assets/corecon-sp.png" alt="CORECON" height="48" id="selo-corecon">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

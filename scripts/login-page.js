@@ -75,11 +75,26 @@
     return '/';
   }
 
-  function readReturnUrl() {
+  function readReturnUrl(basePath) {
     const q = new URLSearchParams(location.search).get('returnUrl');
-    if (!q || !q.startsWith('/')) return null;
-    if (q.includes('..')) return null;
-    return q;
+    if (!q || typeof q !== 'string') return null;
+    let raw = q.trim();
+    try {
+      raw = decodeURIComponent(raw);
+    } catch (_) {
+      return null;
+    }
+    // Rejeitar open redirect: protocol-relative, URLs absolutas, backslash, ..
+    if (!raw.startsWith('/')) return null;
+    if (raw.startsWith('//') || raw.includes('\\') || raw.includes('..')) return null;
+    if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) return null;
+    // Opcional: garantir que fica sob o mesmo basePath da app
+    const base = typeof basePath === 'string' && basePath.startsWith('/') ? basePath : '/';
+    if (base !== '/' && !raw.startsWith(base) && raw !== base.slice(0, -1)) {
+      // Em subpasta (ex. /AutoDocsv7/), só aceitar paths dessa árvore
+      return null;
+    }
+    return raw;
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
@@ -112,7 +127,7 @@
           if (msg) msg.textContent = data.error || 'Credenciais inválidas.';
           return;
         }
-        const ret = readReturnUrl();
+        const ret = readReturnUrl(basePath);
         // returnUrl vem de location.pathname (ex.: /AutoDocsv7/documentacoes/) — já é caminho absoluto no host; não prefixar com basePath.
         if (ret) {
           location.href = ret;

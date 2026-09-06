@@ -96,7 +96,7 @@ if (!in_array($docId, $allowed, true)) {
 $full = AUTODOCS_ROOT . '/' . $rel;
 $real = realpath($full);
 $rootReal = realpath(AUTODOCS_ROOT);
-if ($real === false || $rootReal === false || !str_starts_with($real, $rootReal)) {
+if ($real === false || $rootReal === false || !autodocs_path_is_inside($real, $rootReal)) {
     http_response_code(404);
     echo 'Ficheiro não encontrado.';
     exit;
@@ -119,8 +119,41 @@ if (!is_file($real)) {
     exit;
 }
 
-header('X-Content-Type-Options: nosniff');
+autodocs_send_security_headers();
 header('Content-Type: ' . autodocs_gate_mime($real));
-header('Cache-Control: private, max-age=3600');
+
+/**
+ * Texto (html/css/js) revalida sempre; binários podem ficar em cache.
+ * Sem revalidação, alterações a estilos/scripts só apareciam no navegador
+ * depois de limpar a cache manualmente.
+ */
+$ext = strtolower(pathinfo($real, PATHINFO_EXTENSION));
+$revalidate = in_array($ext, ['html', 'htm', 'css', 'js', 'mjs', 'json', 'svg', 'txt', 'map'], true);
+
+$mtime = @filemtime($real);
+$size = @filesize($real);
+$etag = ($mtime !== false && $size !== false)
+    ? '"' . dechex($mtime) . '-' . dechex($size) . '"'
+    : null;
+
+if ($etag !== null) {
+    header('ETag: ' . $etag);
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', (int) $mtime) . ' GMT');
+}
+
+header($revalidate
+    ? 'Cache-Control: private, no-cache, must-revalidate'
+    : 'Cache-Control: private, max-age=2592000');
+
+$ifNoneMatch = isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim((string) $_SERVER['HTTP_IF_NONE_MATCH']) : '';
+$ifModifiedSince = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime((string) $_SERVER['HTTP_IF_MODIFIED_SINCE']) : false;
+
+$etagMatches = $etag !== null && $ifNoneMatch !== '' && str_contains($ifNoneMatch, $etag);
+$notModifiedSince = $mtime !== false && $ifModifiedSince !== false && $ifModifiedSince >= $mtime;
+
+if ($etagMatches || (!$etagMatches && $ifNoneMatch === '' && $notModifiedSince)) {
+    http_response_code(304);
+    exit;
+}
 
 readfile($real);

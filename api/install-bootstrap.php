@@ -24,9 +24,15 @@ try {
     exit;
 }
 
+if (autodocs_install_is_locked()) {
+    autodocs_json_response(403, ['error' => 'A instalação inicial já foi concluída.']);
+    exit;
+}
+
 try {
     $n = (int) $pdo->query('SELECT COUNT(*) FROM users')->fetchColumn();
     if ($n > 0) {
+        autodocs_install_write_lock();
         autodocs_json_response(403, ['error' => 'A instalação inicial já foi concluída (existem utilizadores).']);
         exit;
     }
@@ -57,6 +63,7 @@ try {
     $st2 = $pdo->prepare('INSERT INTO user_doc_access (user_id, batch_id) VALUES (?, 1)');
     $st2->execute([$uid]);
     $pdo->commit();
+    autodocs_install_write_lock();
 
     autodocs_regenerate_session();
     $_SESSION['uid'] = $uid;
