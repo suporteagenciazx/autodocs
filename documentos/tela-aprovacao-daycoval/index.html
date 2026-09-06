@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Aprovação | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./daycoval.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <link rel="stylesheet" href="./tela-aprovacao.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="tela-aprovacao-daycoval" data-export="png">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Tela de Aprovação</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Emissão</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-gerente">Login do gerente</label>
+                                </div>
+                                <input class="input" id="i-gerente" placeholder="[GERENTE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-resultado">Resultado da análise</label>
+                                </div>
+                                <select id="i-resultado">
+                                    <option value="Aprovado" selected>Aprovado</option>
+                                    <option value="Em análise">Em análise</option>
+                                    <option value="Negado">Negado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Informações da proposta</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-titular">Titular do crédito</label>
+                                </div>
+                                <input class="input" id="i-titular" placeholder="[TITULAR]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CPF/CNPJ</label>
+                                    <span class="material-symbols-rounded" title="Utilize somente números; a integração OpenCNPJ preenche automaticamente quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fantasia">Nome fantasia</label>
+                                </div>
+                                <input class="input" id="i-fantasia" placeholder="[NOME-FANTASIA]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-abertura">Data de abertura</label>
+                                </div>
+                                <input class="input" id="i-abertura" placeholder="[DATA-ABERTURA]" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnae">CNAE</label>
+                                </div>
+                                <input class="input" id="i-cnae" placeholder="[CNAE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-status">Status da aprovação</label>
+                                </div>
+                                <input class="input" id="i-status" placeholder="[STATUS]" type="text" value="Pendente de EVE">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-status-icon">Ícone do status</label>
+                                </div>
+                                <select id="i-status-icon">
+                                    <option value="warning" selected>Warning (amarelo)</option>
+                                    <option value="check">Check (verde)</option>
+                                    <option value="block">Block (vermelho)</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-protocolo">Protocolo de atendimento</label>
+                                    <button type="button" class="campo-gerar" id="btn-gerar-protocolo" title="Gerar novo protocolo" aria-label="Gerar novo protocolo">
+                                        <span class="material-symbols-rounded" aria-hidden="true">autorenew</span>
+                                    </button>
+                                </div>
+                                <input class="input" id="i-protocolo" placeholder="[PROTOCOLO]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-codigo">Código da proposta</label>
+                                    <button type="button" class="campo-gerar" id="btn-gerar-codigo" title="Gerar novo código" aria-label="Gerar novo código">
+                                        <span class="material-symbols-rounded" aria-hidden="true">autorenew</span>
+                                    </button>
+                                </div>
+                                <input class="input" id="i-codigo" placeholder="[CODIGO]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Limite aprovado</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor">Limite aprovado</label>
+                                </div>
+                                <input class="input" id="i-valor" placeholder="R$ 0,00" type="text" value="R$ 100.000,00"
+                                    data-aleatorio data-aleatorio-variacao="0.15" data-aleatorio-min="1000">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-parcelas">Quantidade de parcelas</label>
+                                </div>
+                                <input class="input" id="i-parcelas" placeholder="[PARCELAS]" type="text" value="48x"
+                                    data-aleatorio data-aleatorio-variacao="0.25" data-aleatorio-min="6" data-aleatorio-max="72" data-aleatorio-passo="6">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-prazo">Prazo para pagamento</label>
+                                </div>
+                                <input class="input" id="i-prazo" placeholder="[PRAZO]" type="text" value="Após processamento de informações.">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-status-pagamento">Status do pagamento</label>
+                                </div>
+                                <input class="input" id="i-status-pagamento" placeholder="[STATUS-PAGAMENTO]" type="text" value="Aguardando liberação">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">image</span>
+                        Baixar PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="tela-aprovacao" id="tela-aprovacao-sheet">
+            <div class="ta-topbar">
+                <img class="ta-logo" src="./assets/logo-daycoval.png" alt="Banco Daycoval" width="160" height="54">
+                <div class="ta-top-spacer" aria-hidden="true"></div>
+            </div>
+
+            <div class="ta-subheader">
+                <div class="ta-gerente" title="Gerente emitente">
+                    <span class="material-symbols-rounded" aria-hidden="true">account_circle</span>
+                    <span class="ta-gerente-nome" id="gerente">[GERENTE]</span>
+                </div>
+                <p class="ta-subheader-title">Crédito Corporativo Digital</p>
+                <div class="ta-subheader-actions" aria-hidden="true">
+                    <span class="ta-icon-btn"><span class="material-symbols-rounded">home</span></span>
+                    <span class="ta-icon-btn"><span class="material-symbols-rounded">support_agent</span></span>
+                    <span class="ta-icon-btn"><span class="material-symbols-rounded">notifications</span></span>
+                    <span class="ta-icon-btn"><span class="material-symbols-rounded">logout</span></span>
+                </div>
+            </div>
+
+            <div class="ta-tabs-row">
+                <div class="ta-tabs">
+                    <span class="ta-tab is-active">Informações da Proposta</span>
+                    <span class="ta-tab">Mais dados</span>
+                </div>
+                <div class="ta-resultado">
+                    <span class="ta-pill ta-pill--muted">Resultado da Análise</span>
+                    <span class="ta-pill ta-pill--ok" id="resultado">Aprovado</span>
+                </div>
+            </div>
+
+            <div class="ta-body">
+                <div class="ta-card ta-card--empresa">
+                    <div class="ta-card-head">
+                        <span class="material-symbols-rounded" aria-hidden="true">apartment</span>
+                        <span class="ta-card-label">Informações da empresa</span>
+                    </div>
+                    <div class="ta-empresa-rows">
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Titular do Crédito</span>
+                            <strong class="ta-empresa-v" id="titular">[TITULAR]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Razão Social</span>
+                            <strong class="ta-empresa-v" id="razao">[RAZAO-SOCIAL]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Nome Fantasia</span>
+                            <strong class="ta-empresa-v" id="fantasia">[NOME-FANTASIA]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">CPF/CNPJ</span>
+                            <strong class="ta-empresa-v" id="cnpj">[CNPJ]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Data de Abertura</span>
+                            <strong class="ta-empresa-v" id="abertura">[DATA-ABERTURA]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">CNAE</span>
+                            <strong class="ta-empresa-v" id="cnae">[CNAE]</strong>
+                        </div>
+                        <div class="ta-empresa-row ta-empresa-row--status">
+                            <span class="ta-empresa-k">Status da Aprovação</span>
+                            <div class="ta-empresa-status-line">
+                                <strong class="ta-empresa-v" id="status">[STATUS]</strong>
+                                <div class="ta-status-icon" id="status-icon" data-kind="warning" aria-hidden="true">
+                                    <span class="material-symbols-rounded">warning</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Protocolo de Atendimento</span>
+                            <strong class="ta-empresa-v" id="protocolo">[PROTOCOLO]</strong>
+                        </div>
+                        <div class="ta-empresa-row">
+                            <span class="ta-empresa-k">Código da Proposta</span>
+                            <strong class="ta-empresa-v" id="codigo">[CODIGO]</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ta-mid">
+                    <div class="ta-card ta-card--action">
+                        <div class="ta-card-head">
+                            <span class="material-symbols-rounded" aria-hidden="true">account_balance</span>
+                            <span class="ta-card-label">Projeção BACEN</span>
+                        </div>
+                        <p class="ta-action-hint">Consulta de projeção e indicadores BACEN</p>
+                        <button type="button" class="ta-action-btn" tabindex="-1" aria-label="Abrir Projeção BACEN">
+                            <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+                        </button>
+                    </div>
+                    <div class="ta-card ta-card--action">
+                        <div class="ta-card-head">
+                            <span class="material-symbols-rounded" aria-hidden="true">monitoring</span>
+                            <span class="ta-card-label">Score e Rating</span>
+                        </div>
+                        <p class="ta-action-hint">Score de crédito e rating da proposta</p>
+                        <button type="button" class="ta-action-btn" tabindex="-1" aria-label="Abrir Score e Rating">
+                            <span class="material-symbols-rounded" aria-hidden="true">bar_chart</span>
+                        </button>
+                    </div>
+                </div>
+
+                <aside class="ta-side">
+                    <div class="ta-limite">
+                        <p class="ta-limite-label">Limite Aprovado</p>
+                        <p class="ta-limite-valor" id="valor">R$ 100.000,00</p>
+                        <div class="ta-limite-sep" aria-hidden="true"></div>
+                        <div class="ta-limite-rows">
+                            <div class="ta-limite-row">
+                                <span>Quantidade de Parcelas</span>
+                                <strong id="parcelas">48x</strong>
+                            </div>
+                            <div class="ta-limite-row">
+                                <span>Prazo para pagamento</span>
+                                <strong id="prazo">Após processamento de informações.</strong>
+                            </div>
+                            <div class="ta-limite-row">
+                                <span>Status do pagamento</span>
+                                <strong id="status-pagamento">Aguardando liberação</strong>
+                            </div>
+                        </div>
+                        <div class="ta-limite-codes" aria-hidden="true">
+                            <span>847291056318</span>
+                            <span>193847562094</span>
+                        </div>
+                        <button type="button" class="ta-limite-btn" tabindex="-1">Consultar andamento</button>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="ta-footer">
+                <span>Demais informações</span>
+                <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco-daycoval.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/vendor/html2canvas.min.js"></script>
+    <script src="../../scripts/exportar-png.js?v=20260905"></script>
+</body>
+
+</html>

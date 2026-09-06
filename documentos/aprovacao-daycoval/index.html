@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aprovação | SistemaBC</title>
+
+    <link rel="icon" href="../../sistema/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./daycoval.css">
+    
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="aprovacao-daycoval">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Aprovação</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                <div class="base-box">
+                    <h2>Dados do Cliente</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números, pois o sistema irá pontuar automaticamente.">info</span>
+                            </div>
+                            <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-razao">Razão Social</label>
+                            </div>
+                            <input class="input" id="i-razao" placeholder="Nome da Empresa">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-abertura">Data de Abertura</label>
+                            </div>
+                            <input class="input" id="i-abertura" type="date" max="2026-12-31">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-protocolo">Protocolo de Atendimento</label>
+                                <span class="material-symbols-rounded" title="Mantenha o código gerado automaticamente, personalize um novo ou insira o ID de atendimento informado no sistema da Huggy.">info</span>
+                            </div>
+                            <input class="input" id="i-protocolo" placeholder="000XXX111">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <h2>Proposta de Crédito</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-valor">Valor do Crédito</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números e vírgulas.">info</span>
+                            </div>                            
+                            <input class="input" id="i-valor" placeholder="1.000,00" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-parcelas">Parcelas</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números.">info</span>
+                            </div>
+                            <input class="input" id="i-parcelas" placeholder="00x" type="number" step="12" min="0">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-prazo">Prazo para pagamento</label>
+                                <span class="material-symbols-rounded" title="O texto preenchido é o padrão, mas você pode alterá-lo se preferir.">info</span>
+                            </div>
+                            <input class="input" id="i-prazo" placeholder="Após processamento de informações" type="text" value="Após processamento de informações.">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-codigo">Código da Proposta</label>
+                                <span class="material-symbols-rounded" title="Este código é gerado automaticamente, mas você pode definir um personalizado (somente números).">info</span>
+                            </div>                            
+                            <input class="input" id="i-codigo" placeholder="12345678" type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-pendencia">Pendência</label>
+                            </div>
+                            <input class="input" id="i-pendencia" placeholder="Qual a “pendência” para liberação?">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <div class="h2-ativar" id="h2-dadosbancarios">
+                        <h2>Dados Bancários</h2>
+                        <input type="checkbox" id="i-dadosbancarios">
+                    </div>
+                    <div class="base-boxcampos" id="dadosbancarios">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-banco">Instituição</label>
+                                <span class="material-symbols-rounded" title="Utilize, preferencialmente, o código numérico do banco e depois o nome, como mostrado no exemplo do campo.">info</span>
+                            </div>  
+                            <input class="input" id="i-banco" placeholder="Código - Nome do Banco" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-agencia">Agência</label>
+                            </div>
+                            <input class="input" id="i-agencia" placeholder="0000">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-conta">Conta</label>
+                            </div>
+                            <input class="input" id="i-conta" placeholder="000000-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button type="button" id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="aprovacao">
+            <div class="titulodocumento-nome">Cadastro Empresarial</div>
+            <div class="aprovacao-conteudo">
+                <div class="aprovacao-secao">
+                    <div class="aprovacao-titulo">CADASTRO</div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">PROTOCOLO</div>
+                        <div class="aprovacao-celula"><span id="protocolo"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">CNPJ</div>
+                        <div class="aprovacao-celula"><span id="cnpj"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">RAZÃO SOCIAL</div>
+                        <div class="aprovacao-celula"><span id="razao" class="nowrap"></span></div>
+                    </div>
+                    <div class="aprovacao-row final">
+                        <div class="aprovacao-celulatitulo">DATA DE ABERTURA</div>
+                        <div class="aprovacao-celula"><span id="abertura"></span></div>
+                    </div>
+                </div>
+                <div class="aprovacao-secao">
+                    <div class="aprovacao-titulo">PROPOSTA</div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">CÓDIGO</div>
+                        <div class="aprovacao-celula"><span id="codigo"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">VALOR DO CRÉDITO</div>
+                        <div class="aprovacao-celula">R$<span id="valor"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">PARCELAS</div>
+                        <div class="aprovacao-celula"><span id="parcelas"></span>vezes</div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">TAXA DE JUROS</div>
+                        <div class="aprovacao-celula">0,75% ao mês</div>
+                    </div>
+                    <div class="aprovacao-row final">
+                        <div class="aprovacao-celulatitulo">PRAZO PARA PAGAMENTO</div>
+                        <div class="aprovacao-celula"><span id="prazo"></span></div>
+                    </div>
+                </div>
+                <div class="aprovacao-secao">
+                    <div class="aprovacao-titulo">STATUS DA APROVAÇÃO</div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">GERENTE RESPONSÁVEL</div>
+                        <div class="aprovacao-celula"><span id="gerente"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">RESULTADO DA ANÁLISE</div>
+                        <div class="aprovacao-celula" style="color: #0F9D58;">
+                            <span class="material-symbols-rounded" id="resultado">priority</span>Aprovada
+                        </div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">PROCESSAMENTO</div>
+                        <div class="aprovacao-celula">
+                            <span class="material-symbols-rounded" id="processamento">warning</span>Pendente
+                        </div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">PENDÊNCIA</div>
+                        <div class="aprovacao-celula"><span id="pendencia"></span></div>
+                    </div>
+                    <div class="aprovacao-row final">
+                        <div class="aprovacao-celulatitulo">PREVISÃO DE LIBERAÇÃO</div>
+                        <div class="aprovacao-celula">Após resolução de pendências.</div>
+                    </div>
+                </div>
+                <div class="aprovacao-secao" id="dadosbancarios-documento">
+                    <div class="aprovacao-titulo">DADOS BANCÁRIOS</div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">INSTITUIÇÃO</div>
+                        <div class="aprovacao-celula"><span id="banco"></span></div>
+                    </div>
+                    <div class="aprovacao-row">
+                        <div class="aprovacao-celulatitulo">AGÊNCIA</div>
+                        <div class="aprovacao-celula"><span id="agencia"></span></div>
+                    </div>
+                    <div class="aprovacao-row final">
+                        <div class="aprovacao-celulatitulo">CONTA</div>
+                        <div class="aprovacao-celula"><span id="conta"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco-daycoval.js?v=20260905"></script>
+    
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+
+    <script src="./abertura.js"></script>
+    <script src="./codigo.js"></script>
+    <script src="./dadosbancarios.js"></script>
+    <script src="./inputs.js"></script>
+    <script src="./protocolo.js"></script>
+    <script src="./valor.js"></script>
+    
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

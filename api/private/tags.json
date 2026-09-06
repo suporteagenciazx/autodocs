@@ -39,6 +39,12 @@
             "name": "Bacen",
             "accentColor": "#005c7a",
             "createdAt": 1788660685316
+        },
+        {
+            "id": "tag-3ad41bf8",
+            "name": "Daycoval",
+            "accentColor": "#0c1b56",
+            "createdAt": 1788734360012
         }
     ],
     "docLinks": {
@@ -49,6 +55,14 @@
         "declaracao": "tag-sofisa",
         "ordem": "tag-sofisa",
         "garantia": "tag-sofisa",
+        "aprovacao-daycoval": "tag-3ad41bf8",
+        "contrato-daycoval": "tag-3ad41bf8",
+        "comprovante-daycoval": "tag-3ad41bf8",
+        "termo-daycoval": "tag-3ad41bf8",
+        "declaracao-daycoval": "tag-3ad41bf8",
+        "ordem-daycoval": "tag-3ad41bf8",
+        "garantia-daycoval": "tag-3ad41bf8",
+        "tela-aprovacao-daycoval": "tag-3ad41bf8",
         "magnus-laudo": "tag-2158ca88",
         "valuation-aguia": "tag-ac7d7f38",
         "orcamento-aguia": "tag-ac7d7f38",
@@ -63,6 +77,9 @@
         "tela-auditoria-fiscal": "tag-uso-geral",
         "varredura-expansao": "tag-117693a3",
         "cce-bacen": "tag-117693a3",
+        "cdl-bacen": "tag-117693a3",
+        "cce-aguia": "tag-ac7d7f38",
+        "cce-magnus": "tag-2158ca88",
         "eve-aguia": "tag-ac7d7f38",
         "eve-magnus": "tag-2158ca88"
     }

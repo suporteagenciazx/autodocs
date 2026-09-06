@@ -1,0 +1,599 @@
+/* Tela de Aprovação Daycoval — layout horizontal (screenshot / PNG) */
+
+:root {
+  --ta-teal: #0c1b56;
+  --ta-teal-dark: #081234;
+  --ta-orange: #f18a00;
+  --ta-green: #1db954;
+  --ta-green-soft: #e8f8ee;
+  --ta-text: #2a2a2a;
+  --ta-muted: #7a7a7a;
+  --ta-line: #e6e6e6;
+  --ta-bg: #f4f6f7;
+  --ta-card: #ffffff;
+  --ta-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+#documento {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  background: #e9ecef;
+}
+
+/* Folha horizontal — proporção 16:9, boa para print/PNG */
+.tela-aprovacao {
+  width: 1280px;
+  height: 720px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ta-text);
+  position: relative;
+}
+
+.tela-aprovacao::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ta-teal) 0%, var(--ta-teal) 55%, var(--ta-orange) 100%);
+}
+
+/* —— Topo —— */
+.ta-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--ta-line);
+  flex-shrink: 0;
+}
+
+.ta-logo {
+  height: 44px;
+  width: auto;
+  max-width: 200px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.ta-top-spacer {
+  flex: 1;
+}
+
+.ta-subheader {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 48px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--ta-line);
+  flex-shrink: 0;
+}
+
+.ta-gerente {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+  min-width: 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #e6f2f1;
+  color: var(--ta-teal);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ta-gerente .material-symbols-rounded {
+  font-size: 16px;
+  color: var(--ta-teal);
+}
+
+.ta-gerente-nome {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ta-subheader-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ta-teal);
+  letter-spacing: 0.01em;
+}
+
+.ta-subheader-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ta-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--ta-teal);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.ta-icon-btn .material-symbols-rounded {
+  font-size: 22px;
+}
+
+/* —— Tabs + resultado —— */
+.ta-tabs-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 0 28px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.ta-tabs {
+  display: flex;
+  gap: 22px;
+  height: 100%;
+}
+
+.ta-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ta-muted);
+  border-bottom: 3px solid transparent;
+}
+
+.ta-tab.is-active {
+  color: var(--ta-teal);
+  border-bottom-color: var(--ta-teal);
+}
+
+.ta-resultado {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+
+.ta-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ta-pill--muted {
+  background: #eceff1;
+  color: #607d8b;
+}
+
+.ta-pill--ok,
+.ta-pill--warn,
+.ta-pill--bad {
+  color: #fff !important;
+}
+
+.ta-pill--ok {
+  background: var(--ta-green);
+}
+
+.ta-pill--warn {
+  background: #f9a825;
+}
+
+.ta-pill--bad {
+  background: #e53935;
+}
+
+/* —— Conteúdo —— */
+.ta-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(200px, 0.7fr) 280px;
+  align-items: stretch;
+  gap: 14px;
+  padding: 14px 28px 12px;
+  background: var(--ta-bg);
+}
+
+.ta-card {
+  position: relative;
+  background: var(--ta-card);
+  border-radius: 10px;
+  box-shadow: var(--ta-shadow);
+  padding: 14px 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ta-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--ta-teal);
+}
+
+.ta-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.ta-card-head .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--ta-teal);
+}
+
+.ta-card-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ta-text);
+}
+
+/* —— Card empresa (unificado) —— */
+.ta-card--empresa {
+  justify-content: flex-start;
+  gap: 8px;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 12px;
+  padding-bottom: 10px;
+}
+
+.ta-empresa-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ta-empresa-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--ta-line);
+  min-height: 0;
+}
+
+.ta-empresa-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ta-empresa-k {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ta-muted);
+}
+
+.ta-empresa-v {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ta-text);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.ta-empresa-status-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ta-empresa-status-line .ta-empresa-v {
+  flex: 1;
+  min-width: 0;
+}
+
+.ta-empresa-status-line .ta-status-icon {
+  flex-shrink: 0;
+}
+
+/* —— Cards do meio —— */
+.ta-mid {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+
+.ta-card--action {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.ta-action-hint {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.ta-action-btn {
+  align-self: flex-end;
+  margin-top: auto;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--ta-teal);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ta-teal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.ta-action-btn .material-symbols-rounded {
+  font-size: 22px;
+  color: inherit;
+}
+
+.ta-status-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ta-status-icon .material-symbols-rounded {
+  font-size: 22px;
+  color: inherit;
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+.ta-status-icon[data-kind="warning"] {
+  color: #f9a825;
+  background: rgba(249, 168, 37, 0.12);
+}
+
+.ta-status-icon[data-kind="check"] {
+  color: #1db954;
+  background: rgba(29, 185, 84, 0.12);
+}
+
+.ta-status-icon[data-kind="block"] {
+  color: #e53935;
+  background: rgba(229, 57, 53, 0.12);
+}
+
+.ta-status-icon[hidden] {
+  display: none !important;
+}
+
+/* —— Card limite —— */
+.ta-side {
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.ta-limite {
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--ta-card);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  padding: 12px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.ta-limite::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--ta-teal);
+}
+
+.ta-limite-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ta-muted);
+}
+
+.ta-limite-valor {
+  margin: 4px 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ta-teal);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.ta-limite-sep {
+  height: 1px;
+  background: var(--ta-line);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.ta-limite-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ta-limite-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ta-limite-row span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ta-muted);
+}
+
+.ta-limite-row strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ta-text);
+}
+
+.ta-limite-codes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 8px 0 8px;
+  flex-shrink: 0;
+  font-family: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ta-muted);
+  line-height: 1.35;
+}
+
+.ta-limite-btn {
+  margin-top: 0;
+  height: 32px;
+  border: 1.5px solid var(--ta-teal);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ta-teal);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+/* Botão de geração de protocolo/código (ao lado do rótulo) */
+body#tela-aprovacao .campo-gerar {
+  margin: 0 auto 0 6px;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #bdbdbd;
+  cursor: pointer;
+  transition: color .15s ease, background-color .15s ease, transform .15s ease;
+}
+
+body#tela-aprovacao .campo-gerar .material-symbols-rounded {
+  font-size: 15px;
+  color: inherit;
+}
+
+body#tela-aprovacao .campo-gerar:hover {
+  color: var(--cor-accent, #025aa4);
+  background: rgba(2, 90, 164, .08);
+}
+
+body#tela-aprovacao .campo-gerar:active .material-symbols-rounded {
+  transform: rotate(-45deg);
+}
+
+/* —— Rodapé —— */
+.ta-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 40px;
+  flex-shrink: 0;
+  background: #fff;
+  color: var(--ta-teal);
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.ta-footer .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* Preview: folhas horizontais não devem forçar A4 */
+@media print {
+  @page {
+    size: 1280px 720px;
+    margin: 0;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #documento,
+  #documento * {
+    visibility: visible;
+  }
+
+  #documento {
+    position: absolute;
+    inset: 0;
+    display: flex !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .tela-aprovacao {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

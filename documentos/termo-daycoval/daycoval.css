@@ -1,0 +1,35 @@
+/* Daycoval brand overrides for #termo-daycoval */
+#termo-daycoval { --daycoval-blue: #0c1b56; }
+#termo-daycoval .titulodocumento-nome { color: #0c1b56 !important; }
+#termo-daycoval #documento .pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+#termo-daycoval #documento .capa {
+  background-image: url(./assets/capa.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+#termo-daycoval #documento .aprovacao,
+#termo-daycoval #documento .comprovante,
+#termo-daycoval #documento .ordem {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+/* Color overrides (Sofisa teal -> Daycoval navy) */
+#termo-daycoval .titulodocumento-nome,
+#termo-daycoval .aprovacao-titulo,
+#termo-daycoval .comprovante-titulo,
+#termo-daycoval .ordem-titulo {
+  color: #0c1b56 !important;
+}
+#termo-daycoval .aprovacao-celulatitulo,
+#termo-daycoval .comprovante-celulatitulo,
+#termo-daycoval .ordem-celulatitulo {
+  color: #0c1b56 !important;
+}

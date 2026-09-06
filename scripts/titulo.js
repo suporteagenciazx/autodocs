@@ -21,8 +21,19 @@
     const telaAuditoria = document.getElementById('tela-auditoria-fiscal');
     const varreduraExpansao = document.getElementById('varredura-expansao');
     const cceBacen = document.getElementById('cce-bacen');
+    const cdlBacen = document.getElementById('cdl-bacen');
+    const cceAguia = document.getElementById('cce-aguia');
+    const cceMagnus = document.getElementById('cce-magnus');
     const eveAguia = document.getElementById('eve-aguia');
     const eveMagnus = document.getElementById('eve-magnus');
+    const aprovacaoDaycoval = document.getElementById('aprovacao-daycoval');
+    const contratoDaycoval = document.getElementById('contrato-daycoval');
+    const comprovanteDaycoval = document.getElementById('comprovante-daycoval');
+    const termoDaycoval = document.getElementById('termo-daycoval');
+    const declaracaoDaycoval = document.getElementById('declaracao-daycoval');
+    const ordemDaycoval = document.getElementById('ordem-daycoval');
+    const garantiaDaycoval = document.getElementById('garantia-daycoval');
+    const telaAprovacaoDaycoval = document.getElementById('tela-aprovacao-daycoval');
 
     if (contrato) {
         document.getElementById('i-razao').addEventListener('input', function() {
@@ -69,6 +80,42 @@
         };
         if (titularInput) titularInput.addEventListener('input', syncTitle);
         syncTitle();
+    } else if (contratoDaycoval) {
+        document.getElementById('i-razao').addEventListener('input', function() {
+            document.title = 'Contrato de Crédito [Banco Daycoval S.A.] - ' + this.value;
+        });
+    } else if (comprovanteDaycoval) {
+        document.getElementById('i-cpfcnpj').addEventListener('input', function() {
+            document.title = 'Comprovante Daycoval - ' + this.value;
+        });
+    } else if (declaracaoDaycoval) {
+        document.getElementById('i-razao').addEventListener('input', function() {
+            document.title = 'Declaração de Quitação [Banco Daycoval S.A. e BACEN] - ' + this.value;
+        });
+    } else if (garantiaDaycoval) {
+        document.getElementById('i-cliente').addEventListener('input', function() {
+            document.title = 'Garantia de Liberação [Banco Daycoval S.A.] - ' + this.value;
+        });
+    } else if (termoDaycoval) {
+        document.getElementById('i-razao').addEventListener('input', function() {
+            document.title = 'Termo de Responsabilidade [Banco Daycoval S.A.] - ' + this.value;
+        });
+    } else if (ordemDaycoval) {
+        document.getElementById('i-razao').addEventListener('input', function() {
+            document.title = 'Ordem de Pagamento [Banco Daycoval S.A.] - ' + this.value;
+        });
+    } else if (aprovacaoDaycoval) {
+        document.getElementById('i-cnpj').addEventListener('input', function() {
+            document.title = 'Banco Daycoval S.A. - Aprovação [' + this.value + ']';
+        });
+    } else if (telaAprovacaoDaycoval) {
+        var titularDc = document.getElementById('i-titular');
+        var syncDc = function() {
+            var nome = titularDc && titularDc.value.trim();
+            document.title = nome ? 'Tela de Aprovação Daycoval - ' + nome : 'Tela de Aprovação Daycoval';
+        };
+        if (titularDc) titularDc.addEventListener('input', syncDc);
+        syncDc();
     } else if (magnusLaudo) {
         var razaoInput = document.getElementById('i-razao');
         if (razaoInput) {
@@ -182,6 +229,30 @@
         };
         if (razaoCce) razaoCce.addEventListener('input', syncCce);
         syncCce();
+    } else if (cdlBacen) {
+        var razaoCdl = document.getElementById('i-razao');
+        var syncCdl = function() {
+            var rs = razaoCdl && razaoCdl.value.trim();
+            document.title = rs ? 'Conciliação Digital de Liquidez - ' + rs : 'Conciliação Digital de Liquidez';
+        };
+        if (razaoCdl) razaoCdl.addEventListener('input', syncCdl);
+        syncCdl();
+    } else if (cceAguia) {
+        var razaoCceA = document.getElementById('i-razao');
+        var syncCceA = function() {
+            var rs = razaoCceA && razaoCceA.value.trim();
+            document.title = rs ? 'CCE Águia - ' + rs : 'CCE Águia';
+        };
+        if (razaoCceA) razaoCceA.addEventListener('input', syncCceA);
+        syncCceA();
+    } else if (cceMagnus) {
+        var razaoCceM = document.getElementById('i-razao');
+        var syncCceM = function() {
+            var rs = razaoCceM && razaoCceM.value.trim();
+            document.title = rs ? 'CCE Magnus - ' + rs : 'CCE Magnus';
+        };
+        if (razaoCceM) razaoCceM.addEventListener('input', syncCceM);
+        syncCceM();
     } else if (eveAguia) {
         var razaoEveA = document.getElementById('i-razao');
         var syncEveA = function() {

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Declaração | SistemaBC</title>
+
+    <link rel="icon" href="../../sistema/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./daycoval.css">
+    
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="declaracao-daycoval">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Declaração de Quitação</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+
+                <div class="base-box">
+                    <h2>Documento</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo selo-opcao">
+                            <div class="label">
+                                <label class="label-campo" for="i-gerente">Gerente</label>
+                            </div>
+                            <input class="input" id="i-gerente" placeholder="Nome de Gerente" type="text">
+                        </div>
+                        <div class="campo selo-opcao">
+                            <div class="label">
+                                <label class="label-campo" for="i-data">Data de Emissão</label>
+                            </div>
+                            <input class="input" id="i-data" type="date" max="2026-12-31">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-pendencia">Pendência</label>
+                            </div>
+                            <input class="input" id="i-pendencia" placeholder="Pendência" type="text">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-tempolimite">Tempo Limite</label>
+                                <span class="material-symbols-rounded" title="Insira a quantidade e defina se o tempo limite será em minutos, horas, dias ou como preferir.">info</span>
+                            </div>
+                            <input class="input" id="i-tempolimite" placeholder="2 horas" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-box">
+                    <h2>Dados do Cliente</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                <span class="material-symbols-rounded" title="Utilize somente números, pois o sistema irá pontuar automaticamente.">info</span>
+                            </div>
+                            <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-razao">Razão Social</label>
+                            </div>
+                            <input class="input" id="i-razao" placeholder="Nome da Empresa">
+                        </div>
+                        <div class="campo">
+                            <div class="label">
+                                <label class="label-campo" for="i-titular">Titular</label>
+                            </div>
+                            <input class="input" id="i-titular" placeholder="Nome do Cliente">
+                        </div>
+                    </div>
+                </div>
+                <div class="base-box">
+                    <h2>Selos e Carimbos</h2>
+                    <div class="base-boxcampos">
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                            <input id="i-selo-qr" type="checkbox" checked>
+                        </div>
+                        <div class="campo">
+                            <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                            <input id="i-selo-png" type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-inferior">
+                <div class="confirmacao">
+                    <label for="confirmacao" class="label-confirmacao">
+                        Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                    </label>
+                </div>
+                
+                <button type="button" id="exportar">
+                    <span class="material-symbols-rounded">download</span>
+                    Exportar
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="documento">
+        <div class="pagina">
+            <div class="titulodocumento-nome">Declaração de Quitação</div>
+            <div class="pagina-conteudo">
+                <div class="pagina-textos">
+                    <p>Fica atestado nessa declaração referente ao procedimento de liberação de crédito do contemplado <span id="titular">[TITULAR]</span> que possui a responsabilidade de Sócio-Administrador da empresa de CNPJ: <span id="cnpj">[CNPJ]</span> e Razão Social: <span id="razao">[RAZÃO SOCIAL]</span> que ao concluir a pendência solicitada (<span id="pendencia">[PENDÊNCIA]</span>) pelo <span class="banco-razaosocial"></span> de CNPJ: <span class="banco-cnpj"></span> juntamente ao Banco Central do Brasil de CNPJ: 00.038.166/0001-05 referente a aprovação do crédito liberado em sua titularidade, com o prazo de depósito do valor acordado em até <span id="tempo-limite">[TEMPO LIMITE]</span> após resolução da pendência informada.</p>
+
+                    <p><span class="bold">Data de Emissão:</span> <span id="dia">[DD]</span> de <span id="mes">[MM]</span> de <span id="ano">[AAAA]</span>.</p>
+                </div>
+
+			    <div id="assinaturas">
+		    		<div style="margin-top: 120px; display: flex; flex-direction: row; gap: 32px;">
+		    			<div class="a-modelo">
+		    				<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+						    <div class="a-div"></div>
+						    <span class="banco-diretor"></span>
+						    <span class="bold">DIRETOR EXECUTIVO | <span class="banco-nome"></span></span>
+					    </div>
+					    <div class="a-modelo">
+					    	<div class="a-digital">
+						        <div class="digital-texto">Assinado com Certificado Digital ICP Brasil</div>
+						        <span id="assinatura2" class="digital-texto" style="font-size: 18px; line-height: 15px"></span>
+					        </div>
+					    	<div class="a-div"></div>
+					    	<span id="gerente">[GERENTE]</span>
+					    	<span class="bold">GERENTE DE CRÉDITO | <span class="banco-nome"></span></span>
+					    </div>
+				    </div>
+			    </div>
+                <div class="selos" id="selo" data-auth-src="../../sistema/selo-declaracao.png"></div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco-daycoval.js?v=20260905"></script>
+
+    <script src="../../scripts/assinatura.js?v=20260905"></script>
+    
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/datas.js?v=20260905"></script>
+
+    <script src="./inputs.js"></script>
+
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/selo-digital.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

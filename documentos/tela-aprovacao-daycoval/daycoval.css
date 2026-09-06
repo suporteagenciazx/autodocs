@@ -1,0 +1,7 @@
+#tela-aprovacao-daycoval { --daycoval-blue: #0c1b56; }
+#tela-aprovacao-daycoval .ta-logo {
+  height: 36px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+}

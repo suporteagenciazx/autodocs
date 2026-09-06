@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciliação Digital de Liquidez | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./cdl.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="cdl-bacen">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Conciliação Digital de Liquidez</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Cliente favorecido</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche a razão social quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="00.000.000/0000-00" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="Razão social do cliente" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Crédito</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-credito">Valor aprovado</label>
+                                </div>
+                                <input class="input" id="i-credito" type="text" value="R$ 1.250.000,00"
+                                    data-aleatorio data-aleatorio-variacao="0.35" data-aleatorio-min="50000">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-carencia">Carência (dias)</label>
+                                </div>
+                                <input class="input" id="i-carencia" type="number" min="0" step="1" value="90">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-banco">Concedente</label>
+                                </div>
+                                <input class="input" id="i-banco" type="text" value="Banco Sofisa S.A.">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa">Empresa facilitadora</label>
+                                </div>
+                                <input class="input" id="i-empresa" type="text" value="Águia Consultoria Empresarial Ltda">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa-cnpj">CNPJ da facilitadora</label>
+                                </div>
+                                <input class="input" id="i-empresa-cnpj" type="text" value="04.848.916/0001-57">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Assinaturas</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-autarquia">Nome (BACEN)</label>
+                                </div>
+                                <input class="input" id="i-autarquia" type="text" value="Gabriel Galípolo">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-autarquia-cargo">Cargo (BACEN)</label>
+                                </div>
+                                <input class="input" id="i-autarquia-cargo" type="text" value="Presidente">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista">Economista</label>
+                                </div>
+                                <input class="input" id="i-economista" type="text" value="André Luiz Koerich">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-corecon">COFECON</label>
+                                </div>
+                                <input class="input" id="i-corecon" type="text" value="COFECON 091">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Selos e Carimbos</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-corecon">Selo CORECON-SP</label>
+                                <input id="i-selo-corecon" type="checkbox">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                                <input id="i-selo-qr" type="checkbox">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                                <input id="i-selo-png" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="pagina cdl-pagina">
+            <div class="cdl-brand">
+                <img class="cdl-brand-logo" src="./assets/bacen-logo.png" width="56" height="56" alt="Banco Central do Brasil" decoding="async">
+                <p class="cdl-brand-name">Banco Central do Brasil</p>
+            </div>
+
+            <h1 class="cdl-titulo">Conciliação Digital de Liquidez</h1>
+
+            <p class="cdl-texto">
+                O Presidente <strong id="autarquia">[AUTARQUIA]</strong> fala por meio desta Conciliação Digital de
+                Liquidez, junto ao Banco Central do Brasil, instituição financeira de direito privado,
+                com sede na Loc Edificio Sede Qd 3 Bl B 19 Andar, cidade de Brasília, Estado do Distrito Federal,
+                CEP: 70074-900, inscrito no CNPJ/MF sob o nº 00.038.166/0001-05.
+            </p>
+
+            <p class="cdl-texto">
+                A instituição financeira Banco Central do Brasil, por meio de certificado digital emitido pela
+                <strong id="empresa">[EMPRESA]</strong> e vinculado ao <strong id="banco">[BANCO]</strong>, assegura
+                que o cliente <strong id="razao-social">[RAZAO-SOCIAL]</strong>, cuja empresa é inscrita no CNPJ sob o
+                nº <strong id="cnpj">[CNPJ]</strong>, possui um crédito digital empresarial disponível e aprovado para
+                liberação e <strong>livre movimentação em conta</strong>.
+            </p>
+
+            <p class="cdl-secao-titulo">
+                Informações detalhadas sobre o valor a ser liberado na conta de titularidade do cliente favorecido:
+            </p>
+
+            <div class="cdl-resumo">
+                <div class="cdl-linha">
+                    <span class="cdl-rotulo">Valor aprovado</span>
+                    <span class="cdl-valor cdl-valor--destaque" id="credito">[CREDITO]</span>
+                </div>
+                <div class="cdl-linha">
+                    <span class="cdl-rotulo">Carência</span>
+                    <span class="cdl-valor cdl-valor--destaque">
+                        <span id="carencia">[CARENCIA]</span> dias para efetuar o pagamento da primeira parcela
+                    </span>
+                </div>
+            </div>
+
+            <div class="cdl-artefato" aria-label="Artefato de conexão digital homologada">
+                <div class="cdl-artefato-topo">
+                    <span class="cdl-artefato-badge">
+                        <span class="cdl-artefato-badge-dot" aria-hidden="true"></span>
+                        Conexão homologada
+                    </span>
+                    <span class="cdl-artefato-proto">Protocolo <strong id="protocolo">CDL-BCB-000000</strong></span>
+                </div>
+
+                <div class="cdl-link">
+                    <div class="cdl-node">
+                        <div class="cdl-node-box">
+                            <svg class="cdl-node-ico" viewBox="0 0 28 28" aria-hidden="true">
+                                <rect x="3" y="6" width="22" height="16" rx="2" fill="none" stroke="#005c7a" stroke-width="1.6"/>
+                                <path d="M8 12h12M8 16h8" stroke="#005c7a" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            <p class="cdl-node-label">Empresa</p>
+                            <p class="cdl-node-name" id="empresa">[EMPRESA]</p>
+                            <p class="cdl-node-meta">CNPJ <span id="empresa-cnpj">[CNPJ-EMPRESA]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="cdl-canal">
+                        <svg class="cdl-canal-svg" viewBox="0 0 120 36" aria-hidden="true">
+                            <defs>
+                                <marker id="cdl-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 Z" fill="#005c7a"/>
+                                </marker>
+                            </defs>
+                            <line x1="8" y1="18" x2="112" y2="18" stroke="#005c7a" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#cdl-arrow)"/>
+                            <circle cx="28" cy="18" r="3" fill="#0f7a4a"/>
+                            <circle cx="60" cy="18" r="3.5" fill="#005c7a"/>
+                            <circle cx="92" cy="18" r="3" fill="#0f7a4a"/>
+                            <path d="M20 10h8v4h-8zM52 10h16v4H52zM88 10h8v4h-8z" fill="#c5d5dc"/>
+                        </svg>
+                        <p class="cdl-canal-txt">Canal digital BCB</p>
+                    </div>
+
+                    <div class="cdl-node">
+                        <div class="cdl-node-box">
+                            <img class="cdl-node-ico" src="./assets/bacen-logo.png" alt="" width="28" height="28">
+                            <p class="cdl-node-label">Autarquia</p>
+                            <p class="cdl-node-name">Banco Central do Brasil</p>
+                            <p class="cdl-node-meta">CNPJ 00.038.166/0001-05</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="cdl-artefato-rodape">
+                    Artefato digital de homologação: vínculo criptográfico entre a facilitadora e o BACEN para
+                    conciliação de liquidez e liberação com livre movimentação em conta.
+                </p>
+            </div>
+
+            <div class="cdl-assinaturas">
+                <div class="cdl-assinatura">
+                    <p class="cdl-assinatura-org">Banco Central do Brasil</p>
+                    <img class="cdl-sign-img cdl-sign-img--bacen" src="./assets/assinatura-bacen.png" alt="Assinatura BACEN">
+                    <div class="cdl-assinatura-linha" aria-hidden="true"></div>
+                    <p class="cdl-assinatura-nome" id="autarquia">[AUTARQUIA]</p>
+                    <p class="cdl-assinatura-meta" id="autarquia-cargo">[CARGO-BACEN]</p>
+                    <p class="cdl-assinatura-meta">CNPJ 00.038.166/0001-05</p>
+                </div>
+                <div class="cdl-assinatura">
+                    <p class="cdl-assinatura-org cdl-assinatura-org--muted" id="empresa">[EMPRESA]</p>
+                    <img class="cdl-sign-img" src="./assets/assinatura.png" alt="Assinatura economista">
+                    <div class="cdl-assinatura-linha" aria-hidden="true"></div>
+                    <p class="cdl-assinatura-nome">Economista <span id="economista">[ECONOMISTA]</span></p>
+                    <p class="cdl-assinatura-meta" id="corecon">[CORECON]</p>
+                    <p class="cdl-assinatura-meta">CNPJ <span id="empresa-cnpj">[CNPJ-EMPRESA]</span></p>
+                </div>
+            </div>
+
+            <div class="cdl-selos-area">
+                <div class="selos cdl-selos-padrao" id="selo" data-auth-src="../../sistema/selo-contrato.png"></div>
+                <div class="cdl-selo-corecon" id="selo-corecon">
+                    <img src="./assets/corecon-sp.png" alt="CORECON-SP">
+                </div>
+            </div>
+
+            <p class="cdl-rodape">Conciliação Digital de Liquidez · Banco Central do Brasil</p>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/selo-digital.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

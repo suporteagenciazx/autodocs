@@ -1,0 +1,33 @@
+/* Daycoval — overrides de marca sobre documentos.css (Sofisa) */
+
+:root {
+  --daycoval-blue: #0c1b56;
+  --daycoval-blue-soft: #e8ebf3;
+  --daycoval-gray: #9a9a9a;
+}
+
+/* Títulos / accents que usavam #006157 */
+body[id$="-daycoval"] .titulodocumento-nome,
+body[id$="-daycoval"] .titulo-documento,
+body[id$="-daycoval"] h1.titulo,
+body[id$="-daycoval"] .aprovacao-titulo,
+body[id$="-daycoval"] .destaque {
+  color: var(--daycoval-blue) !important;
+}
+
+body[id$="-daycoval"] #documento .pagina,
+body[id$="-daycoval"] #documento .capa {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+body[id$="-daycoval"] #documento .capa {
+  background-image: url(./assets/capa.png) !important;
+}
+
+/* Substitui selos Sofisa quando houver selo local */
+body[id$="-daycoval"] .selo-autenticidade {
+  /* mantém dimensões do CSS compartilhado */
+}
