@@ -46,7 +46,7 @@ function autodocs_app_gate_redirect_login(): void
 /** @return list<string> */
 function autodocs_app_admin_prefixes(): array
 {
-    return ['usuarios', 'tags', 'configuracoes', 'seguranca', 'designer'];
+    return ['usuarios', 'tags', 'configuracoes', 'seguranca', 'designer', 'integracoes'];
 }
 
 /** @return list<string> */

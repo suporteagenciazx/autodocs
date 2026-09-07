@@ -4,6 +4,8 @@
 **Branch de trabalho:** `dev`  
 **Checkpoint restaurável:** `backup/pre-verificacao-final-20260907` @ `4c5b16f`
 
+> **Guia para pessoa leiga (copiar e colar):** [`DEPLOY-VPS-PASSO-A-PASSO-LEIGO.md`](./DEPLOY-VPS-PASSO-A-PASSO-LEIGO.md)
+
 ---
 
 ## 1. Resumo executivo

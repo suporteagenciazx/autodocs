@@ -1,0 +1,84 @@
+# AutoDocs — produção VPS (Caddy Valida BACEN na rede externa)
+# docker compose -f docker-compose.prod.yml up -d --build
+
+services:
+  app:
+    build: .
+    container_name: autodocs-app
+    ports:
+      - "127.0.0.1:8088:80"
+    env_file:
+      - .env
+    environment:
+      AUTODOCS_DB_HOST: db
+      AUTODOCS_DB_PORT: 3306
+      AUTODOCS_DB_NAME: ${MYSQL_DATABASE:-autodocs}
+      AUTODOCS_DB_USER: ${MYSQL_USER:-autodocs_app}
+      AUTODOCS_DB_PASSWORD: ${MYSQL_PASSWORD:?Defina MYSQL_PASSWORD no .env}
+      AUTODOCS_REDIS_HOST: redis
+      AUTODOCS_REDIS_PORT: 6379
+      AUTODOCS_REDIS_PREFIX: ${AUTODOCS_REDIS_PREFIX:-autodocs:}
+      AUTODOCS_SESSION_COOKIE_SECURE: "1"
+      AUTODOCS_REGISTRATION_OPEN: "0"
+      AUTODOCS_FIGMA_TOKEN: ${AUTODOCS_FIGMA_TOKEN:-}
+      AUTODOCS_PUBLIC_PORT: "443"
+    volumes:
+      - .:/var/www/html
+      - ./api/private:/var/www/html/api/private
+      - ./documentos/importados:/var/www/html/documentos/importados
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - autodocs_net
+      - valida_appnet
+
+  db:
+    image: mysql:8.0
+    container_name: autodocs-db
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-autodocs}
+      MYSQL_USER: ${MYSQL_USER:-autodocs_app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Defina MYSQL_PASSWORD no .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no .env}
+    volumes:
+      - autodocs_db_data:/var/lib/mysql
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - autodocs_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: autodocs-redis
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1000"]
+    volumes:
+      - autodocs_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - autodocs_net
+
+volumes:
+  autodocs_db_data:
+  autodocs_redis_data:
+
+networks:
+  autodocs_net:
+    driver: bridge
+  valida_appnet:
+    external: true
+    name: valida-bacen_appnet

@@ -4,7 +4,7 @@ const NAVDRAWER_COLLAPSED_LS = 'autodocs.navdrawer.collapsed';
 const THEME_MODE_LS = 'autodocs.theme.mode';
 const PROFILE_PREFIX = 'autodocs.profile.';
 /** Incrementar quando o HTML do menu lateral mudar (força atualização após soft-nav). */
-const AUTODOCS_NAVDRAWER_REVISION = '6';
+const AUTODOCS_NAVDRAWER_REVISION = '7';
 
 (function applyNavdrawerCollapsedEarly() {
   try {
@@ -32,7 +32,14 @@ const AUTODOCS_DEFAULTS = {
 };
 
 /** Rotas só para role admin (caminho na URL). */
-const AUTODOCS_ADMIN_PATH_MARKERS = ['/configuracoes/', '/tags/', '/usuarios/', '/designer/', '/seguranca/'];
+const AUTODOCS_ADMIN_PATH_MARKERS = [
+  '/configuracoes/',
+  '/tags/',
+  '/usuarios/',
+  '/designer/',
+  '/seguranca/',
+  '/integracoes/',
+];
 
 const navdrawerHTML = `
 <header id="navdrawer" data-revision="${AUTODOCS_NAVDRAWER_REVISION}">
@@ -67,7 +74,7 @@ const navdrawerHTML = `
       <a class="navdrawer-option navdrawer-admin-only" id="menu-designer" data-path="designer/" href="#" title="Designer">
         <span class="material-symbols-rounded" aria-hidden="true">design_services</span><span class="navdrawer-label">Designer</span>
       </a>
-      <a class="navdrawer-option" id="menu-integracoes" data-path="integracoes/" href="#" title="Integrações">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-integracoes" data-path="integracoes/" href="#" title="Integrações">
         <span class="material-symbols-rounded" aria-hidden="true">hub</span><span class="navdrawer-label">Integrações</span>
       </a>
       <a class="navdrawer-option" id="menu-suporte" data-path="suporte/" href="#" title="Suporte">
@@ -76,7 +83,7 @@ const navdrawerHTML = `
       <a class="navdrawer-option navdrawer-admin-only" id="menu-configuracoes" data-path="configuracoes/" href="#" title="Branding">
         <span class="material-symbols-rounded" aria-hidden="true">palette</span><span class="navdrawer-label">Branding</span>
       </a>
-      <a class="navdrawer-option" id="menu-seguranca" data-path="seguranca/" href="#" title="Segurança">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-seguranca" data-path="seguranca/" href="#" title="Segurança">
         <span class="material-symbols-rounded" aria-hidden="true">shield</span><span class="navdrawer-label">Segurança</span>
       </a>
     </div>

@@ -102,7 +102,7 @@
   function allowedDocIdSet() {
     const a = window.__autodocsAuth;
     if (!a || !a.user) return null;
-    if (a.user.role === 'admin' || a.allowedDocIds == null) return null;
+    if (String(a.user.role || '').toLowerCase() === 'admin' || a.allowedDocIds == null) return null;
     return new Set(a.allowedDocIds);
   }
 
@@ -165,8 +165,8 @@
   function populateTagFilter(preferredIds) {
     const root = document.getElementById('documentacoes-tag-filter');
     if (!root || !window.AutoDocsTags) return;
-    const tags = window.AutoDocsTags.getTags();
-    const signature = tags.map(t => t.id + ':' + t.name).join('|');
+    const tags = visibleTagsForUser();
+    const signature = (isAdmin() ? 'a:' : 'u:') + tags.map(t => t.id + ':' + t.name).join('|');
     const validSelected = normalizeTagIds(preferredIds).filter(id => tags.some(t => t.id === id));
 
     if (root.dataset.tagsSig === signature && root.querySelector('.doc-hub-tag-multi-btn')) {
@@ -295,12 +295,22 @@
       (groupByTag ? 'Agrupado por etiqueta' : 'Agrupar por etiqueta');
   }
 
-  function syncAdminTools(groupByTag) {
+  /** Etiquetas visíveis no filtro/agrupamento (user: só as atribuídas). */
+  function visibleTagsForUser() {
+    const all = window.AutoDocsTags ? window.AutoDocsTags.getTags() : [];
+    if (isAdmin()) return all;
+    const a = window.__autodocsAuth;
+    const assigned = Array.isArray(a && a.userTagIds) ? a.userTagIds.map(String) : [];
+    if (!assigned.length) return [];
+    const set = new Set(assigned);
+    return all.filter(t => set.has(String(t.id)));
+  }
+
+  function syncToolbarTools(groupByTag) {
     const wrap = document.getElementById('documentacoes-admin-tools');
     if (!wrap) return;
-    const admin = isAdmin();
-    wrap.hidden = !admin;
-    if (!admin) return;
+    // Agrupar por etiqueta disponível a qualquer utilizador autenticado
+    wrap.hidden = false;
     syncGroupToggleUi(groupByTag);
   }
 
@@ -330,7 +340,7 @@
   }
 
   function renderGrouped(listEl, docs, basePath) {
-    const tags = window.AutoDocsTags.getTags();
+    const tags = visibleTagsForUser();
     const links = window.AutoDocsTags.getLinks();
     const prefs = loadPrefs();
     const collapsed = prefs.collapsedGroups || {};
@@ -344,7 +354,8 @@
     docs.forEach(doc => {
       const tagId = links[doc.id] || '';
       if (tagId && byTag.has(tagId)) byTag.get(tagId).docs.push(doc);
-      else untagged.docs.push(doc);
+      else if (isAdmin()) untagged.docs.push(doc);
+      // Utilizador: docs fora das etiquetas atribuídas não devem aparecer (já filtrados por allowed)
     });
 
     const sections = [...byTag.values()].filter(s => s.docs.length > 0);
@@ -454,11 +465,15 @@
     const catalog = resolveCatalog(window.AUTODOCS_DOCS_CATALOG);
     window.AutoDocsTags.ensureDefaults(catalog.map(d => d.id));
 
-    const prefs = loadPrefs();
-    const admin = isAdmin();
-    const groupByTag = admin && prefs.groupByTag;
+    let prefs = loadPrefs();
+    const userTags = visibleTagsForUser();
+    // Utilizador com 2+ etiquetas: agrupar por defeito na primeira visita
+    if (!isAdmin() && userTags.length >= 2 && !prefs._groupPrefTouched) {
+      prefs = savePrefs({ groupByTag: true, _groupPrefTouched: true });
+    }
+    const groupByTag = !!prefs.groupByTag;
 
-    syncAdminTools(groupByTag);
+    syncToolbarTools(groupByTag);
     populateTagFilter(prefs.tagFilterIds);
 
     const allowed = allowedDocIdSet();
@@ -493,9 +508,8 @@
     }
     if (groupBtn) {
       groupBtn.addEventListener('click', () => {
-        if (!isAdmin()) return;
         const prefs = loadPrefs();
-        savePrefs({ groupByTag: !prefs.groupByTag });
+        savePrefs({ groupByTag: !prefs.groupByTag, _groupPrefTouched: true });
         resetPageState();
         render();
       });
