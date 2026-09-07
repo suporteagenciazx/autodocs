@@ -86,3 +86,12 @@ button#exportar {
 
     border-radius: var(--btn-radius, 10px);
 }
+
+button#exportar .material-symbols-rounded {
+    font-size: 22px;
+    line-height: 1;
+}
+
+button#exportar .exportar-label {
+    line-height: 1;
+}

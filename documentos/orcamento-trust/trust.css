@@ -1,0 +1,13 @@
+/* Trust brand overrides for #orcamento-trust */
+#orcamento-trust { --trust-accent: #59111d; }
+#orcamento-trust #documento .pagina,
+#orcamento-trust #documento .capa,
+#orcamento-trust #documento .pagina.eve-mda,
+#orcamento-trust #documento .capa.eve-capa,
+#orcamento-trust #documento .pagina.rec-pagina,
+#orcamento-trust #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

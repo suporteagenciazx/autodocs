@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/autodocs-pin-lib.php';
 
 autodocs_send_security_headers();
 
@@ -20,10 +21,10 @@ try {
 
 $body = autodocs_read_json_body();
 $email = isset($body['email']) ? trim((string) $body['email']) : '';
-$password = isset($body['password']) ? (string) $body['password'] : '';
+$pin = autodocs_pin_normalize(isset($body['pin']) ? (string) $body['pin'] : '');
 
-if ($email === '' || $password === '') {
-    autodocs_json_response(400, ['error' => 'Email e palavra-passe são obrigatórios.']);
+if ($email === '' || !autodocs_pin_valid($pin)) {
+    autodocs_json_response(400, ['error' => 'Email e PIN de 6 dígitos são obrigatórios.']);
     exit;
 }
 
@@ -36,10 +37,15 @@ if ($blocked !== null) {
 
 try {
     $pdo = autodocs_pdo();
-    $st = $pdo->prepare('SELECT id, email, password_hash, role, active FROM users WHERE email = ? LIMIT 1');
+    $st = $pdo->prepare('SELECT id, email, pin_hash, role, active FROM users WHERE email = ? LIMIT 1');
     $st->execute([$email]);
     $row = $st->fetch();
-    if (!$row || !(int) $row['active'] || !password_verify($password, (string) $row['password_hash'])) {
+    if (
+        !$row
+        || !(int) $row['active']
+        || empty($row['pin_hash'])
+        || !autodocs_pin_verify($pin, (string) $row['pin_hash'])
+    ) {
         autodocs_login_throttle_fail($ip, $email);
         autodocs_json_response(401, ['error' => 'Credenciais inválidas.']);
         exit;
@@ -47,6 +53,7 @@ try {
     autodocs_login_throttle_clear($ip, $email);
     autodocs_regenerate_session();
     $_SESSION['uid'] = (int) $row['id'];
+    $_SESSION['pin_ok'] = 1;
 
     $user = [
         'id' => (int) $row['id'],

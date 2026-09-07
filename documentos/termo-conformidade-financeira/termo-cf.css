@@ -1,0 +1,164 @@
+/* Termo de Conformidade Financeira — Receita Federal (A4) */
+
+#termo-conformidade-financeira {
+  --tcf-ink: #1a335d;
+  --tcf-muted: #2a4a6e;
+  --tcf-line: #1a335d;
+}
+
+#termo-conformidade-financeira #documento .pagina.tcf-pagina {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 48px 64px 40px;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--tcf-ink);
+}
+
+#termo-conformidade-financeira .tcf-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+#termo-conformidade-financeira .tcf-logo {
+  display: block;
+  width: 72px;
+  height: auto;
+  object-fit: contain;
+}
+
+#termo-conformidade-financeira .tcf-brand-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tcf-ink);
+  letter-spacing: 0.01em;
+}
+
+#termo-conformidade-financeira .tcf-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--tcf-ink);
+  text-transform: uppercase;
+}
+
+#termo-conformidade-financeira .tcf-body {
+  flex: 1;
+  min-height: 0;
+}
+
+#termo-conformidade-financeira .tcf-body p {
+  margin: 0 0 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-align: justify;
+  color: var(--tcf-ink);
+}
+
+#termo-conformidade-financeira .tcf-body strong {
+  font-weight: 700;
+}
+
+#termo-conformidade-financeira .tcf-section {
+  margin-top: 22px !important;
+  margin-bottom: 12px !important;
+  font-weight: 700;
+}
+
+#termo-conformidade-financeira .tcf-line {
+  margin-bottom: 8px !important;
+  text-align: left !important;
+}
+
+#termo-conformidade-financeira .tcf-sign-block {
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#termo-conformidade-financeira .tcf-sign-org {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--tcf-ink);
+}
+
+#termo-conformidade-financeira .tcf-sign-area {
+  position: relative;
+  width: 280px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#termo-conformidade-financeira .tcf-assinatura {
+  display: block;
+  width: 170px;
+  height: auto;
+  max-height: 70px;
+  object-fit: contain;
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+#termo-conformidade-financeira .tcf-carimbo {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-40%) rotate(-18deg);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 2px solid rgba(90, 100, 110, 0.45);
+  border-radius: 4px;
+  color: rgba(90, 100, 110, 0.55);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#termo-conformidade-financeira .tcf-sign-line {
+  width: 100%;
+  height: 1px;
+  background: var(--tcf-ink);
+  opacity: 0.85;
+}
+
+#termo-conformidade-financeira .tcf-sign-meta {
+  width: 280px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--tcf-ink);
+}
+
+#termo-conformidade-financeira .tcf-sign-meta p {
+  margin: 0 0 6px;
+}

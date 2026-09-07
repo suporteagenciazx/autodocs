@@ -246,7 +246,7 @@
         escapeHtml(accent) +
         '" aria-hidden="true"></div>' +
         '<div class="tags-admin-card-body">' +
-        '<h3 class="tags-admin-card-title" style="color:' +
+        '<h3 class="tags-admin-card-title" style="--tag-accent:' +
         escapeHtml(accent) +
         '">' +
         escapeHtml(tag.name) +

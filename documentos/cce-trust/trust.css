@@ -1,0 +1,13 @@
+/* Trust brand overrides for #cce-trust */
+#cce-trust { --trust-accent: #59111d; }
+#cce-trust #documento .pagina,
+#cce-trust #documento .capa,
+#cce-trust #documento .pagina.eve-mda,
+#cce-trust #documento .capa.eve-capa,
+#cce-trust #documento .pagina.rec-pagina,
+#cce-trust #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

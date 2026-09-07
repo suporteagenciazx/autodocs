@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #cce-cortez */
+#cce-cortez { --cortez-accent: #0020EF; }
+#cce-cortez #documento .pagina,
+#cce-cortez #documento .capa,
+#cce-cortez #documento .pagina.eve-mda,
+#cce-cortez #documento .capa.eve-capa,
+#cce-cortez #documento .pagina.rec-pagina,
+#cce-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

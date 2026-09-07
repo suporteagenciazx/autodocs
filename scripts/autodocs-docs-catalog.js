@@ -99,6 +99,24 @@ window.AUTODOCS_DOCS_CATALOG = [
     blurb: 'Laudo de valuation empresarial Magnus.',
   },
   {
+    id: 'trust-laudo',
+    title: 'Trust Laudo',
+    href: 'documentos/trust-laudo/',
+    blurb: 'Laudo de valuation empresarial Trust Assessoria.',
+  },
+  {
+    id: 'cortez-laudo',
+    title: 'Cortez Laudo',
+    href: 'documentos/cortez-laudo/',
+    blurb: 'Laudo de valuation empresarial Cortez Consultoria.',
+  },
+  {
+    id: 'villela-laudo',
+    title: 'Villela Laudo',
+    href: 'documentos/villela-laudo/',
+    blurb: 'Laudo de valuation empresarial Villela Assessoria.',
+  },
+  {
     id: 'valuation-aguia',
     title: 'Valuation Empresarial',
     href: 'documentos/valuation-aguia/',
@@ -117,6 +135,24 @@ window.AUTODOCS_DOCS_CATALOG = [
     blurb: 'Orçamento de serviços Magnus Relações Empresariais.',
   },
   {
+    id: 'orcamento-trust',
+    title: 'Orçamento',
+    href: 'documentos/orcamento-trust/',
+    blurb: 'Orçamento de serviços Trust Assessoria Empresarial.',
+  },
+  {
+    id: 'orcamento-cortez',
+    title: 'Orçamento',
+    href: 'documentos/orcamento-cortez/',
+    blurb: 'Orçamento de serviços Cortez Consultoria Empresarial.',
+  },
+  {
+    id: 'orcamento-villela',
+    title: 'Orçamento',
+    href: 'documentos/orcamento-villela/',
+    blurb: 'Orçamento de serviços Villela Assessoria Empresarial.',
+  },
+  {
     id: 'lae-dvego',
     title: 'LAE/DVEGO',
     href: 'documentos/lae-dvego/',
@@ -129,10 +165,46 @@ window.AUTODOCS_DOCS_CATALOG = [
     blurb: 'Demonstração patrimonial LAE/DVEGO Magnus (retrato).',
   },
   {
+    id: 'lae-dvego-trust',
+    title: 'LAE/DVEGO',
+    href: 'documentos/lae-dvego-trust/',
+    blurb: 'Demonstração patrimonial LAE/DVEGO Trust (retrato).',
+  },
+  {
+    id: 'lae-dvego-cortez',
+    title: 'LAE/DVEGO',
+    href: 'documentos/lae-dvego-cortez/',
+    blurb: 'Demonstração patrimonial LAE/DVEGO Cortez (retrato).',
+  },
+  {
+    id: 'lae-dvego-villela',
+    title: 'LAE/DVEGO',
+    href: 'documentos/lae-dvego-villela/',
+    blurb: 'Demonstração patrimonial LAE/DVEGO Villela (retrato).',
+  },
+  {
     id: 'nfe-magnus',
     title: 'NF-e',
     href: 'documentos/nfe-magnus/',
     blurb: 'DANFE / Nota Fiscal Eletrônica Magnus (até 4 serviços).',
+  },
+  {
+    id: 'nfe-trust',
+    title: 'NF-e',
+    href: 'documentos/nfe-trust/',
+    blurb: 'DANFE / Nota Fiscal Eletrônica Trust (até 4 serviços).',
+  },
+  {
+    id: 'nfe-cortez',
+    title: 'NF-e',
+    href: 'documentos/nfe-cortez/',
+    blurb: 'DANFE / Nota Fiscal Eletrônica Cortez (até 4 serviços).',
+  },
+  {
+    id: 'nfe-villela',
+    title: 'NF-e',
+    href: 'documentos/nfe-villela/',
+    blurb: 'DANFE / Nota Fiscal Eletrônica Villela (até 4 serviços).',
   },
   {
     id: 'nfe-aguia',
@@ -145,6 +217,24 @@ window.AUTODOCS_DOCS_CATALOG = [
     title: 'Recibo de Pagamento',
     href: 'documentos/recibo-magnus/',
     blurb: 'Recibo de pagamento Magnus Relações Empresariais.',
+  },
+  {
+    id: 'recibo-trust',
+    title: 'Recibo de Pagamento',
+    href: 'documentos/recibo-trust/',
+    blurb: 'Recibo de pagamento Trust Assessoria Empresarial.',
+  },
+  {
+    id: 'recibo-cortez',
+    title: 'Recibo de Pagamento',
+    href: 'documentos/recibo-cortez/',
+    blurb: 'Recibo de pagamento Cortez Consultoria Empresarial.',
+  },
+  {
+    id: 'recibo-villela',
+    title: 'Recibo de Pagamento',
+    href: 'documentos/recibo-villela/',
+    blurb: 'Recibo de pagamento Villela Assessoria Empresarial.',
   },
   {
     id: 'recibo-aguia',
@@ -165,6 +255,18 @@ window.AUTODOCS_DOCS_CATALOG = [
     blurb: 'Tela horizontal Receita Federal / gov.br (até 4 cards).',
   },
   {
+    id: 'score-business',
+    title: 'Score Business',
+    href: 'documentos/score-business/',
+    blurb: 'Consulta Serasa Score PJ (tela horizontal PNG).',
+  },
+  {
+    id: 'termo-conformidade-financeira',
+    title: 'Termo de Conformidade Financeira',
+    href: 'documentos/termo-conformidade-financeira/',
+    blurb: 'Termo de conformidade financeira — Receita Federal.',
+  },
+  {
     id: 'varredura-expansao',
     title: 'Varredura de Expansão',
     href: 'documentos/varredura-expansao/',
@@ -178,9 +280,9 @@ window.AUTODOCS_DOCS_CATALOG = [
   },
   {
     id: 'cdl-bacen',
-    title: 'Conciliação Digital de Liquidez',
+    title: 'CDL',
     href: 'documentos/cdl-bacen/',
-    blurb: 'Conciliação digital de liquidez com conexão homologada BACEN.',
+    blurb: 'CDL — Conciliação Digital de Liquidez com conexão homologada BACEN.',
   },
   {
     id: 'cce-aguia',
@@ -195,6 +297,24 @@ window.AUTODOCS_DOCS_CATALOG = [
     blurb: 'Certificado de Conformidade Econômica — Magnus Relações Empresariais.',
   },
   {
+    id: 'cce-trust',
+    title: 'CCE Trust',
+    href: 'documentos/cce-trust/',
+    blurb: 'Certificado de Conformidade Econômica — Trust Assessoria Empresarial.',
+  },
+  {
+    id: 'cce-cortez',
+    title: 'CCE Cortez',
+    href: 'documentos/cce-cortez/',
+    blurb: 'Certificado de Conformidade Econômica — Cortez Consultoria Empresarial.',
+  },
+  {
+    id: 'cce-villela',
+    title: 'CCE Villela',
+    href: 'documentos/cce-villela/',
+    blurb: 'Certificado de Conformidade Econômica — Villela Assessoria Empresarial.',
+  },
+  {
     id: 'eve-aguia',
     title: 'EVE',
     href: 'documentos/eve-aguia/',
@@ -205,5 +325,23 @@ window.AUTODOCS_DOCS_CATALOG = [
     title: 'EVE',
     href: 'documentos/eve-magnus/',
     blurb: 'Estudo de Viabilidade Econômica e Financeira — Magnus.',
+  },
+  {
+    id: 'eve-trust',
+    title: 'EVE',
+    href: 'documentos/eve-trust/',
+    blurb: 'Estudo de Viabilidade Econômica e Financeira — Trust.',
+  },
+  {
+    id: 'eve-cortez',
+    title: 'EVE',
+    href: 'documentos/eve-cortez/',
+    blurb: 'Estudo de Viabilidade Econômica e Financeira — Cortez.',
+  },
+  {
+    id: 'eve-villela',
+    title: 'EVE',
+    href: 'documentos/eve-villela/',
+    blurb: 'Estudo de Viabilidade Econômica e Financeira — Villela.',
   },
 ];

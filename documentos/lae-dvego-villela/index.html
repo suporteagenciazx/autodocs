@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAE/DVEGO | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./villela.css">
+    <link rel="stylesheet" href="./lae.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="lae-dvego-villela">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>LAE/DVEGO</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Empresa</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche dados quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-abertura">Data de Abertura</label>
+                                </div>
+                                <input class="input" id="i-abertura" placeholder="[DATA-ABERTURA]" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnae">CNAE / Atividades</label>
+                                </div>
+                                <input class="input" id="i-cnae" placeholder="[CNAE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-porte">Porte</label>
+                                </div>
+                                <input class="input" id="i-porte" placeholder="[PORTE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-endereco-cnpj">Endereço</label>
+                                </div>
+                                <input class="input" id="i-endereco-cnpj" placeholder="[ENDERECO]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-email-cnpj">E-mail</label>
+                                </div>
+                                <input class="input" id="i-email-cnpj" placeholder="[EMAIL]" type="email">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-telefone">Telefone</label>
+                                </div>
+                                <input class="input" id="i-telefone" placeholder="[TELEFONE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-funcionarios">Funcionários</label>
+                                </div>
+                                <input class="input" id="i-funcionarios" placeholder="[FUNCIONARIOS]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-capital-social">Capital Social</label>
+                                </div>
+                                <input class="input" id="i-capital-social" placeholder="R$ 0,00" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="150.000,00" data-aleatorio-variacao="0.2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Variáveis patrimoniais</h2>
+                        <p class="form-hint-var">Ao preencher estes campos, a tabela DMPL e os demais valores são gerados automaticamente.</p>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-1">Faturamento (antepenúltimo mês)</label>
+                                </div>
+                                <input class="input" id="i-fat-1" placeholder="R$[faturamento1]" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="118.500,00" data-aleatorio-variacao="0.18">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-2">Faturamento (penúltimo mês)</label>
+                                </div>
+                                <input class="input" id="i-fat-2" placeholder="R$[faturamento2]" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="132.800,00" data-aleatorio-variacao="0.18">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-3">Faturamento (último mês)</label>
+                                </div>
+                                <input class="input" id="i-fat-3" placeholder="R$[faturamento3]" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="145.200,00" data-aleatorio-variacao="0.18">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-invest-estoque">Investimento em estoque</label>
+                                </div>
+                                <input class="input" id="i-invest-estoque" placeholder="R$[investimento-estoque]" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="42.750,00" data-aleatorio-variacao="0.22">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-anual">Faturamento anual</label>
+                                </div>
+                                <input class="input" id="i-fat-anual" placeholder="R$[faturamento-anual]" type="text"
+                                    data-seed data-aleatorio data-aleatorio-base="1.485.000,00" data-aleatorio-variacao="0.15">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Documento</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-data-emissao">Data de emissão</label>
+                                </div>
+                                <input class="input" id="i-data-emissao" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-referencia">Referência</label>
+                                </div>
+                                <input class="input" id="i-referencia" placeholder="[REFERENCIA]" type="text" value="LAE-DVEGO">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista-nome">Economista</label>
+                                </div>
+                                <input class="input" id="i-economista-nome" type="text" value="">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista-cofecon">COFECON</label>
+                                </div>
+                                <input class="input" id="i-economista-cofecon" type="text" value="">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-villela-cnpj">CNPJ Villela</label>
+                                </div>
+                                <input class="input" id="i-villela-cnpj" type="text" value="94.649.514/0001-16">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <!-- Capa -->
+        <div class="capa aguia-capa">
+            <div class="aguia-capa-conteudo">
+                <div class="aguia-capa-faixa">
+                    <img class="aguia-capa-faixa-logo" src="./assets/logo-horizontal.png" alt="Villela Assessoria Empresarial">
+                    <span class="aguia-capa-faixa-ref" id="referencia">LAE-DVEGO</span>
+                </div>
+                <div class="aguia-capa-corpo">
+                    <div class="aguia-capa-marca">
+                        <img class="aguia-capa-icone" src="./assets/icone.png" alt="">
+                        <div class="aguia-capa-marca-txt">
+                            <span class="aguia-capa-selo">Demonstrativo</span>
+                            <span class="aguia-capa-marca-sub">Villela Assessoria Empresarial</span>
+                        </div>
+                    </div>
+                    <div class="aguia-capa-centro">
+                        <span class="aguia-capa-regua" aria-hidden="true"></span>
+                        <h1 class="aguia-capa-titulo">LAE / DVEGO</h1>
+                        <div class="aguia-capa-empresa">
+                            <span class="aguia-capa-rotulo">Empresa analisada</span>
+                            <span class="aguia-capa-nome" id="razao-social">[RAZAO-SOCIAL]</span>
+                            <span class="aguia-capa-cnpj">CNPJ <span id="cnpj">[CNPJ]</span></span>
+                        </div>
+                    </div>
+                    <div class="aguia-capa-rodape">
+                        <span>Emitido em <strong id="data-emissao">[DATA-EMISSAO]</strong></span>
+                        <span>Documento confidencial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumo empresa -->
+        <div class="pagina aguia-mda">
+            <div class="aguia-conteudo">
+                <p class="aguia-kicker">Identificação e patrimônio operacional</p>
+                <h2 class="aguia-empresa-nome"><span id="razao-social">[RAZAO-SOCIAL]</span></h2>
+                <p class="aguia-empresa-cnpj"><span id="cnpj">[CNPJ]</span> · Abertura <span id="data-abertura">[DATA-ABERTURA]</span></p>
+                <div class="aguia-divider" aria-hidden="true"></div>
+
+                <div class="aguia-grid-2">
+                    <div class="aguia-bloco">
+                        <p class="aguia-sec-title"><span class="aguia-dot"></span> Contatos</p>
+                        <p><span class="aguia-label">E-mail:</span> <span id="email-cnpj">[EMAIL]</span></p>
+                        <p><span class="aguia-label">Telefone:</span> <span id="telefone">[TELEFONE]</span></p>
+                    </div>
+                    <div class="aguia-bloco">
+                        <p class="aguia-sec-title"><span class="aguia-dot is-dark"></span> Endereço</p>
+                        <p><span id="endereco-cnpj">[ENDERECO]</span></p>
+                    </div>
+                </div>
+
+                <div class="aguia-bloco aguia-bloco-cnae">
+                    <p class="aguia-sec-title"><span class="aguia-dot"></span> CNAE / Atividades</p>
+                    <p><span id="cnae">[CNAE]</span></p>
+                </div>
+
+                <div class="aguia-metricas">
+                    <div class="aguia-metrica-card">
+                        <div class="aguia-metrica-row">
+                            <span class="aguia-metrica-label">Porte</span>
+                            <span class="aguia-metrica-valor" id="porte">[PORTE]</span>
+                        </div>
+                        <div class="aguia-metrica-row">
+                            <span class="aguia-metrica-label">Funcionários</span>
+                            <span class="aguia-metrica-valor" id="funcionarios">[FUNCIONARIOS]</span>
+                        </div>
+                    </div>
+                    <div class="aguia-metrica-card">
+                        <div class="aguia-metrica-row">
+                            <span class="aguia-metrica-label">Capital Social</span>
+                            <span class="aguia-metrica-valor" id="capital-social">[CAPITAL-SOCIAL]</span>
+                        </div>
+                        <div class="aguia-metrica-row">
+                            <span class="aguia-metrica-label">Invest. estoque</span>
+                            <span class="aguia-metrica-valor" id="invest-estoque">[INVESTIMENTO-ESTOQUE]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lae-kpi-grid">
+                    <div class="lae-kpi">
+                        <span class="lae-kpi-lbl">Fat. antepenúltimo</span>
+                        <span class="lae-kpi-val" id="fat-1">[FATURAMENTO1]</span>
+                    </div>
+                    <div class="lae-kpi">
+                        <span class="lae-kpi-lbl">Fat. penúltimo</span>
+                        <span class="lae-kpi-val" id="fat-2">[FATURAMENTO2]</span>
+                    </div>
+                    <div class="lae-kpi">
+                        <span class="lae-kpi-lbl">Fat. último mês</span>
+                        <span class="lae-kpi-val" id="fat-3">[FATURAMENTO3]</span>
+                    </div>
+                </div>
+
+                <div class="aguia-chart">
+                    <p class="aguia-chart-title"><span class="aguia-dot"></span> Faturamento trimestral · Anual <span id="fat-anual">[FATURAMENTO-ANUAL]</span></p>
+                    <svg class="aguia-chart-svg" viewBox="0 0 640 280" role="img" aria-label="Gráfico de faturamento">
+                        <g id="fat-grid"></g>
+                        <line x1="72" y1="24" x2="72" y2="232" stroke="#cfcfcf" stroke-width="1"></line>
+                        <line x1="72" y1="232" x2="616" y2="232" stroke="#cfcfcf" stroke-width="1"></line>
+                        <g id="fat-bars"></g>
+                        <g id="fat-y-labels" font-size="11" font-family="Inter, sans-serif" fill="#8a8a8a" text-anchor="end"></g>
+                        <g id="fat-x-labels" font-size="12" font-family="Inter, sans-serif" font-weight="700" fill="#1a1a1a" text-anchor="middle"></g>
+                        <g id="fat-value-labels" font-size="11" font-family="Inter, sans-serif" font-weight="600" fill="#3a3a3a" text-anchor="middle"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- DMPL -->
+        <div class="pagina aguia-mda">
+            <div class="aguia-conteudo">
+                <p class="aguia-kicker">Dados de patrimônio</p>
+                <h2 class="aguia-page-title">Demonstração das Mutações do PL</h2>
+                <div class="aguia-divider" aria-hidden="true"></div>
+                <p class="lae-hint">Valores derivados automaticamente a partir das variáveis patrimoniais informadas.</p>
+
+                <div class="lae-table-wrap">
+                    <table class="lae-table" id="lae-dmpl-table">
+                        <thead>
+                            <tr>
+                                <th>Movimentação</th>
+                                <th>Capital Social</th>
+                                <th>Reserva Legal</th>
+                                <th>Fundos Especiais</th>
+                                <th>Lucros Acum.</th>
+                                <th>Total PL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lae-dmpl-body"></tbody>
+                    </table>
+                </div>
+
+                <div class="lae-charts-2">
+                    <div class="lae-chart-box">
+                        <h3>Composição do PL (final)</h3>
+                        <svg class="lae-chart-svg" id="chart-pl" viewBox="0 0 320 200" role="img" aria-label="Composição do PL"></svg>
+                    </div>
+                    <div class="lae-chart-box">
+                        <h3>Evolução do PL</h3>
+                        <svg class="lae-chart-svg" id="chart-evol" viewBox="0 0 320 200" role="img" aria-label="Evolução do PL"></svg>
+                    </div>
+                </div>
+
+                <div class="aguia-rodape" style="margin-top:28px">
+                    <div class="aguia-assinatura">
+                        <img class="sign-img" src="./assets/assinatura.png" alt="">
+                        <p class="org">Villela Assessoria Empresarial</p>
+                        <p class="meta">CNPJ <span id="villela-cnpj">94.649.514/0001-16</span></p>
+                        <p class="meta"><span id="economista-nome"></span></p>
+                        <p class="meta">COFECON <span id="economista-cofecon">[COFECON]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final -->
+        <div class="pagina aguia-final">
+            <div class="aguia-final-wrap">
+                <aside class="aguia-final-side">
+                    <img class="aguia-final-icone" src="./assets/icone.png" alt="Villela Assessoria Empresarial">
+                    <span class="aguia-final-side-label">Villela Assessoria Empresarial</span>
+                </aside>
+                <div class="aguia-final-main">
+                    <span class="aguia-final-regua" aria-hidden="true"></span>
+                    <p class="aguia-final-msg">Obrigado pela confiança.</p>
+                    <p class="aguia-final-texto">
+                        Este LAE/DVEGO foi elaborado com rigor técnico e confidencialidade.
+                        Estamos disponíveis para esclarecer quaisquer pontos deste demonstrativo
+                        e apoiar as próximas decisões da sua empresa.
+                    </p>
+                    <div class="aguia-final-contato">
+                        <span class="brand">Villela Assessoria Empresarial</span>
+                        <span id="villela-cnpj">94.649.514/0001-16</span>
+                        <span>LAE / DVEGO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

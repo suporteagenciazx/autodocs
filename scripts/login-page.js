@@ -54,15 +54,17 @@
     const corDestaque = theme && typeof theme.corDestaque === 'string' ? theme.corDestaque : null;
     const corAccent = theme && typeof theme.corAccent === 'string' ? theme.corAccent : null;
     if (corDestaque && isValidHexColor(corDestaque)) {
-      root.style.setProperty('--cor-destaque', corDestaque.trim());
+      root.style.setProperty('--brand-destaque', corDestaque.trim());
     } else {
-      root.style.removeProperty('--cor-destaque');
+      root.style.removeProperty('--brand-destaque');
     }
     if (corAccent && isValidHexColor(corAccent)) {
-      root.style.setProperty('--cor-accent', corAccent.trim());
+      root.style.setProperty('--brand-accent', corAccent.trim());
     } else {
-      root.style.removeProperty('--cor-accent');
+      root.style.removeProperty('--brand-accent');
     }
+    root.style.removeProperty('--cor-destaque');
+    root.style.removeProperty('--cor-accent');
   }
 
   function getBasePath() {
@@ -84,14 +86,11 @@
     } catch (_) {
       return null;
     }
-    // Rejeitar open redirect: protocol-relative, URLs absolutas, backslash, ..
     if (!raw.startsWith('/')) return null;
     if (raw.startsWith('//') || raw.includes('\\') || raw.includes('..')) return null;
     if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) return null;
-    // Opcional: garantir que fica sob o mesmo basePath da app
     const base = typeof basePath === 'string' && basePath.startsWith('/') ? basePath : '/';
     if (base !== '/' && !raw.startsWith(base) && raw !== base.slice(0, -1)) {
-      // Em subpasta (ex. /AutoDocsv7/), só aceitar paths dessa árvore
       return null;
     }
     return raw;
@@ -104,36 +103,40 @@
 
     const form = document.getElementById('form-login');
     const msg = document.getElementById('login-msg');
-    const linkCad = document.getElementById('link-cadastro');
-    if (linkCad) {
-      linkCad.href = basePath + 'cadastro/';
-    }
+    const pinRow = document.getElementById('login-pin-row');
+    if (window.AutoDocsPinInput) window.AutoDocsPinInput.bindPinRow(pinRow);
 
     if (!form) return;
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if (msg) msg.textContent = '';
-      const email = (document.getElementById('login-email') || {}).value || '';
-      const password = (document.getElementById('login-password') || {}).value || '';
+      const email = ((document.getElementById('login-email') || {}).value || '').trim();
+      const pin = window.AutoDocsPinInput ? window.AutoDocsPinInput.readPin(pinRow) : '';
+      if (!/^\d{6}$/.test(pin)) {
+        if (msg) msg.textContent = 'Informe o PIN de 6 dígitos.';
+        return;
+      }
       try {
         const res = await fetch(basePath + 'api/auth-login.php', {
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ email: email.trim(), password }),
+          body: JSON.stringify({ email, pin }),
         });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
           if (msg) msg.textContent = data.error || 'Credenciais inválidas.';
+          if (window.AutoDocsPinInput) window.AutoDocsPinInput.clearPin(pinRow);
           return;
         }
-        const ret = readReturnUrl(basePath);
-        // returnUrl vem de location.pathname (ex.: /AutoDocsv7/documentacoes/) — já é caminho absoluto no host; não prefixar com basePath.
-        if (ret) {
-          location.href = ret;
-        } else {
-          location.href = basePath;
+        try {
+          sessionStorage.removeItem('autodocs.session.locked');
+        } catch (_) {
+          /* ignore */
         }
+        const ret = readReturnUrl(basePath);
+        if (ret) location.href = ret;
+        else location.href = basePath;
       } catch (_) {
         if (msg) msg.textContent = 'Erro de rede. Tente novamente.';
       }

@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #nfe-cortez */
+#nfe-cortez { --cortez-accent: #0020EF; }
+#nfe-cortez #documento .pagina,
+#nfe-cortez #documento .capa,
+#nfe-cortez #documento .pagina.eve-mda,
+#nfe-cortez #documento .capa.eve-capa,
+#nfe-cortez #documento .pagina.rec-pagina,
+#nfe-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NF-e | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./cortez.css">
+    <link rel="stylesheet" href="./nfe.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="nfe-cortez">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>NF-e</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Nota fiscal</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-nf-numero">Número</label>
+                                </div>
+                                <input class="input" id="i-nf-numero" type="text" value="11594620">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-serie">Série</label>
+                                </div>
+                                <input class="input" id="i-serie" type="text" value="1">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-chave">Chave de acesso</label>
+                                </div>
+                                <input class="input" id="i-chave" type="text"
+                                    value="7367.4587.0462.3271.9431.0418.4329.0346.7294.3274.0176">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-protocolo">Protocolo de autorização</label>
+                                </div>
+                                <input class="input" id="i-protocolo" type="text" value="994873400763434">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-natureza">Natureza da operação</label>
+                                </div>
+                                <input class="input" id="i-natureza" type="text"
+                                    value="Preparação de documentos e serviços DE AUTONOMIA ADMINISTRATIVA E TRIBUTÁRIA">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-emissao">Data de emissão</label>
+                                </div>
+                                <input class="input" id="i-emissao" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-hora">Hora entrada / saída</label>
+                                </div>
+                                <input class="input" id="i-hora" type="text" placeholder="13:02">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cortez-cnpj">CNPJ emitente (Cortez)</label>
+                                </div>
+                                <input class="input" id="i-cortez-cnpj" type="text" value="05.833.402/0001-90">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-icms">Valor do ICMS</label>
+                                </div>
+                                <input class="input" id="i-icms" type="text" value="R$ 0,00"
+                                    data-aleatorio data-aleatorio-variacao="0.2" data-aleatorio-min="0">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-total">Valor total da nota</label>
+                                </div>
+                                <input class="input" id="i-total" type="text" value="R$ 0,00" readonly>
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-info-complementar">Informações complementares</label>
+                                </div>
+                                <input class="input" id="i-info-complementar" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Destinatário</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CPF / CNPJ</label>
+                                    <span class="material-symbols-rounded"
+                                        title="Utilize somente números; a integração OpenCNPJ preenche automaticamente quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Nome / razão social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-logradouro">Endereço (logradouro)</label>
+                                </div>
+                                <input class="input" id="i-logradouro" placeholder="[ENDERECO]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-numero">Número</label>
+                                </div>
+                                <input class="input" id="i-numero" placeholder="Nº" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-bairro">Bairro / distrito</label>
+                                </div>
+                                <input class="input" id="i-bairro" placeholder="[BAIRRO]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cep">CEP</label>
+                                </div>
+                                <input class="input" id="i-cep" placeholder="[CEP]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cidade">Município</label>
+                                </div>
+                                <input class="input" id="i-cidade" placeholder="[MUNICIPIO]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-uf">UF</label>
+                                </div>
+                                <input class="input" id="i-uf" placeholder="[UF]" type="text" maxlength="2">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-telefone">Fone / fax</label>
+                                </div>
+                                <input class="input" id="i-telefone" placeholder="[TELEFONE]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Serviços / produtos</h2>
+                        <p style="margin:0 0 10px;font-size:13px;color:#5c6b73;">Até 4 itens na NF-e.</p>
+                        <div id="nfe-servicos-lista"></div>
+                        <button type="button" id="nfe-add-servico">
+                            <span class="material-symbols-rounded" aria-hidden="true">add</span>
+                            Adicionar serviço (0/4)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="pagina nfe-pagina">
+            <div class="nfe-sheet">
+                <div class="nfe-recebimento">
+                    <div class="nfe-recebimento-txt">
+                        Recebemos de <strong>Cortez Consultoria Empresarial</strong> os produtos / serviços constantes
+                        na nota fiscal eletrônica indicada ao lado.
+                    </div>
+                    <div class="nfe-recebimento-assin">
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Data de recebimento</span>
+                            <span class="nfe-val">&nbsp;</span>
+                        </div>
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Identificação e assinatura do recebedor</span>
+                            <span class="nfe-val">&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nfe-cabecalho">
+                    <div class="nfe-emitente">
+                        <img class="nfe-emitente-logo" src="./assets/logo-horizontal.png" alt="Cortez Consultoria Empresarial">
+                        <div class="nfe-emitente-nome">Cortez Consultoria Empresarial</div>
+                        <div class="nfe-emitente-end">
+                            Rua Campinas do Piauí, 849<br>
+                            Itaquera — São Paulo / SP<br>
+                            IE: Isento
+                        </div>
+                    </div>
+                    <div class="nfe-danfe-box">
+                        <p class="nfe-danfe-title">DANFE</p>
+                        <p class="nfe-danfe-sub">Documento auxiliar<br>da Nota Fiscal Eletrônica</p>
+                        <div class="nfe-tipo">
+                            <span>0 — Entrada<br>1 — Saída</span>
+                            <span class="nfe-tipo-box">1</span>
+                        </div>
+                        <div class="nfe-nf-num">
+                            N° <span id="nf-numero">11594620</span><br>
+                            Série <span id="nf-serie">1</span>
+                        </div>
+                        <div class="nfe-pagina-num">PÁGINA 1 DE 1</div>
+                    </div>
+                    <div class="nfe-acesso">
+                        <span class="nfe-lbl">Controle do fisco / chave de acesso</span>
+                        <div class="nfe-barcode" aria-hidden="true"></div>
+                        <span class="nfe-chave" id="chave">7367.4587.0462.3271.9431.0418.4329.0346.7294.3274.0176</span>
+                        <p class="nfe-consulta">
+                            Consulta de autenticidade no portal nacional da NF-e
+                            www.nfe.fazenda.gov.br/portal ou no site da SEFAZ autorizada.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nfe-row nfe-natureza">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Natureza da operação</span>
+                        <span class="nfe-val nfe-val--sm" id="natureza">Preparação de documentos e serviços DE AUTONOMIA ADMINISTRATIVA E TRIBUTÁRIA</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Protocolo de autorização de uso</span>
+                        <span class="nfe-val" id="protocolo">994873400763434</span>
+                    </div>
+                </div>
+
+                <div class="nfe-row">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Inscrição estadual</span>
+                        <span class="nfe-val">Isento</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Inscrição estadual do subst. tributário</span>
+                        <span class="nfe-val">Isento</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">CNPJ emitente</span>
+                        <span class="nfe-val" id="cortez-cnpj">05.833.402/0001-90</span>
+                    </div>
+                </div>
+
+                <div class="nfe-sec-title">Destinatário / remetente</div>
+                <div class="nfe-row nfe-dest-r1">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Nome / razão social</span>
+                        <span class="nfe-val" id="razao-social">[RAZAO-SOCIAL]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">CPF / CNPJ</span>
+                        <span class="nfe-val" id="cnpj">[CNPJ]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Data de emissão</span>
+                        <span class="nfe-val" id="emissao">[EMISSAO]</span>
+                    </div>
+                </div>
+                <div class="nfe-row nfe-dest-r2">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Endereço</span>
+                        <span class="nfe-val nfe-val--sm" id="endereco">[ENDERECO]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Bairro / distrito</span>
+                        <span class="nfe-val" id="bairro">[BAIRRO]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">CEP</span>
+                        <span class="nfe-val" id="cep">[CEP]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Data de entrada / saída</span>
+                        <span class="nfe-val" id="emissao">[EMISSAO]</span>
+                    </div>
+                </div>
+                <div class="nfe-row nfe-dest-r3">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Município</span>
+                        <span class="nfe-val" id="municipio">[MUNICIPIO]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">UF</span>
+                        <span class="nfe-val" id="uf">[UF]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Fone / fax</span>
+                        <span class="nfe-val" id="telefone">[TELEFONE]</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Inscrição estadual</span>
+                        <span class="nfe-val">******</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Hora entrada / saída</span>
+                        <span class="nfe-val" id="hora">[HORA]</span>
+                    </div>
+                </div>
+
+                <div class="nfe-sec-title">Cálculo do imposto</div>
+                <div class="nfe-row nfe-impostos-r1">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Base de cálculo do ICMS</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor do ICMS</span>
+                        <span class="nfe-val" id="icms">R$ 0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Base de cálculo do ICMS subst.</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor do ICMS subst.</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor total dos produtos</span>
+                        <span class="nfe-val" id="total-produtos">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="nfe-row nfe-impostos-r2">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor do frete</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor do seguro</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Desconto</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Outras despesas acessórias</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor total do IPI</span>
+                        <span class="nfe-val">0,00</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Valor total da nota</span>
+                        <span class="nfe-val" id="total-nota">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="nfe-sec-title">Transportador / volumes transportados</div>
+                <div class="nfe-row nfe-transp-r1">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Nome / razão social</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Frete por conta</span>
+                        <span class="nfe-val">0 — Emitente</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Código ANTT</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Placa do veículo</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">UF</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">CPF / CNPJ</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="nfe-row">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Endereço</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Município</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">UF</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Inscrição estadual</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="nfe-row">
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Quantidade</span>
+                        <span class="nfe-val">1</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Espécie</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Marca</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Numeração</span>
+                        <span class="nfe-val">&nbsp;</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Peso bruto</span>
+                        <span class="nfe-val">0,000</span>
+                    </div>
+                    <div class="nfe-cell">
+                        <span class="nfe-lbl">Peso líquido</span>
+                        <span class="nfe-val">0,000</span>
+                    </div>
+                </div>
+
+                <div class="nfe-sec-title">Dados dos produtos / serviços</div>
+                <div class="nfe-produtos">
+                    <div class="nfe-prod-head">
+                        <span>Cód.</span>
+                        <span>Descrição dos produtos / serviços</span>
+                        <span>NCM/SH</span>
+                        <span>Qtd</span>
+                        <span>V. unitário</span>
+                        <span>V. total</span>
+                        <span>BC ICMS</span>
+                        <span>V. ICMS</span>
+                        <span>V. IPI</span>
+                        <span>Alíq. ICMS</span>
+                        <span>Alíq. IPI</span>
+                    </div>
+                    <div class="nfe-prod-body">
+                        <div class="nfe-prod-row is-empty" id="prod-row-1">
+                            <span data-col="codigo">—</span>
+                            <span data-col="descricao">—</span>
+                            <span data-col="ncm">—</span>
+                            <span class="nfe-num" data-col="quant">—</span>
+                            <span class="nfe-num" data-col="vunit">—</span>
+                            <span class="nfe-num" data-col="vtotal">—</span>
+                            <span class="nfe-num" data-col="bc">0,00</span>
+                            <span class="nfe-num" data-col="vicms">0,00</span>
+                            <span class="nfe-num" data-col="vipi">0,00</span>
+                            <span class="nfe-num" data-col="alicms">0,00</span>
+                            <span class="nfe-num" data-col="alipi">0,00</span>
+                        </div>
+                        <div class="nfe-prod-row is-empty" id="prod-row-2">
+                            <span data-col="codigo">—</span>
+                            <span data-col="descricao">—</span>
+                            <span data-col="ncm">—</span>
+                            <span class="nfe-num" data-col="quant">—</span>
+                            <span class="nfe-num" data-col="vunit">—</span>
+                            <span class="nfe-num" data-col="vtotal">—</span>
+                            <span class="nfe-num" data-col="bc">0,00</span>
+                            <span class="nfe-num" data-col="vicms">0,00</span>
+                            <span class="nfe-num" data-col="vipi">0,00</span>
+                            <span class="nfe-num" data-col="alicms">0,00</span>
+                            <span class="nfe-num" data-col="alipi">0,00</span>
+                        </div>
+                        <div class="nfe-prod-row is-empty" id="prod-row-3">
+                            <span data-col="codigo">—</span>
+                            <span data-col="descricao">—</span>
+                            <span data-col="ncm">—</span>
+                            <span class="nfe-num" data-col="quant">—</span>
+                            <span class="nfe-num" data-col="vunit">—</span>
+                            <span class="nfe-num" data-col="vtotal">—</span>
+                            <span class="nfe-num" data-col="bc">0,00</span>
+                            <span class="nfe-num" data-col="vicms">0,00</span>
+                            <span class="nfe-num" data-col="vipi">0,00</span>
+                            <span class="nfe-num" data-col="alicms">0,00</span>
+                            <span class="nfe-num" data-col="alipi">0,00</span>
+                        </div>
+                        <div class="nfe-prod-row is-empty" id="prod-row-4">
+                            <span data-col="codigo">—</span>
+                            <span data-col="descricao">—</span>
+                            <span data-col="ncm">—</span>
+                            <span class="nfe-num" data-col="quant">—</span>
+                            <span class="nfe-num" data-col="vunit">—</span>
+                            <span class="nfe-num" data-col="vtotal">—</span>
+                            <span class="nfe-num" data-col="bc">0,00</span>
+                            <span class="nfe-num" data-col="vicms">0,00</span>
+                            <span class="nfe-num" data-col="vipi">0,00</span>
+                            <span class="nfe-num" data-col="alicms">0,00</span>
+                            <span class="nfe-num" data-col="alipi">0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nfe-rodape">
+                    <div class="nfe-sec-title">Cálculo do ISSQN</div>
+                    <div class="nfe-row nfe-issqn">
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Inscrição municipal</span>
+                            <span class="nfe-val">&nbsp;</span>
+                        </div>
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Valor total dos serviços</span>
+                            <span class="nfe-val" id="total-servicos">R$ 0,00</span>
+                        </div>
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Base de cálculo do ISSQN</span>
+                            <span class="nfe-val" id="base-issqn">R$ 0,00</span>
+                        </div>
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Valor do ISSQN</span>
+                            <span class="nfe-val">0,00</span>
+                        </div>
+                    </div>
+                    <div class="nfe-sec-title">Dados adicionais</div>
+                    <div class="nfe-adicionais">
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Informações complementares</span>
+                            <span class="nfe-val nfe-val--xs" id="info-complementar">&nbsp;</span>
+                        </div>
+                        <div class="nfe-cell">
+                            <span class="nfe-lbl">Reservado ao fisco</span>
+                            <span class="nfe-val">&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

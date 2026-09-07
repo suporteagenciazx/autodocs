@@ -33,3 +33,22 @@
 #garantia-daycoval .ordem-celulatitulo {
   color: #0c1b56 !important;
 }
+
+/* Mesmo fluxo da Sofisa: selo ICP não sobrepõe o texto */
+#garantia-daycoval #assinaturas {
+  margin-top: 24px;
+}
+
+#garantia-daycoval #assinaturas > div {
+  margin-top: 0 !important;
+}
+
+#garantia-daycoval .a-modelo {
+  margin-top: 8px;
+}
+
+#garantia-daycoval .a-digital {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+}

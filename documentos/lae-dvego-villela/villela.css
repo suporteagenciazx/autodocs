@@ -1,0 +1,13 @@
+/* Villela brand overrides for #lae-dvego-villela */
+#lae-dvego-villela { --villela-accent: #14324A; }
+#lae-dvego-villela #documento .pagina,
+#lae-dvego-villela #documento .capa,
+#lae-dvego-villela #documento .pagina.eve-mda,
+#lae-dvego-villela #documento .capa.eve-capa,
+#lae-dvego-villela #documento .pagina.rec-pagina,
+#lae-dvego-villela #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

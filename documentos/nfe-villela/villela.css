@@ -1,0 +1,13 @@
+/* Villela brand overrides for #nfe-villela */
+#nfe-villela { --villela-accent: #14324A; }
+#nfe-villela #documento .pagina,
+#nfe-villela #documento .capa,
+#nfe-villela #documento .pagina.eve-mda,
+#nfe-villela #documento .capa.eve-capa,
+#nfe-villela #documento .pagina.rec-pagina,
+#nfe-villela #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

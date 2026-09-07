@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #cortez-laudo */
+#cortez-laudo { --cortez-accent: #0020EF; }
+#cortez-laudo #documento .pagina,
+#cortez-laudo #documento .capa,
+#cortez-laudo #documento .pagina.eve-mda,
+#cortez-laudo #documento .capa.eve-capa,
+#cortez-laudo #documento .pagina.rec-pagina,
+#cortez-laudo #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

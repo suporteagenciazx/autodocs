@@ -1,0 +1,830 @@
+/* LAE/DVEGO — Cortez Consultoria Empresarial (A4 792x1120) */
+
+#lae-dvego-cortez {
+  --aguia-ink: #1f2422;
+  --aguia-chumbo: #0020EF;
+  --aguia-cinza: #4a6b5e;
+  --aguia-medio: #6d7772;
+  --aguia-prata: #a8b8b0;
+  --aguia-borda: #e2e8e4;
+  --aguia-fundo: #f4f8f5;
+  --aguia-texto: #1f2422;
+  --aguia-suave: #6d7772;
+  --aguia-radius: 0;
+}
+
+/* ---------- Capa (ID Magnus) ---------- */
+
+#lae-dvego-cortez #documento .capa.aguia-capa {
+  width: 792px;
+  height: 1121px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#lae-dvego-cortez .aguia-capa-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--aguia-texto);
+}
+
+#lae-dvego-cortez .aguia-capa-faixa {
+  flex-shrink: 0;
+  height: 148px;
+  background: #0d1f18;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+#lae-dvego-cortez .aguia-capa-faixa::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 48%, #0020EF 49%, #0020EF 100%);
+}
+
+#lae-dvego-cortez .aguia-capa-faixa-logo {
+  height: 64px;
+  width: auto;
+  max-width: 360px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+#lae-dvego-cortez .aguia-capa-faixa-ref {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a8a8a8;
+}
+
+#lae-dvego-cortez .aguia-capa-corpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 56px 64px 48px;
+  min-height: 0;
+}
+
+#lae-dvego-cortez .aguia-capa-marca {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+#lae-dvego-cortez .aguia-capa-icone {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #0d1f18;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#lae-dvego-cortez .aguia-capa-marca-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#lae-dvego-cortez .aguia-capa-selo {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#lae-dvego-cortez .aguia-capa-marca-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--aguia-suave);
+  letter-spacing: 0.04em;
+}
+
+#lae-dvego-cortez .aguia-capa-centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  min-height: 0;
+}
+
+#lae-dvego-cortez .aguia-capa-regua {
+  width: 56px;
+  height: 4px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-cinza);
+  margin-bottom: 22px;
+}
+
+#lae-dvego-cortez .aguia-capa-titulo {
+  margin: 0 0 28px;
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--aguia-ink);
+  text-transform: uppercase;
+}
+
+#lae-dvego-cortez .aguia-capa-empresa {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 24px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  border-left: 5px solid var(--aguia-chumbo);
+  background: rgba(255, 255, 255, 0.92);
+  max-width: 520px;
+}
+
+#lae-dvego-cortez .aguia-capa-rotulo {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego-cortez .aguia-capa-nome {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+}
+
+#lae-dvego-cortez .aguia-capa-cnpj {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-capa-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 12px;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-capa-rodape strong {
+  color: var(--aguia-texto);
+  font-weight: 700;
+}
+
+/* ---------- Páginas MDA ---------- */
+
+#lae-dvego-cortez #documento .pagina.aguia-mda {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#lae-dvego-cortez .aguia-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 72px 64px 64px;
+  font-family: 'Inter', sans-serif;
+  color: var(--aguia-texto);
+}
+
+#lae-dvego-cortez .aguia-kicker {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-empresa-nome,
+#lae-dvego-cortez .aguia-page-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #111;
+}
+
+#lae-dvego-cortez .aguia-empresa-cnpj {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego-cortez .aguia-divider {
+  width: 48px;
+  height: 4px;
+  margin: 18px 0 28px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+}
+
+#lae-dvego-cortez .aguia-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+#lae-dvego-cortez .aguia-bloco {
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--aguia-borda);
+  border-radius: var(--aguia-radius);
+}
+
+#lae-dvego-cortez .aguia-bloco p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #222;
+}
+
+#lae-dvego-cortez .aguia-bloco p:last-child {
+  margin-bottom: 0;
+}
+
+#lae-dvego-cortez .aguia-sec-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo) !important;
+}
+
+#lae-dvego-cortez .aguia-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-prata);
+  flex-shrink: 0;
+}
+
+#lae-dvego-cortez .aguia-dot.is-dark {
+  background: var(--aguia-chumbo);
+}
+
+#lae-dvego-cortez .aguia-label {
+  font-weight: 600;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-bloco-cnae {
+  margin-bottom: 18px;
+}
+
+#lae-dvego-cortez .aguia-metricas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego-cortez .aguia-metrica-card {
+  padding: 14px 16px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#lae-dvego-cortez .aguia-metrica-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--aguia-borda);
+}
+
+#lae-dvego-cortez .aguia-metrica-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+#lae-dvego-cortez .aguia-metrica-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego-cortez .aguia-metrica-valor {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  text-align: right;
+}
+
+#lae-dvego-cortez .aguia-chart {
+  margin-top: 8px;
+  padding: 16px 18px 10px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+#lae-dvego-cortez .aguia-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego-cortez .aguia-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#lae-dvego-cortez .aguia-premissas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego-cortez .aguia-premissa {
+  padding: 14px 16px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego-cortez .aguia-premissa span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#lae-dvego-cortez .aguia-premissa strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+}
+
+#lae-dvego-cortez .aguia-valor-destaque {
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego-cortez .aguia-valor-destaque .lbl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #cfcfcf;
+}
+
+#lae-dvego-cortez .aguia-valor-destaque .val {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+#lae-dvego-cortez .aguia-valores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+#lae-dvego-cortez .aguia-valor-card {
+  padding: 16px 18px;
+  border-radius: var(--aguia-radius);
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#lae-dvego-cortez .aguia-valor-card .lbl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-cinza);
+}
+
+#lae-dvego-cortez .aguia-valor-card .val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+}
+
+#lae-dvego-cortez .aguia-rodape {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+#lae-dvego-cortez .aguia-assinatura {
+  flex: 1;
+  min-width: 0;
+}
+
+#lae-dvego-cortez .aguia-assinatura .sign-img {
+  display: block;
+  height: 72px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: grayscale(1) contrast(1.05);
+}
+
+#lae-dvego-cortez .aguia-assinatura .org {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego-cortez .aguia-assinatura .meta {
+  margin: 0 0 2px;
+  font-size: 11px;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-selos-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+#lae-dvego-cortez .aguia-selos-area .selos.aguia-selos-padrao {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+#lae-dvego-cortez .aguia-selos-area .selo {
+  width: auto;
+  max-width: 280px;
+  margin: 0;
+  align-self: flex-end;
+  border-radius: var(--aguia-radius) !important;
+}
+
+#lae-dvego-cortez .aguia-selos-area .selo:not(.selo-autenticidade) {
+  width: 280px;
+  margin-top: 0;
+}
+
+#lae-dvego-cortez .aguia-selos-area .selo-autenticidade {
+  width: 150px;
+  margin-top: 0;
+}
+
+#lae-dvego-cortez .aguia-selo-corecon img {
+  display: block;
+  height: 46px;
+  width: auto;
+  mix-blend-mode: multiply;
+  filter: grayscale(0.35);
+}
+
+#lae-dvego-cortez .aguia-selo-corecon[hidden] {
+  display: none;
+}
+
+#lae-dvego-cortez .aguia-disclaimer {
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 9.5px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-align: justify;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+}
+
+/* ---------- Página final (layout distinto) ---------- */
+
+#lae-dvego-cortez #documento .pagina.aguia-final {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background: #0d1f18;
+}
+
+#lae-dvego-cortez .aguia-final-wrap {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+#lae-dvego-cortez .aguia-final-side {
+  background: #111;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 48px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+#lae-dvego-cortez .aguia-final-side::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: linear-gradient(135deg, transparent 42%, #2e2e2e 43%, #2e2e2e 100%);
+}
+
+#lae-dvego-cortez .aguia-final-icone {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+#lae-dvego-cortez .aguia-final-side-label {
+  position: relative;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  text-align: center;
+}
+
+#lae-dvego-cortez .aguia-final-main {
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 56px;
+  box-sizing: border-box;
+}
+
+#lae-dvego-cortez .aguia-final-regua {
+  width: 48px;
+  height: 4px;
+  border-radius: var(--aguia-radius);
+  background: var(--aguia-chumbo);
+  margin-bottom: 22px;
+}
+
+#lae-dvego-cortez .aguia-final-msg {
+  margin: 0 0 16px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--aguia-ink);
+}
+
+#lae-dvego-cortez .aguia-final-texto {
+  margin: 0 0 36px;
+  max-width: 360px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--aguia-suave);
+}
+
+#lae-dvego-cortez .aguia-final-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 20px;
+  border-top: 1px solid var(--aguia-borda);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--aguia-cinza);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#lae-dvego-cortez .aguia-final-contato .brand {
+  color: var(--aguia-ink);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* ---------- LAE/DVEGO extras ---------- */
+
+#lae-dvego-cortez .lae-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+#lae-dvego-cortez .lae-kpi {
+  padding: 14px 16px;
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255,255,255,0.92);
+}
+
+#lae-dvego-cortez .lae-kpi-lbl {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aguia-suave);
+  margin-bottom: 6px;
+}
+
+#lae-dvego-cortez .lae-kpi-val {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--aguia-ink);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+#lae-dvego-cortez .lae-table-wrap {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--aguia-borda);
+  margin: 0 0 22px;
+  background: rgba(255,255,255,0.95);
+}
+
+#lae-dvego-cortez .lae-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: Inter, sans-serif;
+}
+
+#lae-dvego-cortez .lae-table th,
+#lae-dvego-cortez .lae-table td {
+  border-bottom: 1px solid var(--aguia-borda);
+  border-right: 1px solid var(--aguia-borda);
+  padding: 8px 7px;
+  font-size: 10.5px;
+  line-height: 1.3;
+  vertical-align: middle;
+}
+
+#lae-dvego-cortez .lae-table th:last-child,
+#lae-dvego-cortez .lae-table td:last-child {
+  border-right: none;
+}
+
+#lae-dvego-cortez .lae-table thead th {
+  background: #0020EF;
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#lae-dvego-cortez .lae-table thead th:first-child {
+  text-align: left;
+  width: 28%;
+}
+
+#lae-dvego-cortez .lae-table tbody td:first-child {
+  font-weight: 600;
+  color: #222;
+  background: #f7f7f7;
+}
+
+#lae-dvego-cortez .lae-table tbody td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+#lae-dvego-cortez .lae-table tbody tr.is-total td {
+  background: #ececec;
+  font-weight: 800;
+  border-bottom: none;
+}
+
+#lae-dvego-cortez .lae-charts-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+#lae-dvego-cortez .lae-chart-box {
+  border: 1px solid var(--aguia-borda);
+  background: rgba(255,255,255,0.92);
+  padding: 12px 12px 8px;
+}
+
+#lae-dvego-cortez .lae-chart-box h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aguia-chumbo);
+}
+
+#lae-dvego-cortez .lae-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#lae-dvego-cortez .lae-hint {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: #5c6b73;
+  line-height: 1.4;
+}
+
+#lae-dvego-cortez .form-hint-var {
+  font-size: 11px;
+  color: #6e6e6e;
+  margin: -4px 0 8px;
+}

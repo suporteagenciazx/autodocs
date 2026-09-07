@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Segurança | AutoDocs</title>
-
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
-
     <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
     <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
     <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
@@ -16,7 +13,7 @@
 </head>
 
 <body>
-    <div class="conteudo">
+    <div class="conteudo" id="conteudo">
         <header id="pagina">
             <span id="sistema-banco" class="banco-razaosocial"></span>
             <span id="sistema-cnpj" class="banco-cnpj"></span>
@@ -31,16 +28,24 @@
                             <h2>Bloqueio por inatividade</h2>
                         </div>
                         <p class="campo-texto" style="margin-bottom: 16px;">
-                            Defina após quanto tempo sem atividade o sistema bloqueia automaticamente a sessão. Esta funcionalidade será ativada em breve.
+                            Após o tempo configurado sem atividade, a sessão é bloqueada e exige o PIN de 6 dígitos para continuar.
                         </p>
                         <form id="form-seguranca-idle" class="base-boxcampos">
                             <div class="campo">
-                                <label class="label-campo" for="seguranca-idle-minutos">Tempo limite (minutos)</label>
-                                <input class="input" type="number" id="seguranca-idle-minutos" name="idleMinutes" min="1" max="240" step="1" value="30" disabled>
+                                <label class="label-campo" for="seguranca-idle-enabled">Ativar bloqueio automático</label>
+                                <label style="display:inline-flex;align-items:center;gap:8px;font-family:Inter,sans-serif;font-size:13px;">
+                                    <input type="checkbox" id="seguranca-idle-enabled" checked>
+                                    Ativo
+                                </label>
                             </div>
+                            <div class="campo">
+                                <label class="label-campo" for="seguranca-idle-minutos">Tempo limite (minutos)</label>
+                                <input class="input" type="number" id="seguranca-idle-minutos" name="idleMinutes" min="1" max="240" step="1" value="1">
+                            </div>
+                            <p id="seguranca-msg" class="campo-texto" style="min-height:1.2em;margin:0;" role="alert"></p>
                             <div class="campo" style="margin-top: 8px;">
-                                <button type="button" disabled style="width:100%;padding:14px 22px;border:0;border-radius:10px;background:#ccc;color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;">
-                                    Em breve
+                                <button type="submit" class="autodocs-btn-pill-primary" style="width:100%;padding:14px 22px;border:0;border-radius:10px;cursor:pointer;background:var(--brand-accent,var(--cor-accent));color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:600;">
+                                    Guardar
                                 </button>
                             </div>
                         </form>
@@ -48,23 +53,12 @@
 
                     <div class="base-box">
                         <div class="box-header">
-                            <span class="material-symbols-rounded">phonelink_lock</span>
-                            <h2>Google Authenticator</h2>
+                            <span class="material-symbols-rounded">pin</span>
+                            <h2>PIN de acesso</h2>
                         </div>
-                        <p class="campo-texto" style="margin-bottom: 16px;">
-                            Configure autenticação de dois fatores (2FA) com Google Authenticator no login. A ligação será disponibilizada em breve.
+                        <p class="campo-texto" style="margin-bottom: 0;">
+                            O login e o desbloqueio usam um PIN de 6 dígitos definido pelo administrador em <strong>Usuários</strong> (gerar / regenerar PIN).
                         </p>
-                        <div class="base-boxcampos">
-                            <div class="campo">
-                                <label class="label-campo" for="seguranca-2fa-status">Estado</label>
-                                <input class="input" type="text" id="seguranca-2fa-status" value="Não configurado" readonly disabled>
-                            </div>
-                            <div class="campo" style="margin-top: 8px;">
-                                <button type="button" disabled style="width:100%;padding:14px 22px;border:0;border-radius:10px;background:#ccc;color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;">
-                                    Configurar autenticador (em breve)
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -72,6 +66,7 @@
     </div>
     <script src="../scripts/banco.js?v=20260905"></script>
     <script src="../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../scripts/seguranca-page.js?v=20260905"></script>
 </body>
 
 </html>

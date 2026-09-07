@@ -1,0 +1,593 @@
+/* Trust Laudo — documento nativo (A4 792x1120) */
+
+#trust-laudo {
+  --trust-verde: #59111d;
+  --trust-verde-claro: #8b3d4a;
+  --trust-lima: #a85a66;
+  --trust-borda: #e8e2e3;
+  --trust-texto: #1f2422;
+  --trust-suave: #6d7772;
+}
+
+/* ---------- Capa (100% nativa) ---------- */
+
+#trust-laudo #documento .capa.trust-capa {
+  width: 792px;
+  height: 1121px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#trust-laudo .trust-capa-conteudo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 84px 76px 96px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--trust-texto);
+}
+
+#trust-laudo .trust-capa-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--trust-borda);
+}
+
+#trust-laudo .trust-capa-selo {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--trust-verde);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#trust-laudo .trust-capa-ref {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-capa-centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+}
+
+#trust-laudo .trust-capa-logo {
+  width: 320px;
+  height: auto;
+  margin-bottom: 46px;
+}
+
+#trust-laudo .trust-capa-regua {
+  width: 72px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--trust-verde-claro);
+  margin-bottom: 26px;
+}
+
+#trust-laudo .trust-capa-titulo {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--trust-verde);
+  text-transform: uppercase;
+}
+
+#trust-laudo .trust-capa-empresa {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 28px;
+  border-radius: 14px;
+  border: 1px solid var(--trust-borda);
+  border-left: 5px solid var(--trust-verde);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+#trust-laudo .trust-capa-rotulo {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-capa-nome {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111;
+  word-break: break-word;
+}
+
+#trust-laudo .trust-capa-cnpj {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-capa-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-capa-rodape strong {
+  color: var(--trust-texto);
+  font-weight: 700;
+}
+
+/* ---------- Páginas internas (MDA) ---------- */
+
+#trust-laudo #documento .pagina.trust-mda {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#trust-laudo .trust-conteudo {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 78px 64px 72px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--trust-texto);
+}
+
+#trust-laudo .trust-kicker {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-empresa-nome {
+  margin: 0 0 4px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111;
+  word-break: break-word;
+}
+
+#trust-laudo .trust-empresa-cnpj {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+#trust-laudo .trust-divider {
+  height: 6px;
+  margin: 0 0 26px;
+  border-radius: 3px;
+  background: var(--trust-verde);
+}
+
+#trust-laudo .trust-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 36px;
+  margin-bottom: 20px;
+}
+
+#trust-laudo .trust-sec-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--trust-lima);
+  transform: rotate(45deg);
+}
+
+#trust-laudo .trust-dot.is-dark {
+  background: var(--trust-verde);
+}
+
+#trust-laudo .trust-bloco p {
+  margin: 0 0 5px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #222;
+}
+
+#trust-laudo .trust-bloco-cnae {
+  margin-bottom: 20px;
+}
+
+#trust-laudo .trust-label {
+  margin-right: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-metricas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  margin-bottom: 22px;
+}
+
+#trust-laudo .trust-metrica-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(27, 77, 62, 0.08);
+  background: rgba(123, 198, 126, 0.13);
+}
+
+#trust-laudo .trust-metrica-row {
+  display: grid;
+  gap: 3px;
+}
+
+#trust-laudo .trust-metrica-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-metrica-valor {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  min-height: 1.2em;
+  word-break: break-word;
+}
+
+/* Gráfico ocupa todo o espaço restante da página */
+#trust-laudo .trust-chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--trust-borda);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+#trust-laudo .trust-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-chart-svg {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  display: block;
+}
+
+/* ---------- Página 3: DCF ---------- */
+
+#trust-laudo .trust-page-title {
+  margin: 0 0 14px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111;
+}
+
+#trust-laudo .trust-premissas {
+  display: grid;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+#trust-laudo .trust-premissa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  border-radius: 8px;
+  background: rgba(123, 198, 126, 0.2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-premissa strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#trust-laudo .trust-valor-destaque {
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: var(--trust-verde);
+  color: #fff;
+}
+
+#trust-laudo .trust-valor-destaque .lbl {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+#trust-laudo .trust-valor-destaque .val {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+#trust-laudo .trust-valores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+#trust-laudo .trust-valor-card {
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--trust-borda);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+#trust-laudo .trust-valor-card .lbl {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-valor-card .val {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Assinatura à esquerda, selos à direita, ambos encostados no rodapé */
+#trust-laudo .trust-rodape {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: auto;
+}
+
+#trust-laudo .trust-assinatura {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+#trust-laudo .trust-assinatura .sign-img {
+  width: 168px;
+  height: auto;
+  margin-bottom: 2px;
+}
+
+#trust-laudo .trust-assinatura .org {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-assinatura .meta {
+  margin: 0;
+  font-size: 12px;
+  color: #444;
+}
+
+/* Selos: padrão (menores) acima do CORECON, sem colidir com a assinatura */
+#trust-laudo .trust-selos-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+#trust-laudo .trust-selos-area .selos.trust-selos-padrao {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+#trust-laudo .trust-selos-area .selo {
+  width: auto;
+  max-width: 280px;
+  margin: 0;
+  align-self: flex-end;
+}
+
+#trust-laudo .trust-selos-area .selo:not(.selo-autenticidade) {
+  width: 280px;
+  margin-top: 0;
+}
+
+#trust-laudo .trust-selos-area .selo-autenticidade {
+  width: 150px;
+  margin-top: 0;
+}
+
+#trust-laudo .trust-selo-corecon img {
+  display: block;
+  height: 46px;
+  width: auto;
+  mix-blend-mode: multiply;
+}
+
+#trust-laudo .trust-selo-corecon[hidden] {
+  display: none;
+}
+
+#trust-laudo .trust-disclaimer {
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--trust-borda);
+  font-size: 9.5px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-align: justify;
+  text-transform: uppercase;
+  color: var(--trust-suave);
+}
+
+/* ---------- Página final ---------- */
+
+#trust-laudo #documento .pagina.trust-final {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#trust-laudo .trust-final-wrap {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 96px 96px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+#trust-laudo .trust-final-logo {
+  width: 300px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+#trust-laudo .trust-final-regua {
+  width: 64px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--trust-verde-claro);
+  margin-bottom: 30px;
+}
+
+#trust-laudo .trust-final-msg {
+  margin: 0 0 18px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--trust-verde);
+}
+
+#trust-laudo .trust-final-texto {
+  margin: 0;
+  max-width: 440px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--trust-suave);
+}
+
+#trust-laudo .trust-final-contato {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 44px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--trust-texto);
+}
+
+#trust-laudo .trust-final-contato .sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--trust-lima);
+}
+
+/* O laudo depende do fundo MDA e dos blocos verdes: força a impressão das
+   cores para o PDF sair igual ao preview, sem depender de "gráficos de fundo". */
+@media print {
+  #trust-laudo #documento,
+  #trust-laudo #documento * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

@@ -1,0 +1,13 @@
+/* Villela brand overrides for #recibo-villela */
+#recibo-villela { --villela-accent: #14324A; }
+#recibo-villela #documento .pagina,
+#recibo-villela #documento .capa,
+#recibo-villela #documento .pagina.eve-mda,
+#recibo-villela #documento .capa.eve-capa,
+#recibo-villela #documento .pagina.rec-pagina,
+#recibo-villela #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

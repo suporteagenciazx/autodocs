@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';
 require __DIR__ . '/user-tag-links-lib.php';
+require __DIR__ . '/autodocs-pin-lib.php';
 
 header('X-Content-Type-Options: nosniff');
 
@@ -41,11 +42,11 @@ try {
     switch ($action) {
         case 'list':
             $rows = $pdo->query(
-                'SELECT u.id, u.email, u.role, u.active,
+                'SELECT u.id, u.email, u.role, u.active, u.pin_hash,
                         GROUP_CONCAT(DISTINCT a.batch_id ORDER BY a.batch_id) AS batch_ids_csv
                  FROM users u
                  LEFT JOIN user_doc_access a ON a.user_id = u.id
-                 GROUP BY u.id, u.email, u.role, u.active
+                 GROUP BY u.id, u.email, u.role, u.active, u.pin_hash
                  ORDER BY u.id'
             )->fetchAll();
             require_once __DIR__ . '/autodocs-tags-lib.php';
@@ -68,6 +69,7 @@ try {
                     'email' => (string) $r['email'],
                     'role' => (string) $r['role'],
                     'active' => (int) $r['active'],
+                    'hasPin' => !empty($r['pin_hash']),
                     'batchIds' => $batches,
                     'tagIds' => $tagIds,
                     'tagLinkCount' => count($tagIds),
@@ -112,18 +114,25 @@ try {
                 autodocs_json_response(400, ['error' => 'Email inválido.']);
                 exit;
             }
-            if (strlen($password) < 8) {
-                autodocs_json_response(400, ['error' => 'Palavra-passe mínima: 8 caracteres.']);
+            if ($password === '') {
+                $password = bin2hex(random_bytes(16));
+            } elseif (strlen($password) < 8) {
+                autodocs_json_response(400, ['error' => 'Palavra-passe mínima: 8 caracteres (ou deixe em branco).']);
                 exit;
             }
+            $plainPin = autodocs_pin_generate();
             $pdo->beginTransaction();
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $st = $pdo->prepare('INSERT INTO users (email, password_hash, role, active) VALUES (?, ?, ?, 1)');
-            $st->execute([$email, $hash, $role]);
+            $pinHash = autodocs_pin_hash($plainPin);
+            $st = $pdo->prepare(
+                'INSERT INTO users (email, password_hash, pin_hash, pin_updated_at, role, active)
+                 VALUES (?, ?, ?, NOW(), ?, 1)'
+            );
+            $st->execute([$email, $hash, $pinHash, $role]);
             $newId = (int) $pdo->lastInsertId();
             autodocs_admin_set_user_batches($pdo, $newId, $batchIds);
             $pdo->commit();
-            autodocs_json_response(201, ['ok' => true, 'id' => $newId]);
+            autodocs_json_response(201, ['ok' => true, 'id' => $newId, 'pin' => $plainPin]);
             break;
 
         case 'update':
@@ -164,6 +173,31 @@ try {
             autodocs_json_response(200, ['ok' => true]);
             break;
 
+        case 'regeneratePin':
+            $id = isset($body['id']) ? (int) $body['id'] : 0;
+            if ($id <= 0) {
+                autodocs_json_response(400, ['error' => 'id inválido.']);
+                exit;
+            }
+            $st = $pdo->prepare('SELECT id, email, role FROM users WHERE id = ? LIMIT 1');
+            $st->execute([$id]);
+            $row = $st->fetch();
+            if (!$row) {
+                autodocs_json_response(404, ['error' => 'Utilizador não encontrado.']);
+                exit;
+            }
+            $plainPin = autodocs_pin_generate();
+            $pinHash = autodocs_pin_hash($plainPin);
+            $pdo->prepare('UPDATE users SET pin_hash = ?, pin_updated_at = NOW() WHERE id = ?')
+                ->execute([$pinHash, $id]);
+            autodocs_json_response(200, [
+                'ok' => true,
+                'id' => $id,
+                'email' => (string) $row['email'],
+                'pin' => $plainPin,
+            ]);
+            break;
+
         case 'delete':
             $id = isset($body['id']) ? (int) $body['id'] : 0;
             if ($id <= 0) {
@@ -181,7 +215,7 @@ try {
             break;
 
         default:
-            autodocs_json_response(400, ['error' => 'action desconhecida. Use list, create, update ou delete.']);
+            autodocs_json_response(400, ['error' => 'action desconhecida. Use list, create, update, regeneratePin ou delete.']);
     }
 } catch (PDOException $e) {
     if ($pdo->inTransaction()) {

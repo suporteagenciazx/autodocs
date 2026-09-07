@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Pagamento | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./cortez.css">
+    <link rel="stylesheet" href="./recibo.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="recibo-cortez">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Recibo de Pagamento</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Serviço</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-documentacao">Documentação</label>
+                                </div>
+                                <input class="input" id="i-documentacao" type="text" value="Valuation Empresarial">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-data-servico">Data do serviço</label>
+                                </div>
+                                <input class="input" id="i-data-servico" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-codigo">Número do documento</label>
+                                </div>
+                                <input class="input" id="i-codigo" type="text" value="REC-TRU-2026-001"
+                                    data-aleatorio data-aleatorio-base="2026001" data-aleatorio-variacao="0.4" data-aleatorio-min="1000">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor">Valor pago</label>
+                                </div>
+                                <input class="input" id="i-valor" type="text" value="R$ 1.450,00"
+                                    data-aleatorio data-aleatorio-variacao="0.2" data-aleatorio-min="100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Pagador (cliente)</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche a razão social quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ CLIENTE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO SOCIAL CLIENTE]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Beneficiário</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa">Empresa</label>
+                                </div>
+                                <input class="input" id="i-empresa" type="text" value="Cortez Consultoria Empresarial">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-empresa-cnpj">CNPJ</label>
+                                </div>
+                                <input class="input" id="i-empresa-cnpj" type="text" value="05.833.402/0001-90">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-contato">Contato</label>
+                                </div>
+                                <input class="input" id="i-contato" type="text" value="">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista">Responsável</label>
+                                </div>
+                                <input class="input" id="i-economista" type="text" value="">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cargo">Cargo</label>
+                                </div>
+                                <input class="input" id="i-cargo" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="pagina rec-pagina">
+            <div class="rec-faixa">
+                <img class="rec-faixa-logo" src="./assets/logo.png" alt="Cortez Consultoria Empresarial">
+                <span class="rec-faixa-tag">Recibo</span>
+            </div>
+            <div class="rec-page">
+                <h1 class="rec-titulo">Recibo de Pagamento</h1>
+                <div class="rec-regua" aria-hidden="true"></div>
+
+                <p class="rec-saudacao">Prezado(a),</p>
+                <p class="rec-texto">
+                    Esperamos que esta mensagem o encontre bem. Em anexo, por favor, encontra-se o
+                    comprovante de pagamento referente à quitação do
+                    <strong id="documentacao">[DOCUMENTACAO]</strong>, correspondente ao período
+                    <strong id="data-servico">[DATA-SERVICO]</strong>. Este documento atesta que o
+                    pagamento foi efetuado conforme as obrigações fiscais e regulamentares vigentes.
+                </p>
+                <p class="rec-texto">Segue abaixo um resumo das informações relevantes:</p>
+
+                <p class="rec-resumo-titulo">Resumo do pagamento</p>
+                <div class="rec-resumo">
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Pagador</span>
+                        <span class="rec-valor"><span id="razao-social">[RAZAO-SOCIAL]</span> · <span id="cnpj">[CNPJ]</span></span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Beneficiário</span>
+                        <span class="rec-valor"><span id="empresa">[EMPRESA]</span> · <span id="empresa-cnpj">[CNPJ-EMPRESA]</span></span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Nº do documento</span>
+                        <span class="rec-valor" id="codigo">[CODIGO]</span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Valor pago</span>
+                        <span class="rec-valor rec-valor--destaque" id="valor">[VALOR]</span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Período de referência</span>
+                        <span class="rec-valor" id="data-servico">[DATA-SERVICO]</span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Responsável</span>
+                        <span class="rec-valor"><span id="economista">[ECONOMISTA]</span> · <span id="cargo">[CARGO]</span></span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Contato</span>
+                        <span class="rec-valor" id="contato">[CONTATO]</span>
+                    </div>
+                    <div class="rec-linha">
+                        <span class="rec-rotulo">Empresa</span>
+                        <span class="rec-valor" id="empresa">[EMPRESA]</span>
+                    </div>
+                </div>
+
+                <p class="rec-fecho">
+                    Por favor, revise cuidadosamente os detalhes mencionados no comprovante. Caso haja
+                    qualquer dúvida ou necessidade de esclarecimento adicional, estamos à disposição para
+                    prestar todo o suporte necessário. Agradecemos pela sua pontualidade e comprometimento
+                    no cumprimento das obrigações tributárias. Esta quitação é fundamental para a manutenção
+                    da regularidade fiscal da empresa.
+                </p>
+
+                <div class="rec-assinatura">
+                    <img class="rec-assinatura-img" src="./assets/assinatura.png" alt="Assinatura">
+                    <p class="rec-assinatura-nome" id="economista">[ECONOMISTA]</p>
+                    <p class="rec-assinatura-meta" id="cargo">[CARGO]</p>
+                    <p class="rec-assinatura-meta" id="empresa">[EMPRESA]</p>
+                    <p class="rec-assinatura-meta">CNPJ <span id="empresa-cnpj">[CNPJ-EMPRESA]</span></p>
+                </div>
+
+                <p class="rec-rodape">Cortez Consultoria Empresarial · CNPJ 05.833.402/0001-90</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+/* Trust brand overrides for #lae-dvego-trust */
+#lae-dvego-trust { --trust-accent: #59111d; }
+#lae-dvego-trust #documento .pagina,
+#lae-dvego-trust #documento .capa,
+#lae-dvego-trust #documento .pagina.eve-mda,
+#lae-dvego-trust #documento .capa.eve-capa,
+#lae-dvego-trust #documento .pagina.rec-pagina,
+#lae-dvego-trust #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

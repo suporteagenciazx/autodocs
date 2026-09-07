@@ -1,0 +1,236 @@
+/* CCE Cortez — Certificado de Conformidade Econômica */
+
+#cce-cortez {
+  --cce-ink: #1a1a1a;
+  --cce-accent: #0020EF;
+  --cce-accent-dark: #0020EF;
+  --cce-soft: #e8f5eb;
+  --cce-muted: #5a6b62;
+  --cce-line: #c8ddd0;
+}
+
+#cce-cortez #documento .pagina.cce-pagina {
+  width: 792px;
+  height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url(./assets/mda.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 56px 36px;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--cce-ink);
+}
+
+#cce-cortez .cce-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+#cce-cortez .cce-brand-logo {
+  width: auto;
+  height: 48px;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
+}
+
+#cce-cortez .cce-brand-name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cce-accent-dark);
+}
+
+#cce-cortez .cce-titulo {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cce-accent-dark);
+  line-height: 1.25;
+}
+
+#cce-cortez .cce-texto {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: justify;
+  color: var(--cce-ink);
+}
+
+#cce-cortez .cce-texto strong {
+  font-weight: 700;
+  color: var(--cce-accent-dark);
+}
+
+#cce-cortez .cce-secao-titulo {
+  margin: 18px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--cce-accent-dark);
+}
+
+#cce-cortez .cce-resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border: 1px solid var(--cce-line);
+  border-left: 3px solid var(--cce-accent);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+#cce-cortez .cce-linha {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+#cce-cortez .cce-rotulo {
+  font-weight: 700;
+  color: var(--cce-accent-dark);
+}
+
+#cce-cortez .cce-valor {
+  color: var(--cce-ink);
+  word-break: break-word;
+}
+
+#cce-cortez .cce-valor--destaque {
+  font-weight: 700;
+  color: var(--cce-accent-dark);
+}
+
+#cce-cortez .cce-assinaturas {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  padding-top: 12px;
+}
+
+#cce-cortez .cce-assinatura {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+}
+
+#cce-cortez .cce-assinatura-org {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cce-accent);
+}
+
+#cce-cortez .cce-assinatura-org--muted {
+  color: #2a2a2a;
+}
+
+#cce-cortez .cce-sign-img {
+  display: block;
+  width: auto;
+  max-width: 220px;
+  height: 56px;
+  object-fit: contain;
+  margin: 0 0 2px;
+}
+
+#cce-cortez .cce-sign-img--bacen {
+  height: 78px;
+  max-width: 200px;
+}
+
+#cce-cortez .cce-assinatura-linha {
+  width: 100%;
+  max-width: 240px;
+  border-top: 1px solid #333;
+  margin: 0 0 8px;
+}
+
+#cce-cortez .cce-selos-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+#cce-cortez .cce-selos-area .selos.cce-selos-padrao {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+#cce-cortez .cce-selos-area .selo {
+  width: auto;
+  max-width: 280px;
+  margin: 0;
+  align-self: flex-end;
+}
+
+#cce-cortez .cce-selos-area .selo:not(.selo-autenticidade) {
+  width: 280px;
+  margin-top: 0;
+}
+
+#cce-cortez .cce-selos-area .selo-autenticidade {
+  width: 150px;
+  margin-top: 0;
+}
+
+#cce-cortez .cce-selo-corecon img {
+  display: block;
+  height: 46px;
+  width: auto;
+  mix-blend-mode: multiply;
+}
+
+#cce-cortez .cce-selo-corecon[hidden] {
+  display: none;
+}
+
+#cce-cortez .cce-assinatura-nome {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cce-ink);
+}
+
+#cce-cortez .cce-assinatura-meta {
+  margin: 0;
+  font-size: 11px;
+  color: var(--cce-muted);
+  line-height: 1.35;
+}
+
+#cce-cortez .cce-rodape {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--cce-muted);
+  letter-spacing: 0.02em;
+}

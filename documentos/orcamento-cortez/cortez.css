@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #orcamento-cortez */
+#orcamento-cortez { --cortez-accent: #0020EF; }
+#orcamento-cortez #documento .pagina,
+#orcamento-cortez #documento .capa,
+#orcamento-cortez #documento .pagina.eve-mda,
+#orcamento-cortez #documento .capa.eve-capa,
+#orcamento-cortez #documento .pagina.rec-pagina,
+#orcamento-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

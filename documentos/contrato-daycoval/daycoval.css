@@ -8,6 +8,9 @@
   background-repeat: no-repeat !important;
 }
 #contrato-daycoval #documento .capa {
+  width: 792px;
+  height: 1120px;
+  background-color: #0c1b56;
   background-image: url(./assets/capa.png) !important;
   background-size: cover !important;
   background-position: center !important;
@@ -21,13 +24,10 @@
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
-/* Color overrides (Sofisa teal -> Daycoval navy) */
 #contrato-daycoval .titulodocumento-nome,
 #contrato-daycoval .aprovacao-titulo,
 #contrato-daycoval .comprovante-titulo,
-#contrato-daycoval .ordem-titulo {
-  color: #0c1b56 !important;
-}
+#contrato-daycoval .ordem-titulo,
 #contrato-daycoval .aprovacao-celulatitulo,
 #contrato-daycoval .comprovante-celulatitulo,
 #contrato-daycoval .ordem-celulatitulo {

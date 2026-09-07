@@ -6,96 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar | AutoDocs</title>
     <link rel="icon" href="../sistema/favicon.svg" type="image/svg+xml">
-    
     <link rel="stylesheet" href="../estilos/fontes/inter.css?v=20260905">
     <link rel="stylesheet" href="../estilos/sistema.css?v=20260905">
     <link rel="stylesheet" href="../estilos/exportar.css?v=20260905">
-    
     <link rel="stylesheet" href="../estilos/icones.css?v=20260905">
-    <style>
-        body.login-standalone {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            padding: 24px 16px;
-            background: #f0f2f0;
-        }
-
-        .login-standalone-main {
-            width: 100%;
-            max-width: 380px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .login-standalone-card {
-            width: 100%;
-            padding: 32px 28px;
-            box-sizing: border-box;
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-        }
-
-        .login-standalone-card.base-boxcampos {
-            gap: 14px;
-        }
-
-        .login-standalone-logo {
-            display: block;
-            margin: 0 auto;
-            max-height: 44px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .autodocs-auth-msg {
-            color: #b00020;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            margin: 0;
-            min-height: 1.2em;
-        }
-
-        .login-standalone-submit {
-            width: 100%;
-            box-sizing: border-box;
-            margin-top: 4px;
-            padding: 14px 22px;
-            border-radius: 10px;
-            border: 0;
-            cursor: pointer;
-            background-color: var(--cor-accent, #025aa4);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .login-standalone-links {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            text-align: center;
-            color: #666;
-        }
-
-        .login-standalone-links a {
-            color: var(--cor-accent, #025aa4);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .login-standalone-links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="../estilos/autodocs-lock.css?v=20260905">
 </head>
 
 <body class="login-standalone">
@@ -108,12 +23,20 @@
                 <input class="input" type="email" id="login-email" name="email" required autocomplete="username" maxlength="255">
             </div>
             <div class="campo">
-                <label class="label-campo" for="login-password">Palavra-passe</label>
-                <input class="input" type="password" id="login-password" name="password" required autocomplete="current-password" minlength="1">
+                <label class="label-campo" for="login-pin-0">PIN</label>
+                <div class="autodocs-pin-row" id="login-pin-row" data-pin-length="6">
+                    <input class="autodocs-pin-box" id="login-pin-0" type="password" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Dígito 1">
+                    <input class="autodocs-pin-box" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 2">
+                    <input class="autodocs-pin-box" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 3">
+                    <input class="autodocs-pin-box" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 4">
+                    <input class="autodocs-pin-box" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 5">
+                    <input class="autodocs-pin-box" type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Dígito 6">
+                </div>
             </div>
             <button type="submit" class="login-standalone-submit">Entrar</button>
         </form>
     </main>
+    <script src="../scripts/autodocs-pin-input.js?v=20260905"></script>
     <script src="../scripts/login-page.js?v=20260905"></script>
     <script src="../scripts/autodocs-css-guard.js?v=20260905"></script>
 </body>

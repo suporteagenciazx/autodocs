@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Laudo | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./laudo.css">
+    <link rel="stylesheet" href="./trust.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="trust-laudo">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Trust Laudo</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Empresa avaliada</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="Utilize somente números; a integração OpenCNPJ preenche automaticamente quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" placeholder="[CNPJ]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão Social</label>
+                                </div>
+                                <input class="input" id="i-razao" placeholder="[RAZAO-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnae">CNAE / Atividades</label>
+                                </div>
+                                <input class="input" id="i-cnae" placeholder="[CNAE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-funcionarios">Funcionários</label>
+                                </div>
+                                <input class="input" id="i-funcionarios" placeholder="[FUNCIONARIOS]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-capital-social">Capital Social</label>
+                                </div>
+                                <input class="input" id="i-capital-social" placeholder="[CAPITAL-SOCIAL]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-abertura">Data de Abertura</label>
+                                </div>
+                                <input class="input" id="i-abertura" placeholder="[DATA-ABERTURA]" type="date">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-porte">Porte</label>
+                                </div>
+                                <input class="input" id="i-porte" placeholder="[PORTE]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Contatos e endereço</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-email-cnpj">E-mail</label>
+                                </div>
+                                <input class="input" id="i-email-cnpj" placeholder="[EMAIL-CNPJ]" type="email">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-telefone">Telefone(s)</label>
+                                </div>
+                                <input class="input" id="i-telefone" placeholder="[TELEFONE]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-endereco-cnpj">Endereço / Local</label>
+                                </div>
+                                <input class="input" id="i-endereco-cnpj" placeholder="[ENDERECO-CNPJ]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Documento</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-data-emissao">Data de emissão</label>
+                                </div>
+                                <input class="input" id="i-data-emissao" placeholder="[DATA-EMISSAO]" type="date" max="2030-12-31">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-referencia">Referência do laudo</label>
+                                </div>
+                                <input class="input" id="i-referencia" placeholder="[REFERENCIA]" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Faturamento (3 meses)</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-label-1">Mês 1</label>
+                                </div>
+                                <select id="i-fat-label-1">
+                                    <option>Janeiro</option>
+                                    <option>Fevereiro</option>
+                                    <option>Março</option>
+                                    <option>Abril</option>
+                                    <option selected>Maio</option>
+                                    <option>Junho</option>
+                                    <option>Julho</option>
+                                    <option>Agosto</option>
+                                    <option>Setembro</option>
+                                    <option>Outubro</option>
+                                    <option>Novembro</option>
+                                    <option>Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-mes-1">Mês 1 (valor)</label>
+                                </div>
+                                <input class="input" id="i-fat-mes-1" placeholder="[FATURAMENTO-MES-1]" type="text"
+                                    data-aleatorio data-aleatorio-base="119.972,91" data-aleatorio-variacao="0.18">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-label-2">Mês 2</label>
+                                </div>
+                                <select id="i-fat-label-2">
+                                    <option>Janeiro</option>
+                                    <option>Fevereiro</option>
+                                    <option>Março</option>
+                                    <option>Abril</option>
+                                    <option>Maio</option>
+                                    <option selected>Junho</option>
+                                    <option>Julho</option>
+                                    <option>Agosto</option>
+                                    <option>Setembro</option>
+                                    <option>Outubro</option>
+                                    <option>Novembro</option>
+                                    <option>Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-mes-2">Mês 2 (valor)</label>
+                                </div>
+                                <input class="input" id="i-fat-mes-2" placeholder="[FATURAMENTO-MES-2]" type="text"
+                                    data-aleatorio data-aleatorio-base="131.480,55" data-aleatorio-variacao="0.18">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-label-3">Mês 3</label>
+                                </div>
+                                <select id="i-fat-label-3">
+                                    <option>Janeiro</option>
+                                    <option>Fevereiro</option>
+                                    <option>Março</option>
+                                    <option>Abril</option>
+                                    <option>Maio</option>
+                                    <option>Junho</option>
+                                    <option selected>Julho</option>
+                                    <option>Agosto</option>
+                                    <option>Setembro</option>
+                                    <option>Outubro</option>
+                                    <option>Novembro</option>
+                                    <option>Dezembro</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-fat-mes-3">Mês 3 (valor)</label>
+                                </div>
+                                <input class="input" id="i-fat-mes-3" placeholder="[FATURAMENTO-MES-3]" type="text"
+                                    data-aleatorio data-aleatorio-base="142.905,38" data-aleatorio-variacao="0.18">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Premissas e valuation</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-taxa-desconto">Taxa de desconto</label>
+                                </div>
+                                <input class="input" id="i-taxa-desconto" placeholder="[TAXA-DESCONTO]" value="20,00%" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.12" data-aleatorio-min="8" data-aleatorio-max="35">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-crescimento-perpetuidade">Crescimento da perpetuidade</label>
+                                </div>
+                                <input class="input" id="i-crescimento-perpetuidade" placeholder="[CRESCIMENTO-PERPETUIDADE]" value="3,00%" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.2" data-aleatorio-min="1" data-aleatorio-max="6">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-ipca-projetado">IPCA projetado</label>
+                                </div>
+                                <input class="input" id="i-ipca-projetado" placeholder="[IPCA-PROJETADO]" value="5,00%" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.15" data-aleatorio-min="2" data-aleatorio-max="9">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor-5-anos">Valor dos 5 anos</label>
+                                </div>
+                                <input class="input" id="i-valor-5-anos" placeholder="[VALOR-5-ANOS]" value="R$ 1.851.777,17" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.1">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor-total-empresa">Valor total da empresa</label>
+                                </div>
+                                <input class="input" id="i-valor-total-empresa" placeholder="[VALOR-TOTAL-EMPRESA]" value="R$ 1.970.134,12" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.1">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor-perpetuidade">Valor de perpetuidade</label>
+                                </div>
+                                <input class="input" id="i-valor-perpetuidade" placeholder="[VALOR-PERPETUIDADE]" value="R$ 2.183.456,78" type="text"
+                                    data-aleatorio data-aleatorio-variacao="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Responsável técnico</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista-nome">Economista</label>
+                                </div>
+                                <input class="input" id="i-economista-nome" placeholder="[ECONOMISTA-NOME]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-economista-cofecon">COFECON</label>
+                                </div>
+                                <input class="input" id="i-economista-cofecon" placeholder="[ECONOMISTA-COFECON]" type="text">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-trust-cnpj">CNPJ Trust</label>
+                                </div>
+                                <input class="input" id="i-trust-cnpj" placeholder="[TRUST-CNPJ]" value="14.668.766/0001-53" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Selos e Carimbos</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-corecon">Selo CORECON-SP</label>
+                                <input id="i-selo-corecon" type="checkbox" checked>
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-qr">Selo QR (Tribunal)</label>
+                                <input id="i-selo-qr" type="checkbox">
+                            </div>
+                            <div class="campo">
+                                <label class="label-campo" for="i-selo-png">Selo de Autenticidade (PNG)</label>
+                                <input id="i-selo-png" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="capa trust-capa">
+            <div class="trust-capa-conteudo">
+                <div class="trust-capa-topo">
+                    <span class="trust-capa-selo">Laudo técnico</span>
+                    <span class="trust-capa-ref" id="referencia">[REFERENCIA]</span>
+                </div>
+
+                <div class="trust-capa-centro">
+                    <img class="trust-capa-logo" src="./assets/logo.png" alt="Trust Assessoria Empresarial">
+                    <span class="trust-capa-regua" aria-hidden="true"></span>
+                    <h1 class="trust-capa-titulo">Valuation<br>Empresarial</h1>
+                </div>
+
+                <div class="trust-capa-empresa">
+                    <span class="trust-capa-rotulo">Empresa avaliada</span>
+                    <span class="trust-capa-nome" id="razao-social">[RAZAO-SOCIAL]</span>
+                    <span class="trust-capa-cnpj">CNPJ <span id="cnpj">[CNPJ]</span></span>
+                </div>
+
+                <div class="trust-capa-rodape">
+                    <span>Emitido em <strong id="data-emissao">[DATA-EMISSAO]</strong></span>
+                    <span>Documento confidencial</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagina trust-mda">
+            <div class="trust-conteudo">
+                <p class="trust-kicker">Resumo da empresa</p>
+                <h2 class="trust-empresa-nome"><span id="razao-social">[RAZAO-SOCIAL]</span></h2>
+                <p class="trust-empresa-cnpj"><span id="cnpj">[CNPJ]</span></p>
+                <div class="trust-divider" aria-hidden="true"></div>
+
+                <div class="trust-grid-2">
+                    <div class="trust-bloco">
+                        <p class="trust-sec-title"><span class="trust-dot" aria-hidden="true"></span> Contatos</p>
+                        <p><span class="trust-label">E-mail:</span> <span id="email-cnpj">[EMAIL-CNPJ]</span></p>
+                        <p><span class="trust-label">Telefone(s):</span> <span id="telefone">[TELEFONE]</span></p>
+                    </div>
+                    <div class="trust-bloco">
+                        <p class="trust-sec-title"><span class="trust-dot is-dark" aria-hidden="true"></span> Endereço / Local</p>
+                        <p><span id="endereco-cnpj">[ENDERECO-CNPJ]</span></p>
+                    </div>
+                </div>
+
+                <div class="trust-bloco trust-bloco-cnae">
+                    <p class="trust-sec-title"><span class="trust-dot" aria-hidden="true"></span> Atividades — CNAEs</p>
+                    <p><span id="cnae">[CNAE]</span></p>
+                </div>
+
+                <div class="trust-metricas">
+                    <div class="trust-metrica-card">
+                        <div class="trust-metrica-row">
+                            <span class="trust-metrica-label">Funcionários</span>
+                            <span class="trust-metrica-valor" id="funcionarios">[FUNCIONARIOS]</span>
+                        </div>
+                        <div class="trust-metrica-row">
+                            <span class="trust-metrica-label">Data de Abertura</span>
+                            <span class="trust-metrica-valor" id="data-abertura">[DATA-ABERTURA]</span>
+                        </div>
+                    </div>
+                    <div class="trust-metrica-card">
+                        <div class="trust-metrica-row">
+                            <span class="trust-metrica-label">Capital Social</span>
+                            <span class="trust-metrica-valor" id="capital-social">[CAPITAL-SOCIAL]</span>
+                        </div>
+                        <div class="trust-metrica-row">
+                            <span class="trust-metrica-label">Porte</span>
+                            <span class="trust-metrica-valor" id="porte">[PORTE]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust-chart">
+                    <p class="trust-chart-title"><span class="trust-dot" aria-hidden="true"></span> Faturamento dos últimos 3 (três) meses</p>
+                    <svg class="trust-chart-svg" viewBox="0 0 640 320" role="img" aria-label="Gráfico de faturamento dos últimos três meses">
+                        <defs>
+                            <linearGradient id="fatArea" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#a85a66" stop-opacity="0.42"></stop>
+                                <stop offset="100%" stop-color="#a85a66" stop-opacity="0.04"></stop>
+                            </linearGradient>
+                        </defs>
+                        <g id="fat-grid"></g>
+                        <line x1="96" y1="24" x2="96" y2="272" stroke="#cfd8d3" stroke-width="1"></line>
+                        <line x1="96" y1="272" x2="616" y2="272" stroke="#cfd8d3" stroke-width="1"></line>
+                        <path id="fat-area" fill="url(#fatArea)" d=""></path>
+                        <path id="fat-line" fill="none" stroke="#8b3d4a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" d=""></path>
+                        <g id="fat-points"></g>
+                        <g id="fat-y-labels" font-size="11" font-family="Inter, sans-serif" fill="#8a8f8c" text-anchor="end"></g>
+                        <g id="fat-value-labels" font-size="12" font-family="Inter, sans-serif" font-weight="600" fill="#2f6b54" text-anchor="middle"></g>
+                        <g id="fat-x-labels" font-size="12" font-family="Inter, sans-serif" font-weight="700" fill="#59111d" text-anchor="middle"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagina trust-mda">
+            <div class="trust-conteudo">
+                <p class="trust-kicker">Cálculo baseado em fluxo de caixa</p>
+                <h2 class="trust-page-title">Cálculo de fluxo de caixa descontado</h2>
+                <div class="trust-divider" aria-hidden="true"></div>
+
+                <div class="trust-premissas">
+                    <div class="trust-premissa">
+                        <span>Taxa de desconto</span>
+                        <strong id="taxa-desconto">[TAXA-DESCONTO]</strong>
+                    </div>
+                    <div class="trust-premissa">
+                        <span>Crescimento da perpetuidade</span>
+                        <strong id="crescimento-perpetuidade">[CRESCIMENTO-PERPETUIDADE]</strong>
+                    </div>
+                    <div class="trust-premissa">
+                        <span>IPCA projetado</span>
+                        <strong id="ipca-projetado">[IPCA-PROJETADO]</strong>
+                    </div>
+                </div>
+
+                <div class="trust-valor-destaque">
+                    <span class="lbl">Valor total da empresa</span>
+                    <span class="val" id="valor-total-empresa">[VALOR-TOTAL-EMPRESA]</span>
+                </div>
+
+                <div class="trust-valores">
+                    <div class="trust-valor-card">
+                        <span class="lbl">Valor dos 5 anos</span>
+                        <span class="val" id="valor-5-anos">[VALOR-5-ANOS]</span>
+                    </div>
+                    <div class="trust-valor-card">
+                        <span class="lbl">Valor de perpetuidade</span>
+                        <span class="val" id="valor-perpetuidade">[VALOR-PERPETUIDADE]</span>
+                    </div>
+                </div>
+
+                <div class="trust-rodape">
+                    <div class="trust-assinatura">
+                        <img class="sign-img" src="./assets/assinatura.png" alt="">
+                        <p class="org">Trust Assessoria Empresarial</p>
+                        <p class="meta">CNPJ <span id="trust-cnpj">[TRUST-CNPJ]</span></p>
+                        <p class="meta"><span id="economista-nome">[ECONOMISTA-NOME]</span></p>
+                        <p class="meta">COFECON <span id="economista-cofecon">[ECONOMISTA-COFECON]</span></p>
+                    </div>
+
+                    <div class="trust-selos-area">
+                        <div class="selos trust-selos-padrao" id="selo" data-auth-src="../../sistema/selo-contrato.png"></div>
+                        <div class="trust-selo-corecon" id="selo-corecon">
+                            <img src="./assets/corecon-sp.png" alt="CORECON-SP">
+                        </div>
+                    </div>
+                </div>
+
+                <p class="trust-disclaimer">
+                    Na Grupo Trust Assessoria Empresarial Ltda, prezamos pela transparência e agilidade em nossos serviços.
+                    É importante salientar que, no processo de avaliação da sua empresa, a responsabilidade pela veracidade
+                    das informações fornecidas é de caráter analítico do cliente, sua compreensão e colaboração para
+                    garantir a eficiência e precisão em nosso trabalho.
+                </p>
+            </div>
+        </div>
+
+        <div class="pagina trust-final">
+            <div class="trust-final-wrap">
+                <img class="trust-final-logo" src="./assets/logo.png" alt="Trust Assessoria Empresarial">
+                <span class="trust-final-regua" aria-hidden="true"></span>
+                <p class="trust-final-msg">Agradecemos a sua preferência</p>
+                <p class="trust-final-texto">
+                    Seguimos à disposição para esclarecer qualquer ponto deste laudo e para acompanhar
+                    os próximos passos da sua empresa.
+                </p>
+                <div class="trust-final-contato">
+                    <span id="trust-cnpj">[TRUST-CNPJ]</span>
+                    <span class="sep" aria-hidden="true"></span>
+                    <span>Valuation Empresarial</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-toast.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="../../scripts/autodocs-aleatorio.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/selo-digital.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

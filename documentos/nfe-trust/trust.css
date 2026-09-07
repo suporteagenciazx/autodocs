@@ -1,0 +1,13 @@
+/* Trust brand overrides for #nfe-trust */
+#nfe-trust { --trust-accent: #59111d; }
+#nfe-trust #documento .pagina,
+#nfe-trust #documento .capa,
+#nfe-trust #documento .pagina.eve-mda,
+#nfe-trust #documento .capa.eve-capa,
+#nfe-trust #documento .pagina.rec-pagina,
+#nfe-trust #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

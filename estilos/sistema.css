@@ -5,10 +5,13 @@
 /* Inter: carregar via <link> no HTML (não @import — evita FOUC/cascade block). */
 
 :root {
-    --cor-destaque: #eef1ee;
-    --cor-accent: #025aa4;
+    --brand-destaque: #eef1ee;
+    --brand-accent: #025aa4;
+    --cor-destaque: var(--brand-destaque);
+    --cor-accent: var(--brand-accent);
     --cinza-titulos: #333;
     --btn-radius: 10px;
+    --navdrawer-border: #eeeeee;
 }
 
 /* Raio padrão de todos os botões (sobrepõe estilos inline antigos) */
@@ -30,7 +33,7 @@ input[type="reset"] {
     border-radius: var(--btn-radius);
     border: 0;
     cursor: pointer;
-    background-color: var(--cor-accent, #025aa4);
+    background-color: var(--brand-accent, var(--cor-accent, #025aa4));
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
@@ -290,7 +293,7 @@ html.navdrawer-collapsed #navdrawer-collapse:hover {
 .logo-div{
     height: 100%;
     width: 1px;
-    background-color: var(--cor-accent);
+    background-color: var(--brand-accent, var(--cor-accent));
 }
 
 .sistema-navdrawer {
@@ -303,7 +306,7 @@ html.navdrawer-collapsed #navdrawer-collapse:hover {
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid #EEEEEE;
+    border-right: 1px solid var(--navdrawer-border);
 
     /* Para rolagem */
     overflow-y: auto;
@@ -475,12 +478,12 @@ html.navdrawer-collapsed .navdrawer-option .material-symbols-rounded {
 }
 
 .navdrawer-switch input:checked + .navdrawer-switch-track {
-    background: color-mix(in srgb, var(--cor-accent, #2563eb) 28%, #1a2332);
+    background: color-mix(in srgb, var(--brand-accent, var(--cor-accent, #2563eb)) 28%, #1a2332);
 }
 
 .navdrawer-switch input:checked + .navdrawer-switch-track::after {
     transform: translateX(20px);
-    background: var(--cor-accent, #2563eb);
+    background: var(--brand-accent, var(--cor-accent, #2563eb));
 }
 
 .navdrawer-profile-card {
@@ -555,6 +558,33 @@ html.navdrawer-collapsed .navdrawer-option .material-symbols-rounded {
     cursor: pointer;
 }
 
+.navdrawer-lock {
+    min-height: 44px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.navdrawer-lock:hover {
+    background: #f5f5f5;
+}
+
+.navdrawer-lock .material-symbols-rounded {
+    font-size: 20px;
+}
+
+.navdrawer-lock[hidden],
+.navdrawer-lock-div[hidden] {
+    display: none !important;
+}
+
 .navdrawer-logout:hover {
     background: #f5f5f5;
 }
@@ -589,6 +619,14 @@ html.navdrawer-collapsed .navdrawer-logout {
     gap: 0;
 }
 
+html.navdrawer-collapsed .navdrawer-lock .navdrawer-label {
+    display: none;
+}
+
+html.navdrawer-collapsed .navdrawer-lock {
+    gap: 0;
+}
+
 .autodocs-support-fab {
     position: fixed;
     right: 22px;
@@ -602,7 +640,7 @@ html.navdrawer-collapsed .navdrawer-logout {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: var(--cor-accent, #025aa4);
+    background: var(--brand-accent, var(--cor-accent, #025aa4));
     color: #fff;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -623,6 +661,16 @@ html.navdrawer-collapsed .navdrawer-logout {
 
 html.theme-dark {
     color-scheme: dark;
+    /* Barra/fundo de destaque adapta; ênfase (links/títulos) fica branca */
+    --cor-destaque: #1c2024;
+    --cor-accent: #ffffff;
+    --navdrawer-border: #2a3036;
+}
+
+/* Preview do documento mantém branding (impressão/PDF) */
+html.theme-dark #documento {
+    --cor-destaque: var(--brand-destaque);
+    --cor-accent: var(--brand-accent);
 }
 
 html.theme-dark body {
@@ -689,16 +737,24 @@ html.theme-dark .navdrawer-logout:hover {
     background: #222b38;
 }
 
+html.theme-dark .navdrawer-lock {
+    color: #e8edf2;
+}
+
+html.theme-dark .navdrawer-lock:hover {
+    background: #222b38;
+}
+
 html.theme-dark .navdrawer-switch-track {
     background: #2a3442;
 }
 
 html.theme-dark .navdrawer-switch input:checked + .navdrawer-switch-track {
-    background: color-mix(in srgb, var(--cor-accent, #2563eb) 35%, #152033);
+    background: color-mix(in srgb, var(--brand-accent, #2563eb) 35%, #152033);
 }
 
 html.theme-dark .navdrawer-switch input:checked + .navdrawer-switch-track::after {
-    background: var(--cor-accent, #2563eb);
+    background: var(--brand-accent, #2563eb);
 }
 
 html.theme-dark .sistema-pagina,
@@ -1237,7 +1293,7 @@ input::placeholder {
         transform: translateX(-100%);
         transition: transform 0.2s ease;
         max-height: none;
-        border-right: 1px solid #EEEEEE;
+        border-right: 1px solid var(--navdrawer-border);
         border-bottom: 0;
         padding: 16px 12px 12px 12px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -1366,7 +1422,7 @@ input::placeholder {
         transform: translateX(-100%);
         transition: transform 0.2s ease;
         max-height: none;
-        border-right: 1px solid #EEEEEE;
+        border-right: 1px solid var(--navdrawer-border);
         border-bottom: 0;
         padding: 16px 12px 12px 12px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);

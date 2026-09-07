@@ -388,6 +388,16 @@
     color: var(--tag-accent, var(--cor-accent));
 }
 
+html.theme-dark .doc-hub-card-tag {
+    color: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 42%, white);
+    border-color: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 50%, transparent);
+    background-color: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 28%, #1c2024);
+}
+
+html.theme-dark .doc-hub-group-title::before {
+    background: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 45%, white);
+}
+
 .doc-hub-empty {
     text-align: left;
     padding: 24px 0;
@@ -435,7 +445,7 @@
     padding: 0 18px;
     border: 0;
     border-radius: var(--btn-radius, 10px);
-    background-color: var(--cor-accent);
+    background-color: var(--brand-accent, var(--cor-accent));
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-size: 12px;
@@ -674,6 +684,16 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 600;
+    color: var(--tag-accent, var(--cinza-titulos));
+}
+
+html.theme-dark .tags-admin-card-title {
+    color: color-mix(in srgb, var(--tag-accent, #888) 42%, white);
+}
+
+html.theme-dark .tags-admin-card {
+    background: #1c2024;
+    border-color: #2a3036;
 }
 
 .tags-admin-card-id,
@@ -984,7 +1004,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: var(--cinza-titulos);
+    color: var(--tag-accent, var(--cinza-titulos));
 }
 
 .usuarios-doc-item-blurb {
@@ -1002,7 +1022,17 @@
     font-size: 11px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-    background: var(--cor-destaque);
+    color: var(--tag-accent, var(--cor-accent));
+    background: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 12%, white);
+}
+
+html.theme-dark .usuarios-doc-item-title {
+    color: color-mix(in srgb, var(--tag-accent, #888) 42%, white);
+}
+
+html.theme-dark .usuarios-doc-item-tag {
+    color: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 42%, white);
+    background: color-mix(in srgb, var(--tag-accent, var(--cor-accent)) 28%, #1c2024);
 }
 
 .usuarios-doc-item-controls {
@@ -1129,7 +1159,7 @@
     height: 18px;
     padding: 0 5px;
     border-radius: 999px;
-    background: var(--cor-accent);
+    background: var(--brand-accent, var(--cor-accent));
     color: #fff;
     font-size: 10px;
     font-weight: 700;
@@ -1886,7 +1916,7 @@
 }
 
 .integracao-switch-input:checked + .integracao-switch-track {
-    background: var(--cor-accent, #025aa4);
+    background: var(--brand-accent, var(--cor-accent, #025aa4));
 }
 
 .integracao-switch-input:checked + .integracao-switch-track .integracao-switch-thumb {
@@ -1977,4 +2007,166 @@
     .integracoes-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* —— Dark mode: outline buttons, designer, usuários, integrações —— */
+html.theme-dark .tags-btn-outline,
+html.theme-dark .designer-btn-arquivo,
+html.theme-dark .designer-arquivo-back,
+html.theme-dark .usuarios-docs-view-btn,
+html.theme-dark .integracao-btn-edit.tags-btn-outline {
+    background: #23282e;
+    border-color: #343b43;
+    color: #e8edf2;
+}
+
+html.theme-dark .tags-btn-outline:hover,
+html.theme-dark .designer-btn-arquivo:hover,
+html.theme-dark .designer-btn-arquivo.is-active,
+html.theme-dark .designer-arquivo-back:hover,
+html.theme-dark .usuarios-docs-view-btn:hover,
+html.theme-dark .usuarios-docs-view-btn.is-active {
+    background: #2c3239;
+    border-color: #3d454e;
+    color: #fff;
+}
+
+html.theme-dark .tags-btn-outline--danger {
+    background: #2a1f21;
+    border-color: #5c3036;
+    color: #ff8a80;
+}
+
+html.theme-dark .tags-btn-outline--danger:hover {
+    background: #3a2528;
+    border-color: #7a3d44;
+    color: #ffcdd2;
+}
+
+html.theme-dark .designer-source-badge,
+html.theme-dark .designer-source-badge--active,
+html.theme-dark .designer-source-badge--native.designer-source-badge--active,
+html.theme-dark .designer-source-badge--figma.designer-source-badge--active,
+html.theme-dark .designer-source-badge--pdf.designer-source-badge--active,
+html.theme-dark .designer-source-badge--docx.designer-source-badge--active,
+html.theme-dark .designer-source-badge--html.designer-source-badge--active,
+html.theme-dark .designer-source-badge--lg {
+    background: #23282e;
+    border-color: #343b43;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+html.theme-dark .designer-source-badge .material-symbols-rounded {
+    color: #e8edf2;
+}
+
+html.theme-dark .designer-arquivo-count {
+    background: var(--brand-accent, #fff);
+    color: #111;
+}
+
+html.theme-dark .tags-table-wrap {
+    background: #1c2024;
+    border-color: #2a3036;
+}
+
+html.theme-dark .tags-doc-table th,
+html.theme-dark .tags-doc-table td {
+    border-bottom-color: #2a3036;
+    color: #d5dbe1;
+}
+
+html.theme-dark .tags-doc-table th {
+    background: #23282e;
+    color: #e8edf2;
+}
+
+html.theme-dark .usuarios-tags-labels {
+    color: #d5dbe1;
+}
+
+html.theme-dark .usuarios-tag-badge {
+    background: #2c3239;
+    color: #b8c0c8;
+}
+
+html.theme-dark .usuarios-legacy-badge {
+    background: #2a2618;
+    color: #e6c35c;
+    border-color: #5a4e20;
+}
+
+html.theme-dark .tags-modal-bg,
+html.theme-dark .usuarios-docs-modal-bg {
+    background: rgba(0, 0, 0, 0.55);
+}
+
+html.theme-dark .tags-modal,
+html.theme-dark .usuarios-docs-modal,
+html.theme-dark .integracao-modal.tags-modal {
+    background: #1c2024;
+    border-color: #2a3036;
+    color: #d5dbe1;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+html.theme-dark .tags-modal h3,
+html.theme-dark .usuarios-docs-modal-header h3 {
+    color: #f0f3f6;
+}
+
+html.theme-dark .usuarios-docs-modal-sub,
+html.theme-dark .usuarios-docs-empty,
+html.theme-dark .integracao-modal-desc {
+    color: #8a949e;
+}
+
+html.theme-dark .usuarios-doc-item {
+    background: #23282e;
+    border-color: #343b43;
+}
+
+html.theme-dark .usuarios-doc-item-blurb {
+    color: #8a949e;
+}
+
+html.theme-dark .usuarios-doc-tag-select {
+    background: #1c2024;
+    border-color: #343b43;
+    color: #e8edf2;
+}
+
+html.theme-dark .usuarios-docs-modal-footer,
+html.theme-dark .usuarios-docs-modal-header,
+html.theme-dark .integracao-card-footer {
+    border-color: #2a3036;
+}
+
+html.theme-dark .integracao-card {
+    background: #1c2024;
+    border-color: #2a3036;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+html.theme-dark .integracao-card-title {
+    color: #e8edf2;
+}
+
+html.theme-dark .integracao-card-summary {
+    color: #8a949e;
+}
+
+html.theme-dark .integracao-card-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e8edf2;
+}
+
+html.theme-dark .integracao-switch-track {
+    background: #3a424c;
+}
+
+html.theme-dark .designer-toolbar,
+html.theme-dark .designer-arquivo-header,
+html.theme-dark .doc-hub-layout.designer-layout .sistema-conteudo {
+    color: #d5dbe1;
 }

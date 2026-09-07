@@ -1,0 +1,13 @@
+/* Villela brand overrides for #orcamento-villela */
+#orcamento-villela { --villela-accent: #14324A; }
+#orcamento-villela #documento .pagina,
+#orcamento-villela #documento .capa,
+#orcamento-villela #documento .pagina.eve-mda,
+#orcamento-villela #documento .capa.eve-capa,
+#orcamento-villela #documento .pagina.rec-pagina,
+#orcamento-villela #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

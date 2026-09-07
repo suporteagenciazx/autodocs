@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #lae-dvego-cortez */
+#lae-dvego-cortez { --cortez-accent: #0020EF; }
+#lae-dvego-cortez #documento .pagina,
+#lae-dvego-cortez #documento .capa,
+#lae-dvego-cortez #documento .pagina.eve-mda,
+#lae-dvego-cortez #documento .capa.eve-capa,
+#lae-dvego-cortez #documento .pagina.rec-pagina,
+#lae-dvego-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

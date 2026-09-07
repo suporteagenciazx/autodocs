@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #recibo-cortez */
+#recibo-cortez { --cortez-accent: #0020EF; }
+#recibo-cortez #documento .pagina,
+#recibo-cortez #documento .capa,
+#recibo-cortez #documento .pagina.eve-mda,
+#recibo-cortez #documento .capa.eve-capa,
+#recibo-cortez #documento .pagina.rec-pagina,
+#recibo-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

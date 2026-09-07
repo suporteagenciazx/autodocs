@@ -101,22 +101,36 @@
     const t = document.getElementById('usuarios-modal-title');
     const idEl = document.getElementById('usuarios-edit-id');
     const email = document.getElementById('usuarios-f-email');
-    const pass = document.getElementById('usuarios-f-password');
     const role = document.getElementById('usuarios-f-role');
+    const regenBtn = document.getElementById('usuarios-btn-regen-pin');
+    const hint = document.getElementById('usuarios-pin-hint');
     if (t) t.textContent = title;
     if (idEl) idEl.value = user ? String(user.id) : '';
     if (email) email.value = user ? user.email : '';
-    if (pass) {
-      pass.value = '';
-      if (typeof window.resetPasswordToggle === 'function') {
-        window.resetPasswordToggle(pass.closest('.password-field-wrap'));
-      }
-    }
     if (role) role.value = user && user.role === 'admin' ? 'admin' : 'user';
+    if (regenBtn) regenBtn.style.display = user ? '' : 'none';
+    if (hint) {
+      hint.textContent = user
+        ? user.hasPin
+          ? 'PIN definido. Use «Regenerar PIN» para criar um novo (o anterior deixa de funcionar).'
+          : 'Este utilizador ainda não tem PIN. Use «Regenerar PIN».'
+        : 'Um PIN de 6 dígitos será gerado automaticamente ao criar o utilizador. Guarde-o — só é mostrado uma vez.';
+    }
     if (bg) {
       bg.classList.add('is-open');
       bg.setAttribute('aria-hidden', 'false');
     }
+  }
+
+  function showPinOnce(email, pin) {
+    const text =
+      'PIN de ' +
+      email +
+      ': ' +
+      pin +
+      '\n\nGuarde agora — não será mostrado novamente.';
+    window.alert(text);
+    setMsg('PIN gerado para ' + email + '. Anote-o com segurança.');
   }
 
   function closeTagsModal() {
@@ -187,10 +201,10 @@
       const item = document.createElement('div');
       item.className = 'usuarios-doc-item' + (linked ? ' is-linked' : '');
       item.innerHTML =
-        '<div class="usuarios-doc-item-main">' +
-        '<p class="usuarios-doc-item-title" style="color:' +
+        '<div class="usuarios-doc-item-main" style="--tag-accent:' +
         escapeHtml(accent) +
         '">' +
+        '<p class="usuarios-doc-item-title">' +
         escapeHtml(tag.name) +
         (isUsoGeral ? ' <span class="usuarios-tag-badge">Uso Geral</span>' : '') +
         '</p>' +
@@ -199,11 +213,7 @@
           ? 'Acesso a todas as documentações vinculadas a esta tag.'
           : 'Grupo com ' + nDocs + ' documentação' + (nDocs === 1 ? '' : 'ões') + '.') +
         '</p>' +
-        '<span class="usuarios-doc-item-tag" style="color:' +
-        escapeHtml(accent) +
-        ';background:color-mix(in srgb, ' +
-        escapeHtml(accent) +
-        ' 12%, #fff)">' +
+        '<span class="usuarios-doc-item-tag">' +
         nDocs +
         ' doc.</span>' +
         '</div>' +
@@ -403,6 +413,9 @@
         '<td>' +
         (u.active ? 'Sim' : 'Não') +
         '</td>' +
+        '<td>' +
+        (u.hasPin ? 'Definido' : 'Sem PIN') +
+        '</td>' +
         '<td class="usuarios-tags-cell">' +
         renderTagsCell(u) +
         '</td>' +
@@ -413,6 +426,11 @@
         '<button type="button" class="tags-btn-outline" data-act="edit" data-id="' +
         u.id +
         '">Editar</button>' +
+        '<button type="button" class="tags-btn-outline" data-act="pin" data-id="' +
+        u.id +
+        '">' +
+        (u.hasPin ? 'Regenerar PIN' : 'Gerar PIN') +
+        '</button>' +
         '<button type="button" class="tags-btn-outline tags-btn-outline--danger" data-act="del" data-id="' +
         u.id +
         '">Eliminar</button>' +
@@ -432,6 +450,23 @@
         const id = parseInt(btn.getAttribute('data-id'), 10);
         const user = state.users.find(x => x.id === id);
         if (user) openTagsModal(user);
+      });
+    });
+    tb.querySelectorAll('[data-act="pin"]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = parseInt(btn.getAttribute('data-id'), 10);
+        const user = state.users.find(x => x.id === id);
+        if (!user) return;
+        const label = user.hasPin ? 'Regenerar' : 'Gerar';
+        if (!confirm(label + ' PIN de ' + user.email + '? O PIN anterior deixa de funcionar.')) return;
+        const res = await apiPost('api/admin-users.php', { action: 'regeneratePin', id });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          setMsg(data.error || 'Erro ao gerar PIN.');
+          return;
+        }
+        showPinOnce(data.email || user.email, data.pin);
+        loadList();
       });
     });
     tb.querySelectorAll('[data-act="del"]').forEach(btn => {
@@ -501,23 +536,20 @@
       const idEl = document.getElementById('usuarios-edit-id');
       const editId = idEl && idEl.value ? parseInt(idEl.value, 10) : 0;
       const email = (document.getElementById('usuarios-f-email') || {}).value || '';
-      const password = (document.getElementById('usuarios-f-password') || {}).value || '';
       const role = (document.getElementById('usuarios-f-role') || {}).value || 'user';
 
       let res;
       if (editId) {
-        const body = { action: 'update', id: editId, email: email.trim(), role };
-        if (password) body.password = password;
-        res = await apiPost('api/admin-users.php', body);
+        res = await apiPost('api/admin-users.php', {
+          action: 'update',
+          id: editId,
+          email: email.trim(),
+          role,
+        });
       } else {
-        if (!password) {
-          setMsg('Indique uma palavra-passe para o novo utilizador.');
-          return;
-        }
         res = await apiPost('api/admin-users.php', {
           action: 'create',
           email: email.trim(),
-          password,
           role,
         });
       }
@@ -527,12 +559,29 @@
         return;
       }
       closeModal();
+      if (data.pin) {
+        showPinOnce(email.trim(), data.pin);
+      }
       loadList();
     });
 
-    if (typeof window.initPasswordToggles === 'function') {
-      window.initPasswordToggles();
-    }
+    document.getElementById('usuarios-btn-regen-pin')?.addEventListener('click', async () => {
+      const idEl = document.getElementById('usuarios-edit-id');
+      const editId = idEl && idEl.value ? parseInt(idEl.value, 10) : 0;
+      if (!editId) return;
+      const user = state.users.find(x => x.id === editId);
+      if (!confirm('Regenerar PIN' + (user ? ' de ' + user.email : '') + '? O anterior deixa de funcionar.')) {
+        return;
+      }
+      const res = await apiPost('api/admin-users.php', { action: 'regeneratePin', id: editId });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setMsg(data.error || 'Erro ao gerar PIN.');
+        return;
+      }
+      showPinOnce(data.email || (user && user.email) || '', data.pin);
+      loadList();
+    });
   }
 
   function boot() {

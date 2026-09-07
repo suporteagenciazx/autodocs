@@ -1,0 +1,13 @@
+/* Villela brand overrides for #villela-laudo */
+#villela-laudo { --villela-accent: #14324A; }
+#villela-laudo #documento .pagina,
+#villela-laudo #documento .capa,
+#villela-laudo #documento .pagina.eve-mda,
+#villela-laudo #documento .capa.eve-capa,
+#villela-laudo #documento .pagina.rec-pagina,
+#villela-laudo #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

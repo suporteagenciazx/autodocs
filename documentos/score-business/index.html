@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Business | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <link rel="stylesheet" href="./score-business.css">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="score-business" data-export="png">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Score Business</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Empresa consultada</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche a razão social quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" type="text" placeholder="[CNPJ]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-razao">Razão social</label>
+                                </div>
+                                <input class="input" id="i-razao" type="text" placeholder="[RAZAO-SOCIAL]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-banco">Empresa / banco (canto superior)</label>
+                                </div>
+                                <input class="input" id="i-banco" type="text" placeholder="[BANCO-EMPRESA]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Serasa Score</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-score">Score (0–1000)</label>
+                                </div>
+                                <input class="input" id="i-score" type="number" min="0" max="1000" value="400">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-chance">Chance de pagar em dia (%)</label>
+                                </div>
+                                <input class="input" id="i-chance" type="number" min="0" max="100" value="60">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-risco">Nível de risco</label>
+                                </div>
+                                <select class="input" id="i-risco">
+                                    <option value="baixo">risco baixo</option>
+                                    <option value="medio" selected>risco médio</option>
+                                    <option value="alto">risco alto</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Detalhes financeiros</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-credito">Limite de crédito disponível</label>
+                                </div>
+                                <input class="input" id="i-credito" type="text" placeholder="[CREDITO]" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="tela-score" id="tela-score">
+            <aside class="sb-sidebar" aria-label="Menu Serasa">
+                <div class="sb-sidebar-logo">
+                    <img src="./assets/logo-serasa.png" alt="Serasa Experian" class="sb-logo-img">
+                </div>
+                <nav class="sb-sidebar-nav">
+                    <div class="sb-nav-item">
+                        <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                        <span>Início</span>
+                    </div>
+                    <div class="sb-nav-item">
+                        <span class="material-symbols-rounded" aria-hidden="true">monitor_heart</span>
+                        <span>Saúde do seu Negócio</span>
+                    </div>
+                    <div class="sb-nav-item is-active">
+                        <span class="material-symbols-rounded" aria-hidden="true">manage_search</span>
+                        <span>Consulta CPF/CNPJ</span>
+                    </div>
+                    <div class="sb-nav-item">
+                        <span class="material-symbols-rounded" aria-hidden="true">person_search</span>
+                        <span>Monitore Clientes</span>
+                    </div>
+                    <div class="sb-nav-item">
+                        <span class="material-symbols-rounded" aria-hidden="true">payments</span>
+                        <span>Recuperação de Dívidas</span>
+                    </div>
+                </nav>
+            </aside>
+
+            <div class="sb-main">
+                <header class="sb-topbar">
+                    <div class="sb-topbar-left">
+                        <span class="material-symbols-rounded sb-menu-icon" aria-hidden="true">menu</span>
+                        <h2 class="sb-topbar-title">Consulta CPF/CNPJ</h2>
+                    </div>
+                    <div class="sb-topbar-user">
+                        <span class="material-symbols-rounded" aria-hidden="true">account_circle</span>
+                        <span id="banco-empresa">[BANCO-EMPRESA]</span>
+                    </div>
+                </header>
+
+                <div class="sb-content">
+                    <div class="sb-head-row">
+                        <div class="sb-head-info">
+                            <p class="sb-eyebrow">Você realizou uma consulta completa</p>
+                            <h1 class="sb-razao" id="razao-social">[RAZAO-SOCIAL]</h1>
+                            <p class="sb-cnpj">CNPJ: <span id="cnpj">[CNPJ]</span></p>
+                        </div>
+                        <div class="sb-actions">
+                            <button type="button" class="sb-btn sb-btn-primary">Nova consulta</button>
+                            <button type="button" class="sb-btn sb-btn-outline">Histórico de consultas</button>
+                            <button type="button" class="sb-btn sb-btn-outline">
+                                <span class="material-symbols-rounded" aria-hidden="true">print</span>
+                                Imprimir
+                            </button>
+                            <button type="button" class="sb-btn sb-btn-outline">
+                                <span class="material-symbols-rounded" aria-hidden="true">picture_as_pdf</span>
+                                Baixar PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sb-tabs" role="tablist">
+                        <div class="sb-tab is-active">
+                            <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+                            Serasa Score
+                        </div>
+                        <div class="sb-tab">
+                            <span class="material-symbols-rounded" aria-hidden="true">bar_chart</span>
+                            Detalhes financeiros
+                        </div>
+                        <div class="sb-tab">
+                            <span class="material-symbols-rounded" aria-hidden="true">monetization_on</span>
+                            Dívidas em aberto
+                        </div>
+                        <div class="sb-tab">
+                            <span class="material-symbols-rounded" aria-hidden="true">work_history</span>
+                            Consultas à Serasa
+                        </div>
+                        <div class="sb-tab">
+                            <span class="material-symbols-rounded" aria-hidden="true">groups</span>
+                            Controle societário
+                        </div>
+                        <div class="sb-tab">
+                            <span class="material-symbols-rounded" aria-hidden="true">list_alt</span>
+                            Informações cadastrais
+                        </div>
+                    </div>
+
+                    <div class="sb-score-grid">
+                        <section class="sb-card sb-card-score">
+                            <div class="sb-card-head">
+                                <h3>Score do CNPJ consultado</h3>
+                                <span class="material-symbols-rounded sb-info" aria-hidden="true">info</span>
+                            </div>
+                            <div class="sb-gauge-wrap">
+                                <svg class="sb-gauge" viewBox="0 0 280 160" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="sb-gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#e53935" />
+                                            <stop offset="35%" stop-color="#fb8c00" />
+                                            <stop offset="65%" stop-color="#fdd835" />
+                                            <stop offset="100%" stop-color="#43a047" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path class="sb-gauge-track" d="M30 140 A110 110 0 0 1 250 140" fill="none" stroke="#eceff3" stroke-width="18" stroke-linecap="round" />
+                                    <path class="sb-gauge-arc" d="M30 140 A110 110 0 0 1 250 140" fill="none" stroke="url(#sb-gauge-grad)" stroke-width="18" stroke-linecap="round" />
+                                    <!-- Setinha no arco (sem haste); números ficam no centro, por cima -->
+                                    <g id="sb-arrow" class="sb-arrow" transform="translate(140 40) rotate(0)">
+                                        <polygon points="0,-11 -7,7 7,7" fill="#2b2f36" />
+                                    </g>
+                                </svg>
+                                <div class="sb-gauge-value">
+                                    <span class="sb-score-num" id="score-valor">400</span>
+                                    <span class="sb-score-den">/1000</span>
+                                </div>
+                            </div>
+                            <p class="sb-chance-text">
+                                Este perfil de CNPJ apresenta <strong><span id="chance-valor">60</span>% de chances</strong>
+                                de pagar as suas contas em dia.
+                            </p>
+                        </section>
+
+                        <section class="sb-card sb-card-sobre">
+                            <div class="sb-sobre-banner">
+                                <span>Solicitar aumento de Score PJ</span>
+                                <button type="button" class="sb-btn sb-btn-solicitar">Solicitar</button>
+                            </div>
+                            <h3 class="sb-sobre-title">Sobre esta consulta</h3>
+                            <div class="sb-sobre-item">
+                                <span class="material-symbols-rounded sb-sobre-ico" aria-hidden="true">verified</span>
+                                <p>Para esta negociação considere a solicitação de aumento de Score PJ.</p>
+                            </div>
+                            <div class="sb-sobre-item">
+                                <span class="material-symbols-rounded sb-sobre-ico" aria-hidden="true">auto_awesome</span>
+                                <p>
+                                    Esta é uma situação que apresenta <strong id="risco-texto">risco médio</strong>, portanto se você nunca
+                                    vendeu para esta empresa, solicite o aumento do Score para maior
+                                    garantia de pagamento.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <p class="sb-disclaimer">
+                        O resultado acima não é uma opinião ou sugestão da Serasa Experian, representa apenas a prática de mercado a partir de análises estatísticas que consideram informações constantes em sua base de dados. A avaliação e decisão de fazer ou não negócios é responsabilidade exclusiva do cliente.
+                    </p>
+
+                    <section class="sb-card sb-card-fin">
+                        <div class="sb-fin-head">
+                            <div class="sb-fin-title">
+                                <span class="material-symbols-rounded" aria-hidden="true">bar_chart</span>
+                                <h3>Detalhes financeiros</h3>
+                            </div>
+                            <span class="material-symbols-rounded" aria-hidden="true">expand_less</span>
+                        </div>
+                        <div class="sb-fin-box">
+                            <span class="material-symbols-rounded sb-info" aria-hidden="true">info</span>
+                            <p>Limite de crédito disponível: R$ <span id="credito">[CREDITO]</span></p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/vendor/html2canvas.min.js"></script>
+    <script src="../../scripts/exportar-png.js?v=20260905"></script>
+</body>
+
+</html>

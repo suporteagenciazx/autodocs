@@ -1,0 +1,13 @@
+/* Trust brand overrides for #recibo-trust */
+#recibo-trust { --trust-accent: #59111d; }
+#recibo-trust #documento .pagina,
+#recibo-trust #documento .capa,
+#recibo-trust #documento .pagina.eve-mda,
+#recibo-trust #documento .capa.eve-capa,
+#recibo-trust #documento .pagina.rec-pagina,
+#recibo-trust #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

@@ -13,7 +13,7 @@
         {
             "id": "tag-26f6fe77",
             "name": "Trust",
-            "accentColor": "#7e2631",
+            "accentColor": "#59111d",
             "createdAt": 1779051080339
         },
         {
@@ -31,8 +31,14 @@
         {
             "id": "tag-c934bcf2",
             "name": "Cortez",
-            "accentColor": "#006eff",
+            "accentColor": "#0020EF",
             "createdAt": 1788635997883
+        },
+        {
+            "id": "tag-94649514",
+            "name": "Villela",
+            "accentColor": "#14324A",
+            "createdAt": 1788800000000
         },
         {
             "id": "tag-117693a3",
@@ -64,23 +70,46 @@
         "garantia-daycoval": "tag-3ad41bf8",
         "tela-aprovacao-daycoval": "tag-3ad41bf8",
         "magnus-laudo": "tag-2158ca88",
+        "trust-laudo": "tag-26f6fe77",
+        "cortez-laudo": "tag-c934bcf2",
+        "villela-laudo": "tag-94649514",
         "valuation-aguia": "tag-ac7d7f38",
         "orcamento-aguia": "tag-ac7d7f38",
         "orcamento-magnus": "tag-2158ca88",
+        "orcamento-trust": "tag-26f6fe77",
+        "orcamento-cortez": "tag-c934bcf2",
+        "orcamento-villela": "tag-94649514",
         "lae-dvego": "tag-ac7d7f38",
         "lae-dvego-magnus": "tag-2158ca88",
+        "lae-dvego-trust": "tag-26f6fe77",
+        "lae-dvego-cortez": "tag-c934bcf2",
+        "lae-dvego-villela": "tag-94649514",
         "nfe-magnus": "tag-2158ca88",
+        "nfe-trust": "tag-26f6fe77",
+        "nfe-cortez": "tag-c934bcf2",
+        "nfe-villela": "tag-94649514",
         "nfe-aguia": "tag-ac7d7f38",
         "recibo-magnus": "tag-2158ca88",
+        "recibo-trust": "tag-26f6fe77",
+        "recibo-cortez": "tag-c934bcf2",
+        "recibo-villela": "tag-94649514",
         "recibo-aguia": "tag-ac7d7f38",
         "tela-aprovacao": "tag-sofisa",
         "tela-auditoria-fiscal": "tag-uso-geral",
+        "score-business": "tag-uso-geral",
+        "termo-conformidade-financeira": "tag-uso-geral",
         "varredura-expansao": "tag-117693a3",
         "cce-bacen": "tag-117693a3",
         "cdl-bacen": "tag-117693a3",
         "cce-aguia": "tag-ac7d7f38",
         "cce-magnus": "tag-2158ca88",
+        "cce-trust": "tag-26f6fe77",
+        "cce-cortez": "tag-c934bcf2",
+        "cce-villela": "tag-94649514",
         "eve-aguia": "tag-ac7d7f38",
-        "eve-magnus": "tag-2158ca88"
+        "eve-magnus": "tag-2158ca88",
+        "eve-trust": "tag-26f6fe77",
+        "eve-cortez": "tag-c934bcf2",
+        "eve-villela": "tag-94649514"
     }
 }

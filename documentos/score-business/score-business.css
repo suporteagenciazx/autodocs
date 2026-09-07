@@ -1,0 +1,474 @@
+/* Score Business — Serasa Experian (tela horizontal PNG, fiel ao SCORE PJ) */
+
+:root {
+  --sb-blue: #1d4f91;
+  --sb-blue-btn: #2563a8;
+  --sb-blue-soft: #e8f1fb;
+  --sb-purple: #6d2077;
+  --sb-pink: #e63888;
+  --sb-text: #2b2f36;
+  --sb-muted: #6b7280;
+  --sb-line: #e5e7eb;
+  --sb-bg: #f3f5f7;
+  --sb-sidebar: #ffffff;
+  --sb-card: #ffffff;
+}
+
+#score-business #documento {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  background: #e9ecef;
+}
+
+#score-business .tela-score {
+  width: 1406px;
+  height: 869px;
+  box-sizing: border-box;
+  background: var(--sb-bg);
+  border-radius: 2px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: flex;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--sb-text);
+  position: relative;
+}
+
+/* —— Sidebar —— */
+#score-business .sb-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--sb-sidebar);
+  border-right: 1px solid var(--sb-line);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0 12px;
+}
+
+#score-business .sb-sidebar-logo {
+  padding: 0 18px 18px;
+}
+
+#score-business .sb-logo-img {
+  display: block;
+  height: 28px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+#score-business .sb-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+}
+
+#score-business .sb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #4b5563;
+  line-height: 1.25;
+}
+
+#score-business .sb-nav-item .material-symbols-rounded {
+  font-size: 20px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+#score-business .sb-nav-item.is-active {
+  background: var(--sb-blue-soft);
+  color: var(--sb-blue);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--sb-blue);
+  border-radius: 0 8px 8px 0;
+  margin-left: -8px;
+  padding-left: 17px;
+}
+
+#score-business .sb-nav-item.is-active .material-symbols-rounded {
+  color: var(--sb-blue);
+}
+
+/* —— Main —— */
+#score-business .sb-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--sb-bg);
+}
+
+#score-business .sb-topbar {
+  height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: #fff;
+  border-bottom: 1px solid var(--sb-line);
+}
+
+#score-business .sb-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#score-business .sb-menu-icon {
+  font-size: 24px;
+  color: #4b5563;
+}
+
+#score-business .sb-topbar-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sb-text);
+}
+
+#score-business .sb-topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+#score-business .sb-topbar-user .material-symbols-rounded {
+  font-size: 26px;
+  color: #9ca3af;
+}
+
+#score-business .sb-content {
+  flex: 1;
+  min-height: 0;
+  padding: 16px 22px 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#score-business .sb-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#score-business .sb-eyebrow {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--sb-muted);
+}
+
+#score-business .sb-razao {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--sb-text);
+  line-height: 1.2;
+}
+
+#score-business .sb-cnpj {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--sb-muted);
+}
+
+#score-business .sb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+#score-business .sb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: default;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+#score-business .sb-btn .material-symbols-rounded {
+  font-size: 16px;
+}
+
+#score-business .sb-btn-primary {
+  background: var(--sb-blue-btn);
+  color: #fff;
+}
+
+#score-business .sb-btn-outline {
+  background: #fff;
+  color: var(--sb-blue);
+  border-color: #c5d4e8;
+}
+
+#score-business .sb-btn-solicitar {
+  background: #fff;
+  color: var(--sb-blue);
+  border: 0;
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Tabs */
+#score-business .sb-tabs {
+  display: flex;
+  gap: 4px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 8px 0;
+  border: 1px solid var(--sb-line);
+  overflow: hidden;
+}
+
+#score-business .sb-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+#score-business .sb-tab .material-symbols-rounded {
+  font-size: 18px;
+}
+
+#score-business .sb-tab.is-active {
+  color: var(--sb-blue);
+  font-weight: 700;
+  border-bottom-color: var(--sb-pink);
+}
+
+#score-business .sb-tab.is-active .material-symbols-rounded {
+  color: var(--sb-pink);
+}
+
+/* Cards */
+#score-business .sb-score-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+
+#score-business .sb-card {
+  background: var(--sb-card);
+  border: 1px solid var(--sb-line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+#score-business .sb-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+#score-business .sb-card-head h3,
+#score-business .sb-fin-title h3,
+#score-business .sb-sobre-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sb-text);
+}
+
+#score-business .sb-info {
+  font-size: 18px;
+  color: #9ca3af;
+}
+
+#score-business .sb-gauge-wrap {
+  position: relative;
+  width: 280px;
+  height: 160px;
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+#score-business .sb-gauge {
+  display: block;
+  width: 280px;
+  height: 160px;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+#score-business .sb-arrow {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+#score-business .sb-gauge-value {
+  position: absolute;
+  left: 50%;
+  top: 58px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 6px 12px;
+  text-align: center;
+  line-height: 1;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+}
+
+#score-business .sb-score-num {
+  display: block;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #2b2f36;
+}
+
+#score-business .sb-score-den {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8b949e;
+}
+
+#score-business .sb-chance-text {
+  margin: 8px 8px 0;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #374151;
+}
+
+#score-business .sb-chance-text strong {
+  color: var(--sb-text);
+}
+
+/* Sobre */
+#score-business .sb-card-sobre {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 0;
+  overflow: hidden;
+}
+
+#score-business .sb-sobre-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 -16px;
+  padding: 10px 16px;
+  background: var(--sb-blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#score-business .sb-sobre-title {
+  margin-top: 2px;
+}
+
+#score-business .sb-sobre-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+#score-business .sb-sobre-ico {
+  font-size: 22px;
+  color: var(--sb-purple);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+#score-business .sb-sobre-item p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+#score-business .sb-disclaimer {
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: #8b949e;
+}
+
+#score-business .sb-card-fin {
+  margin-top: auto;
+}
+
+#score-business .sb-fin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#score-business .sb-fin-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#score-business .sb-fin-title .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--sb-blue);
+}
+
+#score-business .sb-fin-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--sb-blue-soft);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sb-text);
+}
+
+#score-business .sb-fin-box p {
+  margin: 0;
+}
+
+#score-business .sb-fin-box .sb-info {
+  color: var(--sb-blue);
+}

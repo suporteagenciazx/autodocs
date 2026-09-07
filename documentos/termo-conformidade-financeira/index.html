@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo de Conformidade Financeira | AutoDocs</title>
+    <link rel="icon" href="../../sistema/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../estilos/fontes/inter.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/sistema.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/exportar.css?v=20260905">
+    <link rel="stylesheet" href="../../estilos/documentos.css?v=20260905">
+    <link rel="stylesheet" href="./termo-cf.css">
+    <link rel="stylesheet" href="../../estilos/icones.css?v=20260905">
+    <script src="../../scripts/autodocs-page-transition-boot.js?v=20260905"></script>
+</head>
+
+<body id="termo-conformidade-financeira">
+    <div class="conteudo" id="conteudo">
+        <header id="pagina">
+            <span id="sistema-banco" class="banco-razaosocial"></span>
+            <span id="sistema-cnpj" class="banco-cnpj"></span>
+        </header>
+        <div class="sistema-pagina">
+            <h1>Termo de Conformidade Financeira</h1>
+            <div class="formularios">
+                <div class="area-boxes">
+                    <div class="base-box">
+                        <h2>Cliente favorecido</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cliente">Nome do cliente</label>
+                                </div>
+                                <input class="input" id="i-cliente" type="text" placeholder="[CLIENTE]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-cnpj">CNPJ</label>
+                                    <span class="material-symbols-rounded" title="OpenCNPJ preenche a razão quando ativa.">info</span>
+                                </div>
+                                <input class="input" id="i-cnpj" type="text" placeholder="[CNPJ]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Crédito e condições</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-credito">Valor do crédito (R$)</label>
+                                </div>
+                                <input class="input" id="i-credito" type="text" placeholder="[CREDITO]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-parcelas">Quantidade de parcelas</label>
+                                </div>
+                                <input class="input" id="i-parcelas" type="number" min="1" step="1" placeholder="[QTD-PARCELAS]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-valor-parcela">Valor da parcela (R$)</label>
+                                </div>
+                                <input class="input" id="i-valor-parcela" type="text" placeholder="[VALOR-PARCELA]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-carencia">Carência (dias)</label>
+                                </div>
+                                <input class="input" id="i-carencia" type="number" min="0" step="1" placeholder="[CARENCIA]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-taxa">Taxa de juros (% a.m.)</label>
+                                </div>
+                                <input class="input" id="i-taxa" type="text" placeholder="[TAXA]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-box">
+                        <h2>Dados para pagamento</h2>
+                        <div class="base-boxcampos">
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-banco">Banco</label>
+                                </div>
+                                <input class="input" id="i-banco" type="text" placeholder="[BANCO]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-agencia">Agência</label>
+                                </div>
+                                <input class="input" id="i-agencia" type="text" placeholder="[AGENCIA]">
+                            </div>
+                            <div class="campo">
+                                <div class="label">
+                                    <label class="label-campo" for="i-conta">Conta</label>
+                                </div>
+                                <input class="input" id="i-conta" type="text" placeholder="[CONTA]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-inferior">
+                    <div class="confirmacao">
+                        <label for="confirmacao" class="label-confirmacao">
+                            Todos os campos foram preenchidos?<input type="checkbox" id="confirmacao">
+                        </label>
+                    </div>
+                    <button type="button" id="exportar">
+                        <span class="material-symbols-rounded">download</span>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="documento">
+        <div class="pagina tcf-pagina">
+            <header class="tcf-brand">
+                <img class="tcf-logo" src="./assets/logo-receita.png" alt="Receita Federal">
+                <p class="tcf-brand-name">Receita Federal</p>
+            </header>
+
+            <h1 class="tcf-title">TERMO DE CONFORMIDADE FINANCEIRA</h1>
+
+            <div class="tcf-body">
+                <p>
+                    A Autarquia Especial Robinson Sakiyama Barreirinhas fala por meio deste termo de
+                    responsabilidade, junto ao Receita Federal, instituição de direito privado, com sede na Esplanada
+                    Dos Ministerios, S/N, Bloco P, Andar 7, cidade de Brasília, Estado de Destrito Federal, CEP:
+                    70048-900, inscrito no CNPJ/ MF sob o nº 00.394.460/0058-87.
+                </p>
+                <p>
+                    A instituição Receita Federal, assegura por meio do diagnóstico apresentado pelo sistema que a
+                    única pendência para a conclusão do financiamento do cliente
+                    <strong id="cliente">[CLIENTE]</strong>, cuja empresa
+                    é inscrita no CNPJ sob o nº <strong id="cnpj">[CNPJ]</strong>, é a atualização do Estudo de Viabilidade
+                    Econômica.
+                </p>
+
+                <p class="tcf-section">
+                    Informações detalhadas sobre o valor a ser liberado na conta de titularidade do cliente favorecido:
+                </p>
+
+                <p class="tcf-line">
+                    R$ <span id="credito">[CREDITO]</span> em <span id="parcelas">[QTD-PARCELAS]</span>x de R$ <span id="valor-parcela">[VALOR-PARCELA]</span>
+                </p>
+                <p class="tcf-line">
+                    Carência: <span id="carencia">[CARENCIA]</span> dias para efetuar o pagamento da primeira parcela
+                </p>
+                <p class="tcf-line">
+                    Taxas de juros <span id="taxa">[TAXA]</span>% ao mês.
+                </p>
+
+                <p class="tcf-section">Dados para Pagamento:</p>
+                <p class="tcf-line">Banco: <span id="banco">[BANCO]</span></p>
+                <p class="tcf-line">Agência: <span id="agencia">[AGENCIA]</span></p>
+                <p class="tcf-line">Conta: <span id="conta">[CONTA]</span></p>
+            </div>
+
+            <div class="tcf-sign-block">
+                <p class="tcf-sign-org">RECEITA FEDERAL</p>
+                <div class="tcf-sign-area">
+                    <img class="tcf-assinatura" src="./assets/assinatura.png" alt="Assinatura">
+                    <div class="tcf-carimbo" aria-hidden="true">
+                        <span>RECEITA FEDERAL</span>
+                        <span>00.394.460/0058-87</span>
+                    </div>
+                    <div class="tcf-sign-line"></div>
+                </div>
+                <div class="tcf-sign-meta">
+                    <p>Nome: Robinson Sakiyama<br>Barreirinhas</p>
+                    <p>Cargo: Autarquia Especial</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/navdrawer.js?v=20260905"></script>
+    <script src="../../scripts/banco.js?v=20260905"></script>
+    <script src="../../scripts/cnpj.js?v=20260905"></script>
+    <script src="../../scripts/opencnpj-autofill.js?v=20260905"></script>
+    <script src="./inputs.js"></script>
+    <script src="../../scripts/titulo.js?v=20260905"></script>
+    <script src="../../scripts/exportar.js?v=20260905"></script>
+    <script src="../../scripts/impressao.js?v=20260905"></script>
+</body>
+
+</html>

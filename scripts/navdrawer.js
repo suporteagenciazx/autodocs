@@ -4,7 +4,7 @@ const NAVDRAWER_COLLAPSED_LS = 'autodocs.navdrawer.collapsed';
 const THEME_MODE_LS = 'autodocs.theme.mode';
 const PROFILE_PREFIX = 'autodocs.profile.';
 /** Incrementar quando o HTML do menu lateral mudar (força atualização após soft-nav). */
-const AUTODOCS_NAVDRAWER_REVISION = '5';
+const AUTODOCS_NAVDRAWER_REVISION = '6';
 
 (function applyNavdrawerCollapsedEarly() {
   try {
@@ -32,7 +32,7 @@ const AUTODOCS_DEFAULTS = {
 };
 
 /** Rotas só para role admin (caminho na URL). */
-const AUTODOCS_ADMIN_PATH_MARKERS = ['/configuracoes/', '/tags/', '/usuarios/', '/designer/'];
+const AUTODOCS_ADMIN_PATH_MARKERS = ['/configuracoes/', '/tags/', '/usuarios/', '/designer/', '/seguranca/'];
 
 const navdrawerHTML = `
 <header id="navdrawer" data-revision="${AUTODOCS_NAVDRAWER_REVISION}">
@@ -82,6 +82,10 @@ const navdrawerHTML = `
     </div>
     <div class="down-side">
       <div class="navdrawer-div"></div>
+      <button type="button" class="navdrawer-footer-card navdrawer-lock" id="navdrawer-lock" title="Bloquear sessão">
+        <span class="material-symbols-rounded" aria-hidden="true">lock</span><span class="navdrawer-label">Bloquear</span>
+      </button>
+      <div class="navdrawer-div navdrawer-lock-div"></div>
       <button type="button" class="navdrawer-footer-card navdrawer-profile-card" id="navdrawer-profile" title="Editar perfil">
         <span class="navdrawer-profile-avatar" aria-hidden="true"><span class="navdrawer-profile-initial">A</span></span>
         <span class="navdrawer-profile-meta">
@@ -160,6 +164,8 @@ function getBasePath() {
     '/suporte/',
     '/ajuda/',
     '/configuracoes/',
+    '/seguranca/',
+    '/perfil/',
     '/login/',
     '/cadastro/',
     '/install/',
@@ -225,16 +231,20 @@ function aplicarTemaAutoDocs(basePath, theme) {
   linkIcon.href = basePath + favRel;
 
   if (corDestaque && isValidHexColor(corDestaque)) {
-    root.style.setProperty('--cor-destaque', corDestaque.trim());
+    root.style.setProperty('--brand-destaque', corDestaque.trim());
   } else {
-    root.style.removeProperty('--cor-destaque');
+    root.style.removeProperty('--brand-destaque');
   }
 
   if (corAccent && isValidHexColor(corAccent)) {
-    root.style.setProperty('--cor-accent', corAccent.trim());
+    root.style.setProperty('--brand-accent', corAccent.trim());
   } else {
-    root.style.removeProperty('--cor-accent');
+    root.style.removeProperty('--brand-accent');
   }
+
+  /* Evita inline antigo que bloqueava o dark mode */
+  root.style.removeProperty('--cor-destaque');
+  root.style.removeProperty('--cor-accent');
 }
 
 /** Reaplica tema a partir de api/private/theme.json (ex.: após salvar em Configurações). */
@@ -497,6 +507,7 @@ function prepararNavdrawerShell(basePath) {
   ajustarLinks(basePath);
   aplicarVisibilidadeMenuAuth(basePath);
   configurarBotaoSair(basePath);
+  configurarBotaoBloquear();
   configurarThemeSwitch();
   configurarProfileCard(basePath);
   configurarSupportFab(basePath);
@@ -531,6 +542,17 @@ function aplicarVisibilidadeMenuAuth(basePath) {
     }
   });
   const sair = document.getElementById('menu-sair');
+  const lockBtn = document.getElementById('navdrawer-lock');
+  const lockDiv = document.querySelector('.navdrawer-lock-div');
+  if (lockBtn) {
+    const showLock = !!(auth && auth.user);
+    lockBtn.hidden = !showLock;
+    lockBtn.setAttribute('aria-hidden', showLock ? 'false' : 'true');
+    if (lockDiv) {
+      lockDiv.hidden = !showLock;
+      lockDiv.setAttribute('aria-hidden', showLock ? 'false' : 'true');
+    }
+  }
   if (!sair) return;
   if (auth && auth.user) {
     sair.className = 'navdrawer-footer-card navdrawer-logout';
@@ -553,6 +575,21 @@ function aplicarVisibilidadeMenuAuth(basePath) {
       sair.title = 'Entrar';
     }
   }
+}
+
+function configurarBotaoBloquear() {
+  const btn = document.getElementById('navdrawer-lock');
+  if (!btn || btn.dataset.bound === '1') return;
+  btn.dataset.bound = '1';
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    if (!window.__autodocsAuth || !window.__autodocsAuth.user) return;
+    if (window.AutoDocsIdleLock && typeof window.AutoDocsIdleLock.lock === 'function') {
+      window.AutoDocsIdleLock.lock();
+      return;
+    }
+    document.dispatchEvent(new CustomEvent('autodocs-lock-request'));
+  });
 }
 
 function configurarBotaoSair(basePath) {
@@ -1172,6 +1209,14 @@ function autodocsGuardAdminRoute(basePath) {
   location.replace(basePath + 'documentacoes/');
 }
 
+function autodocsEnsureIdleLockScript(basePath) {
+  if (document.querySelector('script[data-autodocs-idle-lock]')) return;
+  const s = document.createElement('script');
+  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260907b';
+  s.dataset.autodocsIdleLock = '1';
+  document.head.appendChild(s);
+}
+
 function autodocsEnsureToastScript(basePath) {
   if (window.AutoDocsToast) return;
   if (document.querySelector('script[data-autodocs-toast]')) return;
@@ -1248,6 +1293,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (abort) return;
     autodocsEnsureCssGuardScript(basePath);
     autodocsEnsureToastScript(basePath);
+    autodocsEnsureIdleLockScript(basePath);
     autodocsGuardAdminRoute(basePath);
     prepararNavdrawerShell(basePath);
     const themeData = await themePromise;

@@ -1,0 +1,13 @@
+/* Cortez brand overrides for #eve-cortez */
+#eve-cortez { --cortez-accent: #0020EF; }
+#eve-cortez #documento .pagina,
+#eve-cortez #documento .capa,
+#eve-cortez #documento .pagina.eve-mda,
+#eve-cortez #documento .capa.eve-capa,
+#eve-cortez #documento .pagina.rec-pagina,
+#eve-cortez #documento .pagina.cce-pagina {
+  background-image: url(./assets/mda.png) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}

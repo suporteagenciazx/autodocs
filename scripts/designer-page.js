@@ -90,41 +90,11 @@
     if (!hex || typeof hex !== 'string') return '';
     const h = hex.trim();
     if (!/^#[0-9A-Fa-f]{6}$/.test(h) && !/^#[0-9A-Fa-f]{3}$/.test(h)) return '';
-    let r;
-    let g;
-    let b;
-    if (h.length === 4) {
-      r = parseInt(h[1] + h[1], 16);
-      g = parseInt(h[2] + h[2], 16);
-      b = parseInt(h[3] + h[3], 16);
-    } else {
-      r = parseInt(h.slice(1, 3), 16);
-      g = parseInt(h.slice(3, 5), 16);
-      b = parseInt(h.slice(5, 7), 16);
-    }
     const full =
       h.length === 4
         ? '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3]
         : h;
-    return (
-      '--tag-accent:' +
-      full +
-      ';color:' +
-      full +
-      ';border-color:rgba(' +
-      r +
-      ',' +
-      g +
-      ',' +
-      b +
-      ',0.35);background-color:rgba(' +
-      r +
-      ',' +
-      g +
-      ',' +
-      b +
-      ',0.12);'
-    );
+    return '--tag-accent:' + full + ';';
   }
 
   function resolveTagForModel(model) {

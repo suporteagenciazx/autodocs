@@ -43,6 +43,8 @@
 
   function fallbackAccentFromTheme() {
     if (typeof document === 'undefined') return SOFISA_ACCENT;
+    const brand = getComputedStyle(document.documentElement).getPropertyValue('--brand-accent').trim();
+    if (isValidHex(brand)) return normalizeHex(brand);
     const v = getComputedStyle(document.documentElement).getPropertyValue('--cor-accent').trim();
     return isValidHex(v) ? normalizeHex(v) : SOFISA_ACCENT;
   }
