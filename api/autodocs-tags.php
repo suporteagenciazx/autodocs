@@ -45,20 +45,9 @@ if ($method !== 'POST') {
 try {
     $pdo = autodocs_pdo();
     autodocs_require_admin($pdo);
+    autodocs_require_csrf();
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        http_response_code(401);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => 'Não autenticado.'], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-    if ($msg === 'FORBIDDEN') {
-        http_response_code(403);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => 'Apenas administradores.'], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
+    autodocs_json_auth_error($e);
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(['error' => 'Erro no servidor.'], JSON_UNESCAPED_UNICODE);

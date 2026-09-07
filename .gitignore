@@ -1,6 +1,7 @@
 api/private/config.local.json
 api/private/install.lock
 api/private/login-throttle.json
+api/private/security.json
 api/private/cache/
 tools/figma-package/node_modules/
 tools/pdf-native/node_modules/
@@ -10,3 +11,5 @@ debug-*.log
 .cursor/debug-*.log
 .env
 .env.local
+_tmp*
+sql/dumps/

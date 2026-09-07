@@ -74,7 +74,10 @@
       res = await fetch(basePath + 'api/autodocs-theme.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: Object.assign(
+          { 'Content-Type': 'application/json', Accept: 'application/json' },
+          window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+        ),
         body: JSON.stringify({ logo, favicon: fav, corDestaque: cd, corAccent: ca }),
       });
     } catch (_) {

@@ -14,6 +14,9 @@
     const form = document.getElementById('form-cadastro');
     const msg = document.getElementById('cadastro-msg');
     const bloq = document.getElementById('cadastro-bloqueado');
+    const ok = document.getElementById('cadastro-ok');
+    const pinWrap = document.getElementById('cadastro-pin-wrap');
+    const pinEl = document.getElementById('cadastro-pin');
 
     try {
       const me = await fetch(basePath + 'api/auth-me.php', { credentials: 'same-origin' });
@@ -53,17 +56,37 @@
       e.preventDefault();
       if (msg) msg.textContent = '';
       const email = (document.getElementById('cadastro-email') || {}).value || '';
-      const password = (document.getElementById('cadastro-password') || {}).value || '';
       try {
         const res = await fetch(basePath + 'api/auth-register.php', {
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ email: email.trim(), password }),
+          body: JSON.stringify({ email: email.trim() }),
         });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
           if (msg) msg.textContent = data.error || 'Registo falhou.';
+          return;
+        }
+        if (data.csrfToken) window.__autodocsCsrf = data.csrfToken;
+        if (data.pin && pinEl && pinWrap) {
+          pinEl.textContent = data.pin;
+          pinWrap.hidden = false;
+          if (ok) {
+            ok.textContent = data.message || 'Conta criada. Anote o PIN.';
+            ok.hidden = false;
+          }
+          form.hidden = true;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'autodocs-btn-pill-primary';
+          btn.style.width = '100%';
+          btn.style.marginTop = '12px';
+          btn.textContent = 'Continuar';
+          btn.addEventListener('click', () => {
+            location.href = basePath;
+          });
+          pinWrap.parentNode.appendChild(btn);
           return;
         }
         location.href = basePath;

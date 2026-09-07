@@ -12,12 +12,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
 
 try {
     $pdo = autodocs_pdo();
-    autodocs_require_login($pdo);
+    autodocs_require_unlocked($pdo);
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        autodocs_json_response(401, ['error' => 'Não autenticado.']);
-    }
+    autodocs_json_auth_error($e);
     autodocs_json_response(503, ['error' => 'Serviço indisponível.']);
 }
 

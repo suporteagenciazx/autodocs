@@ -13,14 +13,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
 try {
     $pdo = autodocs_pdo();
     autodocs_require_admin($pdo);
+    autodocs_require_csrf();
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        autodocs_json_response(401, ['error' => 'Não autenticado.']);
-    }
-    if ($msg === 'FORBIDDEN') {
-        autodocs_json_response(403, ['error' => 'Apenas administradores.']);
-    }
+    autodocs_json_auth_error($e);
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);
 }
 

@@ -18,7 +18,7 @@
         return;
       }
       if (enabled) enabled.checked = data.idleLockEnabled !== false;
-      if (minutes) minutes.value = String(data.idleMinutes || 1);
+      if (minutes) minutes.value = String(data.idleMinutes || 15);
     } catch (_) {
       if (msg) msg.textContent = 'Erro de rede.';
     }
@@ -41,10 +41,13 @@
         const res = await fetch(basePath() + 'api/autodocs-security.php', {
           method: 'POST',
           credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: Object.assign(
+            { 'Content-Type': 'application/json', Accept: 'application/json' },
+            window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+          ),
           body: JSON.stringify({
             idleLockEnabled: !!(enabled && enabled.checked),
-            idleMinutes: minutes ? parseInt(minutes.value, 10) : 1,
+            idleMinutes: minutes ? parseInt(minutes.value, 10) : 15,
           }),
         });
         const data = await res.json().catch(() => ({}));

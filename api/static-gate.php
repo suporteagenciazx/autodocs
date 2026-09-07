@@ -79,6 +79,13 @@ if (!$user || !(int) $user['active']) {
     autodocs_gate_redirect_login();
 }
 
+if (autodocs_idle_lock_enabled() && !autodocs_session_pin_ok()) {
+    http_response_code(423);
+    header('Content-Type: text/plain; charset=utf-8');
+    echo 'Sessão bloqueada. Desbloqueie com o PIN na aplicação.';
+    exit;
+}
+
 $docId = autodocs_path_to_catalog_doc_id($rel);
 if ($docId === null) {
     http_response_code(403);

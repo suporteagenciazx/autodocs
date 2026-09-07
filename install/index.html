@@ -17,6 +17,7 @@
         .autodocs-auth-msg { color: #b00020; font-size: 13px; margin: 0 0 12px; min-height: 1.2em; }
         .autodocs-auth-ok { color: #1b5e20; font-size: 13px; margin: 0 0 12px; }
         .autodocs-auth-note { font-size: 12px; color: #555; margin-top: 12px; }
+        .autodocs-pin-once { font-size: 28px; letter-spacing: 0.35em; font-weight: 700; font-family: ui-monospace, monospace; margin: 8px 0 12px; }
     </style>
 </head>
 
@@ -36,18 +37,18 @@
                             <h2>Criar administrador</h2>
                         </div>
                         <p class="campo-texto" style="margin-bottom: 12px;">
-                            Só é permitido quando ainda não existe nenhum utilizador na base de dados. Importe antes o ficheiro <code>sql/schema.sql</code> e configure <code>api/private/config.local.json</code>.
+                            Só é permitido quando ainda não existe nenhum utilizador. Será gerado um <strong>PIN de 6 dígitos</strong> (único meio de login).
                         </p>
                         <p id="install-msg" class="autodocs-auth-msg" role="alert"></p>
                         <p id="install-ok" class="autodocs-auth-ok" hidden></p>
+                        <p id="install-pin-wrap" class="autodocs-auth-ok" hidden>
+                            O seu PIN (guarde agora — não será mostrado outra vez):
+                            <span id="install-pin" class="autodocs-pin-once"></span>
+                        </p>
                         <form id="form-install" class="base-boxcampos">
                             <div class="campo">
                                 <label class="label-campo" for="install-email">Email do administrador</label>
                                 <input class="input" type="email" id="install-email" name="email" required autocomplete="username" maxlength="255">
-                            </div>
-                            <div class="campo">
-                                <label class="label-campo" for="install-password">Palavra-passe (mín. 10 caracteres)</label>
-                                <input class="input" type="password" id="install-password" name="password" required autocomplete="new-password" minlength="10">
                             </div>
                             <div class="campo" style="margin-top: 8px;">
                                 <button type="submit" class="autodocs-btn-pill-primary" style="width:100%;">Criar e entrar</button>
@@ -60,7 +61,7 @@
         </div>
     </div>
     <script src="../scripts/banco.js?v=20260905"></script>
-    <script src="../scripts/install-page.js?v=20260905"></script>
+    <script src="../scripts/install-page.js?v=20260907"></script>
     <script src="../scripts/navdrawer.js?v=20260905"></script>
 </body>
 

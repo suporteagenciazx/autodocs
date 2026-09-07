@@ -129,6 +129,10 @@
           if (window.AutoDocsPinInput) window.AutoDocsPinInput.clearPin(pinRow);
           return;
         }
+        if (data.csrfToken) {
+          window.__autodocsCsrf = data.csrfToken;
+          if (window.AutoDocsApi) window.AutoDocsApi.setCsrf(data.csrfToken);
+        }
         try {
           sessionStorage.removeItem('autodocs.session.locked');
         } catch (_) {

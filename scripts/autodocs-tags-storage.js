@@ -141,7 +141,10 @@
         method: 'POST',
         credentials: 'same-origin',
         cache: 'no-store',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        headers: Object.assign(
+          { Accept: 'application/json', 'Content-Type': 'application/json' },
+          window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+        ),
         body: JSON.stringify({
           tags: window.AutoDocsTags.getTags(),
           docLinks: window.AutoDocsTags.getLinks(),

@@ -16,12 +16,9 @@ try {
     autodocs_load_config();
     $pdo = autodocs_pdo();
     $user = autodocs_require_login($pdo);
+    autodocs_require_csrf();
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        autodocs_json_response(401, ['error' => 'Não autenticado.']);
-        exit;
-    }
+    autodocs_json_auth_error($e);
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);
     exit;
 }
@@ -53,8 +50,8 @@ try {
         exit;
     }
     autodocs_login_throttle_clear($ip, 'unlock:' . $email);
-    $_SESSION['pin_ok'] = 1;
-    autodocs_json_response(200, ['ok' => true]);
+    autodocs_session_set_pin_ok(true);
+    autodocs_json_response(200, ['ok' => true, 'csrfToken' => autodocs_csrf_token()]);
 } catch (Throwable $e) {
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);
     exit;

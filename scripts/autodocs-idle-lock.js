@@ -169,6 +169,19 @@
     } catch (_) {
       /* ignore */
     }
+    // Marca pin_ok=0 no servidor (gate/API passam a exigir unlock).
+    try {
+      const hdr = { Accept: 'application/json', 'Content-Type': 'application/json' };
+      if (window.__autodocsCsrf) hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
+      fetch(basePath() + 'api/auth-session-lock.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: hdr,
+        body: '{}',
+      }).catch(() => {});
+    } catch (_) {
+      /* ignore */
+    }
     const el = buildOverlay();
     el.classList.remove('is-leaving');
     el.style.opacity = '';
@@ -244,13 +257,22 @@
     setLoadingPhase(true);
     if (msg) msg.textContent = '';
     try {
+      const hdr = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      };
+      if (window.__autodocsCsrf) hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
       const res = await fetch(basePath() + 'api/auth-pin-verify.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: hdr,
         body: JSON.stringify({ pin }),
       });
       const data = await res.json().catch(() => ({}));
+      if (data.csrfToken) {
+        window.__autodocsCsrf = data.csrfToken;
+        if (window.AutoDocsApi) window.AutoDocsApi.setCsrf(data.csrfToken);
+      }
       if (!res.ok) {
         unlocking = false;
         setLoadingPhase(false);
@@ -269,10 +291,12 @@
 
   async function logout() {
     try {
+      const hdr = { Accept: 'application/json' };
+      if (window.__autodocsCsrf) hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
       await fetch(basePath() + 'api/auth-logout.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { Accept: 'application/json' },
+        headers: hdr,
       });
     } catch (_) {
       /* ignore */
@@ -337,8 +361,14 @@
     await loadSecurity();
     bindActivity();
     try {
-      if (sessionStorage.getItem(LOCK_KEY) === '1') showLock();
-      else if (idleEnabled) bump();
+      if (
+        sessionStorage.getItem(LOCK_KEY) === '1' ||
+        (window.__autodocsAuth && window.__autodocsAuth.locked)
+      ) {
+        showLock();
+      } else if (idleEnabled) {
+        bump();
+      }
     } catch (_) {
       if (idleEnabled) bump();
     }

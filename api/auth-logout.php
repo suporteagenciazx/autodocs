@@ -18,5 +18,15 @@ try {
     exit;
 }
 
+try {
+    // CSRF se houver sessão com token (logout após login).
+    autodocs_start_session();
+    if (!empty($_SESSION['csrf'])) {
+        autodocs_require_csrf();
+    }
+} catch (Throwable $e) {
+    autodocs_json_auth_error($e);
+}
+
 autodocs_destroy_session();
 autodocs_json_response(200, ['ok' => true]);

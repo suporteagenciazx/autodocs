@@ -15,7 +15,9 @@
     <style>
         .autodocs-auth-card { max-width: 420px; margin: 0 auto; }
         .autodocs-auth-msg { color: #b00020; font-size: 13px; margin: 0 0 12px; min-height: 1.2em; }
+        .autodocs-auth-ok { color: #1b5e20; font-size: 13px; margin: 0 0 12px; }
         .autodocs-auth-note { font-size: 12px; color: #555; margin-top: 12px; }
+        .autodocs-pin-once { font-size: 28px; letter-spacing: 0.35em; font-weight: 700; font-family: ui-monospace, monospace; margin: 8px 0 12px; }
     </style>
 </head>
 
@@ -35,22 +37,18 @@
                             <h2>Registo</h2>
                         </div>
                         <p id="cadastro-msg" class="autodocs-auth-msg" role="alert"></p>
+                        <p id="cadastro-ok" class="autodocs-auth-ok" hidden></p>
+                        <p id="cadastro-pin-wrap" class="autodocs-auth-ok" hidden>
+                            O seu PIN (guarde agora — não será mostrado outra vez):
+                            <span id="cadastro-pin" class="autodocs-pin-once"></span>
+                        </p>
                         <p id="cadastro-bloqueado" class="campo-texto" hidden>
-                            O registo público está desativado. Peça a um administrador para criar a sua conta, ou ative <code>registration_open</code> em <code>api/private/config.local.json</code>.
+                            O registo público está desativado. Peça a um administrador para criar a sua conta.
                         </p>
                         <form id="form-cadastro" class="base-boxcampos" hidden>
                             <div class="campo">
                                 <label class="label-campo" for="cadastro-email">Email</label>
                                 <input class="input" type="email" id="cadastro-email" name="email" required autocomplete="username" maxlength="255">
-                            </div>
-                            <div class="campo">
-                                <label class="label-campo" for="cadastro-password">Palavra-passe (mín. 8 caracteres)</label>
-                                <div class="password-field-wrap">
-                                    <input class="input" type="password" id="cadastro-password" name="password" required autocomplete="new-password" minlength="8">
-                                    <button type="button" class="password-toggle-btn" aria-label="Mostrar palavra-passe" aria-pressed="false">
-                                        <span class="material-symbols-rounded" aria-hidden="true">visibility</span>
-                                    </button>
-                                </div>
                             </div>
                             <div class="campo" style="margin-top: 8px;">
                                 <button type="submit" class="autodocs-btn-pill-primary" style="width:100%;">Registar</button>
@@ -63,8 +61,7 @@
         </div>
     </div>
     <script src="../scripts/banco.js?v=20260905"></script>
-    <script src="../scripts/password-toggle.js?v=20260905"></script>
-    <script src="../scripts/cadastro-page.js?v=20260905"></script>
+    <script src="../scripts/cadastro-page.js?v=20260907"></script>
     <script src="../scripts/navdrawer.js?v=20260905"></script>
 </body>
 

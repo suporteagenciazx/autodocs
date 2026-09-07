@@ -142,6 +142,16 @@ function autodocs_load_config(): array
     if (is_string($envRedisPrefix) && $envRedisPrefix !== '') {
         $redis['prefix'] = $envRedisPrefix;
     }
+    $secure = !empty($j['session_cookie_secure']);
+    $envSecure = getenv('AUTODOCS_SESSION_COOKIE_SECURE');
+    if (is_string($envSecure) && $envSecure !== '') {
+        $secure = in_array(strtolower($envSecure), ['1', 'true', 'yes'], true);
+    }
+    $regOpen = !empty($j['registration_open']);
+    $envReg = getenv('AUTODOCS_REGISTRATION_OPEN');
+    if (is_string($envReg) && $envReg !== '') {
+        $regOpen = in_array(strtolower($envReg), ['1', 'true', 'yes'], true);
+    }
     return [
         'db' => [
             'host' => $db['host'],
@@ -151,8 +161,8 @@ function autodocs_load_config(): array
             'password' => $db['password'],
         ],
         'redis' => $redis,
-        'session_cookie_secure' => !empty($j['session_cookie_secure']),
-        'registration_open' => !empty($j['registration_open']),
+        'session_cookie_secure' => $secure,
+        'registration_open' => $regOpen,
     ];
 }
 
@@ -169,6 +179,13 @@ function autodocs_send_security_headers(): void
     header('X-Frame-Options: SAMEORIGIN');
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
+    // Report-Only: observa violações sem bloquear (ajuste fino pós go-live).
+    header(
+        "Content-Security-Policy-Report-Only: default-src 'self'; " .
+        "script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; " .
+        "img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.opencnpj.org; " .
+        "frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+    );
 }
 
 function autodocs_json_response(int $code, array $body): void
@@ -467,13 +484,92 @@ function autodocs_require_login(PDO $pdo): array
     return $user;
 }
 
-function autodocs_require_admin(PDO $pdo): array
+function autodocs_session_pin_ok(): bool
+{
+    autodocs_start_session();
+    return !empty($_SESSION['pin_ok']);
+}
+
+function autodocs_session_set_pin_ok(bool $ok): void
+{
+    autodocs_start_session();
+    if ($ok) {
+        $_SESSION['pin_ok'] = 1;
+    } else {
+        unset($_SESSION['pin_ok']);
+    }
+}
+
+/**
+ * Idle lock ativo + sessão sem pin_ok ⇒ LOCKED (API / gate).
+ * Lê security.json diretamente para evitar include do endpoint HTTP.
+ */
+function autodocs_idle_lock_enabled(): bool
+{
+    $path = __DIR__ . '/private/security.json';
+    if (!is_readable($path)) {
+        return true;
+    }
+    $raw = file_get_contents($path);
+    $j = is_string($raw) ? json_decode($raw, true) : null;
+    if (!is_array($j) || !array_key_exists('idleLockEnabled', $j)) {
+        return true;
+    }
+    return (bool) $j['idleLockEnabled'];
+}
+
+function autodocs_require_unlocked(PDO $pdo): array
 {
     $user = autodocs_require_login($pdo);
+    if (autodocs_idle_lock_enabled() && !autodocs_session_pin_ok()) {
+        throw new RuntimeException('LOCKED');
+    }
+    return $user;
+}
+
+function autodocs_require_admin(PDO $pdo): array
+{
+    $user = autodocs_require_unlocked($pdo);
     if (($user['role'] ?? '') !== 'admin') {
         throw new RuntimeException('FORBIDDEN');
     }
     return $user;
+}
+
+function autodocs_csrf_token(): string
+{
+    autodocs_start_session();
+    if (empty($_SESSION['csrf']) || !is_string($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf'];
+}
+
+function autodocs_require_csrf(): void
+{
+    autodocs_start_session();
+    $hdr = isset($_SERVER['HTTP_X_AUTODOCS_CSRF']) ? (string) $_SERVER['HTTP_X_AUTODOCS_CSRF'] : '';
+    $tok = isset($_SESSION['csrf']) && is_string($_SESSION['csrf']) ? $_SESSION['csrf'] : '';
+    if ($tok === '' || $hdr === '' || !hash_equals($tok, $hdr)) {
+        throw new RuntimeException('CSRF');
+    }
+}
+
+function autodocs_json_auth_error(Throwable $e): void
+{
+    $msg = $e->getMessage();
+    if ($msg === 'UNAUTHORIZED') {
+        autodocs_json_response(401, ['error' => 'Não autenticado.']);
+    }
+    if ($msg === 'FORBIDDEN') {
+        autodocs_json_response(403, ['error' => 'Sem permissão.']);
+    }
+    if ($msg === 'LOCKED') {
+        autodocs_json_response(423, ['error' => 'Sessão bloqueada. Introduza o PIN.', 'locked' => true]);
+    }
+    if ($msg === 'CSRF') {
+        autodocs_json_response(403, ['error' => 'Token CSRF inválido ou em falta.']);
+    }
 }
 
 /**

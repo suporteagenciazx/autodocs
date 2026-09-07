@@ -3,6 +3,13 @@
 
 AddDefaultCharset UTF-8
 
+RewriteEngine On
+
+# Hub autenticado (HTML) via app-gate — não aplica a login/cadastro/install/api/estilos/scripts
+RewriteRule ^index\.html?$ api/app-gate.php?rel=index.html [L,B]
+RewriteRule ^$ api/app-gate.php?rel=index.html [L,B]
+RewriteRule ^(documentacoes|perfil|integracoes|suporte|ajuda|usuarios|tags|configuracoes|seguranca|designer)/?(.*)$ api/app-gate.php?rel=$1/$2 [L,B]
+
 # --- Bloquear artefactos sensíveis ---
 <FilesMatch "(?i)\.(log|sql|bak|env)$">
   Require all denied
@@ -21,6 +28,7 @@ AddDefaultCharset UTF-8
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   Header set Cross-Origin-Opener-Policy "same-origin"
+  Header set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.opencnpj.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
 </IfModule>
 
 # --- Compressão ---

@@ -18,6 +18,7 @@ seed_from_example() {
 seed_from_example "${PRIVATE_DIR}/tags.json" "${PRIVATE_DIR}/tags.example.json"
 seed_from_example "${PRIVATE_DIR}/theme.json" "${PRIVATE_DIR}/theme.example.json"
 seed_from_example "${PRIVATE_DIR}/user-doc-links.json" "${PRIVATE_DIR}/user-doc-links.example.json"
+seed_from_example "${PRIVATE_DIR}/security.json" "${PRIVATE_DIR}/security.example.json"
 
 if [[ ! -f "${CONFIG_FILE}" ]]; then
   export AUTODOCS_DB_HOST="${AUTODOCS_DB_HOST:-db}"

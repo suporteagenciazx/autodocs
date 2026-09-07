@@ -842,7 +842,10 @@
         const res = await fetch(getBasePath() + 'api/autodocs-designer-delete.php', {
           method: 'POST',
           credentials: 'same-origin',
-          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          headers: Object.assign(
+            { Accept: 'application/json', 'Content-Type': 'application/json' },
+            window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+          ),
           body: JSON.stringify({ href: model.href }),
         });
         const data = await res.json().catch(() => ({}));
@@ -1095,7 +1098,10 @@
       const res = await fetch(getBasePath() + 'api/autodocs-pdf-native-import.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { Accept: 'application/json' },
+        headers: Object.assign(
+          { Accept: 'application/json' },
+          window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+        ),
         body: formData,
       });
       const data = await res.json().catch(() => ({}));
@@ -1202,7 +1208,10 @@
       const res = await fetch(getBasePath() + 'api/autodocs-figma-package-import.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { Accept: 'application/json' },
+        headers: Object.assign(
+          { Accept: 'application/json' },
+          window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+        ),
         body: formData,
       });
       const data = await res.json().catch(() => ({}));

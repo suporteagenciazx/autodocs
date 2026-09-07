@@ -17,18 +17,11 @@ try {
     autodocs_load_config();
     $pdo = autodocs_pdo();
     autodocs_require_admin($pdo);
+    autodocs_require_csrf();
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        autodocs_json_response(401, ['error' => 'Não autenticado.']);
-        exit;
-    }
-    if ($msg === 'FORBIDDEN') {
-        autodocs_json_response(403, ['error' => 'Apenas administradores.']);
-        exit;
-    }
-    if ($e instanceof RuntimeException && str_contains($msg, 'config')) {
-        autodocs_json_response(503, ['error' => $msg]);
+    autodocs_json_auth_error($e);
+    if ($e instanceof RuntimeException && str_contains($e->getMessage(), 'config')) {
+        autodocs_json_response(503, ['error' => $e->getMessage()]);
         exit;
     }
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);
@@ -107,22 +100,15 @@ try {
 
         case 'create':
             $email = isset($body['email']) ? trim((string) $body['email']) : '';
-            $password = isset($body['password']) ? (string) $body['password'] : '';
             $role = isset($body['role']) && $body['role'] === 'admin' ? 'admin' : 'user';
             $batchIds = isset($body['batchIds']) && is_array($body['batchIds']) ? $body['batchIds'] : [];
             if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 autodocs_json_response(400, ['error' => 'Email inválido.']);
                 exit;
             }
-            if ($password === '') {
-                $password = bin2hex(random_bytes(16));
-            } elseif (strlen($password) < 8) {
-                autodocs_json_response(400, ['error' => 'Palavra-passe mínima: 8 caracteres (ou deixe em branco).']);
-                exit;
-            }
             $plainPin = autodocs_pin_generate();
             $pdo->beginTransaction();
-            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $hash = password_hash(bin2hex(random_bytes(24)), PASSWORD_DEFAULT);
             $pinHash = autodocs_pin_hash($plainPin);
             $st = $pdo->prepare(
                 'INSERT INTO users (email, password_hash, pin_hash, pin_updated_at, role, active)
@@ -141,6 +127,30 @@ try {
                 autodocs_json_response(400, ['error' => 'id inválido.']);
                 exit;
             }
+            $stCur = $pdo->prepare('SELECT id, role, active FROM users WHERE id = ? LIMIT 1');
+            $stCur->execute([$id]);
+            $cur = $stCur->fetch();
+            if (!$cur) {
+                autodocs_json_response(404, ['error' => 'Utilizador não encontrado.']);
+                exit;
+            }
+            $newRole = isset($body['role']) && in_array($body['role'], ['admin', 'user'], true)
+                ? (string) $body['role']
+                : (string) $cur['role'];
+            $newActive = array_key_exists('active', $body)
+                ? (int) (bool) $body['active']
+                : (int) $cur['active'];
+            $wasAdminActive = (string) $cur['role'] === 'admin' && (int) $cur['active'] === 1;
+            $willBeAdminActive = $newRole === 'admin' && $newActive === 1;
+            if ($wasAdminActive && !$willBeAdminActive) {
+                $nAdmins = (int) $pdo->query(
+                    "SELECT COUNT(*) FROM users WHERE role = 'admin' AND active = 1"
+                )->fetchColumn();
+                if ($nAdmins <= 1) {
+                    autodocs_json_response(400, ['error' => 'Não pode remover o último administrador ativo.']);
+                    exit;
+                }
+            }
             $pdo->beginTransaction();
             if (isset($body['email'])) {
                 $em = trim((string) $body['email']);
@@ -150,15 +160,6 @@ try {
                     exit;
                 }
                 $pdo->prepare('UPDATE users SET email = ? WHERE id = ?')->execute([$em, $id]);
-            }
-            if (isset($body['password']) && (string) $body['password'] !== '') {
-                if (strlen((string) $body['password']) < 8) {
-                    $pdo->rollBack();
-                    autodocs_json_response(400, ['error' => 'Palavra-passe mínima: 8 caracteres.']);
-                    exit;
-                }
-                $h = password_hash((string) $body['password'], PASSWORD_DEFAULT);
-                $pdo->prepare('UPDATE users SET password_hash = ? WHERE id = ?')->execute([$h, $id]);
             }
             if (isset($body['role']) && in_array($body['role'], ['admin', 'user'], true)) {
                 $pdo->prepare('UPDATE users SET role = ? WHERE id = ?')->execute([$body['role'], $id]);
@@ -198,6 +199,31 @@ try {
             ]);
             break;
 
+        case 'ensureMissingPins':
+            $rows = $pdo->query(
+                'SELECT id, email FROM users WHERE pin_hash IS NULL OR pin_hash = \'\''
+            )->fetchAll();
+            $generated = [];
+            $upd = $pdo->prepare('UPDATE users SET pin_hash = ?, pin_updated_at = NOW() WHERE id = ?');
+            foreach ($rows as $r) {
+                $plainPin = autodocs_pin_generate();
+                $upd->execute([autodocs_pin_hash($plainPin), (int) $r['id']]);
+                $generated[] = [
+                    'id' => (int) $r['id'],
+                    'email' => (string) $r['email'],
+                    'pin' => $plainPin,
+                ];
+            }
+            autodocs_json_response(200, [
+                'ok' => true,
+                'count' => count($generated),
+                'users' => $generated,
+                'message' => $generated === []
+                    ? 'Todos os utilizadores já têm PIN.'
+                    : 'PINs gerados. Guarde esta lista — só é mostrada uma vez.',
+            ]);
+            break;
+
         case 'delete':
             $id = isset($body['id']) ? (int) $body['id'] : 0;
             if ($id <= 0) {
@@ -209,13 +235,25 @@ try {
                 autodocs_json_response(400, ['error' => 'Não pode eliminar a sua própria conta.']);
                 exit;
             }
+            $stDel = $pdo->prepare('SELECT role, active FROM users WHERE id = ? LIMIT 1');
+            $stDel->execute([$id]);
+            $delRow = $stDel->fetch();
+            if ($delRow && (string) $delRow['role'] === 'admin' && (int) $delRow['active'] === 1) {
+                $nAdmins = (int) $pdo->query(
+                    "SELECT COUNT(*) FROM users WHERE role = 'admin' AND active = 1"
+                )->fetchColumn();
+                if ($nAdmins <= 1) {
+                    autodocs_json_response(400, ['error' => 'Não pode eliminar o último administrador ativo.']);
+                    exit;
+                }
+            }
             $pdo->prepare('DELETE FROM users WHERE id = ?')->execute([$id]);
             autodocs_user_tag_links_remove_user($id);
             autodocs_json_response(200, ['ok' => true]);
             break;
 
         default:
-            autodocs_json_response(400, ['error' => 'action desconhecida. Use list, create, update, regeneratePin ou delete.']);
+            autodocs_json_response(400, ['error' => 'action desconhecida. Use list, create, update, regeneratePin, ensureMissingPins ou delete.']);
     }
 } catch (PDOException $e) {
     if ($pdo->inTransaction()) {

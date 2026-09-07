@@ -53,7 +53,7 @@ try {
     autodocs_login_throttle_clear($ip, $email);
     autodocs_regenerate_session();
     $_SESSION['uid'] = (int) $row['id'];
-    $_SESSION['pin_ok'] = 1;
+    autodocs_session_set_pin_ok(true);
 
     $user = [
         'id' => (int) $row['id'],
@@ -66,6 +66,9 @@ try {
         'user' => $user,
         'allowedDocIds' => $allowed,
         'userTagIds' => autodocs_user_assigned_tag_ids($user + ['active' => 1]),
+        'csrfToken' => autodocs_csrf_token(),
+        'pinOk' => true,
+        'locked' => false,
     ]);
 } catch (Throwable $e) {
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);

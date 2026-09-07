@@ -14,10 +14,16 @@
   }
 
   function apiPost(path, body) {
+    const hdr = { 'Content-Type': 'application/json', Accept: 'application/json' };
+    if (window.AutoDocsApi) {
+      Object.assign(hdr, window.AutoDocsApi.headers());
+    } else if (window.__autodocsCsrf) {
+      hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
+    }
     return fetch(getBasePath() + path, {
       method: 'POST',
       credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: hdr,
       body: JSON.stringify(body),
     });
   }
@@ -511,6 +517,31 @@
     document.getElementById('usuarios-search')?.addEventListener('input', renderTable);
     document.getElementById('usuarios-btn-novo')?.addEventListener('click', () => {
       openModal('Novo utilizador', null);
+    });
+    document.getElementById('usuarios-btn-ensure-pins')?.addEventListener('click', async () => {
+      if (
+        !confirm(
+          'Gerar PIN para todos os utilizadores sem PIN?\nOs PINs serão mostrados uma única vez — anote-os.'
+        )
+      ) {
+        return;
+      }
+      const res = await apiPost('api/admin-users.php', { action: 'ensureMissingPins' });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setMsg(data.error || 'Erro ao gerar PINs.');
+        return;
+      }
+      if (!data.count) {
+        setMsg(data.message || 'Todos já têm PIN.');
+        return;
+      }
+      const lines = (data.users || [])
+        .map(u => (u.email || '') + ' → ' + (u.pin || ''))
+        .join('\n');
+      window.prompt('PINs gerados (copie agora):', lines);
+      setMsg(data.message || 'PINs gerados.');
+      loadList();
     });
     document.getElementById('usuarios-modal-cancel')?.addEventListener('click', closeModal);
     document.getElementById('usuarios-modal-bg')?.addEventListener('click', e => {

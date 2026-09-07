@@ -141,24 +141,13 @@ require_once __DIR__ . '/bootstrap.php';
 try {
     $pdo = autodocs_pdo();
     autodocs_require_admin($pdo);
+    autodocs_require_csrf();
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        http_response_code(401);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => 'Não autenticado.'], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-    if ($msg === 'FORBIDDEN') {
-        http_response_code(403);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => 'Apenas administradores.'], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-    if ($e instanceof RuntimeException && str_contains($msg, 'config')) {
+    autodocs_json_auth_error($e);
+    if ($e instanceof RuntimeException && str_contains($e->getMessage(), 'config')) {
         http_response_code(503);
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => $msg], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
         exit;
     }
     http_response_code(500);

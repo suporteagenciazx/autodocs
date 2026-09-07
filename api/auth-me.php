@@ -16,6 +16,7 @@ try {
     $pdo = autodocs_pdo();
     $user = autodocs_require_login($pdo);
     $allowed = autodocs_allowed_doc_ids($pdo, $user);
+    $locked = autodocs_idle_lock_enabled() && !autodocs_session_pin_ok();
     autodocs_json_response(200, [
         'user' => [
             'id' => (int) $user['id'],
@@ -24,19 +25,14 @@ try {
         ],
         'allowedDocIds' => $allowed,
         'userTagIds' => autodocs_user_assigned_tag_ids($user),
+        'pinOk' => autodocs_session_pin_ok(),
+        'locked' => $locked,
+        'csrfToken' => autodocs_csrf_token(),
     ]);
 } catch (Throwable $e) {
-    $msg = $e->getMessage();
-    if ($msg === 'UNAUTHORIZED') {
-        autodocs_json_response(401, ['error' => 'Não autenticado.']);
-        exit;
-    }
-    if ($msg === 'FORBIDDEN') {
-        autodocs_json_response(403, ['error' => 'Sem permissão.']);
-        exit;
-    }
-    if ($e instanceof RuntimeException && str_contains($msg, 'config')) {
-        autodocs_json_response(503, ['error' => $msg]);
+    autodocs_json_auth_error($e);
+    if ($e instanceof RuntimeException && str_contains($e->getMessage(), 'config')) {
+        autodocs_json_response(503, ['error' => $e->getMessage()]);
         exit;
     }
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);

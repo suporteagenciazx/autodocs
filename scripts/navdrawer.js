@@ -606,7 +606,10 @@ function configurarBotaoSair(basePath) {
       await fetch(basePath + 'api/auth-logout.php', {
         method: 'POST',
         credentials: 'same-origin',
-        headers: { Accept: 'application/json' },
+        headers: Object.assign(
+          { Accept: 'application/json' },
+          window.__autodocsCsrf ? { 'X-AutoDocs-CSRF': window.__autodocsCsrf } : {}
+        ),
       });
     } catch (_) {
       /* continua para limpar UI */
@@ -1187,10 +1190,16 @@ async function autodocsResolveAuth(basePath) {
   }
   try {
     const data = await res.json();
+    if (data && typeof data.csrfToken === 'string') {
+      window.__autodocsCsrf = data.csrfToken;
+      if (window.AutoDocsApi) window.AutoDocsApi.setCsrf(data.csrfToken);
+    }
     window.__autodocsAuth = {
       user: data.user,
       allowedDocIds: Array.isArray(data.allowedDocIds) ? data.allowedDocIds : [],
       userTagIds: Array.isArray(data.userTagIds) ? data.userTagIds : [],
+      locked: !!data.locked,
+      pinOk: !!data.pinOk,
     };
   } catch (_) {
     window.__autodocsAuth = null;
@@ -1207,6 +1216,16 @@ function autodocsGuardAdminRoute(basePath) {
   const auth = window.__autodocsAuth;
   if (autodocsUserIsAdmin(auth)) return;
   location.replace(basePath + 'documentacoes/');
+}
+
+function autodocsEnsureApiScript(basePath) {
+  if (window.AutoDocsApi) return;
+  if (document.querySelector('script[data-autodocs-api]')) return;
+  const s = document.createElement('script');
+  s.src = basePath + 'scripts/autodocs-api.js?v=20260907';
+  s.dataset.autodocsApi = '1';
+  s.async = false;
+  document.head.appendChild(s);
 }
 
 function autodocsEnsureIdleLockScript(basePath) {
@@ -1285,6 +1304,7 @@ function autodocsSetupDocumentoVoltar() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const basePath = getBasePath();
+  autodocsEnsureApiScript(basePath);
   let abort = false;
   try {
     // Tema em paralelo com auth — reduz FOUC de cores/logo sem bloquear o gate.
