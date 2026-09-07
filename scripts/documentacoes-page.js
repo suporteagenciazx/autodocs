@@ -47,32 +47,64 @@
   function loadPrefs() {
     try {
       const raw = localStorage.getItem(prefsKey());
-      const parsed = raw ? JSON.parse(raw) : {};
+      if (raw == null || raw === '') {
+        return {
+          groupByTag: false,
+          tagFilterIds: [],
+          collapsedGroups: {},
+          hasStoredPrefs: false,
+        };
+      }
+      const parsed = JSON.parse(raw) || {};
       const legacyFilter =
-        parsed && typeof parsed.tagFilter === 'string' && parsed.tagFilter
-          ? [parsed.tagFilter]
-          : [];
-      const tagFilterIds = normalizeTagIds(parsed && parsed.tagFilterIds);
+        typeof parsed.tagFilter === 'string' && parsed.tagFilter ? [parsed.tagFilter] : [];
+      const tagFilterIds = normalizeTagIds(parsed.tagFilterIds);
       return {
-        groupByTag: !!(parsed && parsed.groupByTag),
+        groupByTag: !!parsed.groupByTag,
         tagFilterIds: tagFilterIds.length ? tagFilterIds : legacyFilter,
         collapsedGroups:
-          parsed && parsed.collapsedGroups && typeof parsed.collapsedGroups === 'object'
+          parsed.collapsedGroups && typeof parsed.collapsedGroups === 'object'
             ? parsed.collapsedGroups
             : {},
+        hasStoredPrefs: true,
       };
     } catch (_) {
-      return { groupByTag: false, tagFilterIds: [], collapsedGroups: {} };
+      return {
+        groupByTag: false,
+        tagFilterIds: [],
+        collapsedGroups: {},
+        hasStoredPrefs: false,
+      };
     }
   }
 
   function savePrefs(partial) {
-    const next = Object.assign({}, loadPrefs(), partial || {});
+    const current = loadPrefs();
+    const next = {
+      groupByTag: !!current.groupByTag,
+      tagFilterIds: current.tagFilterIds || [],
+      collapsedGroups: current.collapsedGroups || {},
+    };
+    if (partial && typeof partial === 'object') {
+      if (Object.prototype.hasOwnProperty.call(partial, 'groupByTag')) {
+        next.groupByTag = !!partial.groupByTag;
+      }
+      if (Object.prototype.hasOwnProperty.call(partial, 'tagFilterIds')) {
+        next.tagFilterIds = normalizeTagIds(partial.tagFilterIds);
+      }
+      if (Object.prototype.hasOwnProperty.call(partial, 'collapsedGroups')) {
+        next.collapsedGroups =
+          partial.collapsedGroups && typeof partial.collapsedGroups === 'object'
+            ? partial.collapsedGroups
+            : {};
+      }
+    }
     try {
       localStorage.setItem(prefsKey(), JSON.stringify(next));
     } catch (_) {
       /* ignore quota */
     }
+    next.hasStoredPrefs = true;
     return next;
   }
 
@@ -467,9 +499,9 @@
 
     let prefs = loadPrefs();
     const userTags = visibleTagsForUser();
-    // Utilizador com 2+ etiquetas: agrupar por defeito na primeira visita
-    if (!isAdmin() && userTags.length >= 2 && !prefs._groupPrefTouched) {
-      prefs = savePrefs({ groupByTag: true, _groupPrefTouched: true });
+    // Só na 1.ª visita (sem prefs guardadas): sugerir agrupamento se tiver 2+ etiquetas
+    if (!prefs.hasStoredPrefs && !isAdmin() && userTags.length >= 2) {
+      prefs = savePrefs({ groupByTag: true });
     }
     const groupByTag = !!prefs.groupByTag;
 
@@ -500,16 +532,20 @@
     if (!listEl || listEl.dataset.docHubBound === '1') return;
     listEl.dataset.docHubBound = '1';
 
-    if (search) {
+    if (search && search.dataset.docHubBound !== '1') {
+      search.dataset.docHubBound = '1';
       search.addEventListener('input', () => {
         resetPageState();
         render();
       });
     }
-    if (groupBtn) {
-      groupBtn.addEventListener('click', () => {
+    if (groupBtn && groupBtn.dataset.docHubBound !== '1') {
+      groupBtn.dataset.docHubBound = '1';
+      groupBtn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
         const prefs = loadPrefs();
-        savePrefs({ groupByTag: !prefs.groupByTag, _groupPrefTouched: true });
+        savePrefs({ groupByTag: !prefs.groupByTag });
         resetPageState();
         render();
       });
