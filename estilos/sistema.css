@@ -409,6 +409,14 @@ html.navdrawer-collapsed .navdrawer-option .material-symbols-rounded {
     display: none !important;
 }
 
+/* Fail-closed: itens admin ficam ocultos até html.autodocs-role-admin (após auth). */
+.navdrawer-admin-only {
+    display: none !important;
+}
+html.autodocs-role-admin .navdrawer-admin-only:not([hidden]) {
+    display: flex !important;
+}
+
 .navdrawer-footer-card {
     width: 100%;
     box-sizing: border-box;

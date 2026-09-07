@@ -4,7 +4,8 @@ const NAVDRAWER_COLLAPSED_LS = 'autodocs.navdrawer.collapsed';
 const THEME_MODE_LS = 'autodocs.theme.mode';
 const PROFILE_PREFIX = 'autodocs.profile.';
 /** Incrementar quando o HTML do menu lateral mudar (força atualização após soft-nav). */
-const AUTODOCS_NAVDRAWER_REVISION = '7';
+const AUTODOCS_NAVDRAWER_REVISION = '8';
+const AUTODOCS_AUTH_ROLE_LS = 'autodocs.auth.role';
 
 (function applyNavdrawerCollapsedEarly() {
   try {
@@ -21,6 +22,25 @@ const AUTODOCS_NAVDRAWER_REVISION = '7';
     const mode = localStorage.getItem(THEME_MODE_LS);
     if (mode === 'dark') document.documentElement.classList.add('theme-dark');
     else document.documentElement.classList.remove('theme-dark');
+  } catch (_) {
+    /* ignore */
+  }
+})();
+
+/** Evita flash de itens admin: só mostra se a sessão anterior já era admin. */
+(function applyAuthRoleEarly() {
+  try {
+    const p = (location.pathname || '').toLowerCase();
+    if (p.includes('/login/') || p.includes('/cadastro/') || p.includes('/install/')) {
+      sessionStorage.removeItem(AUTODOCS_AUTH_ROLE_LS);
+      document.documentElement.classList.remove('autodocs-role-admin');
+      return;
+    }
+    if (sessionStorage.getItem(AUTODOCS_AUTH_ROLE_LS) === 'admin') {
+      document.documentElement.classList.add('autodocs-role-admin');
+    } else {
+      document.documentElement.classList.remove('autodocs-role-admin');
+    }
   } catch (_) {
     /* ignore */
   }
@@ -65,25 +85,25 @@ const navdrawerHTML = `
       <a class="navdrawer-option" id="menu-documentacoes" data-path="documentacoes/" href="#" title="Documentações">
         <span class="material-symbols-rounded" aria-hidden="true">folder_open</span><span class="navdrawer-label">Documentações</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-tags" data-path="tags/" href="#" title="Etiqueta">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-tags" data-path="tags/" href="#" title="Etiqueta" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">label</span><span class="navdrawer-label">Etiqueta</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-usuarios" data-path="usuarios/" href="#" title="Usuários">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-usuarios" data-path="usuarios/" href="#" title="Usuários" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">group</span><span class="navdrawer-label">Usuários</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-designer" data-path="designer/" href="#" title="Designer">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-designer" data-path="designer/" href="#" title="Designer" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">design_services</span><span class="navdrawer-label">Designer</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-integracoes" data-path="integracoes/" href="#" title="Integrações">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-integracoes" data-path="integracoes/" href="#" title="Integrações" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">hub</span><span class="navdrawer-label">Integrações</span>
       </a>
       <a class="navdrawer-option" id="menu-suporte" data-path="suporte/" href="#" title="Suporte">
         <span class="material-symbols-rounded" aria-hidden="true">support_agent</span><span class="navdrawer-label">Suporte</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-configuracoes" data-path="configuracoes/" href="#" title="Branding">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-configuracoes" data-path="configuracoes/" href="#" title="Branding" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">palette</span><span class="navdrawer-label">Branding</span>
       </a>
-      <a class="navdrawer-option navdrawer-admin-only" id="menu-seguranca" data-path="seguranca/" href="#" title="Segurança">
+      <a class="navdrawer-option navdrawer-admin-only" id="menu-seguranca" data-path="seguranca/" href="#" title="Segurança" hidden>
         <span class="material-symbols-rounded" aria-hidden="true">shield</span><span class="navdrawer-label">Segurança</span>
       </a>
     </div>
@@ -132,6 +152,26 @@ function isValidHexColor(v) {
 
 function autodocsUserIsAdmin(auth) {
   return !!(auth && auth.user && String(auth.user.role || '').toLowerCase() === 'admin');
+}
+
+function autodocsPersistAuthRole(auth) {
+  const isAdmin = autodocsUserIsAdmin(auth);
+  try {
+    if (isAdmin) sessionStorage.setItem(AUTODOCS_AUTH_ROLE_LS, 'admin');
+    else sessionStorage.setItem(AUTODOCS_AUTH_ROLE_LS, 'user');
+  } catch (_) {
+    /* ignore */
+  }
+  document.documentElement.classList.toggle('autodocs-role-admin', isAdmin);
+}
+
+function autodocsClearAuthRole() {
+  try {
+    sessionStorage.removeItem(AUTODOCS_AUTH_ROLE_LS);
+  } catch (_) {
+    /* ignore */
+  }
+  document.documentElement.classList.remove('autodocs-role-admin');
 }
 
 function autodocsIsPublicAuthPath() {
@@ -539,6 +579,7 @@ function ajustarLinks(basePath) {
 function aplicarVisibilidadeMenuAuth(basePath) {
   const auth = window.__autodocsAuth;
   const isAdmin = autodocsUserIsAdmin(auth);
+  autodocsPersistAuthRole(auth);
   document.querySelectorAll('.navdrawer-admin-only').forEach(el => {
     if (isAdmin) {
       el.removeAttribute('hidden');
@@ -622,6 +663,7 @@ function configurarBotaoSair(basePath) {
       /* continua para limpar UI */
     }
     window.__autodocsAuth = null;
+    autodocsClearAuthRole();
     location.href = basePath + 'login/';
   });
 }
@@ -1165,6 +1207,7 @@ async function autodocsResolveAuth(basePath) {
   }
   if (autodocsIsPublicAuthPath()) {
     window.__autodocsAuth = null;
+    autodocsClearAuthRole();
     return false;
   }
   const url = basePath + 'api/auth-me.php';
@@ -1238,7 +1281,7 @@ function autodocsEnsureApiScript(basePath) {
 function autodocsEnsureIdleLockScript(basePath) {
   if (document.querySelector('script[data-autodocs-idle-lock]')) return;
   const s = document.createElement('script');
-  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260907b';
+  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260908c';
   s.dataset.autodocsIdleLock = '1';
   document.head.appendChild(s);
 }

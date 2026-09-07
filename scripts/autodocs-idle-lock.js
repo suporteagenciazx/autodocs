@@ -307,6 +307,12 @@
       /* ignore */
     }
     window.__autodocsAuth = null;
+    try {
+      sessionStorage.removeItem('autodocs.auth.role');
+    } catch (_) {
+      /* ignore */
+    }
+    document.documentElement.classList.remove('autodocs-role-admin');
     location.href = basePath() + 'login/';
   }
 
