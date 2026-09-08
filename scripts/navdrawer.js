@@ -948,6 +948,22 @@ function autodocsHidePageTransition() {
   }, 280);
 }
 
+/** Limpa overlay/flag imediatamente (ex.: voltar pelo browser / bfcache). */
+function autodocsResetPageTransition() {
+  try {
+    sessionStorage.removeItem('autodocs.pageTransition');
+  } catch (_) {
+    /* ignore */
+  }
+  document.documentElement.classList.remove('autodocs-page-transition-pending');
+  autodocsPageTransitionStarted = 0;
+  const el = document.getElementById('autodocs-page-transition');
+  if (el) {
+    el.hidden = true;
+    el.classList.remove('is-hiding');
+  }
+}
+
 function autodocsNavigateToDocumento(href) {
   try {
     sessionStorage.setItem('autodocs.pageTransition', String(Date.now()));
@@ -979,6 +995,28 @@ function autodocsResumePageTransition() {
   autodocsShowPageTransition();
   const wait = Math.max(0, AUTODOCS_PAGE_TRANSITION_MS - (Date.now() - autodocsPageTransitionStarted));
   window.setTimeout(autodocsHidePageTransition, wait);
+}
+
+if (!window.__autodocsPageTransitionPageshowBound) {
+  window.__autodocsPageTransitionPageshowBound = true;
+  // Esconde o overlay ao sair (bfcache não deve restaurar a bolinha visível).
+  // Não limpa sessionStorage — a página de destino ainda precisa do flag.
+  window.addEventListener('pagehide', () => {
+    const el = document.getElementById('autodocs-page-transition');
+    if (el) {
+      el.hidden = true;
+      el.classList.remove('is-hiding');
+    }
+    document.documentElement.classList.remove('autodocs-page-transition-pending');
+    autodocsPageTransitionStarted = 0;
+  });
+  window.addEventListener('pageshow', event => {
+    // bfcache: limpar qualquer residual do overlay / soft-nav.
+    if (!event.persisted) return;
+    autodocsResetPageTransition();
+    document.body.classList.remove('autodocs-soft-nav');
+    autodocsSoftNavBusy = false;
+  });
 }
 
 function configurarTransicaoDocumentos() {
@@ -1178,6 +1216,7 @@ function configurarNavegacaoShell() {
   window.__autodocsShellPopstateBound = true;
 
   window.addEventListener('popstate', () => {
+    autodocsResetPageTransition();
     if (!autodocsIsShellUrl(location.href)) {
       location.reload();
       return;
