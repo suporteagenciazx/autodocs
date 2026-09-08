@@ -1281,7 +1281,7 @@ function autodocsEnsureApiScript(basePath) {
 function autodocsEnsureIdleLockScript(basePath) {
   if (document.querySelector('script[data-autodocs-idle-lock]')) return;
   const s = document.createElement('script');
-  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260908c';
+  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260908f';
   s.dataset.autodocsIdleLock = '1';
   document.head.appendChild(s);
 }

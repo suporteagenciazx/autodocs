@@ -1,15 +1,21 @@
 (function () {
   const LOCK_KEY = 'autodocs.session.locked';
-  const LOADING_MS = 520;
+  const LAST_ACTIVE_KEY = 'autodocs.session.lastActiveAt';
+  const LOADING_MS = 160;
   const UNLOCK_FADE_MS = 380;
+  const WATCHDOG_MS = 15000;
+  const ACTIVITY_PERSIST_MS = 1000;
   let idleMs = 60 * 1000;
   let idleEnabled = true;
   let timer = null;
+  let watchdog = null;
   let locked = false;
   let unlocking = false;
   let loadingTimer = null;
   let overlay = null;
   let started = false;
+  let lastActiveAt = Date.now();
+  let lastPersistAt = 0;
 
   function basePath() {
     return typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
@@ -20,7 +26,7 @@
     const link = document.createElement('link');
     link.id = 'autodocs-lock-css';
     link.rel = 'stylesheet';
-    link.href = basePath() + 'estilos/autodocs-lock.css?v=20260907b';
+    link.href = basePath() + 'estilos/autodocs-lock.css?v=20260908f';
     document.head.appendChild(link);
   }
 
@@ -28,11 +34,58 @@
     if (window.AutoDocsPinInput) return Promise.resolve();
     return new Promise(resolve => {
       const s = document.createElement('script');
-      s.src = basePath() + 'scripts/autodocs-pin-input.js?v=20260907b';
+      s.src = basePath() + 'scripts/autodocs-pin-input.js?v=20260908f';
       s.onload = () => resolve();
       s.onerror = () => resolve();
       document.head.appendChild(s);
     });
+  }
+
+  function readStoredLastActive() {
+    try {
+      const n = parseInt(sessionStorage.getItem(LAST_ACTIVE_KEY) || '', 10);
+      return Number.isFinite(n) && n > 0 ? n : 0;
+    } catch (_) {
+      return 0;
+    }
+  }
+
+  function persistLastActive(ts, force) {
+    const now = Date.now();
+    if (!force && now - lastPersistAt < ACTIVITY_PERSIST_MS) return;
+    lastPersistAt = now;
+    try {
+      sessionStorage.setItem(LAST_ACTIVE_KEY, String(ts));
+    } catch (_) {
+      /* ignore */
+    }
+  }
+
+  function clearTimer() {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+
+  function scheduleTimer() {
+    clearTimer();
+    if (!idleEnabled || locked) return;
+    const remaining = Math.max(0, idleMs - (Date.now() - lastActiveAt));
+    timer = setTimeout(checkIdle, remaining + 30);
+  }
+
+  /** Bloqueia se já passou o tempo de inatividade (robusto a aba/PC a dormir). */
+  function checkIdle() {
+    if (!idleEnabled || locked || !authUser()) return false;
+    const stored = readStoredLastActive();
+    if (stored > 0) lastActiveAt = Math.max(lastActiveAt, stored);
+    if (Date.now() - lastActiveAt >= idleMs) {
+      showLock();
+      return true;
+    }
+    scheduleTimer();
+    return false;
   }
 
   function authUser() {
@@ -160,10 +213,7 @@
     if (!authUser()) return;
     locked = true;
     unlocking = false;
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
+    clearTimer();
     try {
       sessionStorage.setItem(LOCK_KEY, '1');
     } catch (_) {
@@ -213,7 +263,7 @@
       if (card) card.hidden = true;
     }
     document.body.style.overflow = '';
-    bump();
+    markActivity(true);
   }
 
   function hideLockSmooth() {
@@ -303,6 +353,7 @@
     }
     try {
       sessionStorage.removeItem(LOCK_KEY);
+      sessionStorage.removeItem(LAST_ACTIVE_KEY);
     } catch (_) {
       /* ignore */
     }
@@ -316,21 +367,29 @@
     location.href = basePath() + 'login/';
   }
 
-  function bump() {
-    if (!idleEnabled || locked) return;
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(showLock, idleMs);
+  function markActivity(forcePersist) {
+    if (locked) return;
+    lastActiveAt = Date.now();
+    persistLastActive(lastActiveAt, !!forcePersist);
+    scheduleTimer();
   }
 
   function onActivity() {
     if (locked) return;
-    bump();
+    markActivity(false);
+  }
+
+  /** Ao voltar à aba/janela/PC: avaliar idle — não contar como atividade. */
+  function onResume() {
+    if (locked) return;
+    checkIdle();
   }
 
   async function loadSecurity() {
     try {
       const res = await fetch(basePath() + 'api/autodocs-security.php', {
         credentials: 'same-origin',
+        cache: 'no-store',
         headers: { Accept: 'application/json' },
       });
       if (!res.ok) return;
@@ -352,9 +411,16 @@
       document.addEventListener(ev, onActivity, { passive: true, capture: true });
     });
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') onActivity();
+      if (document.visibilityState === 'visible') onResume();
     });
+    window.addEventListener('focus', onResume);
+    window.addEventListener('pageshow', onResume);
     document.addEventListener('autodocs-page-ready', onActivity);
+    if (!watchdog) {
+      watchdog = setInterval(() => {
+        if (document.visibilityState === 'visible') checkIdle();
+      }, WATCHDOG_MS);
+    }
   }
 
   async function start() {
@@ -366,6 +432,12 @@
     ensureCss();
     await loadSecurity();
     bindActivity();
+    const stored = readStoredLastActive();
+    if (stored > 0) lastActiveAt = stored;
+    else {
+      lastActiveAt = Date.now();
+      persistLastActive(lastActiveAt, true);
+    }
     try {
       if (
         sessionStorage.getItem(LOCK_KEY) === '1' ||
@@ -373,10 +445,12 @@
       ) {
         showLock();
       } else if (idleEnabled) {
-        bump();
+        if (!checkIdle()) scheduleTimer();
       }
     } catch (_) {
-      if (idleEnabled) bump();
+      if (idleEnabled) {
+        if (!checkIdle()) scheduleTimer();
+      }
     }
   }
 

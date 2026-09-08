@@ -135,6 +135,7 @@
         }
         try {
           sessionStorage.removeItem('autodocs.session.locked');
+          sessionStorage.removeItem('autodocs.session.lastActiveAt');
         } catch (_) {
           /* ignore */
         }
