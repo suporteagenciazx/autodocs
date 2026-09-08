@@ -149,8 +149,8 @@
 
     /**
      * Atualiza nome, descrição e tag de um modelo activo (catálogo ou custom).
-     * Modelos do catálogo guardam título/descrição em overrides locais; a tag
-     * vai para AutoDocsTags.docLinks. Modelos custom actualizam o próprio registo.
+     * Modelos do catálogo guardam título/descrição em overrides (local + servidor via tags API);
+     * a tag vai para AutoDocsTags.docLinks. Modelos custom actualizam o próprio registo.
      */
     updateModelMeta(modelId, payload) {
       const title = payload && payload.title ? String(payload.title).trim() : '';

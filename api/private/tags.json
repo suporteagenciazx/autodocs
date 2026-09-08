@@ -111,5 +111,15 @@
         "eve-trust": "tag-26f6fe77",
         "eve-cortez": "tag-c934bcf2",
         "eve-villela": "tag-94649514"
+    },
+    "catalogOverrides": {
+        "aprovacao": {
+            "title": "Ficha de Cadastro",
+            "blurb": "Ficha de cadastro / aprovação de crédito."
+        },
+        "aprovacao-daycoval": {
+            "title": "Ficha de Cadastro",
+            "blurb": "Ficha de cadastro / aprovação Banco Daycoval S.A."
+        }
     }
 }

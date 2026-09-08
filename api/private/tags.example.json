@@ -19,5 +19,15 @@
     "declaracao": "tag-sofisa",
     "ordem": "tag-sofisa",
     "garantia": "tag-sofisa"
+  },
+  "catalogOverrides": {
+    "aprovacao": {
+      "title": "Ficha de Cadastro",
+      "blurb": "Ficha de cadastro / aprovação de crédito."
+    },
+    "aprovacao-daycoval": {
+      "title": "Ficha de Cadastro",
+      "blurb": "Ficha de cadastro / aprovação Banco Daycoval S.A."
+    }
   }
 }

@@ -55,7 +55,17 @@ try {
 }
 
 $body = autodocs_read_json_body();
-$save = autodocs_tags_sanitize_payload($body);
+$existing = null;
+if (is_readable(AUTODOCS_TAGS_FILE)) {
+    $rawExisting = file_get_contents(AUTODOCS_TAGS_FILE);
+    if ($rawExisting !== false && $rawExisting !== '') {
+        $decoded = json_decode($rawExisting, true);
+        if (is_array($decoded)) {
+            $existing = $decoded;
+        }
+    }
+}
+$save = autodocs_tags_sanitize_payload($body, $existing);
 
 $json = json_encode($save, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
 if (@file_put_contents(AUTODOCS_TAGS_FILE, $json, LOCK_EX) === false) {
@@ -68,5 +78,10 @@ if (@file_put_contents(AUTODOCS_TAGS_FILE, $json, LOCK_EX) === false) {
 autodocs_tags_cache_invalidate();
 
 header('Content-Type: application/json; charset=utf-8');
-echo json_encode(['ok' => true, 'tags' => $save['tags'], 'docLinks' => $save['docLinks']], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+echo json_encode([
+    'ok' => true,
+    'tags' => $save['tags'],
+    'docLinks' => $save['docLinks'],
+    'catalogOverrides' => $save['catalogOverrides'],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 exit;

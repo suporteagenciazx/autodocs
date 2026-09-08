@@ -95,7 +95,34 @@
     const mig = migrateTagColors(tags);
     localStorage.setItem(LS_TAGS, JSON.stringify(mig.tags));
     localStorage.setItem(LS_LINKS, JSON.stringify(links));
+    if (Object.prototype.hasOwnProperty.call(data, 'catalogOverrides')) {
+      const overrides =
+        data.catalogOverrides && typeof data.catalogOverrides === 'object' && !Array.isArray(data.catalogOverrides)
+          ? data.catalogOverrides
+          : {};
+      localStorage.setItem('autodocs.designer.catalogOverrides', JSON.stringify(overrides));
+    }
     return true;
+  }
+
+  function readLocalCatalogOverrides() {
+    if (
+      window.AutoDocsDesignerModels &&
+      typeof window.AutoDocsDesignerModels.getCatalogOverrides === 'function'
+    ) {
+      return window.AutoDocsDesignerModels.getCatalogOverrides() || {};
+    }
+    try {
+      const raw = localStorage.getItem('autodocs.designer.catalogOverrides');
+      const map = raw ? JSON.parse(raw) : {};
+      return map && typeof map === 'object' && !Array.isArray(map) ? map : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function hasLocalCatalogOverrides() {
+    return Object.keys(readLocalCatalogOverrides()).length > 0;
   }
 
   function hasLocalTagsState() {
@@ -148,9 +175,25 @@
         body: JSON.stringify({
           tags: window.AutoDocsTags.getTags(),
           docLinks: window.AutoDocsTags.getLinks(),
+          catalogOverrides: readLocalCatalogOverrides(),
         }),
       });
       if (res.ok) {
+        try {
+          const saved = await res.json();
+          if (saved && typeof saved === 'object' && Object.prototype.hasOwnProperty.call(saved, 'catalogOverrides')) {
+            localStorage.setItem(
+              'autodocs.designer.catalogOverrides',
+              JSON.stringify(
+                saved.catalogOverrides && typeof saved.catalogOverrides === 'object'
+                  ? saved.catalogOverrides
+                  : {}
+              )
+            );
+          }
+        } catch (_) {
+          /* ignore */
+        }
         dispatchTagsSynced(true);
         return { ok: true, error: null };
       }
@@ -204,14 +247,32 @@
       return lastPushError;
     },
 
-    /** Carrega tags/docLinks do servidor para o localStorage (todos os utilizadores). */
+    /** Carrega tags/docLinks/catalogOverrides do servidor para o localStorage (todos os utilizadores). */
     async syncFromServer(basePath) {
       if (syncPromise) return syncPromise;
       syncPromise = (async () => {
         const data = await fetchTagsJson(basePath);
         if (!data) return false;
         const persisted = !!data.persisted;
+        const serverOverrides =
+          data.catalogOverrides && typeof data.catalogOverrides === 'object' && !Array.isArray(data.catalogOverrides)
+            ? data.catalogOverrides
+            : {};
+        const serverHasOverrides = Object.keys(serverOverrides).length > 0;
         if (!persisted && isAdminUser() && hasLocalTagsState()) {
+          const result = await pushTagsToServer(basePath);
+          return result.ok;
+        }
+        // Migração: admin com nomes locais e servidor ainda sem catalogOverrides.
+        if (
+          persisted &&
+          isAdminUser() &&
+          !serverHasOverrides &&
+          hasLocalCatalogOverrides()
+        ) {
+          if (!applyServerPayload(Object.assign({}, data, { catalogOverrides: readLocalCatalogOverrides() }))) {
+            return false;
+          }
           const result = await pushTagsToServer(basePath);
           return result.ok;
         }

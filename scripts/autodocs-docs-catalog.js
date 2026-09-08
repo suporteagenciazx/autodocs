@@ -4,9 +4,9 @@
 window.AUTODOCS_DOCS_CATALOG = [
   {
     id: 'aprovacao',
-    title: 'Aprovação',
+    title: 'Ficha de Cadastro',
     href: 'documentos/aprovacao/',
-    blurb: 'Documento de aprovação de crédito.',
+    blurb: 'Ficha de cadastro / aprovação de crédito.',
   },
   {
     id: 'contrato',
@@ -46,9 +46,9 @@ window.AUTODOCS_DOCS_CATALOG = [
   },
   {
     id: 'aprovacao-daycoval',
-    title: 'Aprovação',
+    title: 'Ficha de Cadastro',
     href: 'documentos/aprovacao-daycoval/',
-    blurb: 'Aprovação de crédito Banco Daycoval S.A.',
+    blurb: 'Ficha de cadastro / aprovação Banco Daycoval S.A.',
   },
   {
     id: 'contrato-daycoval',

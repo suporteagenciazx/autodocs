@@ -79,7 +79,7 @@ function autodocs_tags_catalog_doc_ids(): array
 }
 
 /**
- * @return array{tags: list<array{id: string, name: string, accentColor?: string, createdAt?: int}>, docLinks: array<string, string>}
+ * @return array{tags: list<array{id: string, name: string, accentColor?: string, createdAt?: int}>, docLinks: array<string, string>, catalogOverrides: array<string, array{title?: string, blurb?: string}>}
  */
 function autodocs_tags_defaults(): array
 {
@@ -103,6 +103,7 @@ function autodocs_tags_defaults(): array
             ],
         ],
         'docLinks' => $links,
+        'catalogOverrides' => [],
     ];
 }
 
@@ -135,9 +136,10 @@ function autodocs_tags_normalize_hex(?string $v): string
 
 /**
  * @param mixed $raw
- * @return array{tags: list<array{id: string, name: string, accentColor: string, createdAt?: int}>, docLinks: array<string, string>}
+ * @param array{tags?: mixed, docLinks?: mixed, catalogOverrides?: mixed}|null $existing
+ * @return array{tags: list<array{id: string, name: string, accentColor: string, createdAt?: int}>, docLinks: array<string, string>, catalogOverrides: array<string, array{title: string, blurb: string}>}
  */
-function autodocs_tags_sanitize_payload($raw): array
+function autodocs_tags_sanitize_payload($raw, $existing = null): array
 {
     $defaults = autodocs_tags_defaults();
     if (!is_array($raw)) {
@@ -202,11 +204,47 @@ function autodocs_tags_sanitize_payload($raw): array
         }
     }
 
-    return ['tags' => $tagsOut, 'docLinks' => $linksOut];
+    $overridesSource = null;
+    if (array_key_exists('catalogOverrides', $raw) && is_array($raw['catalogOverrides'])) {
+        $overridesSource = $raw['catalogOverrides'];
+    } elseif (is_array($existing) && isset($existing['catalogOverrides']) && is_array($existing['catalogOverrides'])) {
+        $overridesSource = $existing['catalogOverrides'];
+    }
+
+    $overridesOut = [];
+    if (is_array($overridesSource)) {
+        foreach ($overridesSource as $docId => $over) {
+            $docId = (string) $docId;
+            if (!in_array($docId, $allowedDocIds, true) || !is_array($over)) {
+                continue;
+            }
+            $title = isset($over['title']) ? trim((string) $over['title']) : '';
+            $blurb = isset($over['blurb']) ? trim((string) $over['blurb']) : '';
+            if ($title === '' && $blurb === '') {
+                continue;
+            }
+            $row = [];
+            if ($title !== '') {
+                $row['title'] = autodocs_tags_substr($title, 0, 120);
+            }
+            if ($blurb !== '') {
+                $row['blurb'] = autodocs_tags_substr($blurb, 0, 400);
+            }
+            if ($row !== []) {
+                $overridesOut[$docId] = $row;
+            }
+        }
+    }
+
+    return [
+        'tags' => $tagsOut,
+        'docLinks' => $linksOut,
+        'catalogOverrides' => $overridesOut,
+    ];
 }
 
 /**
- * @return array{tags: list<array{id: string, name: string, accentColor: string, createdAt?: int}>, docLinks: array<string, string>}
+ * @return array{tags: list<array{id: string, name: string, accentColor: string, createdAt?: int}>, docLinks: array<string, string>, catalogOverrides: array<string, array{title: string, blurb: string}>}
  */
 function autodocs_tags_load_merged(): array
 {
@@ -216,7 +254,7 @@ function autodocs_tags_load_merged(): array
         if (is_string($cached) && $cached !== '') {
             $j = json_decode($cached, true);
             if (is_array($j)) {
-                return autodocs_tags_sanitize_payload($j);
+                return autodocs_tags_sanitize_payload($j, $j);
             }
         }
     }
@@ -229,7 +267,7 @@ function autodocs_tags_load_merged(): array
         return autodocs_tags_defaults();
     }
     $j = json_decode($raw, true);
-    $payload = autodocs_tags_sanitize_payload($j);
+    $payload = autodocs_tags_sanitize_payload(is_array($j) ? $j : null, is_array($j) ? $j : null);
     if (function_exists('autodocs_cache_set')) {
         autodocs_cache_set($cacheKey, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 300);
     }
