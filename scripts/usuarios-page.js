@@ -1,5 +1,6 @@
 ﻿(function () {
   const USO_GERAL_TAG_ID = 'tag-uso-geral';
+  const PAGE_SIZE = 15;
 
   function getBasePath() {
     return typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
@@ -38,6 +39,7 @@
     docsByTag: {},
     view: 'cards',
     search: '',
+    limit: PAGE_SIZE,
   };
 
   function setMsg(t) {
@@ -166,6 +168,19 @@
     });
   }
 
+  function docsLabel(n) {
+    return n === 1 ? '1 documentação' : n + ' documentações';
+  }
+
+  function makeLoadMoreBtn(remaining, onClick) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'doc-hub-load-more tags-btn-outline';
+    btn.textContent = 'Carregar mais (' + remaining + ')';
+    btn.addEventListener('click', onClick);
+    return btn;
+  }
+
   function renderTagsModal() {
     const container = document.getElementById('usuarios-docs-container');
     if (!container) return;
@@ -178,9 +193,17 @@
         String(tag.id).toLowerCase().includes(q)
       );
     });
+    const limit = tagsModal.limit || PAGE_SIZE;
+    const shown = tags.slice(0, limit);
+    const remaining = Math.max(0, tags.length - shown.length);
     container.className =
       tagsModal.view === 'list' ? 'usuarios-docs-list' : 'usuarios-docs-grid';
     container.innerHTML = '';
+
+    const body = container.parentElement;
+    if (body) {
+      body.querySelectorAll('.doc-hub-load-more-wrap').forEach(el => el.remove());
+    }
 
     if (!allTags.length) {
       setModalMsg(
@@ -199,7 +222,7 @@
       return;
     }
 
-    tags.forEach(tag => {
+    shown.forEach(tag => {
       const linked = tagsModal.tagIds.includes(tag.id);
       const accent = tag.accentColor || '#006157';
       const nDocs = docCountForTag(tag.id);
@@ -217,7 +240,7 @@
         '<p class="usuarios-doc-item-blurb">' +
         (isUsoGeral
           ? 'Acesso a todas as documentações vinculadas a esta tag.'
-          : 'Grupo com ' + nDocs + ' documentação' + (nDocs === 1 ? '' : 'ões') + '.') +
+          : 'Grupo com ' + docsLabel(nDocs) + '.') +
         '</p>' +
         '<span class="usuarios-doc-item-tag">' +
         nDocs +
@@ -239,6 +262,18 @@
         '</div>';
       container.appendChild(item);
     });
+
+    if (remaining > 0 && body) {
+      const wrap = document.createElement('div');
+      wrap.className = 'doc-hub-load-more-wrap';
+      wrap.appendChild(
+        makeLoadMoreBtn(remaining, () => {
+          tagsModal.limit = limit + PAGE_SIZE;
+          renderTagsModal();
+        })
+      );
+      body.appendChild(wrap);
+    }
 
     container.querySelectorAll('.usuarios-doc-link-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -304,6 +339,7 @@
       docsByTag: buildDocsByTag(docLinks, data.docsByTag),
       view: tagsModal.view || 'cards',
       search: '',
+      limit: PAGE_SIZE,
     };
     const sub = document.getElementById('usuarios-docs-modal-sub');
     const title = document.getElementById('usuarios-docs-modal-title');
@@ -555,6 +591,7 @@
     });
     document.getElementById('usuarios-docs-search')?.addEventListener('input', e => {
       tagsModal.search = e.target.value;
+      tagsModal.limit = PAGE_SIZE;
       renderTagsModal();
     });
     document.querySelectorAll('.usuarios-docs-view-btn').forEach(btn => {

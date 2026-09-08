@@ -1,7 +1,9 @@
 ﻿(function () {
   const SOFISA_ACCENT = '#006157';
   const USO_GERAL_TAG_ID = 'tag-uso-geral';
+  const PAGE_SIZE = 30;
 
+  let pageLimit = PAGE_SIZE;
   let vincularModal = { tagId: '', tagName: '', search: '', view: 'cards' };
 
   function escapeHtml(s) {
@@ -226,16 +228,36 @@
     return window.AutoDocsTags.countDocsForTag(tagId, ids);
   }
 
+  function docsLabel(n) {
+    return n === 1 ? '1 documentação' : n + ' documentações';
+  }
+
+  function makeLoadMoreBtn(remaining, onClick) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'doc-hub-load-more tags-btn-outline';
+    btn.textContent = 'Carregar mais (' + remaining + ')';
+    btn.addEventListener('click', onClick);
+    return btn;
+  }
+
   function renderGrid() {
     const grid = document.getElementById('tags-grid');
     const empty = document.getElementById('tags-empty');
     const searchEl = document.getElementById('tags-search');
+    const layout = grid && grid.closest('.tags-admin-layout');
     if (!grid || !window.AutoDocsTags) return;
     const q = searchEl ? searchEl.value : '';
     const tags = window.AutoDocsTags.getTags().filter(t => tagMatchesSearch(t, q));
+    const limit = pageLimit || PAGE_SIZE;
+    const shown = tags.slice(0, limit);
+    const remaining = Math.max(0, tags.length - shown.length);
     grid.innerHTML = '';
+    if (layout) {
+      layout.querySelectorAll('.doc-hub-load-more-wrap').forEach(el => el.remove());
+    }
     if (empty) empty.hidden = tags.length > 0;
-    tags.forEach(tag => {
+    shown.forEach(tag => {
       const accent = normalizePickerHex(tag.accentColor || SOFISA_ACCENT);
       const nDocs = docCountForTag(tag.id);
       const card = document.createElement('article');
@@ -252,9 +274,7 @@
         escapeHtml(tag.name) +
         '</h3>' +
         '<p class="tags-admin-card-id tags-admin-card-meta">' +
-        nDocs +
-        ' documentação' +
-        (nDocs === 1 ? '' : 'ões') +
+        docsLabel(nDocs) +
         '</p>' +
         '</div>' +
         '<div class="tags-admin-card-actions">' +
@@ -272,6 +292,22 @@
         '</div>';
       grid.appendChild(card);
     });
+
+    if (remaining > 0 && layout) {
+      const wrap = document.createElement('div');
+      wrap.className = 'doc-hub-load-more-wrap';
+      wrap.appendChild(
+        makeLoadMoreBtn(remaining, () => {
+          pageLimit = limit + PAGE_SIZE;
+          renderGrid();
+        })
+      );
+      if (empty && empty.parentNode === layout) {
+        layout.insertBefore(wrap, empty);
+      } else {
+        layout.appendChild(wrap);
+      }
+    }
 
     grid.querySelectorAll('[data-act="vincular"]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -291,8 +327,8 @@
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-id');
         if (id === USO_GERAL_TAG_ID) return;
-        const tags = window.AutoDocsTags.getTags();
-        if (tags.length <= 1) {
+        const allTags = window.AutoDocsTags.getTags();
+        if (allTags.length <= 1) {
           alert('É necessário manter pelo menos uma etiqueta.');
           return;
         }
@@ -383,7 +419,10 @@
     }
     bindModals();
     renderGrid();
-    document.getElementById('tags-search')?.addEventListener('input', renderGrid);
+    document.getElementById('tags-search')?.addEventListener('input', () => {
+      pageLimit = PAGE_SIZE;
+      renderGrid();
+    });
     document.getElementById('tags-btn-nova')?.addEventListener('click', () => openEditModal('new', null));
     if (!window.__autodocsTagsPushErrorBound) {
       window.__autodocsTagsPushErrorBound = true;
