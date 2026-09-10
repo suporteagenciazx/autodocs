@@ -1151,12 +1151,21 @@ async function autodocsSoftNavigate(href, opts) {
 
     autodocsEnsureStylesFrom(doc, url);
 
-    // Mantém #navdrawer, FAB de suporte e scripts de shell; só troca o conteúdo da direita
+    // Mantém #navdrawer, FAB, overlay de lock/transição e scripts de shell
     const nav = document.getElementById('navdrawer');
     const fab = document.getElementById('autodocs-support-fab');
+    const lockOv = document.getElementById('autodocs-lock-overlay');
+    const pageTrans = document.getElementById('autodocs-page-transition');
     [...document.body.children].forEach(child => {
-      if (child === nav || child === fab) return;
-      if (child.id === 'navdrawer' || child.id === 'autodocs-support-fab') return;
+      if (child === nav || child === fab || child === lockOv || child === pageTrans) return;
+      if (
+        child.id === 'navdrawer' ||
+        child.id === 'autodocs-support-fab' ||
+        child.id === 'autodocs-lock-overlay' ||
+        child.id === 'autodocs-page-transition'
+      ) {
+        return;
+      }
       if (child.tagName === 'SCRIPT') return;
       child.remove();
     });
@@ -1168,10 +1177,25 @@ async function autodocsSoftNavigate(href, opts) {
         scripts.push(child);
         return;
       }
-      if (child.id === 'navdrawer' || child.id === 'autodocs-support-fab') return;
+      if (
+        child.id === 'navdrawer' ||
+        child.id === 'autodocs-support-fab' ||
+        child.id === 'autodocs-lock-overlay' ||
+        child.id === 'autodocs-page-transition'
+      ) {
+        return;
+      }
       toInsert.push(document.importNode(child, true));
     });
     toInsert.forEach(node => document.body.appendChild(node));
+
+    // Overlay de lock deve ficar por cima do conteúdo novo
+    if (lockOv && lockOv.parentNode === document.body) {
+      document.body.appendChild(lockOv);
+    }
+    if (pageTrans && pageTrans.parentNode === document.body) {
+      document.body.appendChild(pageTrans);
+    }
 
     if (doc.title) document.title = doc.title;
 
@@ -1198,6 +1222,9 @@ async function autodocsSoftNavigate(href, opts) {
     if (toggle) toggle.setAttribute('aria-expanded', 'false');
 
     document.dispatchEvent(new CustomEvent('autodocs-page-ready', { detail: { href: url.href } }));
+    if (window.AutoDocsIdleLock && typeof window.AutoDocsIdleLock.ensureVisible === 'function') {
+      window.AutoDocsIdleLock.ensureVisible();
+    }
   } catch (err) {
     if (err && err.name === 'AbortError') return;
     location.href = href;
@@ -1289,6 +1316,8 @@ async function autodocsResolveAuth(basePath) {
       userTagIds: Array.isArray(data.userTagIds) ? data.userTagIds : [],
       locked: !!data.locked,
       pinOk: !!data.pinOk,
+      lastActiveAt: typeof data.lastActiveAt === 'number' ? data.lastActiveAt : 0,
+      idleMinutes: typeof data.idleMinutes === 'number' ? data.idleMinutes : undefined,
     };
   } catch (_) {
     window.__autodocsAuth = null;
@@ -1320,7 +1349,7 @@ function autodocsEnsureApiScript(basePath) {
 function autodocsEnsureIdleLockScript(basePath) {
   if (document.querySelector('script[data-autodocs-idle-lock]')) return;
   const s = document.createElement('script');
-  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260908f';
+  s.src = basePath + 'scripts/autodocs-idle-lock.js?v=20260910a';
   s.dataset.autodocsIdleLock = '1';
   document.head.appendChild(s);
 }

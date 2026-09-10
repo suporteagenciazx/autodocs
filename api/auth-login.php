@@ -54,6 +54,7 @@ try {
     autodocs_regenerate_session();
     $_SESSION['uid'] = (int) $row['id'];
     autodocs_session_set_pin_ok(true);
+    autodocs_session_touch_activity();
 
     $user = [
         'id' => (int) $row['id'],

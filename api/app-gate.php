@@ -121,9 +121,9 @@ if ($needsAdmin && ($user['role'] ?? '') !== 'admin') {
     exit;
 }
 
-if (autodocs_idle_lock_enabled() && !autodocs_session_pin_ok()) {
-    // Permite carregar o HTML do shell para o overlay de PIN; assets já públicos.
-    // Documentos continuam bloqueados no static-gate.
+if (autodocs_idle_lock_enabled()) {
+    // Enforce idle no servidor; ainda assim serve o HTML do shell para o overlay de PIN.
+    autodocs_idle_enforce();
 }
 
 $full = AUTODOCS_ROOT . '/' . $rel;

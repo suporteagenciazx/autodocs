@@ -501,28 +501,102 @@ function autodocs_session_set_pin_ok(bool $ok): void
 }
 
 /**
- * Idle lock ativo + sessão sem pin_ok ⇒ LOCKED (API / gate).
- * Lê security.json diretamente para evitar include do endpoint HTTP.
+ * @return array{idleLockEnabled: bool, idleMinutes: int}
  */
-function autodocs_idle_lock_enabled(): bool
+function autodocs_security_settings(): array
 {
+    $defaults = [
+        'idleLockEnabled' => true,
+        'idleMinutes' => 15,
+    ];
     $path = __DIR__ . '/private/security.json';
     if (!is_readable($path)) {
-        return true;
+        return $defaults;
     }
     $raw = file_get_contents($path);
     $j = is_string($raw) ? json_decode($raw, true) : null;
-    if (!is_array($j) || !array_key_exists('idleLockEnabled', $j)) {
+    if (!is_array($j)) {
+        return $defaults;
+    }
+    $out = $defaults;
+    if (array_key_exists('idleLockEnabled', $j)) {
+        $out['idleLockEnabled'] = (bool) $j['idleLockEnabled'];
+    }
+    if (isset($j['idleMinutes'])) {
+        $m = (int) $j['idleMinutes'];
+        if ($m >= 1 && $m <= 240) {
+            $out['idleMinutes'] = $m;
+        }
+    }
+    return $out;
+}
+
+/**
+ * Idle lock ativo + sessão sem pin_ok ⇒ LOCKED (API / gate).
+ */
+function autodocs_idle_lock_enabled(): bool
+{
+    return (bool) autodocs_security_settings()['idleLockEnabled'];
+}
+
+function autodocs_idle_minutes(): int
+{
+    return (int) autodocs_security_settings()['idleMinutes'];
+}
+
+function autodocs_session_last_active_at(): int
+{
+    autodocs_start_session();
+    $n = isset($_SESSION['last_active_at']) ? (int) $_SESSION['last_active_at'] : 0;
+    return $n > 0 ? $n : 0;
+}
+
+/** Marca atividade do utilizador (heartbeat / login / unlock). */
+function autodocs_session_touch_activity(?int $ts = null): void
+{
+    autodocs_start_session();
+    $_SESSION['last_active_at'] = $ts ?? time();
+}
+
+/**
+ * Se o idle expirou, limpa pin_ok.
+ *
+ * @return bool true se a sessão está (ou ficou) bloqueada por idle
+ */
+function autodocs_idle_enforce(): bool
+{
+    if (!autodocs_idle_lock_enabled()) {
+        return false;
+    }
+    autodocs_start_session();
+    if (empty($_SESSION['uid'])) {
+        return false;
+    }
+    if (!autodocs_session_pin_ok()) {
         return true;
     }
-    return (bool) $j['idleLockEnabled'];
+    $last = autodocs_session_last_active_at();
+    if ($last <= 0) {
+        // Sessão antiga sem timestamp: inicia contagem sem bloquear já.
+        autodocs_session_touch_activity();
+        return false;
+    }
+    $limit = autodocs_idle_minutes() * 60;
+    if ((time() - $last) >= $limit) {
+        autodocs_session_set_pin_ok(false);
+        return true;
+    }
+    return false;
 }
 
 function autodocs_require_unlocked(PDO $pdo): array
 {
     $user = autodocs_require_login($pdo);
-    if (autodocs_idle_lock_enabled() && !autodocs_session_pin_ok()) {
-        throw new RuntimeException('LOCKED');
+    if (autodocs_idle_lock_enabled()) {
+        autodocs_idle_enforce();
+        if (!autodocs_session_pin_ok()) {
+            throw new RuntimeException('LOCKED');
+        }
     }
     return $user;
 }

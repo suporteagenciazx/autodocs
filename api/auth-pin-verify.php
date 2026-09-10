@@ -51,6 +51,7 @@ try {
     }
     autodocs_login_throttle_clear($ip, 'unlock:' . $email);
     autodocs_session_set_pin_ok(true);
+    autodocs_session_touch_activity();
     autodocs_json_response(200, ['ok' => true, 'csrfToken' => autodocs_csrf_token()]);
 } catch (Throwable $e) {
     autodocs_json_response(500, ['error' => 'Erro no servidor.']);

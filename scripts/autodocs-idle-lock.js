@@ -3,9 +3,11 @@
   const LAST_ACTIVE_KEY = 'autodocs.session.lastActiveAt';
   const LOADING_MS = 160;
   const UNLOCK_FADE_MS = 380;
-  const WATCHDOG_MS = 15000;
+  const WATCHDOG_MS = 5000;
   const ACTIVITY_PERSIST_MS = 1000;
-  let idleMs = 60 * 1000;
+  const HEARTBEAT_MS = 30000;
+  const ASSET_V = '20260910a';
+  let idleMs = 15 * 60 * 1000;
   let idleEnabled = true;
   let timer = null;
   let watchdog = null;
@@ -16,6 +18,8 @@
   let started = false;
   let lastActiveAt = Date.now();
   let lastPersistAt = 0;
+  let lastHeartbeatAt = 0;
+  let heartbeatBusy = false;
 
   function basePath() {
     return typeof window.getAutoDocsBasePath === 'function' ? window.getAutoDocsBasePath() : '/';
@@ -26,7 +30,7 @@
     const link = document.createElement('link');
     link.id = 'autodocs-lock-css';
     link.rel = 'stylesheet';
-    link.href = basePath() + 'estilos/autodocs-lock.css?v=20260908f';
+    link.href = basePath() + 'estilos/autodocs-lock.css?v=' + ASSET_V;
     document.head.appendChild(link);
   }
 
@@ -34,7 +38,7 @@
     if (window.AutoDocsPinInput) return Promise.resolve();
     return new Promise(resolve => {
       const s = document.createElement('script');
-      s.src = basePath() + 'scripts/autodocs-pin-input.js?v=20260908f';
+      s.src = basePath() + 'scripts/autodocs-pin-input.js?v=' + ASSET_V;
       s.onload = () => resolve();
       s.onerror = () => resolve();
       document.head.appendChild(s);
@@ -108,9 +112,18 @@
     return email.includes('@') ? email.split('@')[0] : email || 'Utilizador';
   }
 
+  function overlayInDom() {
+    return !!(overlay && overlay.isConnected);
+  }
+
   function buildOverlay() {
-    if (overlay) return overlay;
+    if (overlayInDom()) return overlay;
+    overlay = null;
     ensureCss();
+    const existing = document.getElementById('autodocs-lock-overlay');
+    if (existing) {
+      existing.remove();
+    }
     const el = document.createElement('div');
     el.id = 'autodocs-lock-overlay';
     el.setAttribute('role', 'dialog');
@@ -167,7 +180,7 @@
   }
 
   function setLoadingPhase(on) {
-    const el = overlay;
+    const el = overlayInDom() ? overlay : buildOverlay();
     if (!el) return;
     const loading = document.getElementById('autodocs-lock-loading');
     const card = document.getElementById('autodocs-lock-card');
@@ -185,7 +198,7 @@
   }
 
   function showPinPhase() {
-    const el = overlay;
+    const el = overlayInDom() ? overlay : buildOverlay();
     if (!el) return;
     unlocking = false;
     setLoadingPhase(false);
@@ -208,18 +221,7 @@
     if (msg) msg.textContent = '';
   }
 
-  function showLock() {
-    if (locked) return;
-    if (!authUser()) return;
-    locked = true;
-    unlocking = false;
-    clearTimer();
-    try {
-      sessionStorage.setItem(LOCK_KEY, '1');
-    } catch (_) {
-      /* ignore */
-    }
-    // Marca pin_ok=0 no servidor (gate/API passam a exigir unlock).
+  function notifyServerLock() {
     try {
       const hdr = { Accept: 'application/json', 'Content-Type': 'application/json' };
       if (window.__autodocsCsrf) hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
@@ -232,14 +234,57 @@
     } catch (_) {
       /* ignore */
     }
+  }
+
+  function openLockUi(opts) {
+    const skipLoading = !!(opts && opts.skipLoading);
     const el = buildOverlay();
     el.classList.remove('is-leaving');
     el.style.opacity = '';
+    document.body.style.overflow = 'hidden';
+    if (skipLoading) {
+      el.classList.add('is-open', 'is-ready');
+      el.classList.remove('is-loading');
+      showPinPhase();
+      return;
+    }
     setLoadingPhase(true);
     el.classList.add('is-open', 'is-loading');
-    document.body.style.overflow = 'hidden';
     if (loadingTimer) clearTimeout(loadingTimer);
     loadingTimer = setTimeout(showPinPhase, LOADING_MS);
+  }
+
+  /**
+   * Garante overlay visível se locked=true (ex.: soft-nav removeu o nó).
+   */
+  function ensureLockUi() {
+    if (!locked) return false;
+    if (overlayInDom() && overlay.classList.contains('is-open')) return true;
+    openLockUi({ skipLoading: true });
+    return true;
+  }
+
+  function showLock() {
+    if (!authUser()) return;
+    if (locked && overlayInDom() && overlay.classList.contains('is-open')) return;
+
+    const alreadyLocked = locked;
+    locked = true;
+    unlocking = false;
+    clearTimer();
+    try {
+      sessionStorage.setItem(LOCK_KEY, '1');
+    } catch (_) {
+      /* ignore */
+    }
+    if (window.__autodocsAuth) {
+      window.__autodocsAuth.locked = true;
+      window.__autodocsAuth.pinOk = false;
+    }
+    if (!alreadyLocked) {
+      notifyServerLock();
+    }
+    openLockUi({ skipLoading: alreadyLocked });
   }
 
   function finishUnlockTransition() {
@@ -254,6 +299,10 @@
     } catch (_) {
       /* ignore */
     }
+    if (window.__autodocsAuth) {
+      window.__autodocsAuth.locked = false;
+      window.__autodocsAuth.pinOk = true;
+    }
     if (overlay) {
       overlay.classList.remove('is-open', 'is-loading', 'is-ready', 'is-leaving');
       overlay.style.opacity = '';
@@ -267,13 +316,12 @@
   }
 
   function hideLockSmooth() {
-    const el = overlay;
+    const el = overlayInDom() ? overlay : null;
     if (!el) {
       finishUnlockTransition();
       return;
     }
     setLoadingPhase(true);
-    // Allow spinner to paint before fade-out.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         el.classList.add('is-leaving');
@@ -330,7 +378,6 @@
         if (window.AutoDocsPinInput) window.AutoDocsPinInput.clearPin(row);
         return;
       }
-      // Mantém a bolinha visível um instante antes do fade para o sistema.
       window.setTimeout(hideLockSmooth, 280);
     } catch (_) {
       unlocking = false;
@@ -367,11 +414,46 @@
     location.href = basePath() + 'login/';
   }
 
+  function sendActivityHeartbeat(force) {
+    if (locked || heartbeatBusy || !authUser()) return;
+    const now = Date.now();
+    if (!force && now - lastHeartbeatAt < HEARTBEAT_MS) return;
+    lastHeartbeatAt = now;
+    heartbeatBusy = true;
+    try {
+      const hdr = { Accept: 'application/json', 'Content-Type': 'application/json' };
+      if (window.__autodocsCsrf) hdr['X-AutoDocs-CSRF'] = window.__autodocsCsrf;
+      fetch(basePath() + 'api/auth-activity.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: hdr,
+        body: '{}',
+      })
+        .then(async res => {
+          const data = await res.json().catch(() => ({}));
+          if (data && data.csrfToken) {
+            window.__autodocsCsrf = data.csrfToken;
+            if (window.AutoDocsApi) window.AutoDocsApi.setCsrf(data.csrfToken);
+          }
+          if (data && data.locked) {
+            showLock();
+          }
+        })
+        .catch(() => {})
+        .finally(() => {
+          heartbeatBusy = false;
+        });
+    } catch (_) {
+      heartbeatBusy = false;
+    }
+  }
+
   function markActivity(forcePersist) {
     if (locked) return;
     lastActiveAt = Date.now();
     persistLastActive(lastActiveAt, !!forcePersist);
     scheduleTimer();
+    sendActivityHeartbeat(!!forcePersist);
   }
 
   function onActivity() {
@@ -381,7 +463,19 @@
 
   /** Ao voltar à aba/janela/PC: avaliar idle — não contar como atividade. */
   function onResume() {
-    if (locked) return;
+    if (locked) {
+      ensureLockUi();
+      return;
+    }
+    checkIdle();
+  }
+
+  /** Soft-nav / troca de página: nunca reinicia idle; só revalida / restaura UI. */
+  function onPageReady() {
+    if (locked) {
+      ensureLockUi();
+      return;
+    }
     checkIdle();
   }
 
@@ -407,7 +501,8 @@
   function bindActivity() {
     if (bindActivity.done) return;
     bindActivity.done = true;
-    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'].forEach(ev => {
+    // Interação real apenas — mousemove/scroll reiniciavam o idle sem intenção.
+    ['mousedown', 'keydown', 'touchstart', 'click'].forEach(ev => {
       document.addEventListener(ev, onActivity, { passive: true, capture: true });
     });
     document.addEventListener('visibilitychange', () => {
@@ -415,10 +510,15 @@
     });
     window.addEventListener('focus', onResume);
     window.addEventListener('pageshow', onResume);
-    document.addEventListener('autodocs-page-ready', onActivity);
+    document.addEventListener('autodocs-page-ready', onPageReady);
     if (!watchdog) {
       watchdog = setInterval(() => {
-        if (document.visibilityState === 'visible') checkIdle();
+        if (document.visibilityState !== 'visible') return;
+        if (locked) {
+          ensureLockUi();
+          return;
+        }
+        checkIdle();
       }, WATCHDOG_MS);
     }
   }
@@ -432,12 +532,22 @@
     ensureCss();
     await loadSecurity();
     bindActivity();
-    const stored = readStoredLastActive();
-    if (stored > 0) lastActiveAt = stored;
-    else {
-      lastActiveAt = Date.now();
+
+    const auth = window.__autodocsAuth;
+    if (auth && typeof auth.lastActiveAt === 'number' && auth.lastActiveAt > 0) {
+      // servidor envia segundos UNIX
+      const serverMs = auth.lastActiveAt * 1000;
+      lastActiveAt = Math.max(readStoredLastActive() || 0, serverMs);
       persistLastActive(lastActiveAt, true);
+    } else {
+      const stored = readStoredLastActive();
+      if (stored > 0) lastActiveAt = stored;
+      else {
+        lastActiveAt = Date.now();
+        persistLastActive(lastActiveAt, true);
+      }
     }
+
     try {
       if (
         sessionStorage.getItem(LOCK_KEY) === '1' ||
@@ -445,7 +555,10 @@
       ) {
         showLock();
       } else if (idleEnabled) {
-        if (!checkIdle()) scheduleTimer();
+        if (!checkIdle()) {
+          scheduleTimer();
+          sendActivityHeartbeat(true);
+        }
       }
     } catch (_) {
       if (idleEnabled) {
@@ -456,6 +569,7 @@
 
   window.AutoDocsIdleLock = {
     lock: showLock,
+    ensureVisible: ensureLockUi,
     isLocked: function () {
       return locked;
     },

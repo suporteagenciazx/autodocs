@@ -25,4 +25,9 @@ try {
 }
 
 autodocs_session_set_pin_ok(false);
-autodocs_json_response(200, ['ok' => true, 'locked' => true]);
+// Congela last_active_at no momento do bloqueio (não tocar).
+autodocs_json_response(200, [
+    'ok' => true,
+    'locked' => true,
+    'lastActiveAt' => autodocs_session_last_active_at(),
+]);

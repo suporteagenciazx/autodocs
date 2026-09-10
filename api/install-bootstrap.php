@@ -71,6 +71,7 @@ try {
     autodocs_regenerate_session();
     $_SESSION['uid'] = $uid;
     autodocs_session_set_pin_ok(true);
+    autodocs_session_touch_activity();
     $csrf = autodocs_csrf_token();
     $user = ['id' => $uid, 'email' => $email, 'role' => 'admin'];
     autodocs_json_response(201, [

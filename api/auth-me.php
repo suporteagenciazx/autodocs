@@ -16,7 +16,10 @@ try {
     $pdo = autodocs_pdo();
     $user = autodocs_require_login($pdo);
     $allowed = autodocs_allowed_doc_ids($pdo, $user);
-    $locked = autodocs_idle_lock_enabled() && !autodocs_session_pin_ok();
+    $locked = false;
+    if (autodocs_idle_lock_enabled()) {
+        $locked = autodocs_idle_enforce() || !autodocs_session_pin_ok();
+    }
     autodocs_json_response(200, [
         'user' => [
             'id' => (int) $user['id'],
@@ -27,6 +30,8 @@ try {
         'userTagIds' => autodocs_user_assigned_tag_ids($user),
         'pinOk' => autodocs_session_pin_ok(),
         'locked' => $locked,
+        'idleMinutes' => autodocs_idle_minutes(),
+        'lastActiveAt' => autodocs_session_last_active_at(),
         'csrfToken' => autodocs_csrf_token(),
     ]);
 } catch (Throwable $e) {

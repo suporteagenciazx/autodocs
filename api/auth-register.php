@@ -46,6 +46,7 @@ try {
     autodocs_regenerate_session();
     $_SESSION['uid'] = $id;
     autodocs_session_set_pin_ok(true);
+    autodocs_session_touch_activity();
     $user = ['id' => $id, 'email' => $email, 'role' => 'user'];
     autodocs_json_response(201, [
         'user' => $user,
